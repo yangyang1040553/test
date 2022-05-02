@@ -50,4 +50,8 @@ export default {
   code_generation: "Code generation",
   system_interface: "System interface",
   telegram_list: "Telegram list",
+  source_address: "SourceAddress",
+  document_address: "DocumentAddress",
+  layout_size: "LayoutSize",
+  language: "Language",
 }

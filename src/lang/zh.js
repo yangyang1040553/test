@@ -50,4 +50,8 @@ export default {
   code_generation: "代码生成",
   system_interface: "系统接口",
   telegram_list: "机器人列表",
+  source_address: "源码地址",
+  document_address: "文档地址",
+  layout_size: "布局大小",
+  language: "语言",
 }
