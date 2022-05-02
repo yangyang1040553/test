@@ -1,4 +1,5 @@
 export default {
+  homePage:"首页",
   login: {
     title: '后台管理系统',
     logIn: '登录',

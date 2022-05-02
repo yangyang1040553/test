@@ -1,4 +1,5 @@
 export default {
+  homePage:"HomePage",
   login: {
     title: 'RuoYi Login Form',
     logIn: 'Log in',

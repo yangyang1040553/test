@@ -25,6 +25,7 @@ export default {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.$store.dispatch('app/setLanguage', lang)
+      window.location.reload()
       this.$message({
         message: '设置语言成功',
         type: 'success'
