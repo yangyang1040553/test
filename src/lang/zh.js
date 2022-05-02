@@ -113,4 +113,10 @@ export default {
   login_delete: "操作删除",
   log_export: "日志导出",
 
+  robot_search: "机器人查询",
+  robot_new: "机器人新增",
+  robot_edit: "机器人修改",
+  robot_delete: "机器人删除",
+  robot_export: "机器人导出",
+
 }

@@ -111,4 +111,11 @@ export default {
   login_search: "login_search",
   login_delete: "login_delete",
   log_export: "log_export",
+
+
+  robot_search: "robot_search",
+  robot_new: "robot_new",
+  robot_edit: "robot_edit",
+  robot_delete: "robot_delete",
+  robot_export: "robot_export",
 }
