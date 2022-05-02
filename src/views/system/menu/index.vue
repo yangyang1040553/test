@@ -29,7 +29,7 @@
 
     <el-table v-if="refreshTable" v-loading="loading" :data="menuList" row-key="menuId"
       :default-expand-all="isExpandAll" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-      <el-table-column prop="menuName" label="菜单名称" :show-overflow-tooltip="true" width="160">
+      <el-table-column prop="menuName" label="菜单名称" :show-overflow-tooltip="true" width="260">
         <template slot-scope="scope">
           <span>{{ $t(scope.row.menuName.toString()) }}</span>
         </template>

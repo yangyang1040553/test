@@ -54,4 +54,62 @@ export default {
   document_address: "文档地址",
   layout_size: "布局大小",
   language: "语言",
+  user_search: "用户查询",
+  user_new: "用户新增",
+  user_edit: "用户修改",
+  user_delete: "用户删除",
+  user_export: "用户导出",
+  user_import: "用户导入",
+  reset_password: "重置密码",
+
+  role_search: "用户查询",
+  role_new: "用户新增",
+  role_edit: "用户修改",
+  role_delete: "用户删除",
+  role_export: "用户导出",
+
+  menu_search: "用户查询",
+  menu_new: "用户新增",
+  menu_edit: "用户修改",
+  menu_delete: "用户删除",
+
+  department_search: "部门查询",
+  department_new: "部门新增",
+  department_edit: "部门修改",
+  department_delete: "部门删除",
+
+  post_search: "岗位查询",
+  post_new: "岗位新增",
+  post_edit: "岗位修改",
+  post_delete: "岗位删除",
+  post_export: "岗位导出",
+
+  dictionary_search: "字典查询",
+  dictionary_new: "字典新增",
+  dictionary_edit: "字典修改",
+  dictionary_delete: "字典删除",
+  dictionary_export: "字典导出",
+
+  parameter_search: "参数查询",
+  parameter_new: "参数新增",
+  parameter_edit: "参数修改",
+  parameter_delete: "参数删除",
+  parameter_export: "参数导出",
+
+  announcement_search: "公告查询",
+  announcement_new: "公告新增",
+  announcement_edit: "公告修改",
+  announcement_delete: "公告删除",
+
+  operation_log: "操作日志",
+  login_log: "登录日志",
+
+  operation_search: "操作查询",
+  operation_delete: "操作删除",
+  operation_export: "日志导出",
+
+  login_search: "操作查询",
+  login_delete: "操作删除",
+  log_export: "日志导出",
+
 }
