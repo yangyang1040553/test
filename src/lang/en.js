@@ -165,4 +165,10 @@ export default {
   data_permission:"data_permission",
   assign_users:"Assign users",
   display_order:"Display order",
+  role_order:"Role order",
+  menu_permission:"Menu permission",
+  expand_collapse:"expand/collapse",
+  all_none:"select all / select none",
+  father_son_linkage:"Father-son linkage",
+  scope_of_authority:"Scope of authority",
 }

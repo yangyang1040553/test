@@ -167,4 +167,10 @@ export default {
   data_permission:"数据权限",
   assign_users:"分配用户",
   display_order:"显示顺序",
+  role_order:"角色顺序",
+  menu_permission:"菜单权限",
+  expand_collapse:"展开/折叠",
+  all_none:"全选/全不选",
+  father_son_linkage:"父子联动",
+  scope_of_authority:"权限范围",
 }
