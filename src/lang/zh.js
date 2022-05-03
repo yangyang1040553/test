@@ -1,5 +1,5 @@
 export default {
-  homePage:"首页",
+  homePage: "首页",
   login: {
     title: '后台管理系统',
     logIn: '登录',
@@ -19,6 +19,7 @@ export default {
     fixedHeader: '固定 Header',
     sidebarLogo: '侧边栏 Logo'
   },
+  
   new: "新增",
   status: "状态",
   search: "搜索",
@@ -119,4 +120,42 @@ export default {
   robot_delete: "机器人删除",
   robot_export: "机器人导出",
 
+
+  type_department_name: "请输入部门名称",
+  department: "部门",
+  user_name: "用户名称",
+  type_user_name: "请输入用户名称",
+  phone: "手机号码",
+  type_phone: "请输入手机号码",
+  user_status: "用户状态",
+  create_time: "创建时间",
+  start_date: "开始日期",
+  end_date: "结束日期",
+  import: "导入",
+  export: "导出",
+  edit: "编辑",
+  delete: "删除",
+
+  user_id: "用户编号",
+  user_name_en: "用户名称",
+  operate: "操作",
+  operate: "操作",
+  more: "更多",
+  reset_password: "充值密码",
+  assigning_roles: "分配角色",
+  email: "邮箱",
+  type_email: "请输入邮箱地址",
+  password: "密码",
+  type_password: "请输入密码",
+  select_department: "请选择归属部门",
+  sex: "性别",
+  select_sex: "请选择性别",
+  job: "岗位",
+  select_job: "请选择岗位",
+  role: "角色",
+  select_role: "请选择角色",
+  remark: "备注",
+  sure: "确定",
+  cancel: "取消",
+  type_content: "请输入内容",
 }
