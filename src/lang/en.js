@@ -156,4 +156,13 @@ export default {
   sure: "Sure",
   cancel: "Cancel",
   type_content: "Please enter content",
+  role_name: "Role name",
+  permission_character: "Permission character",
+  type_role_name: "Please enter role name",
+  type_permission_character: "Please enter permission character",
+  role_status:"Role status",
+  ID:"ID",
+  data_permission:"data_permission",
+  assign_users:"Assign users",
+  display_order:"Display order",
 }

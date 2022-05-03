@@ -158,4 +158,13 @@ export default {
   sure: "确定",
   cancel: "取消",
   type_content: "请输入内容",
+  role_name: "角色名称",
+  type_role_name: "请输入角色名称",
+  permission_character: "权限字符",
+  type_permission_character: "请输入权限字符",
+  role_status:"角色状态",
+  ID:"ID",
+  data_permission:"数据权限",
+  assign_users:"分配用户",
+  display_order:"显示顺序",
 }
