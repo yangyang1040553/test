@@ -36,13 +36,13 @@
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/user/profile">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item>{{ $t('user_center') }}</el-dropdown-item>
           </router-link>
           <el-dropdown-item @click.native="setting = true">
-            <span>布局设置</span>
+            <span>{{ $t('layout_settings') }}</span>
           </el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">
-            <span>退出登录</span>
+            <span>{{ $t('login_out') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

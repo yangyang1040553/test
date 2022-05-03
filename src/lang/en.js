@@ -171,4 +171,7 @@ export default {
   all_none:"select all / select none",
   father_son_linkage:"Father-son linkage",
   scope_of_authority:"Scope of authority",
+  user_center: "User center",
+  layout_settings: "Layout settings",
+  login_out: "Login out",
 }
