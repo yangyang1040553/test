@@ -214,4 +214,9 @@ export default {
   main_category:"主类目",
   show:"显示",
   hide:"隐藏",
+  department_status: "部门状态",
+  parent_department: "上级部门",
+  select_parent_department: "请选择上级部门",
+  principal: "负责人",
+  enter_principal: "请输入负责人",
 }
