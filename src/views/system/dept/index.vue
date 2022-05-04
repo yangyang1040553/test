@@ -161,6 +161,7 @@
 import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {getKey} from '@/lang'
 
 export default {
   name: "Dept",
@@ -277,7 +278,7 @@ export default {
         this.form.parentId = row.deptId;
       }
       this.open = true;
-      this.title = "添加部门";
+      this.title = getKey('add_deptment');
       listDept().then(response => {
         this.deptOptions = this.handleTree(response.data, "deptId");
       });

@@ -219,4 +219,15 @@ export default {
   select_parent_department: "请选择上级部门",
   principal: "负责人",
   enter_principal: "请输入负责人",
+  add_deptment: "添加部门",
+  job_code: "岗位编码",
+  job_number: "岗位编号",
+  job_sort: "岗位排序",
+  enter_job_code: "请输入岗位编码",
+  job_name: "岗位名称",
+  job_status: "岗位状态",
+  enter_job_name: "请输入岗位名称",
+  job_edit: "修改岗位",
+  job_add: "添加岗位",
+
 }
