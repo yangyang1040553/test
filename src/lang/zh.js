@@ -211,5 +211,7 @@ export default {
   view_text: "访问的组件路径，如：`system/user/index`，默认在`views`目录下",
   yes:"是",
   no:"否",
-
+  main_category:"主类目",
+  show:"显示",
+  hide:"隐藏",
 }

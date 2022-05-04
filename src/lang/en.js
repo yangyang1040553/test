@@ -211,4 +211,7 @@ export default {
   view_text: "Access component path, such as: `system/user/index`, default in the `views` directory",
   yes:"yes",
   no:"no",
+  main_category:"Main category",
+  show:"Show",
+  hide:"Hide",
 }
