@@ -311,6 +311,40 @@ export default {
   retreat: "强退",
 
 
+  mission_name: "任务名称",
+  enter_mission_name: "请输入任务名称",
+  mission_group_name: "任务组名",
+  select_mission_group_name: "请选择任务组名",
+  mission_status: "任务状态",
+  select_mission_status: "请选择任务状态",
+  log: "日志",
+  mission_number: "任务编号",
+  call_target_string: "调用目标字符串",
+  cron_execute_expression: "cron执行表达式",
+  execute_once: "执行一次",
+  task_details: "任务详细",
+  scheduling_log: "调度日志",
+  call_method: "调用方法",
+  execution_strategy: "执行策略",
+  execute_immediately: "立即执行",
+
+  give_up_execution: "放弃执行",
+  is_it_concurrent: "是否并发",
+  allow: "允许",
+  prohibit: "禁止",
+  cron_expression_generator: "Cron表达式生成器",
+  cron_expression: "cron表达式：",
+  next_execution_time: "下次执行时间：",
+  call_the_target_method: "调用目标方法：",
+  task_status: "任务状态：",
+  default_policy: "默认策略",
+  generate_expression: "生成表达式",
+  enter_cron_execution_expression: "请输入cron执行表达式",
+  parameter_description: "参数说明：支持字符串，布尔类型，长整型，浮点型，整型",
+  class_description: "Class类调用示例：com.ruoyi.quartz.task.RyTask.ryParams('ry')",
+  bean_description: "Bean调用示例：ryTask.ryParams('ry')",
+
+
 
 
 }

@@ -318,4 +318,41 @@ export default {
   retreat: "retreat",
 
 
+
+  mission_name: "mission_name",
+  enter_mission_name: "enter_mission_name",
+  mission_group_name: "mission_group_name",
+  select_mission_group_name: "select_mission_group_name",
+  mission_status: "mission_status",
+  select_mission_status: "select_mission_status",
+  log: "log",
+  mission_number: "mission_number",
+  call_target_string: "call_target_string",
+  cron_execute_expression: "cron_execute_expression",
+  execute_once: "execute_once",
+  task_details: "task_details",
+  scheduling_log: "scheduling_log",
+  call_method: "call_method",
+  execution_strategy: "execution_strategy",
+  execute_immediately: "execute_immediately",
+
+  give_up_execution: "give_up_execution",
+  is_it_concurrent: "is_it_concurrent",
+  allow: "allow",
+  prohibit: "prohibit",
+  cron_expression_generator: "cron_expression_generator",
+  cron_expression: "cron_expression",
+  next_execution_time: "next_execution_time",
+  call_the_target_method: "call_the_target_method",
+  task_status: "task_status",
+  default_policy: "default_policy",
+  generate_expression: "generate_expression",
+  enter_cron_execution_expression: "Please enter cron execution expression",
+  parameter_description: "Parameter description: support string, boolean, long integer, floating point, integer",
+  class_description: "Class class call example: com.ruoyi.quartz.task.RyTask.ryParams('ry')",
+  bean_description: "Bean invocation example: ryTask.ryParams('ry')",
+
+
+
+
 }
