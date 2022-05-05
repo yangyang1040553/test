@@ -237,4 +237,29 @@ export default {
   dictionary_status: "dictionary_status",
   dictionary_number: "dictionary_number",
   flush_cache: "flush_cache",
+  add_dictionary_type: "Add dictionary type",
+
+  parameter_name: "parameter_name",
+  enter_parameter_name: "enter_parameter_name",
+  parameter_key: "parameter_key",
+  enter_parameter_key: "enter_parameter_key",
+  system_built_in: "system_built_in",
+  parameter_primary_key: "parameter_primary_key",
+  parameter_value: "parameter_value",
+  enter_parameter_value: "enter_parameter_value",
+
+
+  parameter_name: "parameter_name",
+  enter_parameter_name: "enter_parameter_name",
+  parameter_key: "parameter_key",
+  enter_parameter_key: "enter_parameter_key",
+  system_built_in: "system_built_in",
+  parameter_primary_key: "parameter_primary_key",
+  parameter_value: "parameter_value",
+  enter_parameter_value: "enter_parameter_value",
+  add_parameter: "Add parameter",
+
+
+
+
 }

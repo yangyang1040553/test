@@ -116,6 +116,7 @@
 
 <script>
 import { listType, getType, delType, addType, updateType, refreshCache } from "@/api/system/dict/type";
+import { getKey } from "@/lang";
 
 export default {
   name: "Dict",
@@ -208,7 +209,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加字典类型";
+      this.title = getKey('add_dictionary_type')
     },
     // 多选框选中数据
     handleSelectionChange(selection) {

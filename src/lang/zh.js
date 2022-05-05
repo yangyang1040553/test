@@ -237,5 +237,17 @@ export default {
   dictionary_status: "字典状态",
   dictionary_number: "字典编号",
   flush_cache: "刷新缓存",
+  add_dictionary_type: "添加字典类型",
+
+
+  parameter_name: "参数名称",
+  enter_parameter_name: "请输入参数名称",
+  parameter_key: "参数键名",
+  enter_parameter_key: "请输入参数键名",
+  system_built_in: "系统内置",
+  parameter_primary_key: "参数主键",
+  parameter_value: "参数键值",
+  enter_parameter_value: "请输入参数键值",
+  add_parameter: "添加参数",
 
 }
