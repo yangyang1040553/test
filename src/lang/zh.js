@@ -250,4 +250,17 @@ export default {
   enter_parameter_value: "请输入参数键值",
   add_parameter: "添加参数",
 
+
+  announcement_title: "公告标题",
+  enter_announcement_title: "请输入公告标题",
+  operation_user: "操作人员",
+  enter_operation_user: "请输入操作人员",
+  type: "类型",
+  announcement_type: "公告类型",
+  select_announcement_type: "请选择公告类型",
+  creator: "创建者",
+  serial_number: "序号",
+  content: "内容",
+  add_announcement: "添加公告",
+
 }

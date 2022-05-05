@@ -260,6 +260,17 @@ export default {
   add_parameter: "Add parameter",
 
 
+  announcement_title: "announcement_title",
+  enter_announcement_title: "enter_announcement_title",
+  operation_user: "operation_user",
+  enter_operation_user: "enter_operation_user",
+  type: "type",
+  announcement_type: "announcement_type",
+  select_announcement_type: "select_announcement_type",
+  creator: "creator",
+  serial_number: "serial_number",
+  content: "content",
+  add_announcement: "Add announcement",
 
 
 }
