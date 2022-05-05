@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" label-width="108px">
       <el-form-item :label="$t('login_address')" prop="ipaddr">
         <el-input v-model="queryParams.ipaddr" :placeholder="$t('enter_login_address')" clearable
           @keyup.enter.native="handleQuery" />
