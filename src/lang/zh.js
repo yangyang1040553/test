@@ -263,4 +263,54 @@ export default {
   content: "内容",
   add_announcement: "添加公告",
 
+
+  system_module: "系统模块",
+  enter_system_module: "请输入系统模块",
+  operator: "操作人员",
+  enter_operator: "请输入操作人员",
+  operating_time: "操作时间",
+  log_number: "日志编号",
+  operating_type: "操作类型",
+  operating_address: "操作地址",
+  operating_location: "操作地点",
+  operating_status: "操作状态",
+  operating_date: "操作日期",
+  operating_log_detail: "操作日志详细",
+  operating_moudel: "操作模块：",
+  login_info: "登录信息：",
+  request_address: "请求地址：",
+  request_method: "请求方式：",
+  method: "请求方法：",
+  request_paramater: "请求参数：",
+  back_paramater: "返回参数：",
+  exception_information: "异常信息：",
+  clear: "清空",
+  system_moudel: "系统模块",
+  detail: "详细",
+  normal: "正常",
+  fail: "失败",
+  closed: "关闭",
+
+
+  login_address: "登录地址",
+  enter_login_address: "请输入登录地址",
+  login_status: "登录状态",
+  login_time: "登录时间",
+  access_number: "访问编号",
+  login_location: "登录地点",
+  browser: "浏览器",
+  operating_system: "操作系统",
+  operating_info: "操作信息",
+  login_date: "登录日期",
+
+
+  session_number: "会话编号",
+  login_name: "登录名称",
+  department_name: "部门名称",
+  host: "主机",
+  retreat: "强退",
+
+
+
+
 }
