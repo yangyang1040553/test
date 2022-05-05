@@ -229,4 +229,12 @@ export default {
   enter_job_name: "please enter_job_name",
   job_edit: "Job edit",
   job_add: "Job add",
+
+  dictionary_name: "dictionary_name",
+  enter_dictionary_name: "enter_dictionary_name",
+  dictionary_type: "dictionary_type",
+  enter_dictionary_type: "enter_dictionary_type",
+  dictionary_status: "dictionary_status",
+  dictionary_number: "dictionary_number",
+  flush_cache: "flush_cache",
 }
