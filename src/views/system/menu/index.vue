@@ -229,6 +229,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import IconSelect from "@/components/IconSelect";
 import { getKey } from '@/lang'
+import store from "@/store";
 
 export default {
   name: "Menu",
@@ -378,12 +379,14 @@ export default {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
+              store.dispatch('GenerateRoutes')
             });
           } else {
             addMenu(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
+              store.dispatch('GenerateRoutes')
             });
           }
         }
@@ -396,6 +399,7 @@ export default {
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
+        store.dispatch('GenerateRoutes')
       }).catch(() => { });
     }
   }
