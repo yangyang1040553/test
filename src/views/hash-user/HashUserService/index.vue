@@ -46,7 +46,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="HashUserServiceList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="HashUserServiceList" @selection-change="handleSelectionChange" height="600">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="用户id" align="center" prop="id" />
       <el-table-column label="用户类型" align="center" prop="userType" />
