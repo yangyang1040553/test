@@ -17,9 +17,7 @@
       </el-form-item>
       <el-form-item :label="$t('create_time')">
         <el-date-picker v-model="dateRange" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
-          range-separator="-" 
-          :start-placeholder="$t('start_date')" 
-          :end-placeholder="$t('end_date')"></el-date-picker>
+          range-separator="-" :start-placeholder="$t('start_date')" :end-placeholder="$t('end_date')"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">{{ $t('search') }}</el-button>
@@ -51,7 +49,8 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="typeList" @sort-change="sortChange" @selection-change="handleSelectionChange"
+      height="600">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column :label="$t('dictionary_number')" align="center" prop="dictId" />
       <el-table-column :label="$t('dictionary_name')" align="center" prop="dictName" :show-overflow-tooltip="true" />
@@ -68,7 +67,7 @@
         </template>
       </el-table-column>
       <el-table-column :label="$t('remark')" align="center" prop="remark" :show-overflow-tooltip="true" />
-      <el-table-column :label="$t('create_time')" align="center" prop="createTime" width="180">
+      <el-table-column :label="$t('create_time')" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
@@ -149,7 +148,8 @@ export default {
         pageSize: 10,
         dictName: undefined,
         dictType: undefined,
-        status: undefined
+        status: undefined,
+        sort: 'asc'
       },
       // 表单参数
       form: {},
@@ -168,6 +168,15 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.sort = 'desc'
+      } else {
+        this.queryParams.sort = 'asc'
+      }
+      this.getList()
+    },
     /** 查询字典类型列表 */
     getList() {
       this.loading = true;
