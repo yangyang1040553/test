@@ -134,7 +134,7 @@
               :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="是否活动场" prop="isActivty">
+        <el-form-item label="活动场" prop="isActivty">
           <el-select v-model="form.isActivty" placeholder="请选择是否活动场">
             <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
