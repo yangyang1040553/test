@@ -21,13 +21,13 @@ const messages = {
 
 const i18n = new VueI18n({
   // 设置语言 选项 en | zh
-  locale: Cookies.get('language') || 'en',
+  locale: Cookies.get('language') || 'zh',
   // 设置文本内容
   messages
 })
 
 export const getKey=(key)=>{
-  var v= Cookies.get('language') || 'en'
+  var v= Cookies.get('language') || 'zh'
   console.log("key==",key)
   console.log("v==",v)
   if(v=='en'){

@@ -195,7 +195,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加用户钱包";
+      this.title = "用户钱包";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -204,7 +204,7 @@ export default {
       getManagement(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改用户钱包";
+        this.title = "用户钱包";
       });
     },
     /** 提交按钮 */
