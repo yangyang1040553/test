@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="78px">
       <el-form-item label="游戏名称" prop="gameName">
         <el-input v-model="queryParams.gameName" placeholder="请输入游戏名称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
@@ -17,16 +17,16 @@
           <el-option v-for="dict in dict.type.game_open" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="是否活动场" prop="isActivty">
+      <el-form-item label="活动场" prop="isActivty">
         <el-select v-model="queryParams.isActivty" placeholder="请选择是否活动场" clearable>
           <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="结束时间" prop="finishTime">
+      <!-- <el-form-item label="结束时间" prop="finishTime">
         <el-date-picker clearable v-model="queryParams.finishTime" type="date" value-format="yyyy-MM-dd"
           placeholder="请选择结束时间">
         </el-date-picker>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -85,7 +85,12 @@
           <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivty" />
         </template>
       </el-table-column>
-      <el-table-column label="结束时间" align="center" prop="finishTime" width="180" sortable>
+        <el-table-column label="创建时间" align="center" prop="createTime"  sortable>
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="结束时间" align="center" prop="finishTime"  sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.finishTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>

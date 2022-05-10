@@ -10,7 +10,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"
+        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="请选择创建时间">
         </el-date-picker>
       </el-form-item>
