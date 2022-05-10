@@ -11,6 +11,8 @@ const name = process.env.VUE_APP_TITLE || '后台管理系统' // 网页标题
 
 const port = process.env.port || process.env.npm_config_port || 80 // 端口
 
+const Timestamp = new Date().getTime()
+
 // vue.config.js 配置说明
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
 // 这里只列一部分，具体配置参考文档
@@ -45,6 +47,10 @@ module.exports = {
     disableHostCheck: true
   },
   css: {
+    extract: {
+      filename: `css/[name].${Timestamp}.css`,
+      chunkFilename: `css/[name].${Timestamp}.css`
+    },
     loaderOptions: {
       sass: {
         sassOptions: { outputStyle: "expanded" }
@@ -53,6 +59,11 @@ module.exports = {
   },
   configureWebpack: {
     name: name,
+    output: {
+      filename: `js/[name].${Timestamp}.js`,
+      chunkFilename: `js/[name].${Timestamp}.js`
+    },
+
     resolve: {
       alias: {
         '@': resolve('src')
@@ -96,7 +107,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()
@@ -126,8 +137,8 @@ module.exports = {
             })
           config.optimization.runtimeChunk('single'),
           {
-             from: path.resolve(__dirname, './public/robots.txt'), //防爬虫文件
-             to: './' //到根目录下
+            from: path.resolve(__dirname, './public/robots.txt'), //防爬虫文件
+            to: './' //到根目录下
           }
         }
       )
