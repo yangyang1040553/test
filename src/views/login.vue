@@ -2,7 +2,7 @@
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">{{ $t('login.title') }}</h3>
-      <lang-select class="set-language" />
+      <!-- <lang-select class="set-language" /> -->
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" type="text" auto-complete="off" :placeholder="$t('login.username')">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />

@@ -125,7 +125,7 @@ export function filterDynamicRoutes(routes) {
 }
 
 export const loadView = (view) => {
-  console.log(view)
+  // console.log(view)
   if (process.env.NODE_ENV === 'development') {
     return (resolve) => require([`@/views/${view}`], resolve)
   } else {

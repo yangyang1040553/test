@@ -24,9 +24,9 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
 
-        <el-tooltip :content="$t('language')" effect="dark" placement="bottom">
+        <!-- <el-tooltip :content="$t('language')" effect="dark" placement="bottom">
           <LangSelect class="right-menu-item hover-effect" />
-        </el-tooltip>
+        </el-tooltip> -->
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">

@@ -1,5 +1,6 @@
 export default {
-  homePage: "HomePage",
+  homePage: 'HomePage',
+  '首页': 'HomePage',
   login: {
     title: 'RuoYi Login Form',
     logIn: 'Log in',
@@ -354,5 +355,13 @@ export default {
 
 
 
+  user_list: "User list",
+  feedback: "Feedback",
+  user_announcement: "User announcement",
+  game_management: "Game management",
+  game_configuration: "Game configuration",
+  betting_record: "Betting record",
+  wallet_management: "Wallet management",
+  user_wallet: "User wallet",
 
 }

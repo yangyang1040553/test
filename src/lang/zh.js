@@ -1,5 +1,6 @@
 export default {
   homePage: "首页",
+  '首页': "首页",
   login: {
     title: '后台管理系统',
     logIn: '登录',
@@ -343,6 +344,17 @@ export default {
   parameter_description: "参数说明：支持字符串，布尔类型，长整型，浮点型，整型",
   class_description: "Class类调用示例：com.ruoyi.quartz.task.RyTask.ryParams('ry')",
   bean_description: "Bean调用示例：ryTask.ryParams('ry')",
+
+
+
+  user_list: "用户列表",
+  feedback: "意见反馈",
+  user_announcement: "用户公告",
+  game_management: "游戏管理",
+  game_configuration: "游戏配置",
+  betting_record: "投注记录",
+  wallet_management: "钱包管理",
+  user_wallet: "用户钱包",
 
 
 
