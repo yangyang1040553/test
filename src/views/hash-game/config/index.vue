@@ -53,7 +53,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange" height="600" 
+    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange" height="600"
       @sort-change="sortChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="配置id" align="center" prop="id" />
