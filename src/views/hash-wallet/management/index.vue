@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
-      <el-form-item label="账单ID" prop="usdtAmount">
+      <el-form-item label="账单ID" prop="id">
         <el-input v-model="queryParams.id" placeholder="请输入账单ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="usdt余额" prop="usdtAmount">
