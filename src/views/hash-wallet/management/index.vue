@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+      <el-form-item label="账单ID" prop="usdtAmount">
+        <el-input v-model="queryParams.id" placeholder="请输入账单ID" clearable @keyup.enter.native="handleQuery" />
+      </el-form-item>
       <el-form-item label="usdt余额" prop="usdtAmount">
         <el-input v-model="queryParams.usdtAmount" placeholder="请输入usdt余额" clearable
           @keyup.enter.native="handleQuery" />
@@ -52,7 +55,7 @@
 
     <el-table v-loading="loading" :data="managementList" @selection-change="handleSelectionChange" height="600">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="usdt余额" align="center" prop="usdtAmount" />
       <el-table-column label="trx余额" align="center" prop="trxAmount" />
       <el-table-column label="Usdt的hash地址" align="center" prop="hashAddressUsdt" />
@@ -74,12 +77,12 @@
 
     <!-- 添加或修改用户钱包对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form"  label-width="100px"  disabled>
+      <el-form ref="form" :model="form" label-width="100px" disabled>
         <el-form-item label="usdt余额" prop="usdtAmount">
-          <el-input v-model="form.usdtAmount" placeholder="usdt余额"  />
+          <el-input v-model="form.usdtAmount" placeholder="usdt余额" />
         </el-form-item>
         <el-form-item label="trx余额" prop="trxAmount">
-          <el-input v-model="form.trxAmount" placeholder="trx余额"  />
+          <el-input v-model="form.trxAmount" placeholder="trx余额" />
         </el-form-item>
         <el-form-item label="Usdt地址" prop="hashAddressUsdt">
           <el-input v-model="form.hashAddressUsdt" placeholder="Usdt的hash地址" />
@@ -128,6 +131,7 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
+        id: null,
         pageNum: 1,
         pageSize: 10,
         usdtAmount: null,
