@@ -39,8 +39,8 @@
           v-hasPermi="['hash-game:config:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
-          v-hasPermi="['hash-game:config:edit']">修改</el-button>
+        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single"
+          @click="handleUpdate(null, false)" v-hasPermi="['hash-game:config:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
@@ -64,7 +64,14 @@
           <dict-tag :options="dict.type.game_session" :value="scope.row.gameSession" />
         </template>
       </el-table-column>
-      <el-table-column label="下注规则" align="center" prop="betRule" />
+      <!-- <el-table-column label="下注规则" align="center" prop="betRuleList" width="160">
+        <template slot-scope="scope">
+          <div v-for="(item, index) in scope.row.betRuleList" :key="index">
+            <div class="div-rule">{{ item.name }}最小{{ item.betMinLimit }}</div>
+            <div class="div-rule">{{ item.name }}最大{{ item.betMaxLimit }}</div>
+          </div>
+        </template>
+      </el-table-column> -->
       <el-table-column label="倍率配置" align="center" prop="odds">
         <template slot-scope="scope">
           <span v-if="scope.row.odds">{{ scope.row.odds.toFixed(4) }}</span>
@@ -97,7 +104,9 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row, true)">详情
+          </el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row, false)"
             v-hasPermi="['hash-game:config:edit']">修改</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
             v-hasPermi="['hash-game:config:remove']">删除</el-button>
@@ -110,8 +119,8 @@
 
     <!-- 添加或修改游戏配置
 对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body   >
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px"  :disabled="isDetail">
         <el-form-item label="游戏id" prop="gameId">
           <el-input v-model="form.gameId" placeholder="请输入游戏id" />
         </el-form-item>
@@ -142,19 +151,18 @@
               :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="USDT规则">
+        <el-form-item :label="item.title" v-for="(item, index) in form.betRuleList" :key="index">
           <!-- <el-input v-model="form.betRule" type="textarea" class="textarea" placeholder="请输入内容" /> -->
           <div>
             <span class="label">最小投注</span>
-            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.usdtMin" type="text"
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMinLimit" type="text"
               placeholder="请输入内容" clearable />
             <span class="label">最大投注</span>
-            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.usdtMax" type="text"
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMaxLimit" type="text"
               placeholder="请输入内容" clearable />
           </div>
         </el-form-item>
-        <el-form-item label="TRX规则">
-          <!-- <el-input v-model="form.betRule" type="textarea" class="textarea" placeholder="请输入内容" /> -->
+        <!-- <el-form-item label="TRX规则">
           <div>
             <span class="label">最小投注</span>
             <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.trxMin" type="text"
@@ -163,7 +171,7 @@
             <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.trxMax" type="text"
               placeholder="请输入内容" clearable />
           </div>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -181,6 +189,8 @@ export default {
   dicts: ['game_open', 'game_session', 'is_activty'],
   data() {
     return {
+      //是否查看详情
+      isDetail: false,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -290,10 +300,10 @@ export default {
       this.title = "添加游戏配置";
     },
     /** 修改按钮操作 */
-    handleUpdate(row) {
+    handleUpdate(row, isDetail) {
+      this.isDetail = isDetail
       // this.reset();
-      console.log(row)
-      const id = row.id || this.ids
+      const id = row ? row.id : this.ids
       getConfig(id).then(response => {
         this.form = response.data;
         this.title = "修改游戏配置";
@@ -305,10 +315,14 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
 
-          let obj = {
-            "USDT": { "betMaxLimit": this.form.usdtMax, "betMinLimit": this.form.usdtMin },
-            "TRX": { "betMaxLimit": this.form.trxMax, "betMinLimit": this.form.trxMin }
-          }
+          let obj = {}
+          this.form.betRuleList.forEach(element => {
+            // if (element.name == "USDT") {
+            //   obj.USDT = element
+            // }
+            obj[element.name] = element
+
+          });
 
           this.form.betRule = JSON.stringify(obj)
 
@@ -357,5 +371,10 @@ export default {
 .label {
   margin-left: 10px;
   margin-right: 5px;
+}
+
+.div-rule {
+  width: 100%;
+  text-align: start;
 }
 </style>
