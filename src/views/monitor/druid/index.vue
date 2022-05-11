@@ -13,6 +13,7 @@ export default {
     };
   },
   created() {
+    document.domain = window.location.hostname
     console.log(window.location)
   }
 };

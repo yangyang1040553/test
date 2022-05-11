@@ -15,7 +15,6 @@ export default {
       }
     }
   }, created() {
-    document.domain = 'www.myadmin.com'
   }
 }
 </script>
