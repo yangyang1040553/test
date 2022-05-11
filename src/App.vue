@@ -14,6 +14,8 @@ export default {
         return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
       }
     }
+  }, created() {
+    document.domain = window.location.hostname
   }
 }
 </script>
@@ -24,6 +26,5 @@ export default {
   line-height: 32px;
 }
 
-.item__label {
-}
+.item__label {}
 </style>
