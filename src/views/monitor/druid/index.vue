@@ -8,8 +8,8 @@ export default {
   components: { iFrame },
   data() {
     return {
-      // url: process.env.VUE_APP_BASE_API + "/druid/login.html"
-      url: "/druid/login.html"
+      url: process.env.VUE_APP_BASE_API + "/druid/login.html"
+      // url: "/druid/login.html"
     };
   },
   created() {
