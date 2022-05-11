@@ -8,7 +8,7 @@ export default {
   components: { iFrame },
   data() {
     return {
-      url: window.location.hostname + ":8022/swagger-ui/index.html"
+      url:"/swagger-ui/index.html"
     };
   },
 };
