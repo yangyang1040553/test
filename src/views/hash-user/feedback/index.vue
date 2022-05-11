@@ -7,6 +7,11 @@
       <el-form-item label="玩家昵称" prop="nickName">
         <el-input v-model="queryParams.nickName" placeholder="请输入玩家昵称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
+      <el-form-item label="反馈类型" prop="code">
+        <el-select v-model="queryParams.code" placeholder="请选择反馈类型" clearable>
+          <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label" :value="dict.value" />
+        </el-select>
+      </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
         <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd"
           placeholder="请选择创建时间">
@@ -19,14 +24,14 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <!-- <el-col :span="1.5">
+      <el-col :span="1.5">
         <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
           v-hasPermi="['hash-user:feedback:add']">新增</el-button>
-      </el-col> -->
-      <!-- <el-col :span="1.5">
+      </el-col>
+      <el-col :span="1.5">
         <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
           v-hasPermi="['hash-user:feedback:edit']">修改</el-button>
-      </el-col> -->
+      </el-col>
       <el-col :span="1.5">
         <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
           v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
@@ -38,17 +43,23 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="feedbackList" @selection-change="handleSelectionChange" height="600">
+    <el-table v-loading="loading" :data="feedbackList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="反馈类型" align="center" prop="code">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.back_type" :value="scope.row.code" />
+        </template>
+      </el-table-column>
       <el-table-column label="玩家ID" align="center" prop="userId" />
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
-      <el-table-column label="反馈时间" align="center" prop="createTime" />
       <el-table-column label="内容" align="center" prop="content" />
+      <el-table-column label="时间" align="center" prop="createTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-user:feedback:edit']">详情</el-button>
+          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row)">详情</el-button>
+          <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+            v-hasPermi="['hash-user:feedback:edit']">修改</el-button> -->
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
             v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
         </template>
@@ -59,8 +70,14 @@
       @pagination="getList" />
 
     <!-- 添加或修改用户意见反馈对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="dialog" disabled>
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="dialog">
+        <el-form-item label="反馈类型" prop="code">
+          <el-select v-model="form.code" placeholder="请选择反馈类型">
+            <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="玩家ID" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
@@ -68,12 +85,12 @@
           <el-input v-model="form.nickName" placeholder="请输入玩家昵称" />
         </el-form-item>
         <el-form-item label="内容">
-          <editor v-model="form.content" :min-height="300" />
+          <editor v-model="form.content" :min-height="400" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
-        <el-button @click="cancel">关 闭</el-button>
+        <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -84,6 +101,7 @@ import { listFeedback, getFeedback, delFeedback, addFeedback, updateFeedback } f
 
 export default {
   name: "Feedback",
+  dicts: ['back_type'],
   data() {
     return {
       // 遮罩层
@@ -108,6 +126,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        code: null,
         userId: null,
         nickName: null,
         createTime: null
@@ -141,6 +160,7 @@ export default {
     reset() {
       this.form = {
         id: null,
+        code: null,
         userId: null,
         nickName: null,
         content: null,
@@ -168,7 +188,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "用户意见反馈";
+      this.title = "添加用户意见反馈";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -177,7 +197,7 @@ export default {
       getFeedback(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "用户意见反馈";
+        this.title = "修改用户意见反馈";
       });
     },
     /** 提交按钮 */
@@ -219,8 +239,8 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss"  scoped>
 .dialog {
-  height: 500px;
+  height: 70vh;
 }
 </style>

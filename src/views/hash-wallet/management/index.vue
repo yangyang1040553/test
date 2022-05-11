@@ -34,18 +34,18 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <!-- <el-col :span="1.5">
+      <el-col :span="1.5">
         <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
           v-hasPermi="['hash-wallet:management:add']">新增</el-button>
-      </el-col> -->
-      <!-- <el-col :span="1.5">
+      </el-col>
+      <el-col :span="1.5">
         <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
           v-hasPermi="['hash-wallet:management:edit']">修改</el-button>
-      </el-col> -->
-      <!-- <el-col :span="1.5">
+      </el-col>
+      <el-col :span="1.5">
         <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
           v-hasPermi="['hash-wallet:management:remove']">删除</el-button>
-      </el-col> -->
+      </el-col>
       <el-col :span="1.5">
         <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
           v-hasPermi="['hash-wallet:management:export']">导出</el-button>
