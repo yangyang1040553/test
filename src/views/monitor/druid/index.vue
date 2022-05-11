@@ -8,8 +8,13 @@ export default {
   components: { iFrame },
   data() {
     return {
-      url: process.env.VUE_APP_BASE_API + "/druid/login.html"
+      // url: process.env.VUE_APP_BASE_API + "/druid/login.html"
+      url: window.location.hostname + ":8022/druid/login.html"
     };
   },
+  created() {
+    console.log(window.location)
+    console.log(window.location.hostname + ":8022/druid/login.html")
+  }
 };
 </script>
