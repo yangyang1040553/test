@@ -60,7 +60,7 @@
       </el-table-column>
       <el-table-column label="结束时间" align="center" prop="finishTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.finishTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.finishTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
