@@ -85,12 +85,12 @@
           <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivty" />
         </template>
       </el-table-column>
-        <el-table-column label="创建时间" align="center" prop="createTime"  sortable>
+      <el-table-column label="创建时间" align="center" prop="createTime" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="结束时间" align="center" prop="finishTime"  sortable>
+      <el-table-column label="结束时间" align="center" prop="finishTime" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.finishTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
@@ -110,7 +110,7 @@
 
     <!-- 添加或修改游戏配置
 对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="游戏id" prop="gameId">
           <el-input v-model="form.gameId" placeholder="请输入游戏id" />
@@ -123,9 +123,6 @@
             <el-option v-for="dict in dict.type.game_session" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="下注规则" prop="betRule">
-          <el-input v-model="form.betRule" type="textarea" placeholder="请输入内容" />
         </el-form-item>
         <el-form-item label="倍率配置" prop="odds">
           <el-input v-model="form.odds" placeholder="请输入倍率配置" />
@@ -144,6 +141,28 @@
             <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="USDT规则">
+          <!-- <el-input v-model="form.betRule" type="textarea" class="textarea" placeholder="请输入内容" /> -->
+          <div>
+            <span class="label">最小投注</span>
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.usdtMin" type="text"
+              placeholder="请输入内容" clearable />
+            <span class="label">最大投注</span>
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.usdtMax" type="text"
+              placeholder="请输入内容" clearable />
+          </div>
+        </el-form-item>
+        <el-form-item label="TRX规则">
+          <!-- <el-input v-model="form.betRule" type="textarea" class="textarea" placeholder="请输入内容" /> -->
+          <div>
+            <span class="label">最小投注</span>
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.trxMin" type="text"
+              placeholder="请输入内容" clearable />
+            <span class="label">最大投注</span>
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="form.trxMax" type="text"
+              placeholder="请输入内容" clearable />
+          </div>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -193,7 +212,9 @@ export default {
         sort: 'asc'
       },
       // 表单参数
-      form: {},
+      form: {
+
+      },
       // 表单校验
       rules: {
       }
@@ -270,18 +291,29 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset();
+      // this.reset();
+      console.log(row)
       const id = row.id || this.ids
       getConfig(id).then(response => {
         this.form = response.data;
-        this.open = true;
         this.title = "修改游戏配置";
+        this.open = true;
       });
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+
+          let obj = {
+            "USDT": { "betMaxLimit": this.form.usdtMax, "betMinLimit": this.form.usdtMin },
+            "TRX": { "betMaxLimit": this.form.trxMax, "betMinLimit": this.form.trxMin }
+          }
+
+          this.form.betRule = JSON.stringify(obj)
+
+          console.log(this.form)
+
           if (this.form.id != null) {
             updateConfig(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
@@ -317,3 +349,13 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.my-input {
+  width: 200px;
+}
+
+.label {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+</style>

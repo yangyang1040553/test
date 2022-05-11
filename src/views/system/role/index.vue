@@ -90,7 +90,7 @@
 
     <!-- 添加或修改角色配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px" class="dialog">
         <el-form-item :label="$t('role_name')" prop="roleName">
           <el-input v-model="form.roleName" :placeholder="$t('type_role_name')" />
         </el-form-item>
@@ -114,7 +114,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item :label="$t('menu_permission')">
-          <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">{{ $t('expand_collapse') }}
+          <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">{{ $t('expand_collapse')
+          }}
           </el-checkbox>
           <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">{{ $t('all_none') }}
           </el-checkbox>
@@ -133,8 +134,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">{{$t('sure')}}</el-button>
-        <el-button @click="cancel">{{$t('cancel')}}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('sure') }}</el-button>
+        <el-button @click="cancel">{{ $t('cancel') }}</el-button>
       </div>
     </el-dialog>
 
@@ -154,9 +155,13 @@
           </el-select>
         </el-form-item>
         <el-form-item :label="$t('data_permission')" v-show="form.dataScope == 2">
-          <el-checkbox v-model="deptExpand" @change="handleCheckedTreeExpand($event, 'dept')">{{ $t('expand_collapse') }}</el-checkbox>
-          <el-checkbox v-model="deptNodeAll" @change="handleCheckedTreeNodeAll($event, 'dept')">{{ $t('all_none') }}</el-checkbox>
-          <el-checkbox v-model="form.deptCheckStrictly" @change="handleCheckedTreeConnect($event, 'dept')"> {{ $t('father_son_linkage') }}
+          <el-checkbox v-model="deptExpand" @change="handleCheckedTreeExpand($event, 'dept')">{{ $t('expand_collapse')
+          }}</el-checkbox>
+          <el-checkbox v-model="deptNodeAll" @change="handleCheckedTreeNodeAll($event, 'dept')">{{ $t('all_none') }}
+          </el-checkbox>
+          <el-checkbox v-model="form.deptCheckStrictly" @change="handleCheckedTreeConnect($event, 'dept')"> {{
+              $t('father_son_linkage')
+          }}
           </el-checkbox>
           <el-tree class="tree-border" :data="deptOptions" show-checkbox default-expand-all ref="dept" node-key="id"
             :check-strictly="!form.deptCheckStrictly" empty-text="加载中，请稍候" :props="defaultProps">
@@ -545,5 +550,9 @@ export default {
   justify-content: space-between;
   font-size: 14px;
   padding-right: 8px;
+}
+
+.dialog {
+  height: 70vh;
 }
 </style>
