@@ -282,7 +282,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('role')">
-              <el-select v-model="form.roleIds" :placeholder="$t('select_role')">
+              <el-select v-model="form.roleId" :placeholder="$t('select_role')">
                 <el-option
                   v-for="item in roleOptions"
                   :key="item.roleId"
