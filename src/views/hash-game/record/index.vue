@@ -94,8 +94,10 @@
       <el-table-column label="投注位置" align="center" prop="betPosition" />
       <el-table-column label="金额状态" align="center" prop="awardAmount">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.money_status" :value="scope.row.awardAmount" />
+          <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
+      </el-table-column>
+      <el-table-column label="金额" align="center" prop="awardAmount">
       </el-table-column>
       <el-table-column label="手续费" align="center" prop="taxAmount" />
       <el-table-column label="hash值" align="center" prop="hashValue" />
@@ -210,7 +212,7 @@ import { listRecord, getRecord, delRecord, addRecord, updateRecord } from '@/api
 
 export default {
   name: 'Record',
-  dicts: ['winner', 'wallet_type', 'money_status', 'reward_status', 'bet_result'],
+  dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result'],
   data() {
     return {
       // 遮罩层
