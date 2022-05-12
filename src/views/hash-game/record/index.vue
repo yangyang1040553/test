@@ -75,7 +75,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="recordList" @sort-change="sortChange"  height="600"
+    <el-table v-loading="loading" :data="recordList" @sort-change="sortChange" height="600"
       :default-sort="{ prop: 'create_time', order: 'descending' }" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
@@ -105,7 +105,7 @@
           <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
         </template>
       </el-table-column>
-      <el-table-column label="到账结果" align="center" prop="rewardStatus">
+      <el-table-column label="到账结果" align="center" prop="rewardStatus" width="120">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.reward_status" :value="scope.row.rewardStatus" />
         </template>
