@@ -320,7 +320,10 @@ export default {
             // if (element.name == "USDT") {
             //   obj.USDT = element
             // }
-            obj[element.name] = element
+            var name =element.name 
+            delete element.name
+            delete element.title
+            obj[name] = element
 
           });
 
