@@ -75,11 +75,11 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="recordList" @sort-change="sortChange"  :default-sort="{ prop: 'create_time', order: 'descending' }"
-      @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="recordList" @sort-change="sortChange"  height="600"
+      :default-sort="{ prop: 'create_time', order: 'descending' }" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
-      <el-table-column label="配置id" align="center" prop="configId" />
+      <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
       <el-table-column label="游戏id" align="center" prop="gameId" />
       <el-table-column label="场次id" align="center" prop="sessionId" />
       <el-table-column label="玩家id" align="center" prop="userId" />
