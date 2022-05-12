@@ -100,6 +100,7 @@
       <el-table-column label="手续费" align="center" prop="taxAmount" />
       <el-table-column label="hash值" align="center" prop="hashValue" />
       <el-table-column label="下注时间" align="center" prop="createTime" sortable width="120" />
+      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="120" />
       <el-table-column label="下注结果" align="center" prop="betResult">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
