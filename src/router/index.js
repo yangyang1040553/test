@@ -76,20 +76,20 @@ export const constantRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/user',
-  //   component: Layout,
-  //   hidden: true,
-  //   redirect: 'noredirect',
-  //   children: [
-  //     {
-  //       path: 'profile',
-  //       component: () => import('@/views/system/user/profile/index'),
-  //       name: 'Profile',
-  //       meta: { title: getKey('user_center'), icon: 'user' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/user',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'profile',
+        component: () => import('@/views/system/user/profile/index'),
+        name: 'Profile',
+        meta: { title: getKey('user_center'), icon: 'user' }
+      }
+    ]
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载
