@@ -48,16 +48,16 @@
 
     <el-table v-loading="loading" :data="HashUserServiceList" @selection-change="handleSelectionChange" height="600">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="用户id" align="center" prop="id" />
-      <el-table-column label="用户类型" align="center" prop="userType" />
+      <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
+      <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
       <el-table-column label="手机区号" align="center" prop="areaCode" />
       <el-table-column label="手机号" align="center" prop="phone" />
       <el-table-column label="用户名" align="center" prop="account" />
-      <el-table-column label="密码" align="center" prop="password" />
+      <!-- <el-table-column label="密码" align="center" prop="password" /> -->
       <el-table-column label="设备码" align="center" prop="deviceCode" />
       <el-table-column label="平台" align="center" prop="platform" />
       <el-table-column label="用户昵称" align="center" prop="nickName" />
-      <el-table-column label="头像" align="center" prop="head" width="300" />
+      <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
       <el-table-column label="用户状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.user_status" :value="scope.row.status" />
@@ -71,22 +71,13 @@
       <el-table-column label="邀请码" align="center" prop="invitationCode" />
       <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" />
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.registerTime, '{y}-{m}-{d}') }}</span>
-        </template>
       </el-table-column>
       <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.bindTime, '{y}-{m}-{d}') }}</span>
-        </template>
       </el-table-column>
-      <el-table-column label="注册ip" align="center" prop="registerIp" />
-      <el-table-column label="登录时间" align="center" prop="loginTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.loginTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="登录ip" align="center" prop="loginIp" />
+      <!-- <el-table-column label="注册ip" align="center" prop="registerIp" /> -->
+      <!-- <el-table-column label="登录时间" align="center" prop="loginTime" width="180">
+      </el-table-column> -->
+      <!-- <el-table-column label="登录ip" align="center" prop="loginIp" /> -->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
