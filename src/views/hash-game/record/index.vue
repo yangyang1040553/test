@@ -97,7 +97,7 @@
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column> -->
-      <el-table-column label="开奖金额" align="center" prop="awardAmount">
+      <el-table-column label="入账金额" align="center" prop="awardAmount">
       </el-table-column>
       <el-table-column label="手续费" align="center" prop="taxAmount" />
       <el-table-column label="hash值" align="center" prop="hashValue" />
