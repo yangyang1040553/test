@@ -92,12 +92,12 @@
       </el-table-column>
       <el-table-column label="投注金额" align="center" prop="betAmount" />
       <el-table-column label="投注位置" align="center" prop="betPosition" />
-      <el-table-column label="金额状态" align="center" prop="awardAmount">
+      <!-- <el-table-column label="金额状态" align="center" prop="awardAmount">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
-      </el-table-column>
-      <el-table-column label="金额" align="center" prop="awardAmount">
+      </el-table-column> -->
+      <el-table-column label="开奖金额" align="center" prop="awardAmount">
       </el-table-column>
       <el-table-column label="手续费" align="center" prop="taxAmount" />
       <el-table-column label="hash值" align="center" prop="hashValue" />
@@ -165,12 +165,12 @@
         <el-form-item label="投注位置" prop="betPosition">
           <el-input v-model="form.betPosition" placeholder="请输入投注位置" />
         </el-form-item>
-        <el-form-item label="金额状态" prop="awardAmount">
+        <!-- <el-form-item label="金额状态" prop="awardAmount">
           <el-select v-model="form.awardAmount" placeholder="请选择中奖金额或退回金额">
             <el-option v-for="dict in dict.type.money_status" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="手续费" prop="taxAmount">
           <el-input v-model="form.taxAmount" placeholder="请输入手续费" />
         </el-form-item>
