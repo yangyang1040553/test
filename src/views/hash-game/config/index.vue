@@ -17,8 +17,8 @@
           <el-option v-for="dict in dict.type.game_open" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="活动场" prop="isActivty">
-        <el-select v-model="queryParams.isActivty" placeholder="请选择是否活动场" clearable>
+      <el-form-item label="活动场" prop="isActivity">
+        <el-select v-model="queryParams.isActivity" placeholder="请选择是否活动场" clearable>
           <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
@@ -87,9 +87,9 @@
           <dict-tag :options="dict.type.game_open" :value="scope.row.open" />
         </template>
       </el-table-column>
-      <el-table-column label="是否活动场" align="center" prop="isActivty">
+      <el-table-column label="是否活动场" align="center" prop="isActivity">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivty" />
+          <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivity" />
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" sortable>
@@ -117,12 +117,15 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
       @pagination="getList" />
 
-    <!-- 添加或修改游戏配置
-对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body   >
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px"  :disabled="isDetail">
-        <el-form-item label="游戏id" prop="gameId">
-          <el-input v-model="form.gameId" placeholder="请输入游戏id" />
+    <!-- 添加或修改游戏配置对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="isDetail">
+        <el-form-item label="游戏菜单" prop="menuId">
+          <el-select v-model="form.menuId" placeholder="请选择对应游戏">
+            <!-- dict.activity   隐藏 特殊活动场 -->
+            <el-option v-if="dict.activity != 1" v-for="dict in gameMenuList" :key="dict.id" :label="dict.menuName"
+              :value="parseInt(dict.id)"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="游戏名称" prop="gameName">
           <el-input v-model="form.gameName" placeholder="请输入游戏名称" />
@@ -134,10 +137,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="倍率配置" prop="odds">
-          <el-input v-model="form.odds" placeholder="请输入倍率配置" />
+          <el-input v-model="form.odds" placeholder="请输入倍率配置"  oninput="value=value.replace(/[^\d\.]/g,'')"/>
         </el-form-item>
         <el-form-item label="税收" prop="tax">
-          <el-input v-model="form.tax" placeholder="请输入税收" />
+          <el-input v-model="form.tax" placeholder="请输入税收" oninput="value=value.replace(/[^\d\.]/g,'')" />
         </el-form-item>
         <el-form-item label="是否开启" prop="open">
           <el-select v-model="form.open" placeholder="请选择是否开启">
@@ -145,8 +148,8 @@
               :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动场" prop="isActivty">
-          <el-select v-model="form.isActivty" placeholder="请选择是否活动场">
+        <el-form-item label="活动场" prop="isActivity">
+          <el-select v-model="form.isActivity" placeholder="请选择是否活动场">
             <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
@@ -183,7 +186,7 @@
 
 <script>
 import { listConfig, getConfig, delConfig, addConfig, updateConfig } from "@/api/hash-game/config";
-
+import { listGameMenu } from "@/api/hash-game/gameMenu";
 export default {
   name: "Config",
   dicts: ['game_open', 'game_session', 'is_activty'],
@@ -217,7 +220,7 @@ export default {
         gameSession: null,
         odds: null,
         open: null,
-        isActivty: null,
+        isActivity: null,
         finishTime: null,
         sort: 'asc'
       },
@@ -227,13 +230,43 @@ export default {
       },
       // 表单校验
       rules: {
-      }
+        menuId: [
+          { required: true, message: '请选择游戏菜单', trigger: 'blur' },
+        ],
+        gameName: [
+          { required: true, message: '请输入游戏名称', trigger: 'blur' },
+        ],
+        gameSession: [
+          { required: true, message: '请选择游戏场次', trigger: 'blur' },
+        ],
+        odds: [
+          { required: true, message: '请输入游戏倍率', trigger: 'blur' },
+        ],
+        tax: [
+          { required: true, message: '请输入游戏税收', trigger: 'blur' },
+        ],
+        open: [
+          { required: true, message: '请选择是否开启', trigger: 'blur' },
+        ], isActivity: [
+          { required: true, message: '请选择活动场', trigger: 'blur' },
+        ],
+      },
+      gameMenuList: []
     };
   },
   created() {
     this.getList();
   },
   methods: {
+    getMenuList() {
+      listGameMenu({
+        pageNum: 1,
+        pageSize: 100,
+      }).then(response => {
+        this.gameMenuList = response.rows;
+      });
+    },
+
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
@@ -268,7 +301,7 @@ export default {
         odds: null,
         tax: null,
         open: null,
-        isActivty: null,
+        isActivity: null,
         finishTime: null,
         createTime: null,
         createBy: null,
@@ -296,6 +329,18 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
+      this.getMenuList()
+      this.form.betRuleList = [{
+        betMaxLimit: 500000,
+        betMinLimit: 10,
+        name: "USDT",
+        title: "USDT规则",
+      }, {
+        betMaxLimit: 1000000,
+        betMinLimit: 1000,
+        name: "TRX",
+        title: "TRX规则"
+      }]
       this.open = true;
       this.title = "添加游戏配置";
     },
@@ -304,6 +349,7 @@ export default {
       this.isDetail = isDetail
       // this.reset();
       const id = row ? row.id : this.ids
+      this.getMenuList()
       getConfig(id).then(response => {
         this.form = response.data;
         this.title = "修改游戏配置";
@@ -320,7 +366,7 @@ export default {
             // if (element.name == "USDT") {
             //   obj.USDT = element
             // }
-            var name =element.name 
+            var name = element.name
             delete element.name
             delete element.title
             obj[name] = element
