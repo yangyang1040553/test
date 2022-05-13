@@ -23,18 +23,19 @@ const i18n = new VueI18n({
   // 设置语言 选项 en | zh
   locale: Cookies.get('language') || 'zh',
   // 设置文本内容
-  messages
+  messages,
+  silentTranslationWarn: true
 })
 
-export const getKey=(key)=>{
-  var v= Cookies.get('language') || 'zh'
-  console.log("key==",key)
-  console.log("v==",v)
-  if(v=='en'){
-    console.log("enLocale[key]==",messages.en[key])
+export const getKey = (key) => {
+  var v = Cookies.get('language') || 'zh'
+  console.log("key==", key)
+  console.log("v==", v)
+  if (v == 'en') {
+    console.log("enLocale[key]==", messages.en[key])
     return enLocale[key]
   } else {
-    console.log("enLocale[key]==",messages.zh[key])
+    console.log("enLocale[key]==", messages.zh[key])
     return zhLocale[key]
   }
 }

@@ -57,7 +57,7 @@
       <el-table-column label="设备码" align="center" prop="deviceCode" />
       <el-table-column label="平台" align="center" prop="platform" />
       <el-table-column label="用户昵称" align="center" prop="nickName" />
-      <el-table-column label="头像" align="center" prop="head" />
+      <el-table-column label="头像" align="center" prop="head" width="300" />
       <el-table-column label="用户状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.user_status" :value="scope.row.status" />

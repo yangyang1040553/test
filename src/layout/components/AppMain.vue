@@ -4,7 +4,7 @@
       <!-- <keep-alive :include="cachedViews">
         <router-view :key="key" />
       </keep-alive> -->
-       <router-view :key="key" />
+      <router-view :key="key" />
     </transition>
   </section>
 </template>
