@@ -53,7 +53,14 @@
       </el-table-column>
       <el-table-column label="玩家ID" align="center" prop="userId" />
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
-      <el-table-column label="内容" align="center" prop="content" />
+      <el-table-column label="内容" align="center" prop="content">
+        <template slot-scope="scope">
+          <el-popover trigger="hover" placement="top">
+            <div class="hover-div">{{ scope.row.content }}</div>
+            <div class="text-content name-wrapper" slot="reference">{{ scope.row.content }}</div>
+          </el-popover>
+        </template>
+      </el-table-column>
       <el-table-column label="时间" align="center" prop="createTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -89,7 +96,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
+        <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -242,5 +249,14 @@ export default {
 <style lang="scss"  scoped>
 .dialog {
   height: 70vh;
+}
+
+.text-content {
+  max-height: 50px !important;
+  overflow: hidden;
+}
+
+.hover-div{
+  max-width: 300px;
 }
 </style>
