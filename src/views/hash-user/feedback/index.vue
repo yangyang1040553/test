@@ -70,7 +70,7 @@
       @pagination="getList" />
 
     <!-- 添加或修改用户意见反馈对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="dialog">
         <el-form-item label="反馈类型" prop="code">
           <el-select v-model="form.code" placeholder="请选择反馈类型">

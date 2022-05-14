@@ -74,10 +74,10 @@
       </el-table-column>
       <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180">
       </el-table-column>
-      <!-- <el-table-column label="注册ip" align="center" prop="registerIp" /> -->
-      <!-- <el-table-column label="登录时间" align="center" prop="loginTime" width="180">
-      </el-table-column> -->
-      <!-- <el-table-column label="登录ip" align="center" prop="loginIp" /> -->
+      <el-table-column label="注册ip" align="center" prop="registerIp" />
+      <el-table-column label="登录时间" align="center" prop="loginTime" width="180">
+      </el-table-column>
+      <el-table-column label="登录ip" align="center" prop="loginIp" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
