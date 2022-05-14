@@ -164,7 +164,7 @@ export default {
       } else {
         this.queryParams.sort = 'asc'
       }
-      if (val.prop && val.prop == '"createTime"') {
+      if (val.prop && val.prop == 'createTime') {
         this.queryParams.prop = 'create_time'
       } else {
         this.queryParams.prop = 'finish_time'

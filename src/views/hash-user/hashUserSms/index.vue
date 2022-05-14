@@ -88,7 +88,7 @@
           <el-input v-model="form.phone" placeholder="请输入手机号" />
         </el-form-item>
         <el-form-item label="是否成功" prop="ok">
-          <el-select v-model="form.ok" placeholder="请选择是否成功0失败1成功">
+          <el-select v-model="form.ok" placeholder="请选择是否成功">
             <el-option v-for="dict in dict.type.sms_status" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>

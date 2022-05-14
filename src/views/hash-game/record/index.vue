@@ -97,7 +97,9 @@
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column> -->
-      <el-table-column label="入账金额" align="center" prop="awardAmount">
+      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount">
+      </el-table-column>
+      <el-table-column label="入账金额" align="center" prop="incomeAmount">
       </el-table-column>
       <el-table-column label="手续费" align="center" prop="taxAmount" />
       <el-table-column label="hash值" align="center" prop="hashValue" />
@@ -269,11 +271,12 @@ export default {
       } else {
         this.queryParams.sort = 'asc'
       }
-      if (val.prop && val.prop == '"createTime"') {
+      if (val.prop && val.prop == 'createTime') {
         this.queryParams.prop = 'create_time'
       } else {
         this.queryParams.prop = 'finish_time'
       }
+      console.log(this.queryParams)
       this.getList()
     },
     /** 查询游戏投注记录列表 */
