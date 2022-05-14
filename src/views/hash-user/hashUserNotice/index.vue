@@ -45,7 +45,14 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="公告标题" align="center" prop="title" />
-      <el-table-column label="公告内容" align="center" prop="content" />
+      <el-table-column label="公告内容" align="center" prop="content">
+        <template slot-scope="scope">
+          <el-popover trigger="hover" placement="top">
+            <div class="hover-div">{{ scope.row.content }}</div>
+            <div class="text-content name-wrapper" slot="reference">{{ scope.row.content }}</div>
+          </el-popover>
+        </template>
+      </el-table-column>
       <el-table-column label="活动开启" align="center" prop="isOpen">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.isOpen" />
@@ -267,5 +274,15 @@ export default {
 <style lang="scss" scoped>
 .form {
   height: 500px;
+}
+
+
+.text-content {
+  max-height: 50px !important;
+  overflow: hidden;
+}
+
+.hover-div {
+  max-width: 300px;
 }
 </style>
