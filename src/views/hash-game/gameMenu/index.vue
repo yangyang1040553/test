@@ -71,10 +71,10 @@
           <el-input v-model="form.menuName" placeholder="请输入菜单名称" />
         </el-form-item>
         <el-form-item label="权重值" prop="weight">
-          <el-input v-model="form.weight" placeholder="请输入权重值" oninput="value=value.replace(/[^\d]/g,'')"/>
+          <el-input v-model="form.weight" placeholder="请输入权重值" oninput="value=value.replace(/[^\d]/g,'')" />
         </el-form-item>
         <el-form-item v-if="isEdit" label="活动菜单" prop="activity">
-          <el-select v-model="form.activity" placeholder="请选择是否活动菜单" disabled>
+          <el-select v-model="form.activity" placeholder="请选择是否活动菜单" :disabled="form.activity == 1">
             <el-option v-for="dict in dict.type.is_activity" :key="dict.value" :label="dict.label" :value="dict.value">
             </el-option>
           </el-select>
