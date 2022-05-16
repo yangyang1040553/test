@@ -21,6 +21,11 @@
         <el-select v-model="queryParams.isActivity" placeholder="请选择是否活动场" clearable>
           <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
+      </el-form-item> 
+        <el-form-item label="参与返佣" prop="isBrokerage">
+        <el-select v-model="queryParams.isBrokerage" placeholder="请选择是否参与返佣" clearable>
+          <el-option v-for="dict in dict.type.is_brokerage" :key="dict.value" :label="dict.label" :value="dict.value" />
+        </el-select>
       </el-form-item>
       <!-- <el-form-item label="结束时间" prop="finishTime">
         <el-date-picker clearable v-model="queryParams.finishTime" type="date" value-format="yyyy-MM-dd"
@@ -91,6 +96,11 @@
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivity" />
         </template>
+      </el-table-column> 
+        <el-table-column label="是否返佣" align="center" prop="isBrokerage">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.is_brokerage" :value="scope.row.isBrokerage" />
+        </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" sortable>
         <template slot-scope="scope">
@@ -123,7 +133,7 @@
         <el-form-item label="游戏菜单" prop="menuId">
           <el-select v-model="form.menuId" placeholder="请选择对应游戏">
             <!-- dict.activity   隐藏 特殊活动场 -->
-            <el-option v-if="dict.activity != 1" v-for="dict in gameMenuList" :key="dict.id" :label="dict.menuName"
+            <el-option v-show="dict.activity != 1" v-for="dict in gameMenuList" :key="dict.id" :label="dict.menuName"
               :value="parseInt(dict.id)"></el-option>
           </el-select>
         </el-form-item>
@@ -151,6 +161,12 @@
         <el-form-item label="活动场" prop="isActivity">
           <el-select v-model="form.isActivity" placeholder="请选择是否活动场">
             <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
+          </el-select>
+        </el-form-item> 
+        <el-form-item label="是否返佣" prop="isBrokerage">
+          <el-select v-model="form.isBrokerage" placeholder="请选择是否参与返佣">
+            <el-option v-for="dict in dict.type.is_brokerage" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
@@ -189,7 +205,7 @@ import { listConfig, getConfig, delConfig, addConfig, updateConfig } from "@/api
 import { listGameMenu } from "@/api/hash-game/gameMenu";
 export default {
   name: "Config",
-  dicts: ['game_open', 'game_session', 'is_activty'],
+  dicts: ['game_open', 'game_session', 'is_activty','is_brokerage'],
   data() {
     return {
       //是否查看详情
@@ -247,8 +263,12 @@ export default {
         ],
         open: [
           { required: true, message: '请选择是否开启', trigger: 'blur' },
-        ], isActivity: [
+        ], 
+        isActivity: [
           { required: true, message: '请选择活动场', trigger: 'blur' },
+        ],
+         isBrokerage: [
+          { required: true, message: '请选择是否返佣', trigger: 'blur' },
         ],
       },
       gameMenuList: []
