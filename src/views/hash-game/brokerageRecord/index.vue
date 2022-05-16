@@ -69,13 +69,21 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
-      <el-table-column label="下注金额" align="center" prop="betAmount" />
+      <el-table-column label="下注金额" align="center" prop="betAmount" >
+         <template slot-scope="scope">
+          <div>{{scope.row.betAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="反佣类型" align="center" prop="brokerageType" width="85">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.brokerage_type" :value="scope.row.brokerageType" />
         </template>
       </el-table-column>
-      <el-table-column label="反佣金额" align="center" prop="brokerageAmount" />
+      <el-table-column label="反佣金额" align="center" prop="brokerageAmount" >
+          <template slot-scope="scope">
+          <div>{{scope.row.brokerageAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="下级玩家id" align="center" prop="childUserId">
         <template slot-scope="scope">
           <div class="blue-text" @click="handleUserInfo(scope.row)">{{ scope.row.childUserId }}</div>
