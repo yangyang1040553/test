@@ -30,8 +30,7 @@
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
         <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd"
-          placeholder="请选择创建时间">
-        </el-date-picker>
+          placeholder="请选择创建时间"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -87,8 +86,7 @@
           <dict-tag :options="dict.type.record_status" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
-      </el-table-column>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable></el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
@@ -143,61 +141,67 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog> -->
-
+    </el-dialog>-->
 
     <!-- 添加或修改用户对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px" disabled>
-        <el-form-item label="手机区号" prop="areaCode">
-          <el-input v-model="form.areaCode" placeholder="请输入手机区号" />
-        </el-form-item>
-        <el-form-item label="手机号" prop="phone">
-          <el-input v-model="form.phone" placeholder="请输入手机号" />
-        </el-form-item>
-        <el-form-item label="用户名" prop="account">
-          <el-input v-model="form.account" placeholder="请输入用户名" />
-        </el-form-item>
-        <!-- <el-form-item label="密码" prop="password">
+    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
+      <div class="parent">
+        <el-form ref="form" class="form" :model="form" :rules="rules" label-width="100px" disabled>
+
+          <div class="left">
+            <el-form-item label="手机区号" prop="areaCode">
+              <el-input v-model="form.areaCode" placeholder="请输入手机区号" />
+            </el-form-item>
+            <el-form-item label="手机号" prop="phone">
+              <el-input v-model="form.phone" placeholder="请输入手机号" />
+            </el-form-item>
+            <el-form-item label="用户名" prop="account">
+              <el-input v-model="form.account" placeholder="请输入用户名" />
+            </el-form-item>
+            <!-- <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
-        </el-form-item> -->
-        <el-form-item label="设备码" prop="deviceCode">
-          <el-input v-model="form.deviceCode" placeholder="请输入设备码" />
-        </el-form-item>
-        <el-form-item label="平台" prop="platform">
-          <el-input v-model="form.platform" placeholder="请输入平台-IOS、android" />
-        </el-form-item>
-        <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
-        </el-form-item>
-        <el-form-item label="邀请码" prop="invitationCode">
-          <el-input v-model="form.invitationCode" placeholder="请输入邀请码" />
-        </el-form-item>
-        <el-form-item label="上级邀请码" prop="fatherInvitationCode">
-          <el-input v-model="form.fatherInvitationCode" />
-        </el-form-item>
-        <el-form-item label="注册IP" prop="registerIp">
-          <el-input v-model="form.registerIp" />
-        </el-form-item>
-        <el-form-item label="登录IP" prop="loginIp">
-          <el-input v-model="form.loginIp" />
-        </el-form-item>
-        <el-form-item label="注册时间" prop="registerTime">
-          <el-input v-model="form.registerTime" />
-        </el-form-item>
-        <el-form-item label="用户状态" prop="status">
-          <el-select v-model="form.status" placeholder="请选择用户状态">
-            <el-option v-for="dict in dict.type.user_status" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
+        </el-form-item>-->
+            <el-form-item label="设备码" prop="deviceCode">
+              <el-input v-model="form.deviceCode" placeholder="请输入设备码" />
+            </el-form-item>
+            <el-form-item label="平台" prop="platform">
+              <el-input v-model="form.platform" placeholder="请输入平台-IOS、android" />
+            </el-form-item>
+            <el-form-item label="用户昵称" prop="nickName">
+              <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
+            </el-form-item>
+            <el-form-item label="邀请码" prop="invitationCode">
+              <el-input v-model="form.invitationCode" placeholder="请输入邀请码" />
+            </el-form-item>
+            <el-form-item label="上级邀请码" prop="fatherInvitationCode">
+              <el-input v-model="form.fatherInvitationCode" />
+            </el-form-item>
+          </div>
+          <div class="line"></div>
+          <div class="right">
+            <el-form-item label="注册IP" prop="registerIp">
+              <el-input v-model="form.registerIp" />
+            </el-form-item>
+            <el-form-item label="登录IP" prop="loginIp">
+              <el-input v-model="form.loginIp" />
+            </el-form-item>
+            <el-form-item label="注册时间" prop="registerTime">
+              <el-input v-model="form.registerTime" />
+            </el-form-item>
+            <el-form-item label="用户状态" prop="status">
+              <el-select v-model="form.status" placeholder="请选择用户状态">
+                <el-option v-for="dict in dict.type.user_status" :key="dict.value" :label="dict.label"
+                  :value="parseInt(dict.value)"></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+        </el-form>
+      </div>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -375,8 +379,38 @@ export default {
 </script>
 <style lang="scss" scoped>
 .blue-text {
-
   color: #1890ff;
+}
+
+.form {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+
+  .left,
+  .right {
+    width: 49%;
+    height: 100%;
+  }
+
+  .line {
+    width: 1px;
+    margin-left: 10px;
+    height: 70vh;
+    background: gainsboro;
+  }
+}
+
+.dialog-footer {
+  border-top: 1px solid gainsboro;
+  width: 100%;
+  padding-top: 10px;
+}
+
+  ::v-deep .el-dialog__body {
+  padding: 30px 20px 0px 20px  !important;
 
 }
+
 </style>
