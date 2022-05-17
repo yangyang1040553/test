@@ -7,7 +7,7 @@
             <span>趋势</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div id="lineChart" ref="lineChart" style="height: 300px" />
+            <div id="lineChart" ref="lineChart" style="height: 360px" />
           </div>
         </el-card>
       </el-col>
@@ -18,7 +18,7 @@
             <span>营收</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="commandstats" style="height: 330px" />
+            <div ref="commandstats" style="height: 420px" />
           </div>
         </el-card>
       </el-col>
@@ -29,7 +29,7 @@
             <span>占比</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="usedmemory" style="height: 330px" />
+            <div ref="usedmemory" style="height: 420px" />
           </div>
         </el-card>
       </el-col>
