@@ -192,14 +192,109 @@ aside {
 
 //  配置公用样式属性  配合 字典 使用
 
-.global-text-blue{
+.global-text-blue {
   color: #1890ff;
 }
 
-.global-text-green{
+.global-text-green {
   color: #3dc1a2;
 }
 
-.global-text-red{
+.global-text-red {
   color: #ff4396;
+}
+
+.global-text-default {
+  color: #909399;
+}
+
+
+.global-text-box {
+  display: inline-block;
+  height: 32px;
+  padding: 0 10px;
+  line-height: 30px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+//退回
+.global-text-back {
+  color: #3dc1a2;
+  background-color: #e2f6f2;
+  border-color: #3dc1a2;
+ 
+}
+
+//中奖
+.global-text-win {
+  color: #ff4040;
+  background-color: #f7e5e5;
+  border-color: #ff4040;
+
+}
+
+//和局
+.global-text-tie {
+  color: #ffc300;
+  background-color: #f5f1e5;
+  border-color: #ffc300;
+}
+
+
+//未中奖
+.global-text-no-win {
+  color: #40f0ff;
+  background-color: #e4f4f5;
+  border-color: #40f0ff;
+}
+
+
+//庄家赢
+.global-text-banker-wins {
+  color: #ff4083;
+  background-color: #f4e1e8;
+  border-color: #ff4083;
+
+}
+
+
+
+//玩家赢
+.global-text-player-wins {
+  color: #ff8640;
+  background-color: #f9eae1;
+  border-color: #ff8640;
+}
+
+//退回已到账
+.global-text-return-card {
+  color: #9c40ff;
+  background-color: #f0eaf7;
+  border-color: #9c40ff;
+}
+//退回未到账
+.global-text-return-no {
+  color: #5be000;
+  background-color: #ecf5e6;
+  border-color: #5be000;
+}
+
+//奖金已退回
+.global-text-bonus-returned {
+  color: #4092ff;
+  background-color: #e1e9f3;
+  border-color: #4092ff;
+}
+
+//奖金已到账
+.global-text-bonus-card {
+  color: #ff40de;
+  background-color: #f3e1f0;
+  border-color: #ff40de;
 }
