@@ -78,11 +78,11 @@
     <el-table v-loading="loading" :data="recordList" @sort-change="sortChange" height="600"
       :default-sort="{ prop: 'create_time', order: 'descending' }" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="唯一id" align="center" prop="id" width="200"/>
       <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
       <el-table-column label="游戏id" align="center" prop="gameId" />
       <el-table-column label="场次id" align="center" prop="sessionId" />
-      <el-table-column label="玩家id" align="center" prop="userId" />
+      <el-table-column label="玩家id" align="center" prop="userId" width="200"/>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
       <el-table-column label="赔率" align="center" prop="odds" />
       <el-table-column label="投注类型" align="center" prop="betWalletType">
@@ -90,21 +90,21 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.betWalletType" />
         </template>
       </el-table-column>
-      <el-table-column label="投注金额" align="center" prop="betAmount" />
+      <el-table-column label="投注金额" align="center" prop="betAmount" width="200" />
       <el-table-column label="投注位置" align="center" prop="betPosition" />
       <!-- <el-table-column label="金额状态" align="center" prop="awardAmount">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column> -->
-      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount">
+      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="200">
       </el-table-column>
-      <el-table-column label="入账金额" align="center" prop="incomeAmount">
+      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="200">
       </el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" />
-      <el-table-column label="hash值" align="center" prop="hashValue" />
-      <el-table-column label="下注时间" align="center" prop="createTime" sortable width="120" />
-      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="120" />
+      <el-table-column label="手续费" align="center" prop="taxAmount"  width="200"/>
+      <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
+      <el-table-column label="下注时间" align="center" prop="createTime" sortable width="180" />
+      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" />
       <el-table-column label="下注结果" align="center" prop="betResult">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
