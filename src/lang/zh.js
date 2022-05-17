@@ -254,6 +254,7 @@ export default {
 
   announcement_title: "公告标题",
   enter_announcement_title: "请输入公告标题",
+  operation: "操作",
   operation_user: "操作人员",
   enter_operation_user: "请输入操作人员",
   type: "类型",

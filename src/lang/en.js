@@ -263,6 +263,7 @@ export default {
 
   announcement_title: "announcement_title",
   enter_announcement_title: "enter_announcement_title",
+  operation: "Operation",
   operation_user: "operation_user",
   enter_operation_user: "enter_operation_user",
   type: "type",
