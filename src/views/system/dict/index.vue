@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="128px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="78px">
       <el-form-item :label="$t('dictionary_name')" prop="dictName">
         <el-input v-model="queryParams.dictName" :placeholder="$t('enter_dictionary_name')" clearable
           style="width: 240px" @keyup.enter.native="handleQuery" />
@@ -149,7 +149,7 @@ export default {
         dictName: undefined,
         dictType: undefined,
         status: undefined,
-        sort: 'asc'
+        sort: 'desc',
       },
       // 表单参数
       form: {},
