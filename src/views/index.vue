@@ -3,51 +3,11 @@
     <el-row>
       <el-col :span="24" class="card-box">
         <el-card>
-          <div slot="header"><span>基本信息</span></div>
-          <div class="el-table el-table--enable-row-hover el-table--medium">
-            <table cellspacing="0" style="width: 100%">
-              <tbody>
-                <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">Redis版本</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.redis_version }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">运行模式</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.redis_mode == "standalone" ? "单机" : "集群" }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">端口</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.tcp_port }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">客户端数</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.connected_clients }}</div></td>
-                </tr>
-                <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">运行时间(天)</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.uptime_in_days }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">使用内存</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.used_memory_human }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">使用CPU</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ parseFloat(cache.info.used_cpu_user_children).toFixed(2) }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">内存配置</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.maxmemory_human }}</div></td>
-                </tr>
-                <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">AOF是否开启</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.aof_enabled == "0" ? "否" : "是" }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">RDB是否成功</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.rdb_last_bgsave_status }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">Key数量</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.dbSize">{{ cache.dbSize }} </div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">网络入口/出口</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.instantaneous_input_kbps }}kps/{{cache.info.instantaneous_output_kbps}}kps</div></td>
-                </tr>
-              </tbody>
-            </table>
+          <div slot="header">
+            <span>趋势</span>
           </div>
-        </el-card>
-      </el-col>
-
-      <el-col :span="12" class="card-box">
-        <el-card>
-          <div slot="header"><span>命令统计</span></div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="commandstats" style="height: 420px" />
+            <div id="lineChart" ref="lineChart" style="height: 300px" />
           </div>
         </el-card>
       </el-col>
@@ -55,10 +15,21 @@
       <el-col :span="12" class="card-box">
         <el-card>
           <div slot="header">
-            <span>内存信息</span>
+            <span>营收</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="usedmemory" style="height: 420px" />
+            <div ref="commandstats" style="height: 330px" />
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :span="12" class="card-box">
+        <el-card>
+          <div slot="header">
+            <span>占比</span>
+          </div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div ref="usedmemory" style="height: 330px" />
           </div>
         </el-card>
       </el-col>
@@ -78,6 +49,7 @@ export default {
       commandstats: null,
       // 使用内存
       usedmemory: null,
+      lineChart: null,
       // cache信息
       cache: [],
     };
@@ -85,6 +57,9 @@ export default {
   created() {
     this.getList();
     this.openLoading();
+  },
+  mounted() {
+    this.initLineChart();
   },
   methods: {
     /** 查缓存询信息 */
@@ -136,6 +111,118 @@ export default {
           ],
         });
       });
+    },
+    initLineChart() {
+      this.lineChart = echarts.init(this.$refs.lineChart, "macarons");
+      // var chartDom = document.getElementById('lineChart');
+      // var myChart = echarts.init(chartDom);
+      var option;
+      const colors = ['#5470C6', '#91CC75', '#EE6666'];
+      option = {
+        color: colors,
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
+          }
+        },
+        grid: {
+          right: '20%'
+        },
+        toolbox: {
+          feature: {
+            dataView: { show: false, readOnly: false },
+            restore: { show: false },
+            saveAsImage: { show: false }
+          }
+        },
+        legend: {
+          data: ['Evaporation', 'Precipitation', 'Temperature']
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true
+            },
+            // prettier-ignore
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            name: 'Evaporation',
+            position: 'right',
+            alignTicks: true,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: colors[0]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} ml'
+            }
+          },
+          {
+            type: 'value',
+            name: 'Precipitation',
+            position: 'right',
+            alignTicks: true,
+            offset: 80,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: colors[1]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} ml'
+            }
+          },
+          {
+            type: 'value',
+            name: '温度',
+            position: 'left',
+            alignTicks: true,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: colors[2]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} °C'
+            }
+          }
+        ],
+        series: [
+          {
+            name: 'Evaporation',
+            type: 'bar',
+            data: [
+              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
+            ]
+          },
+          {
+            name: 'Precipitation',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [
+              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
+            ]
+          },
+          {
+            name: 'Temperature',
+            type: 'line',
+            yAxisIndex: 2,
+            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+          }
+        ]
+      };
+
+      option && this.lineChart.setOption(option);
     },
     // 打开加载层
     openLoading() {
