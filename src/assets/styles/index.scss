@@ -189,3 +189,17 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+//  配置公用样式属性  配合 字典 使用
+
+.global-text-blue{
+  color: #1890ff;
+}
+
+.global-text-green{
+  color: #3dc1a2;
+}
+
+.global-text-red{
+  color: #ff4396;
+}
