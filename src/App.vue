@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div id="app"><router-view /></div>
 </template>
 
 <script>
@@ -14,8 +12,8 @@ export default {
         return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
       }
     }
-  }, created() {
-  }
+  },
+  created() {}
 }
 </script>
 <style lang="scss">
@@ -25,5 +23,6 @@ export default {
   line-height: 32px;
 }
 
-.item__label {}
+.item__label {
+}
 </style>

@@ -1,21 +1,47 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="玩家ID" prop="userId">
-        <el-input v-model="queryParams.userId" placeholder="请输入玩家ID" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.userId"
+          placeholder="请输入玩家ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="玩家昵称" prop="nickName">
-        <el-input v-model="queryParams.nickName" placeholder="请输入玩家昵称" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.nickName"
+          placeholder="请输入玩家昵称"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="反馈类型" prop="code">
         <el-select v-model="queryParams.code" placeholder="请选择反馈类型" clearable>
-          <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.back_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd"
-          placeholder="请选择创建时间">
-        </el-date-picker>
+        <el-date-picker
+          clearable
+          v-model="queryParams.createTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="请选择创建时间"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -27,18 +53,31 @@
       <!-- <el-col :span="1.5">
         <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
           v-hasPermi="['hash-user:feedback:add']">新增</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
           v-hasPermi="['hash-user:feedback:edit']">修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['hash-user:feedback:remove']"
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-          v-hasPermi="['hash-user:feedback:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-user:feedback:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -64,25 +103,44 @@
       <el-table-column label="时间" align="center" prop="createTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row)">详情</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-zoom-in"
+            @click="handleUpdate(scope.row)"
+          >详情</el-button>
           <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-user:feedback:edit']">修改</el-button> -->
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
+          v-hasPermi="['hash-user:feedback:edit']">修改</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['hash-user:feedback:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改用户意见反馈对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="dialog">
         <el-form-item label="反馈类型" prop="code">
           <el-select v-model="form.code" placeholder="请选择反馈类型">
-            <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option
+              v-for="dict in dict.type.back_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="玩家ID" prop="userId">
@@ -146,6 +204,10 @@ export default {
     };
   },
   created() {
+    console.log("this.$route.query.userId==", this.$route.query)
+    if (this.$route.query.userId) {
+      this.queryParams.userId = this.$route.query.userId
+    }
     this.getList();
   },
   methods: {
@@ -256,7 +318,7 @@ export default {
   overflow: hidden;
 }
 
-.hover-div{
+.hover-div {
   max-width: 300px;
 }
 </style>
