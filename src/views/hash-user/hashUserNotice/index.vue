@@ -98,7 +98,7 @@
             placeholder="请选择公告结束时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="公告内容">
+        <el-form-item label="公告内容" prop="content">
           <editor v-model="form.content" :min-height="260" />
         </el-form-item>
       </el-form>
@@ -150,6 +150,10 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        title: [{ required: true, message: '公告标题不能为空', trigger: 'blur' }],
+        content: [{ required: true, message: '公告内容-支付富文本不能为空', trigger: 'blur' }],
+        isOpen: [{ required: true, message: '状态不能为空', trigger: 'change' }],
+        finishTime: [{ required: true, message: '公告结束时间不能为空', trigger: 'blur' }]
       }
     };
   },

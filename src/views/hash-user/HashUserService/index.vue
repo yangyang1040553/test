@@ -40,7 +40,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading"  @sort-change="sortChange"  :data="HashUserServiceList" @selection-change="handleSelectionChange" height="600">
+    <el-table v-loading="loading" @sort-change="sortChange" :data="HashUserServiceList" @selection-change="handleSelectionChange" height="600">
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
@@ -159,7 +159,14 @@ export default {
       // 表单参数
       form: {},
       // 表单校验
-      rules: {}
+      rules: {
+        // areaCode: [{ required: true, message: '手机区号不能为空', trigger: 'blur' }],
+        // phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
+        account: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
+        password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
+        nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
+        status: [{ required: true, message: '用户状态不能为空', trigger: 'change' }]
+      }
     }
   },
   created() {

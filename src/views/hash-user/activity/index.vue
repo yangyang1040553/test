@@ -129,7 +129,13 @@ export default {
       // 表单参数
       form: {},
       // 表单校验
-      rules: {}
+      rules: {
+        name: [{ required: true, message: '活动名称不能为空', trigger: 'blur' }],
+        bannerUrl: [{ required: true, message: 'banner图的链接不能为空', trigger: 'blur' }],
+        landingPageUrl: [{ required: true, message: '落地页URL地址不能为空', trigger: 'blur' }],
+        open: [{ required: true, message: '状态不能为空', trigger: 'change' }],
+        finishTime: [{ required: true, message: '结束时间不能为空', trigger: 'blur' }]
+      }
     }
   },
   created() {
