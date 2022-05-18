@@ -9,9 +9,7 @@
           <el-option v-for="dict in dict.type.game_session" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="倍率配置" prop="odds">
-        <el-input v-model="queryParams.odds" placeholder="请输入倍率配置" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item>
+      <el-form-item label="倍率配置" prop="odds"><el-input v-model="queryParams.odds" placeholder="请输入倍率配置" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="是否开启" prop="open">
         <el-select v-model="queryParams.open" placeholder="请选择是否开启" clearable>
           <el-option v-for="dict in dict.type.game_open" :key="dict.value" :label="dict.label" :value="dict.value" />
@@ -21,8 +19,8 @@
         <el-select v-model="queryParams.isActivity" placeholder="请选择是否活动场" clearable>
           <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
-      </el-form-item> 
-        <el-form-item label="参与返佣" prop="isBrokerage">
+      </el-form-item>
+      <el-form-item label="参与返佣" prop="isBrokerage">
         <el-select v-model="queryParams.isBrokerage" placeholder="请选择是否参与返佣" clearable>
           <el-option v-for="dict in dict.type.is_brokerage" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
@@ -39,27 +37,22 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
+      <el-col :span="1.5"><el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['hash-game:config:add']">新增</el-button></el-col>
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
-          v-hasPermi="['hash-game:config:add']">新增</el-button>
+        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate(null, false)" v-hasPermi="['hash-game:config:edit']">
+          修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single"
-          @click="handleUpdate(null, false)" v-hasPermi="['hash-game:config:edit']">修改</el-button>
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['hash-game:config:remove']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['hash-game:config:remove']">删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-          v-hasPermi="['hash-game:config:export']">导出</el-button>
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['hash-game:config:export']">导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange" height="600"
-      @sort-change="sortChange">
+    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange" height="600" @sort-change="sortChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="配置id" align="center" prop="id" />
       <el-table-column label="游戏id" align="center" prop="gameId" />
@@ -96,36 +89,32 @@
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivity" />
         </template>
-      </el-table-column> 
-        <el-table-column label="是否返佣" align="center" prop="isBrokerage">
+      </el-table-column>
+      <el-table-column label="是否返佣" align="center" prop="isBrokerage">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_brokerage" :value="scope.row.isBrokerage" />
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" sortable>
+      <el-table-column label="创建时间" align="center" prop="createTime" sortable  width="160">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="结束时间" align="center" prop="finishTime" sortable>
+      <el-table-column label="更新时间" align="center" prop="updateTime" sortable width="160">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.finishTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row, true)">详情
-          </el-button>
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row, false)"
-            v-hasPermi="['hash-game:config:edit']">修改</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-game:config:remove']">删除</el-button>
+          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row, true)">详情</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row, false)" v-hasPermi="['hash-game:config:edit']">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['hash-game:config:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList" />
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- 添加或修改游戏配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
@@ -133,52 +122,39 @@
         <el-form-item label="游戏菜单" prop="menuId">
           <el-select v-model="form.menuId" placeholder="请选择对应游戏">
             <!-- dict.activity   隐藏 特殊活动场 -->
-            <el-option v-show="dict.activity != 1" v-for="dict in gameMenuList" :key="dict.id" :label="dict.menuName"
-              :value="parseInt(dict.id)"></el-option>
+            <el-option v-show="dict.activity != 1" v-for="dict in gameMenuList" :key="dict.id" :label="dict.menuName" :value="parseInt(dict.id)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="游戏名称" prop="gameName">
-          <el-input v-model="form.gameName" placeholder="请输入游戏名称" />
-        </el-form-item>
+        <el-form-item label="游戏名称" prop="gameName"><el-input v-model="form.gameName" placeholder="请输入游戏名称" /></el-form-item>
         <el-form-item label="游戏场次" prop="gameSession">
           <el-select v-model="form.gameSession" placeholder="请选择游戏场次">
-            <el-option v-for="dict in dict.type.game_session" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option v-for="dict in dict.type.game_session" :key="dict.value" :label="dict.label" :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="倍率配置" prop="odds">
-          <el-input v-model="form.odds" placeholder="请输入倍率配置"  oninput="value=value.replace(/[^\d\.]/g,'')"/>
-        </el-form-item>
-        <el-form-item label="税收" prop="tax">
-          <el-input v-model="form.tax" placeholder="请输入税收" oninput="value=value.replace(/[^\d\.]/g,'')" />
-        </el-form-item>
+        <el-form-item label="倍率配置" prop="odds"><el-input v-model="form.odds" placeholder="请输入倍率配置" oninput="value=value.replace(/[^\d\.]/g,'')" /></el-form-item>
+        <el-form-item label="税收" prop="tax"><el-input v-model="form.tax" placeholder="请输入税收" oninput="value=value.replace(/[^\d\.]/g,'')" /></el-form-item>
         <el-form-item label="是否开启" prop="open">
           <el-select v-model="form.open" placeholder="请选择是否开启">
-            <el-option v-for="dict in dict.type.game_open" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option v-for="dict in dict.type.game_open" :key="dict.value" :label="dict.label" :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="活动场" prop="isActivity">
           <el-select v-model="form.isActivity" placeholder="请选择是否活动场">
-            <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option v-for="dict in dict.type.is_activty" :key="dict.value" :label="dict.label" :value="parseInt(dict.value)"></el-option>
           </el-select>
-        </el-form-item> 
+        </el-form-item>
         <el-form-item label="是否返佣" prop="isBrokerage">
           <el-select v-model="form.isBrokerage" placeholder="请选择是否参与返佣">
-            <el-option v-for="dict in dict.type.is_brokerage" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option v-for="dict in dict.type.is_brokerage" :key="dict.value" :label="dict.label" :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item :label="item.title" v-for="(item, index) in form.betRuleList" :key="index">
           <!-- <el-input v-model="form.betRule" type="textarea" class="textarea" placeholder="请输入内容" /> -->
           <div>
             <span class="label">最小投注</span>
-            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMinLimit" type="text"
-              placeholder="请输入内容" clearable />
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMinLimit" type="text" placeholder="请输入内容" clearable />
             <span class="label">最大投注</span>
-            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMaxLimit" type="text"
-              placeholder="请输入内容" clearable />
+            <el-input class="my-input" oninput="value=value.replace(/[^\d]/g,'')" v-model="item.betMaxLimit" type="text" placeholder="请输入内容" clearable />
           </div>
         </el-form-item>
         <!-- <el-form-item label="TRX规则">
@@ -193,7 +169,7 @@
         </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button  v-if="!isDetail" type="primary" @click="submitForm">确 定</el-button>
+        <el-button v-if="!isDetail" type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -201,11 +177,11 @@
 </template>
 
 <script>
-import { listConfig, getConfig, delConfig, addConfig, updateConfig } from "@/api/hash-game/config";
-import { listGameMenu } from "@/api/hash-game/gameMenu";
+import { listConfig, getConfig, delConfig, addConfig, updateConfig } from '@/api/hash-game/config'
+import { listGameMenu } from '@/api/hash-game/gameMenu'
 export default {
-  name: "Config",
-  dicts: ['game_open', 'game_session', 'is_activty','is_brokerage'],
+  name: 'Config',
+  dicts: ['game_open', 'game_session', 'is_activty', 'is_brokerage'],
   data() {
     return {
       //是否查看详情
@@ -225,7 +201,7 @@ export default {
       // 游戏配置表格数据
       configList: [],
       // 弹出层标题
-      title: "",
+      title: '',
       // 是否显示弹出层
       open: false,
       // 查询参数
@@ -238,77 +214,63 @@ export default {
         open: null,
         isActivity: null,
         finishTime: null,
-        sort: 'asc'
+        sort: 'asc',
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       },
       // 表单参数
-      form: {
-
-      },
+      form: {},
       // 表单校验
       rules: {
-        menuId: [
-          { required: true, message: '请选择游戏菜单', trigger: 'blur' },
-        ],
-        gameName: [
-          { required: true, message: '请输入游戏名称', trigger: 'blur' },
-        ],
-        gameSession: [
-          { required: true, message: '请选择游戏场次', trigger: 'blur' },
-        ],
-        odds: [
-          { required: true, message: '请输入游戏倍率', trigger: 'blur' },
-        ],
-        tax: [
-          { required: true, message: '请输入游戏税收', trigger: 'blur' },
-        ],
-        open: [
-          { required: true, message: '请选择是否开启', trigger: 'blur' },
-        ], 
-        isActivity: [
-          { required: true, message: '请选择活动场', trigger: 'blur' },
-        ],
-         isBrokerage: [
-          { required: true, message: '请选择是否返佣', trigger: 'blur' },
-        ],
+        menuId: [{ required: true, message: '请选择游戏菜单', trigger: 'blur' }],
+        gameName: [{ required: true, message: '请输入游戏名称', trigger: 'blur' }],
+        gameSession: [{ required: true, message: '请选择游戏场次', trigger: 'blur' }],
+        odds: [{ required: true, message: '请输入游戏倍率', trigger: 'blur' }],
+        tax: [{ required: true, message: '请输入游戏税收', trigger: 'blur' }],
+        open: [{ required: true, message: '请选择是否开启', trigger: 'blur' }],
+        isActivity: [{ required: true, message: '请选择活动场', trigger: 'blur' }],
+        isBrokerage: [{ required: true, message: '请选择是否返佣', trigger: 'blur' }]
       },
       gameMenuList: []
-    };
+    }
   },
   created() {
-    this.getList();
+    this.getList()
   },
   methods: {
     getMenuList() {
       listGameMenu({
         pageNum: 1,
-        pageSize: 100,
+        pageSize: 100
       }).then(response => {
-        this.gameMenuList = response.rows;
-      });
+        this.gameMenuList = response.rows
+      })
     },
 
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
-        this.queryParams.sort = 'desc'
+        this.queryParams.isAsc = 'desc'
       } else {
-        this.queryParams.sort = 'asc'
+        this.queryParams.isAsc = 'asc'
       }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
       this.getList()
     },
     /** 查询游戏配置列表 */
     getList() {
-      this.loading = true;
+      this.loading = true
       listConfig(this.queryParams).then(response => {
-        this.configList = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
+        this.configList = response.rows
+        this.total = response.total
+        this.loading = false
+      })
     },
     // 取消按钮
     cancel() {
-      this.open = false;
-      this.reset();
+      this.open = false
+      this.reset()
     },
     // 表单重置
     reset() {
@@ -326,19 +288,21 @@ export default {
         createTime: null,
         createBy: null,
         updateTime: null,
-        updateBy: null
-      };
-      this.resetForm("form");
+        updateBy: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
+      }
+      this.resetForm('form')
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1;
-      this.getList();
+      this.queryParams.pageNum = 1
+      this.getList()
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
+      this.resetForm('queryForm')
+      this.handleQuery()
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
@@ -348,21 +312,24 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.reset();
+      this.reset()
       this.getMenuList()
-      this.form.betRuleList = [{
-        betMaxLimit: 500000,
-        betMinLimit: 10,
-        name: "USDT",
-        title: "USDT规则",
-      }, {
-        betMaxLimit: 1000000,
-        betMinLimit: 1000,
-        name: "TRX",
-        title: "TRX规则"
-      }]
-      this.open = true;
-      this.title = "添加游戏配置";
+      this.form.betRuleList = [
+        {
+          betMaxLimit: 500000,
+          betMinLimit: 10,
+          name: 'USDT',
+          title: 'USDT规则'
+        },
+        {
+          betMaxLimit: 1000000,
+          betMinLimit: 1000,
+          name: 'TRX',
+          title: 'TRX规则'
+        }
+      ]
+      this.open = true
+      this.title = '添加游戏配置'
     },
     /** 修改按钮操作 */
     handleUpdate(row, isDetail) {
@@ -371,16 +338,15 @@ export default {
       const id = row ? row.id : this.ids
       this.getMenuList()
       getConfig(id).then(response => {
-        this.form = response.data;
-        this.title = "修改游戏配置";
-        this.open = true;
-      });
+        this.form = response.data
+        this.title = '修改游戏配置'
+        this.open = true
+      })
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
-
           let obj = {}
           this.form.betRuleList.forEach(element => {
             // if (element.name == "USDT") {
@@ -390,8 +356,7 @@ export default {
             delete element.name
             delete element.title
             obj[name] = element
-
-          });
+          })
 
           this.form.betRule = JSON.stringify(obj)
 
@@ -399,38 +364,46 @@ export default {
 
           if (this.form.id != null) {
             updateConfig(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
-            });
+              this.$modal.msgSuccess('修改成功')
+              this.open = false
+              this.getList()
+            })
           } else {
             addConfig(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
+              this.$modal.msgSuccess('新增成功')
+              this.open = false
+              this.getList()
+            })
           }
         }
-      });
+      })
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除游戏配置编号为"' + ids + '"的数据项？').then(function () {
-        return delConfig(ids);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => { });
+      const ids = row.id || this.ids
+      this.$modal
+        .confirm('是否确认删除游戏配置编号为"' + ids + '"的数据项？')
+        .then(function() {
+          return delConfig(ids)
+        })
+        .then(() => {
+          this.getList()
+          this.$modal.msgSuccess('删除成功')
+        })
+        .catch(() => {})
     },
     /** 导出按钮操作 */
     handleExport() {
-      this.download('hash-game/config/export', {
-        ...this.queryParams
-      }, `config_${new Date().getTime()}.xlsx`)
+      this.download(
+        'hash-game/config/export',
+        {
+          ...this.queryParams
+        },
+        `config_${new Date().getTime()}.xlsx`
+      )
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .my-input {

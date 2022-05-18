@@ -251,7 +251,8 @@ export default {
         childUserId: null,
         status: null,
         createTime: null,
-        sort: 'desc'
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       },
       // 表单参数
       form: {},
@@ -265,13 +266,15 @@ export default {
   },
   methods: {
     sortChange(val) {
-      console.log(val)
-      if (val.order && val.order == 'descending') {
-        this.queryParams.sort = 'desc'
-      } else {
-        this.queryParams.sort = 'asc'
-      }
-      this.getList()
+     console.log(val)
+     if (val.order && val.order == 'descending') {
+       this.queryParams.isAsc = 'desc'
+     } else {
+       this.queryParams.isAsc = 'asc'
+     }
+     this.queryParams.orderByColumn=val.prop && val.prop
+     console.log(this.queryParams)
+     this.getList()
     },
     /** 查询玩家返佣记录列表 */
     getList() {
@@ -299,7 +302,9 @@ export default {
         brokerageAmount: null,
         childUserId: null,
         status: null,
-        createTime: null
+        createTime: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       };
       this.resetForm("form");
     },

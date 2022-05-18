@@ -143,8 +143,8 @@ export default {
         title: null,
         isOpen: null,
         createTime: null,
-        sort: 'asc',
-        prop: 'create_time'
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       },
       // 表单参数
       form: {},
@@ -157,20 +157,17 @@ export default {
     this.getList();
   },
   methods: {
-    sortChange(val) {
-      console.log(val)
-      if (val.order && val.order == 'descending') {
-        this.queryParams.sort = 'desc'
-      } else {
-        this.queryParams.sort = 'asc'
-      }
-      if (val.prop && val.prop == 'createTime') {
-        this.queryParams.prop = 'create_time'
-      } else {
-        this.queryParams.prop = 'finish_time'
-      }
-      this.getList()
-    },
+   sortChange(val) {
+     console.log(val)
+     if (val.order && val.order == 'descending') {
+       this.queryParams.isAsc = 'desc'
+     } else {
+       this.queryParams.isAsc = 'asc'
+     }
+     this.queryParams.orderByColumn = val.prop && val.prop
+     console.log(this.queryParams)
+     this.getList()
+   },
     /** 查询用户公告列表 */
     getList() {
       this.loading = true;
@@ -196,7 +193,9 @@ export default {
         createTime: null,
         createBy: null,
         updateTime: null,
-        updateBy: null
+        updateBy: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       };
       this.resetForm("form");
     },

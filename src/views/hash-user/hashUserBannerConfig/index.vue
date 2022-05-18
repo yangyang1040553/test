@@ -135,8 +135,9 @@ export default {
         isSkip: null,
         skipUrl: null,
         weight: null,
-        prop: 'weight',
-        sort: 'desc'
+        sort: 'desc',
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       },
       // 表单参数
       form: {},
@@ -160,17 +161,12 @@ export default {
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
-        this.queryParams.sort = 'desc'
+        this.queryParams.isAsc = 'desc'
       } else {
-        this.queryParams.sort = 'asc'
+        this.queryParams.isAsc = 'asc'
       }
-      if (val.prop && val.prop == 'createTime') {
-        this.queryParams.prop = 'create_time'
-      } else if (val.prop && val.prop == 'updateTime') {
-        this.queryParams.prop = 'update_time'
-      } else if (val.prop && val.prop == 'weight') {
-        this.queryParams.prop = 'weight'
-      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
       this.getList()
     },
     /** 查询用户首页的banner列列表 */
@@ -198,7 +194,9 @@ export default {
         createTime: null,
         createBy: null,
         updateTime: null,
-        updateBy: null
+        updateBy: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       }
       this.resetForm('form')
     },
