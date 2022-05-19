@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="游戏id" prop="gameId"><el-input v-model="queryParams.gameId" placeholder="请输入游戏id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="玩家id" prop="userId"><el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="玩家昵称" prop="nickName">
@@ -87,9 +87,9 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.betWalletType" />
         </template>
       </el-table-column>
-      <el-table-column label="投注金额" align="center" prop="betAmount" width="200" >
+      <el-table-column label="投注金额" align="center" prop="betAmount" width="200">
         <template slot-scope="scope">
-          <div>{{scope.row.betAmount.toFixed(2)}}</div>
+          <div>{{ scope.row.betAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column label="投注位置" align="center" prop="betPosition" />
@@ -100,17 +100,17 @@
       </el-table-column> -->
       <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="200">
         <template slot-scope="scope">
-          <div>{{scope.row.awardAmount.toFixed(2)}}</div>
+          <div>{{ scope.row.awardAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column label="入账金额" align="center" prop="incomeAmount" width="200">
         <template slot-scope="scope">
-          <div>{{scope.row.incomeAmount.toFixed(2)}}</div>
+          <div>{{ scope.row.incomeAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" width="200" >
+      <el-table-column label="手续费" align="center" prop="taxAmount" width="200">
         <template slot-scope="scope">
-          <div>{{scope.row.incomeAmount.toFixed(2)}}</div>
+          <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
@@ -257,7 +257,7 @@ export default {
       } else {
         this.queryParams.isAsc = 'asc'
       }
-      this.queryParams.orderByColumn=val.prop && val.prop
+      this.queryParams.orderByColumn = val.prop && val.prop
       console.log(this.queryParams)
       this.getList()
     },
