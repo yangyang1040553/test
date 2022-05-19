@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
       <el-form-item label="唯一id" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="菜单名称" prop="menuName">
         <el-input v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable @keyup.enter.native="handleQuery" />
