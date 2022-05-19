@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
       <el-form-item label="游戏id" prop="gameId"><el-input v-model="queryParams.gameId" placeholder="请输入游戏id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="玩家id" prop="userId"><el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="玩家昵称" prop="nickName">
