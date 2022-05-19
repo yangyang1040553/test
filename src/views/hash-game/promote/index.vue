@@ -88,9 +88,9 @@
           <div>{{ scope.row.canWithdrawTrxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="一级代理人数" align="center" prop="level1Person" width="100" sortable />
-      <el-table-column label="二级代理人数" align="center" prop="level2Person" width="100" sortable/>
-      <el-table-column label="三级代理人数" align="center" prop="level3Person" width="100" sortable/>
+      <el-table-column label="一级代理" align="center" prop="level1Person" width="100" sortable />
+      <el-table-column label="二级代理" align="center" prop="level2Person" width="100" sortable/>
+      <el-table-column label="三级代理" align="center" prop="level3Person" width="100" sortable/>
 
       <el-table-column label="usdt游戏返佣" align="center" prop="usdtGameBrokerageToFather" width="200" sortable>
         <template slot-scope="scope">
