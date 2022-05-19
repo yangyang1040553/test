@@ -11,7 +11,7 @@
         <el-input v-model="queryParams.fatherInvitationCode" placeholder="请输入上级玩家的邀请码" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd" placeholder="请选择创建时间"></el-date-picker>
+        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd HH:mm:ss" placeholder="请选择创建时间"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -63,7 +63,7 @@
           <div>{{ scope.row.incomeTrxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="200" sortable> 
+      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="200" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeTrxToday.toFixed(2) }}</div>
         </template>
