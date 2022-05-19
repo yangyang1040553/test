@@ -87,16 +87,32 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.betWalletType" />
         </template>
       </el-table-column>
-      <el-table-column label="投注金额" align="center" prop="betAmount" width="200" />
+      <el-table-column label="投注金额" align="center" prop="betAmount" width="200" >
+        <template slot-scope="scope">
+          <div>{{scope.row.betAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="投注位置" align="center" prop="betPosition" />
       <!-- <el-table-column label="金额状态" align="center" prop="awardAmount">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column> -->
-      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="200"></el-table-column>
-      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="200"></el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" width="200" />
+      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{scope.row.awardAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{scope.row.incomeAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="手续费" align="center" prop="taxAmount" width="200" >
+        <template slot-scope="scope">
+          <div>{{scope.row.incomeAmount.toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
       <el-table-column label="下注时间" align="center" prop="createTime" sortable width="180" />
       <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" />

@@ -38,16 +38,56 @@
       <el-table-column label="玩家邀请码" align="center" prop="invitationCode" width="100" />
       <el-table-column label="上级玩家id" align="center" prop="fatherUserId" width="200" />
       <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" />
-      <el-table-column label="usdt总收益" align="center" prop="incomeUsdtAmount" width="200" />
-      <el-table-column label="usdt今日收益" align="center" prop="incomeUsdtToday" width="200" />
-      <el-table-column label="usdt昨日收益" align="center" prop="incomeUsdtYesterday" width="200" />
-      <el-table-column label="usdt直推收益" align="center" prop="incomeUsdtDirectPromote" width="200" />
-      <el-table-column label="trx总收益" align="center" prop="incomeTrxAmount" width="200" />
-      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="200" />
-      <el-table-column label="trx昨日收益" align="center" prop="incomeTrxYesterday" width="200" />
-      <el-table-column label="trx直推收益" align="center" prop="incomeTrxDirectPromote" width="200" />
-      <el-table-column label="可提现usdt" align="center" prop="canWithdrawUsdtAmount" width="200" />
-      <el-table-column label="可提现trx" align="center" prop="canWithdrawTrxAmount" width="200" />
+      <el-table-column label="usdt总收益" align="center" prop="incomeUsdtAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeUsdtAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="usdt今日收益" align="center" prop="incomeUsdtToday" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeUsdtToday.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="usdt昨日收益" align="center" prop="incomeUsdtYesterday" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeUsdtYesterday.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="usdt直推收益" align="center" prop="incomeUsdtDirectPromote" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeUsdtDirectPromote.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx总收益" align="center" prop="incomeTrxAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeTrxAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeTrxToday.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx昨日收益" align="center" prop="incomeTrxYesterday" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeTrxYesterday.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx直推收益" align="center" prop="incomeTrxDirectPromote" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.incomeTrxDirectPromote.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="可提现usdt" align="center" prop="canWithdrawUsdtAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.canWithdrawUsdtAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="可提现trx" align="center" prop="canWithdrawTrxAmount" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.canWithdrawTrxAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="一级代理人数" align="center" prop="level1Person" width="100" />
       <el-table-column label="二级代理人数" align="center" prop="level2Person" width="100" />
       <el-table-column label="三级代理人数" align="center" prop="level3Person" width="100" />
@@ -61,10 +101,26 @@
           <span>{{ scope.row.updateTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="usdt游戏返佣" align="center" prop="usdtGameBrokerageToFather" width="200"/>
-      <el-table-column label="usdt代理返佣" align="center" prop="usdtPromoteBrokerageToFather" width="200"/>
-      <el-table-column label="trx游戏返佣" align="center" prop="trxGameBrokerageToFather" width="200"/>
-      <el-table-column label="trx代理返佣" align="center" prop="trxPromoteBrokerageToFather" width="200"/>
+      <el-table-column label="usdt游戏返佣" align="center" prop="usdtGameBrokerageToFather" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.usdtGameBrokerageToFather.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="usdt代理返佣" align="center" prop="usdtPromoteBrokerageToFather" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.usdtPromoteBrokerageToFather.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx游戏返佣" align="center" prop="trxGameBrokerageToFather" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.trxGameBrokerageToFather.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx代理返佣" align="center" prop="trxPromoteBrokerageToFather" width="200">
+        <template slot-scope="scope">
+          <div>{{ scope.row.trxPromoteBrokerageToFather.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['hash-game:promote:edit']">修改</el-button>
