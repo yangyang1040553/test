@@ -5,7 +5,7 @@
         <el-input v-model="queryParams.menuName" :placeholder="$t('tyepe_menu_name')" clearable
           @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item :label="$t('satus')" prop="status">
+      <el-form-item :label="$t('status')" prop="status">
         <el-select v-model="queryParams.status" :placeholder="$t('menu_status')" clearable>
           <el-option v-for="dict in dict.type.sys_normal_disable" :key="dict.value" :label="dict.label"
             :value="dict.value" />
@@ -45,7 +45,7 @@
       <el-table-column prop="orderNum" :label="$t('sort')" width="60"></el-table-column>
       <el-table-column prop="perms" :label="$t('authority_id')" :show-overflow-tooltip="true"></el-table-column>
       <el-table-column prop="component" :label="$t('component_path')" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column prop="status" :label="$t('satus')" width="80">
+      <el-table-column prop="status" :label="$t('status')" width="80">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status" />
         </template>

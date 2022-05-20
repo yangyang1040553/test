@@ -56,7 +56,7 @@
       :default-expand-all="isExpandAll"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
     >
-      <el-table-column prop="deptName" :label="$t('deptment')" width="260"></el-table-column>
+      <el-table-column prop="deptName" :label="$t('department')" width="260"></el-table-column>
       <el-table-column prop="orderNum" :label="$t('sort')" width="200"></el-table-column>
       <el-table-column prop="status" :label="$t('status')" width="100">
         <template slot-scope="scope">

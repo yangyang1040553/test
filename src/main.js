@@ -38,7 +38,7 @@ import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
 
-import i18n from './lang'
+import i18n from './locales/index.js'
 
 
 Vue.use(Element, {
