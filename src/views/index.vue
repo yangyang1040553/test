@@ -56,7 +56,7 @@ export default {
   },
   created() {
     this.getList();
-    this.openLoading();
+    // this.openLoading();
   },
   mounted() {
     this.initLineChart();
@@ -64,53 +64,54 @@ export default {
   methods: {
     /** 查缓存询信息 */
     getList() {
-      getCache().then((response) => {
-        this.cache = response.data;
-        this.$modal.closeLoading();
+      console.log("查缓存询信息")
+      // getCache().then((response) => {
+      //   this.cache = response.data;
+      //   this.$modal.closeLoading();
 
-        this.commandstats = echarts.init(this.$refs.commandstats, "macarons");
-        this.commandstats.setOption({
-          tooltip: {
-            trigger: "item",
-            formatter: "{a} <br/>{b} : {c} ({d}%)",
-          },
-          series: [
-            {
-              name: "命令",
-              type: "pie",
-              roseType: "radius",
-              radius: [15, 95],
-              center: ["50%", "38%"],
-              data: response.data.commandStats,
-              animationEasing: "cubicInOut",
-              animationDuration: 1000,
-            },
-          ],
-        });
-        this.usedmemory = echarts.init(this.$refs.usedmemory, "macarons");
-        this.usedmemory.setOption({
-          tooltip: {
-            formatter: "{b} <br/>{a} : " + this.cache.info.used_memory_human,
-          },
-          series: [
-            {
-              name: "峰值",
-              type: "gauge",
-              min: 0,
-              max: 1000,
-              detail: {
-                formatter: this.cache.info.used_memory_human,
-              },
-              data: [
-                {
-                  value: parseFloat(this.cache.info.used_memory_human),
-                  name: "内存消耗",
-                },
-              ],
-            },
-          ],
-        });
-      });
+      //   this.commandstats = echarts.init(this.$refs.commandstats, "macarons");
+      //   this.commandstats.setOption({
+      //     tooltip: {
+      //       trigger: "item",
+      //       formatter: "{a} <br/>{b} : {c} ({d}%)",
+      //     },
+      //     series: [
+      //       {
+      //         name: "命令",
+      //         type: "pie",
+      //         roseType: "radius",
+      //         radius: [15, 95],
+      //         center: ["50%", "38%"],
+      //         data: response.data.commandStats,
+      //         animationEasing: "cubicInOut",
+      //         animationDuration: 1000,
+      //       },
+      //     ],
+      //   });
+      //   this.usedmemory = echarts.init(this.$refs.usedmemory, "macarons");
+      //   this.usedmemory.setOption({
+      //     tooltip: {
+      //       formatter: "{b} <br/>{a} : " + this.cache.info.used_memory_human,
+      //     },
+      //     series: [
+      //       {
+      //         name: "峰值",
+      //         type: "gauge",
+      //         min: 0,
+      //         max: 1000,
+      //         detail: {
+      //           formatter: this.cache.info.used_memory_human,
+      //         },
+      //         data: [
+      //           {
+      //             value: parseFloat(this.cache.info.used_memory_human),
+      //             name: "内存消耗",
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   });
+      // });
     },
     initLineChart() {
       this.lineChart = echarts.init(this.$refs.lineChart, "macarons");
