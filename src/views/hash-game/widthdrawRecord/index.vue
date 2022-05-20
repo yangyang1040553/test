@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { listWidthdrawRecord, getWidthdrawRecord, delWidthdrawRecord, addWidthdrawRecord, updateWidthdrawRecord } from '@/api/hash-wallet/widthdrawRecord'
+import { listWidthdrawRecord, getWidthdrawRecord, delWidthdrawRecord, addWidthdrawRecord, updateWidthdrawRecord } from '@/api/hash-game/widthdrawRecord'
 
 export default {
   name: 'WidthdrawRecord',

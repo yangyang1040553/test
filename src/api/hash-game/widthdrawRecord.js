@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询佣金提现记录列表
 export function listWidthdrawRecord(query) {
   return request({
-    url: '/hash-wallet/widthdrawRecord/list',
+    url: '/hash-game/widthdrawRecord/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listWidthdrawRecord(query) {
 // 查询佣金提现记录详细
 export function getWidthdrawRecord(id) {
   return request({
-    url: '/hash-wallet/widthdrawRecord/' + id,
+    url: '/hash-game/widthdrawRecord/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getWidthdrawRecord(id) {
 // 新增佣金提现记录
 export function addWidthdrawRecord(data) {
   return request({
-    url: '/hash-wallet/widthdrawRecord',
+    url: '/hash-game/widthdrawRecord',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addWidthdrawRecord(data) {
 // 修改佣金提现记录
 export function updateWidthdrawRecord(data) {
   return request({
-    url: '/hash-wallet/widthdrawRecord',
+    url: '/hash-game/widthdrawRecord',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateWidthdrawRecord(data) {
 // 删除佣金提现记录
 export function delWidthdrawRecord(id) {
   return request({
-    url: '/hash-wallet/widthdrawRecord/' + id,
+    url: '/hash-game/widthdrawRecord/' + id,
     method: 'delete'
   })
 }
