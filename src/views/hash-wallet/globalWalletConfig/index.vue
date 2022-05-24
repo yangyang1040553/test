@@ -105,28 +105,29 @@
       v-loading="loading"
       :data="globalWalletConfigList"
       @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="trx转usdt比例" align="center" prop="trxTransUsdtScale" />
-      <el-table-column label="usdt转trx比例" align="center" prop="usdtTransTrxScale" />
-      <el-table-column label="矿工费比例" align="center" prop="minerScala" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="trx转usdt比例" align="center" prop="trxTransUsdtScale" sortable />
+      <el-table-column label="usdt转trx比例" align="center" prop="usdtTransTrxScale" sortable />
+      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable />
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime || "-" }}</span>
         </template>
       </el-table-column>
       <el-table-column label="创建者" align="center" prop="createBy" />
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.updateTime || "-" }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新者" align="center" prop="updateBy" >
-         <template slot-scope="scope">
+      <el-table-column label="更新者" align="center" prop="updateBy">
+        <template slot-scope="scope">
           <span>{{ scope.row.updateBy || "-" }}</span>
         </template>
       </el-table-column>
@@ -253,6 +254,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     /** 查询钱包全局配置列表 */
     getList() {
       this.loading = true;
