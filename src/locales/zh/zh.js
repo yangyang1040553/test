@@ -356,11 +356,10 @@ export default {
   betting_record: "投注记录",
   wallet_management: "钱包管理",
   user_wallet: "用户钱包",
-  login_method: "登录方式", 
+  login_method: "登录方式",
   user_time: "用户时间",
   menu: "菜单",
   change_table: "切换菜单",
-
 
 
 }
