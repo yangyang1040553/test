@@ -25,7 +25,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="trx转usdt比例" prop="trxTransUsdtScale">
+      <!-- <el-form-item label="trx转usdt比例" prop="trxTransUsdtScale">
         <el-input
           v-model="queryParams.trxTransUsdtScale"
           placeholder="请输入trx转usdt比例"
@@ -40,15 +40,15 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="矿工费比例" prop="minerScala">
+      </el-form-item> -->
+      <!-- <el-form-item label="矿工费比例" prop="minerScala">
         <el-input
           v-model="queryParams.minerScala"
           placeholder="请输入矿工费比例"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -112,8 +112,17 @@
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="trx转usdt比例" align="center" prop="trxTransUsdtScale" sortable />
-      <el-table-column label="usdt转trx比例" align="center" prop="usdtTransTrxScale" sortable />
+      <el-table-column label="trx转usdt比例" align="center" prop="trxToUsdt" sortable>
+        <template slot-scope="scope">
+          <span>{{ (scope.row.trxToUsdt.sourceScale+':'+scope.row.trxToUsdt.toScale) || "-" }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="usdt转trx比例" align="center" prop="usdtToTrx" sortable>
+        <template slot-scope="scope">
+          <span>{{ (scope.row.usdtToTrx.sourceScale+':'+scope.row.usdtToTrx.toScale) || "-" }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
@@ -171,11 +180,31 @@
         <el-form-item label="私钥" prop="privateKey">
           <el-input v-model="form.privateKey" placeholder="请输入私钥" />
         </el-form-item>
-        <el-form-item label="trx转usdt比例" prop="trxTransUsdtScale">
-          <el-input v-model="form.trxTransUsdtScale" placeholder="请输入trx转usdt比例" />
+        <el-form-item label="trx转usdt比例" prop="trxToUsdt">
+          <el-row>
+            <el-col :span="12" class="card-box">
+              <el-input v-model="form.trxToUsdt.sourceScale" placeholder="请输入trx转usdt比例" />
+            </el-col>
+            <el-col :span="1">
+              <div class="space">:</div>
+            </el-col>
+            <el-col :span="11" class="card-box">
+              <el-input v-model="form.trxToUsdt.toScale" placeholder="请输入trx转usdt比例" />
+            </el-col>
+          </el-row>
         </el-form-item>
-        <el-form-item label="usdt转trx比例" prop="usdtTransTrxScale">
-          <el-input v-model="form.usdtTransTrxScale" placeholder="请输入usdt转trx比例" />
+        <el-form-item label="usdt转trx比例" prop="usdtToTrx">
+          <el-row>
+            <el-col :span="12" class="card-box">
+              <el-input v-model="form.usdtToTrx.sourceScale" placeholder="请输入usdt转trx比例" />
+            </el-col>
+            <el-col :span="1">
+              <div class="space">:</div>
+            </el-col>
+            <el-col :span="11" class="card-box">
+              <el-input v-model="form.usdtToTrx.toScale" placeholder="请输入usdt转trx比例" />
+            </el-col>
+          </el-row>
         </el-form-item>
         <el-form-item label="矿工费比例" prop="minerScala">
           <el-input v-model="form.minerScala" placeholder="请输入矿工费比例" />
@@ -221,12 +250,21 @@ export default {
         merchantNo: null,
         publicKey: null,
         privateKey: null,
-        trxTransUsdtScale: null,
-        usdtTransTrxScale: null,
-        minerScala: null,
+        // trxTransUsdtScale: null,
+        // usdtTransTrxScale: null,
+        // minerScala: null,
       },
       // 表单参数
-      form: {},
+      form: {
+        trxToUsdt: {
+          sourceScale: 0,
+          toScale: 0
+        },
+        usdtToTrx: {
+          sourceScale: 0,
+          toScale: 0
+        }
+      },
       // 表单校验
       rules: {
         merchantNo: [
@@ -286,8 +324,14 @@ export default {
         merchantNo: null,
         publicKey: null,
         privateKey: null,
-        trxTransUsdtScale: null,
-        usdtTransTrxScale: null,
+        trxToUsdt: {
+          sourceScale: 0,
+          toScale: 0
+        },
+        usdtToTrx: {
+          sourceScale: 0,
+          toScale: 0
+        },
         minerScala: null,
         createTime: null,
         createBy: null,
@@ -332,6 +376,8 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.usdtTransTrxScale=JSON.stringify(this.form.usdtToTrx)
+          this.form.trxTransUsdtScale=JSON.stringify(this.form.trxToUsdt)
           if (this.form.id != null) {
             updateGlobalWalletConfig(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
@@ -367,3 +413,11 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.space {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+}
+</style>
