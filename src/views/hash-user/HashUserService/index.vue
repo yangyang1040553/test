@@ -156,6 +156,23 @@
       @pagination="getList"
     />
 
+    <el-dialog :title="title" :visible.sync="openDetail" width="600px" append-to-body>
+      <el-form ref="form" :model="detailForm" :rules="rules" label-width="100px">
+        <el-form-item label="今日投注金额">
+          <span class="label">{{ detailForm.betAmount }}</span>
+        </el-form-item>
+        <el-form-item label="今日充值金额">
+          <span class="label">{{ detailForm.inAmount }}</span>
+        </el-form-item>
+        <el-form-item label="今日提现金额">
+          <span class="label">{{ detailForm.outAmount }}</span>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="openDetail=false">取 消</el-button>
+      </div>
+    </el-dialog>
+
     <!-- 添加或修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
@@ -206,7 +223,7 @@
 </template>
 
 <script>
-import { listHashUserService, getHashUserService, delHashUserService, addHashUserService, updateHashUserService } from '@/api/hash-user/HashUserService'
+import { listHashUserService, getHashUserService, delHashUserService, addHashUserService, updateHashUserService, getHashUserServiceDetail } from '@/api/hash-user/HashUserService'
 
 export default {
   name: 'HashUserService',
@@ -245,6 +262,8 @@ export default {
       },
       // 表单参数
       form: {},
+      openDetail: false,
+      detailForm: {},
       // 表单校验
       rules: {
         // areaCode: [{ required: true, message: '手机区号不能为空', trigger: 'blur' }],
@@ -272,7 +291,11 @@ export default {
       this.getList()
     },
     goToUserFeedBack(row) {
-      this.$router.push({ path: '/user/feedback', query: { userId: row.id } })
+      // this.$router.push({ path: '/user/feedback', query: { userId: row.id } })
+      getHashUserServiceDetail(row.id).then(res => {
+        this.openDetail = true
+        this.detailForm = res.data
+      })
     },
 
     /** 查询用户列表 */
@@ -395,3 +418,9 @@ export default {
   }
 }
 </script>
+<style>
+.label {
+  color: #99a9bf;
+  font-weight: bold;
+}
+</style>

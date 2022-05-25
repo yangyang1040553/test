@@ -10,6 +10,13 @@ export function listHashUserService(query) {
 }
 
 // 查询用户详细
+export function getHashUserServiceDetail(id) {
+  return request({
+    url: '/hash-user/HashUserService/detail/' + id,
+    method: 'get'
+  })
+}
+// 查询用户详细
 export function getHashUserService(id) {
   return request({
     url: '/hash-user/HashUserService/' + id,
