@@ -16,7 +16,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="活动活动" prop="isOpen">
+      <el-form-item label="是否开启" prop="isOpen">
         <el-select v-model="queryParams.isOpen" placeholder="请选择是否开启" clearable>
           <el-option
             v-for="dict in dict.type.is_open"
@@ -116,7 +116,7 @@
         </template>
       </el-table-column>
       <el-table-column label="权重" align="center" prop="weight" sortable />
-      <el-table-column label="活动开启" align="center" prop="isOpen">
+      <el-table-column label="是否开启" align="center" prop="isOpen">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.isOpen" />
         </template>
@@ -259,7 +259,7 @@ export default {
         title: [{ required: true, message: '公告标题不能为空', trigger: 'blur' }],
         content: [{ required: true, message: '公告内容-支付富文本不能为空', trigger: 'blur' }],
         isOpen: [{ required: true, message: '状态不能为空', trigger: 'change' }],
-        finishTime: [{ required: true, message: '公告结束时间不能为空', trigger: 'blur' }],
+        // finishTime: [{ required: true, message: '公告结束时间不能为空', trigger: 'blur' }],
         isPop: [{ required: true, message: '是否公告不能为空', trigger: 'blur' }],
         weight: [{ required: true, message: '权重不能为空', trigger: 'blur' }],
       }
