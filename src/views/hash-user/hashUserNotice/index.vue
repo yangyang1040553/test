@@ -1,18 +1,49 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="88px"
+    >
       <el-form-item label="公告标题" prop="title">
-        <el-input v-model="queryParams.title" placeholder="请输入公告标题" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.title"
+          placeholder="请输入公告标题"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="活动活动" prop="isOpen">
         <el-select v-model="queryParams.isOpen" placeholder="请选择是否开启" clearable>
-          <el-option v-for="dict in dict.type.is_open" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.is_open"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="是否弹窗" prop="isPop">
+        <el-select v-model="queryParams.isPop" placeholder="请选择是否弹窗" clearable>
+          <el-option
+            v-for="dict in dict.type.is_pop"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd HH:mm:ss"
-          placeholder="请选择创建时间">
-        </el-date-picker>
+        <el-date-picker
+          clearable
+          v-model="queryParams.createTime"
+          type="date"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          placeholder="请选择创建时间"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -22,26 +53,57 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
-          v-hasPermi="['hash-user:hashUserNotice:add']">新增</el-button>
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['hash-user:hashUserNotice:add']"
+        >新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
-          v-hasPermi="['hash-user:hashUserNotice:edit']">修改</el-button>
+        <el-button
+          type="success"
+          plain
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['hash-user:hashUserNotice:edit']"
+        >修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['hash-user:hashUserNotice:remove']">删除</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['hash-user:hashUserNotice:remove']"
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-          v-hasPermi="['hash-user:hashUserNotice:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-user:hashUserNotice:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="hashUserNoticeList" @selection-change="handleSelectionChange" height="600"
-      @sort-change="sortChange">
+    <el-table
+      v-loading="loading"
+      :data="hashUserNoticeList"
+      @selection-change="handleSelectionChange"
+      height="600"
+      @sort-change="sortChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="公告标题" align="center" prop="title" />
@@ -53,9 +115,15 @@
           </el-popover>
         </template>
       </el-table-column>
+      <el-table-column label="权重" align="center" prop="weight" sortable />
       <el-table-column label="活动开启" align="center" prop="isOpen">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.isOpen" />
+        </template>
+      </el-table-column>
+      <el-table-column label="是否弹窗" align="center" prop="isPop">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.is_pop" :value="scope.row.isPop" />
         </template>
       </el-table-column>
       <el-table-column label="公告创建时间" align="center" prop="createTime" width="180" sortable>
@@ -70,16 +138,31 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-user:hashUserNotice:edit']">修改</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-user:hashUserNotice:remove']">删除</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['hash-user:hashUserNotice:edit']"
+          >修改</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['hash-user:hashUserNotice:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改用户公告对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
@@ -87,16 +170,37 @@
         <el-form-item label="公告标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入公告标题" />
         </el-form-item>
+        <el-form-item label="权重" prop="weight">
+          <el-input v-model="form.weight" placeholder="请输入公告权重" />
+        </el-form-item>
         <el-form-item label="活动开启" prop="isOpen">
           <el-select v-model="form.isOpen" placeholder="请选择是否开启">
-            <el-option v-for="dict in dict.type.is_open" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option
+              v-for="dict in dict.type.is_open"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否弹窗" prop="isPop">
+          <el-select v-model="form.isPop" placeholder="请选择是否弹窗">
+            <el-option
+              v-for="dict in dict.type.is_pop"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="结束时间" prop="finishTime">
-          <el-date-picker clearable v-model="form.finishTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"
-            placeholder="请选择公告结束时间">
-          </el-date-picker>
+          <el-date-picker
+            clearable
+            v-model="form.finishTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="请选择公告结束时间"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item label="公告内容" prop="content">
           <editor v-model="form.content" :min-height="260" />
@@ -115,7 +219,7 @@ import { listHashUserNotice, getHashUserNotice, delHashUserNotice, addHashUserNo
 
 export default {
   name: "HashUserNotice",
-  dicts: ['is_open'],
+  dicts: ['is_open', 'is_pop'],
   data() {
     return {
       // 遮罩层
@@ -142,6 +246,8 @@ export default {
         pageSize: 10,
         title: null,
         isOpen: null,
+        isPop: null,
+        weight: null,
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc'
@@ -153,7 +259,9 @@ export default {
         title: [{ required: true, message: '公告标题不能为空', trigger: 'blur' }],
         content: [{ required: true, message: '公告内容-支付富文本不能为空', trigger: 'blur' }],
         isOpen: [{ required: true, message: '状态不能为空', trigger: 'change' }],
-        finishTime: [{ required: true, message: '公告结束时间不能为空', trigger: 'blur' }]
+        finishTime: [{ required: true, message: '公告结束时间不能为空', trigger: 'blur' }],
+        isPop: [{ required: true, message: '是否公告不能为空', trigger: 'blur' }],
+        weight: [{ required: true, message: '权重不能为空', trigger: 'blur' }],
       }
     };
   },
@@ -161,17 +269,17 @@ export default {
     this.getList();
   },
   methods: {
-   sortChange(val) {
-     console.log(val)
-     if (val.order && val.order == 'descending') {
-       this.queryParams.isAsc = 'desc'
-     } else {
-       this.queryParams.isAsc = 'asc'
-     }
-     this.queryParams.orderByColumn = val.prop && val.prop
-     console.log(this.queryParams)
-     this.getList()
-   },
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     /** 查询用户公告列表 */
     getList() {
       this.loading = true;
@@ -193,6 +301,8 @@ export default {
         title: null,
         content: null,
         isOpen: null,
+        isPop: null,
+        weight: null,
         finishTime: null,
         createTime: null,
         createBy: null,
@@ -276,9 +386,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .form {
-  height: 500px;
+  height: 600px;
 }
-
 
 .text-content {
   max-height: 50px !important;
