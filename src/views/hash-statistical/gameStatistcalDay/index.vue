@@ -66,16 +66,6 @@
       <el-table-column label="usdt奖金额" align="center" prop="usdtAwardAmount" />
       <el-table-column label="trx押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="trx奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-zoom-in"
-            @click="handleUpdate(scope.row, true)"
-          >详情</el-button>
-        </template>
-      </el-table-column>
     </el-table>
 
     <pagination
@@ -114,9 +104,7 @@
 </template>
 
 <script>
-import { listStatisticalGame, listChildren } from "@/api/hash-game/statisticalGame";
-
-import { listGameMenu } from '@/api/hash-game/gameMenu'
+import { listGameStatistcalDay, getGameStatistcalDay, delGameStatistcalDay, addGameStatistcalDay, updateGameStatistcalDay } from "@/api/hash-game/gameStatistcalDay";
 export default {
   name: 'Config',
   dicts: ['game_list'],
@@ -195,7 +183,7 @@ export default {
     /** 查询游戏配置列表 */
     getList() {
       this.loading = true
-      listStatisticalGame(this.queryParams).then(response => {
+      listGameStatistcalDay(this.queryParams).then(response => {
         this.statisticalGameList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -213,7 +201,8 @@ export default {
         gameId: null,
         gameId: null,
         orderByColumn: 'createTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
+        type: 1
       }
       this.resetForm('form')
     },
