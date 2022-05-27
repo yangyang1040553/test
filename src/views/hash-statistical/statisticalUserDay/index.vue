@@ -16,14 +16,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="游戏id" prop="gameId">
+      <!-- <el-form-item label="游戏id" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
           placeholder="请输入游戏id"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item> -->
       <!-- <el-form-item label="今日usdt押注金额" prop="usdtBetAmount">
         <el-input
           v-model="queryParams.usdtBetAmount"
@@ -248,7 +248,7 @@ export default {
         usdtAwardAmount: null,
         trxBetAmount: null,
         trxAwardAmount: null,
-        type: 1
+        type: 1,
       },
       // 表单参数
       form: {},
@@ -322,7 +322,7 @@ export default {
       this.reset();
       const id = row.id || this.ids
       listChildren({ gameId: row.gameId, time: row.time, type: this.tabPosition, week: row.week, userId: row.userId }).then(response => {
-        this.form = response.rows;
+        this.childrenList = response.rows;
         this.open = true;
         this.title = "游戏玩家投注统计";
       });
