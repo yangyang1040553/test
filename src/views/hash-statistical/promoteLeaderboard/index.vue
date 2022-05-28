@@ -379,15 +379,16 @@ export default {
       this.reset()
       const id = row.id || this.ids
       this.userId = id
-      getHashUserService(id).then(response => {
-        this.form = response.data
-        this.form.level1Person = row.level1Person
-        this.form.level2Person = row.level2Person
-        this.form.level3Person = row.level3Person
-        this.form.sumnumber = row.sumnumber
-        this.open = true
-        this.title = '修改用户'
-      })
+      this.open = true
+      // getHashUserService(id).then(response => {
+      //   this.form = response.data
+      //   this.form.level1Person = row.level1Person
+      //   this.form.level2Person = row.level2Person
+      //   this.form.level3Person = row.level3Person
+      //   this.form.sumnumber = row.sumnumber
+      //   this.open = true
+      //   this.title = '修改用户'
+      // })
     },
     /** 提交按钮 */
     submitForm() {

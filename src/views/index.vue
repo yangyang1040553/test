@@ -15,11 +15,56 @@
       <el-col :span="12" class="card-box">
         <el-card>
           <div slot="header">
-            <span>营收</span>
+            <span>在线用户</span>
           </div>
-          <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="commandstats" style="height: 420px" />
-          </div>
+          <el-table
+            v-loading="loading"
+            @sort-change="sortChange"
+            :data="HashUserServiceList"
+            height="420"
+          >
+            <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
+            <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
+            <!-- <el-table-column label="手机区号" align="center" prop="areaCode" sortable /> -->
+            <!-- <el-table-column label="手机号" align="center" prop="phone" sortable /> -->
+            <el-table-column label="用户名" align="center" prop="account" />
+            <!-- <el-table-column label="密码" align="center" prop="password" /> -->
+            <!-- <el-table-column label="设备码" align="center" prop="deviceCode" /> -->
+            <el-table-column label="平台" align="center" prop="platform" width="100" />
+            <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
+              <template slot-scope="scope">
+                <span
+                  class="global-text-blue"
+                  @click="handleUserInfo(scope.row)"
+                >{{ scope.row.nickName }}</span>
+              </template>
+            </el-table-column>
+            <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
+            <!-- <el-table-column label="用户状态" align="center" prop="status">
+              <template slot-scope="scope">
+                <dict-tag :options="dict.type.user_status" :value="scope.row.status" />
+              </template>
+            </el-table-column>-->
+            <!-- <el-table-column label="是否在线" align="center" prop="online">
+              <template slot-scope="scope">
+                <dict-tag :options="dict.type.online" :value="scope.row.online" />
+              </template>
+            </el-table-column>-->
+            <!-- <el-table-column label="邀请码" align="center" prop="invitationCode" /> -->
+            <!-- <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" /> -->
+            <!-- <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column> -->
+            <!-- <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180" sortable></el-table-column> -->
+            <!-- <el-table-column label="注册ip" align="center" prop="registerIp" /> -->
+            <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
+            <el-table-column label="登录ip" align="center" prop="loginIp" />
+          </el-table>
+          <pagination
+            v-show="total > 0"
+            :total="total"
+            :page.sync="queryParams.pageNum"
+            :limit.sync="queryParams.pageSize"
+            @pagination="getList"
+          />
         </el-card>
       </el-col>
 
@@ -34,37 +79,98 @@
         </el-card>
       </el-col>
     </el-row>
+    <UserInfoDialog v-if="open" :open="open" :id="this.userId" @close="open=false" />
   </div>
 </template>
 
 <script>
 import { getCache } from "@/api/monitor/cache";
+import { listStatisticalOperation } from "@/api/hash-statistical/statisticalOperation";
+import { listRedisOnLineList } from "@/api/hash-statistical/statisticalRedis";
 import echarts from "echarts";
+import UserInfoDialog from "./components/dialog/UserInfoDialog.vue";
 
 export default {
   name: "Server",
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      open: false,
+      userId: null,
       // 统计命令信息
       commandstats: null,
       // 使用内存
       usedmemory: null,
       lineChart: null,
+      loading: true,
       // cache信息
       cache: [],
+      HashUserServiceList: [],
+      total: 0,
+      queryParams: {
+        pageNum: 1,
+        pageSize: 30,
+      },
+      queryParams2: {
+        pageNum: 1,
+        pageSize: 10,
+        orderByColumn: 'loginTime',
+        isAsc: 'desc'
+      }
     };
   },
   created() {
-    this.getList();
     // this.openLoading();
   },
   mounted() {
-    this.initLineChart();
+    this.getList();
   },
   methods: {
+
+    handleUserInfo(row) {
+      this.userId = row.id
+      this.open = true
+    },
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     /** 查缓存询信息 */
     getList() {
+      this.loading = true
       console.log("查缓存询信息")
+      listStatisticalOperation(this.queryParams).then(response => {
+
+        var list = response.rows;
+        var labels = []
+        var valuesActiveCount = []
+        var valuesRegisterCount = []
+        var valuesPromoteCount = []
+        if (list) {
+          list.forEach(element => {
+            labels.push(element.id)
+            valuesActiveCount.push(element.activeCount)
+            valuesRegisterCount.push(element.registerCount)
+            valuesPromoteCount.push(element.promoteCount)
+          });
+          this.initLineChart(labels, valuesActiveCount, valuesRegisterCount, valuesPromoteCount);
+        }
+      })
+      listRedisOnLineList(this.queryParams2).then(response => {
+        this.HashUserServiceList = response.rows
+        this.total = response.total
+        this.loading = false
+      })
+
       // getCache().then((response) => {
       //   this.cache = response.data;
       //   this.$modal.closeLoading();
@@ -113,7 +219,7 @@ export default {
       //   });
       // });
     },
-    initLineChart() {
+    initLineChart(labels, valuesActiveCount, valuesRegisterCount, valuesPromoteCount) {
       this.lineChart = echarts.init(this.$refs.lineChart, "macarons");
       // var chartDom = document.getElementById('lineChart');
       // var myChart = echarts.init(chartDom);
@@ -138,7 +244,7 @@ export default {
           }
         },
         legend: {
-          data: ['Evaporation', 'Precipitation', 'Temperature']
+          data: ['活跃人数', '注册人数', '推广人数']
         },
         xAxis: [
           {
@@ -147,13 +253,13 @@ export default {
               alignWithLabel: true
             },
             // prettier-ignore
-            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            data: labels
           }
         ],
         yAxis: [
           {
             type: 'value',
-            name: 'Evaporation',
+            name: '活跃人数',
             position: 'right',
             alignTicks: true,
             axisLine: {
@@ -163,12 +269,12 @@ export default {
               }
             },
             axisLabel: {
-              formatter: '{value} ml'
+              formatter: '{value}'
             }
           },
           {
             type: 'value',
-            name: 'Precipitation',
+            name: '注册人数',
             position: 'right',
             alignTicks: true,
             offset: 80,
@@ -179,12 +285,12 @@ export default {
               }
             },
             axisLabel: {
-              formatter: '{value} ml'
+              formatter: '{value}'
             }
           },
           {
             type: 'value',
-            name: '温度',
+            name: '推广人数',
             position: 'left',
             alignTicks: true,
             axisLine: {
@@ -194,31 +300,28 @@ export default {
               }
             },
             axisLabel: {
-              formatter: '{value} °C'
+              formatter: '{value}'
             }
           }
         ],
         series: [
           {
-            name: 'Evaporation',
+            name: '活跃人数',
             type: 'bar',
-            data: [
-              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
-            ]
+            data: valuesActiveCount,
+            yAxisIndex: 0,
           },
           {
-            name: 'Precipitation',
+            name: '注册人数',
             type: 'bar',
             yAxisIndex: 1,
-            data: [
-              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-            ]
+            data: valuesRegisterCount
           },
           {
-            name: 'Temperature',
-            type: 'line',
+            name: '推广人数',
+            type: 'bar',
             yAxisIndex: 2,
-            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+            data: valuesPromoteCount
           }
         ]
       };

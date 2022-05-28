@@ -33,8 +33,8 @@
           <el-form-item label="三级代理人数" prop="level3Person">
             <el-input v-model="form.level3Person" placeholder="请输入用户昵称" />
           </el-form-item>
-          <el-form-item label="总代理人数" prop="sumnumber">
-            <el-input v-model="form.sumnumber" placeholder="请输入用户昵称" />
+          <el-form-item label="总代理人数" prop="sumNumber">
+            <el-input v-model="form.sumNumber" placeholder="请输入用户昵称" />
           </el-form-item>
         </div>
         <div class="line"></div>
