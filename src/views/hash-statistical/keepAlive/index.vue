@@ -23,7 +23,7 @@
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
-    </el-form> -->
+    </el-form>-->
 
     <el-row :gutter="10" class="mb8">
       <!-- <el-col :span="1.5">
@@ -87,6 +87,14 @@
       </el-table-column>
       <el-table-column label="注册总数" align="center" prop="total" />
       <el-table-column label="登录总数" align="center" prop="loginCount" />
+      <el-table-column
+        v-for="(item,index) in this.columList"
+        :key="index"
+        :label="item.label"
+        align="center"
+        :prop="item.prop"
+      />
+      <!-- <el-table-column label="登录总数" align="center" prop="loginCount" />
       <el-table-column label="次日留存" align="center" prop="one" />
       <el-table-column label="二日留存" align="center" prop="two" />
       <el-table-column label="三日留存" align="center" prop="three" />
@@ -116,7 +124,7 @@
       <el-table-column label="二十七日留存" align="center" prop="twentySeven" />
       <el-table-column label="二十八日留存" align="center" prop="twentyEight" />
       <el-table-column label="二十九日留存" align="center" prop="twentyNine" />
-      <el-table-column label="三十日留存" align="center" prop="thirty" />
+      <el-table-column label="三十日留存" align="center" prop="thirty" />-->
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -168,6 +176,45 @@ export default {
       total: 0,
       // 留存分析表格数据
       keepAliveList: [],
+
+      columList: [
+      ],
+      sevenList: [
+        { label: "次日留存", prop: "one" },
+        { label: "二日留存", prop: "two" },
+        { label: "三日留存", prop: "three" },
+        { label: "四日留存", prop: "four" },
+        { label: "五日留存", prop: "five" },
+        { label: "六日留存", prop: "six" },
+        { label: "七日留存", prop: "seven" },
+      ],
+      fifteenList: [
+        { label: "八日留存", prop: "eight" },
+        { label: "九日留存", prop: "nine" },
+        { label: "十日留存", prop: "ten" },
+        { label: "十一日留存", prop: "eleven" },
+        { label: "十二日留存", prop: "twelve" },
+        { label: "十三日留存", prop: "thirteen" },
+        { label: "十四日留存", prop: "fourteen" },
+        { label: "十五日留存", prop: "fifteen" },
+      ],
+      thirtyList: [
+        { label: "十六日留存", prop: "sixteen" },
+        { label: "十七日留存", prop: "seventeen" },
+        { label: "十八日留存", prop: "eighteen" },
+        { label: "十九日留存", prop: "nineteen" },
+        { label: "二十日留存", prop: "twenty" },
+        { label: "二十一日留存", prop: "twentyOne" },
+        { label: "二十二日留存", prop: "twentyTwo" },
+        { label: "二十三日留存", prop: "twentyThree" },
+        { label: "二十四日留存", prop: "twentyFour" },
+        { label: "二十五日留存", prop: "twentyFive" },
+        { label: "二十六日留存", prop: "twentySix" },
+        { label: "二十七日留存", prop: "twentySeven" },
+        { label: "二十八日留存", prop: "twentyEight" },
+        { label: "二十九日留存", prop: "twentyNine" },
+        { label: "三十日留存", prop: "thirty" },
+      ],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -177,41 +224,10 @@ export default {
       daterangeRegisterTime: [],
       // 查询参数
       queryParams: {
+        type: this.tabPosition,
         pageNum: 1,
         pageSize: 10,
         registerTime: null,
-        total: null,
-        loginCount: null,
-        one: null,
-        two: null,
-        three: null,
-        four: null,
-        five: null,
-        six: null,
-        seven: null,
-        eight: null,
-        nine: null,
-        ten: null,
-        eleven: null,
-        twelve: null,
-        thirteen: null,
-        fourteen: null,
-        fifteen: null,
-        sixteen: null,
-        seventeen: null,
-        eighteen: null,
-        nineteen: null,
-        twenty: null,
-        twentyOne: null,
-        twentyTwo: null,
-        twentyThree: null,
-        twentyFour: null,
-        twentyFive: null,
-        twentySix: null,
-        twentySeven: null,
-        twentyEight: null,
-        twentyNine: null,
-        thirty: null
       },
       // 表单参数
       form: {},
@@ -226,10 +242,72 @@ export default {
       }
     };
   },
+  watch: {
+    tabPosition(news, old) {
+      console.log(news, old)
+      this.tabPosition = news
+      this.formartColum()
+      this.formatTime()
+      this.getList()
+    }
+  },
   created() {
+    this.columList = this.columList.concat(this.sevenList)
+    this.formatTime();
     this.getList();
   },
   methods: {
+    formartColum() {
+      if (this.tabPosition == 1) {
+        this.columList = []
+        this.columList = this.columList.concat(this.sevenList)
+      }
+      if (this.tabPosition == 2) {
+        this.columList = []
+        this.columList = this.columList.concat(this.sevenList).concat(this.fifteenList)
+      }
+      if (this.tabPosition == 3) {
+        this.columList = []
+        this.columList = this.columList.concat(this.sevenList).concat(this.fifteenList).concat(this.thirtyList)
+      }
+    },
+    getago(startDate, valueTime) {
+      var date = new Date(startDate);
+      var newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + valueTime);
+      var Y = newDate.getFullYear();
+      var M = newDate.getMonth() + 1;
+      M = M < 10 ? '0' + M : M;
+      var D = newDate.getDate();
+      D = D < 10 ? '0' + D : D;
+      return `${Y}-${M}-${D}`;
+    },
+    formatTime() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      if (month > 0 || month < 10) {
+        month = "0" + month;
+      }
+      var cut = 0;
+      if (this.tabPosition == 1) {
+        cut = -7;
+      }
+      if (this.tabPosition == 2) {
+        cut = -15;
+      }
+      if (this.tabPosition == 3) {
+        cut = -30;
+        this.daterangeRegisterTime[0] = year + "-" + month + "-" + (day - 30)
+      }
+      var cur = year + "-" + month + "-" + day
+      this.daterangeRegisterTime[0] = this.getago(cur, cut)
+      this.daterangeRegisterTime[1] = year + "-" + month + "-" + day
+
+
+
+      console.log(this.daterangeRegisterTime)
+    },
     /** 查询留存分析列表 */
     getList() {
       this.loading = true;
@@ -238,6 +316,8 @@ export default {
         this.queryParams.params["beginRegisterTime"] = this.daterangeRegisterTime[0];
         this.queryParams.params["endRegisterTime"] = this.daterangeRegisterTime[1];
       }
+      this.queryParams.type = this.tabPosition
+      console.log(this.queryParams)
       listKeepAlive(this.queryParams).then(response => {
         this.keepAliveList = response.rows;
         this.total = response.total;
@@ -253,38 +333,7 @@ export default {
     reset() {
       this.form = {
         registerTime: null,
-        total: null,
-        loginCount: null,
-        one: null,
-        two: null,
-        three: null,
-        four: null,
-        five: null,
-        six: null,
-        seven: null,
-        eight: null,
-        nine: null,
-        ten: null,
-        eleven: null,
-        twelve: null,
-        thirteen: null,
-        fourteen: null,
-        fifteen: null,
-        sixteen: null,
-        seventeen: null,
-        eighteen: null,
-        nineteen: null,
-        twenty: null,
-        twentyOne: null,
-        twentyTwo: null,
-        twentyThree: null,
-        twentyFour: null,
-        twentyFive: null,
-        twentySix: null,
-        twentySeven: null,
-        twentyEight: null,
-        twentyNine: null,
-        thirty: null
+        type: this.tabPosition
       };
       this.resetForm("form");
     },
