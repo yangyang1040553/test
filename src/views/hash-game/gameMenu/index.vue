@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
-      <el-form-item label="唯一id" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一id" clearable @keyup.enter.native="handleQuery" /></el-form-item>
-      <el-form-item label="菜单名称" prop="menuName">
+      <!-- <el-form-item label="唯一id" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一id" clearable @keyup.enter.native="handleQuery" /></el-form-item> -->
+      <!-- <el-form-item label="菜单名称" prop="menuName">
         <el-input v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="权重值" prop="weight"><el-input v-model="queryParams.weight" placeholder="请输入权重值" clearable @keyup.enter.native="handleQuery" /></el-form-item>
       <el-form-item label="活动菜单" prop="activity">
         <el-select v-model="queryParams.activity" placeholder="请选择是否活动菜单" clearable>
