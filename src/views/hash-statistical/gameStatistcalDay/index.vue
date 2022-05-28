@@ -8,13 +8,15 @@
       v-show="showSearch"
       label-width="78px"
     >
-      <el-form-item label="游戏id" prop="gameId">
-        <el-input
-          v-model="queryParams.gameId"
-          placeholder="请输入游戏名称"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-form-item label="选择游戏" prop="gameId">
+        <el-select v-model="queryParams.gameId" placeholder="请选择游戏" clearable>
+          <el-option
+            v-for="dict in dict.type.game_list"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -91,9 +93,9 @@
           </template>
         </el-table-column>
         <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
-        <el-table-column label="usdt奖金额" align="center" prop="usdtAwardAmount" />
+        <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
         <el-table-column label="trx押注金额" align="center" prop="usdtBetAmount" />
-        <el-table-column label="trx奖金额" align="center" prop="usdtAwardAmount" />
+        <el-table-column label="trx中奖金额" align="center" prop="usdtAwardAmount" />
       </el-table>
 
       <div slot="footer" class="dialog-footer">
@@ -104,7 +106,7 @@
 </template>
 
 <script>
-import { listGameStatistcalDay, getGameStatistcalDay, delGameStatistcalDay, addGameStatistcalDay, updateGameStatistcalDay } from "@/api/hash-game/gameStatistcalDay";
+import { listGameStatistcalDay, getGameStatistcalDay, delGameStatistcalDay, addGameStatistcalDay, updateGameStatistcalDay } from "@/api/hash-statistical/gameStatistcalDay";
 export default {
   name: 'Config',
   dicts: ['game_list'],

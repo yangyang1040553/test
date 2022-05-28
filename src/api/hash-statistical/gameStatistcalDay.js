@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询游戏押注位置日统计列表
 export function listGameStatistcalDay(query) {
   return request({
-    url: '/hash-game/gameStatistcalDay/list',
+    url: '/hash-statistical/gameStatistcalDay/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listGameStatistcalDay(query) {
 // 查询游戏押注位置日统计详细
 export function getGameStatistcalDay(id) {
   return request({
-    url: '/hash-game/gameStatistcalDay/' + id,
+    url: '/hash-statistical/gameStatistcalDay/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getGameStatistcalDay(id) {
 // 新增游戏押注位置日统计
 export function addGameStatistcalDay(data) {
   return request({
-    url: '/hash-game/gameStatistcalDay',
+    url: '/hash-statistical/gameStatistcalDay',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addGameStatistcalDay(data) {
 // 修改游戏押注位置日统计
 export function updateGameStatistcalDay(data) {
   return request({
-    url: '/hash-game/gameStatistcalDay',
+    url: '/hash-statistical/gameStatistcalDay',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateGameStatistcalDay(data) {
 // 删除游戏押注位置日统计
 export function delGameStatistcalDay(id) {
   return request({
-    url: '/hash-game/gameStatistcalDay/' + id,
+    url: '/hash-statistical/gameStatistcalDay/' + id,
     method: 'delete'
   })
 }

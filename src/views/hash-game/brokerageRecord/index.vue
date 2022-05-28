@@ -154,8 +154,7 @@
     <!-- 添加或修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <div class="parent">
-        <el-form ref="form" class="form" :model="form" :rules="rules" label-width="100px" disabled>
-
+        <el-form ref="form" class="form" :model="form" :rules="rules" label-width="100px" >
           <div class="left">
             <el-form-item label="手机区号" prop="areaCode">
               <el-input v-model="form.areaCode" placeholder="请输入手机区号" />

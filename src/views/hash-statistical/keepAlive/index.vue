@@ -78,7 +78,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="keepAliveList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="keepAliveList" @selection-change="handleSelectionChange" height="600px">
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180">
         <template slot-scope="scope">
@@ -86,7 +86,7 @@
         </template>
       </el-table-column>
       <el-table-column label="注册总数" align="center" prop="total" />
-      <el-table-column label="登录总数" align="center" prop="loginCount" />
+      <!-- <el-table-column label="登录总数" align="center" prop="loginCount" /> -->
       <el-table-column
         v-for="(item,index) in this.columList"
         :key="index"
