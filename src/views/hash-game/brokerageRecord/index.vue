@@ -1,36 +1,75 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="88px"
+    >
       <el-form-item label="玩家id" prop="userId">
-        <el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.userId"
+          placeholder="请输入玩家id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="佣金等级" prop="level">
-        <el-input v-model="queryParams.level" placeholder="请输入第几级的佣金" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.level"
+          placeholder="请输入第几级的佣金"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="钱包类型" prop="walletType">
         <el-select v-model="queryParams.walletType" placeholder="请选择钱包类型" clearable>
-          <el-option v-for="dict in dict.type.wallet_type" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.wallet_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="反佣类型" prop="brokerageType">
         <el-select v-model="queryParams.brokerageType" placeholder="请选择反佣类型" clearable>
-          <el-option v-for="dict in dict.type.brokerage_type" :key="dict.value" :label="dict.label"
-            :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.brokerage_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="下级玩家id" prop="childUserId">
-        <el-input v-model="queryParams.childUserId" placeholder="请输入下级玩家id" clearable
-          @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.childUserId"
+          placeholder="请输入下级玩家id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="查询状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择" clearable>
-          <el-option v-for="dict in dict.type.record_status" :key="dict.value" :label="dict.label"
-            :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.record_status"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd"
-          placeholder="请选择创建时间"></el-date-picker>
+        <el-date-picker
+          clearable
+          v-model="queryParams.createTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="请选择创建时间"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -50,27 +89,42 @@
       <el-col :span="1.5">
         <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
           v-hasPermi="['hash-game:brokerageRecord:remove']">删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-          v-hasPermi="['hash-game:brokerageRecord:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-game:brokerageRecord:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="brokerageRecordList" @selection-change="handleSelectionChange"
-      @sort-change="sortChange" :default-sort="{ prop: 'create_time', order: 'descending' }">
+    <el-table
+      v-loading="loading"
+      :data="brokerageRecordList"
+      @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
+      :default-sort="{ prop: 'create_time', order: 'descending' }"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
-      <el-table-column label="玩家id" align="center" prop="userId" />
+      <el-table-column label="玩家id" align="center" prop="userId">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="佣金等级" align="center" prop="level" width="75" />
       <el-table-column label="钱包类型" align="center" prop="walletType" width="85">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
-      <el-table-column label="下注金额" align="center" prop="betAmount" >
-         <template slot-scope="scope">
+      <el-table-column label="下注金额" align="center" prop="betAmount">
+        <template slot-scope="scope">
           <div>{{scope.row.betAmount.toFixed(2)}}</div>
         </template>
       </el-table-column>
@@ -79,8 +133,8 @@
           <dict-tag :options="dict.type.brokerage_type" :value="scope.row.brokerageType" />
         </template>
       </el-table-column>
-      <el-table-column label="反佣金额" align="center" prop="brokerageAmount" >
-          <template slot-scope="scope">
+      <el-table-column label="反佣金额" align="center" prop="brokerageAmount">
+        <template slot-scope="scope">
           <div>{{scope.row.brokerageAmount.toFixed(2)}}</div>
         </template>
       </el-table-column>
@@ -102,11 +156,16 @@
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
             v-hasPermi="['hash-game:brokerageRecord:remove']">删除</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改玩家返佣记录对话框 -->
     <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -154,7 +213,7 @@
     <!-- 添加或修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <div class="parent">
-        <el-form ref="form" class="form" :model="form" :rules="rules" label-width="100px" >
+        <el-form ref="form" class="form" :model="form" :rules="rules" label-width="100px">
           <div class="left">
             <el-form-item label="手机区号" prop="areaCode">
               <el-input v-model="form.areaCode" placeholder="请输入手机区号" />
@@ -167,7 +226,7 @@
             </el-form-item>
             <!-- <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
-        </el-form-item>-->
+            </el-form-item>-->
             <el-form-item label="设备码" prop="deviceCode">
               <el-input v-model="form.deviceCode" placeholder="请输入设备码" />
             </el-form-item>
@@ -197,8 +256,12 @@
             </el-form-item>
             <el-form-item label="用户状态" prop="status">
               <el-select v-model="form.status" placeholder="请选择用户状态">
-                <el-option v-for="dict in dict.type.user_status" :key="dict.value" :label="dict.label"
-                  :value="parseInt(dict.value)"></el-option>
+                <el-option
+                  v-for="dict in dict.type.user_status"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="parseInt(dict.value)"
+                ></el-option>
               </el-select>
             </el-form-item>
           </div>
@@ -209,18 +272,25 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listBrokerageRecord, getBrokerageRecord, delBrokerageRecord, addBrokerageRecord, updateBrokerageRecord } from "@/api/hash-game/brokerageRecord";
 import { getHashUserService } from "@/api/hash-user/HashUserService";
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "BrokerageRecord",
   dicts: ['wallet_type', 'brokerage_type', 'record_status', 'user_status'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -264,16 +334,20 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(row) {
+      this.openUser = true;
+      this.userId = row.userId;
+    },
     sortChange(val) {
-     console.log(val)
-     if (val.order && val.order == 'descending') {
-       this.queryParams.isAsc = 'desc'
-     } else {
-       this.queryParams.isAsc = 'asc'
-     }
-     this.queryParams.orderByColumn=val.prop && val.prop
-     console.log(this.queryParams)
-     this.getList()
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
     },
     /** 查询玩家返佣记录列表 */
     getList() {
@@ -340,15 +414,17 @@ export default {
       });
     },
     handleUserInfo(row) {
-      const id = row.childUserId
-      getHashUserService(id).then(response => {
-        console.log(response)
-        if (response.data) {
-          this.form = response.data;
-          this.open = true;
-          this.title = "用户详情";
-        }
-      });
+      // const id = row.childUserId
+      this.openUser = true;
+      this.userId = row.childUserId;
+      // getHashUserService(id).then(response => {
+      //   console.log(response)
+      //   if (response.data) {
+      //     this.form = response.data;
+      //     this.open = true;
+      //     this.title = "用户详情";
+      //   }
+      // });
     },
     /** 提交按钮 */
     submitForm() {
@@ -420,9 +496,7 @@ export default {
   padding-top: 10px;
 }
 
-  ::v-deep .el-dialog__body {
-  padding: 30px 20px 0px 20px  !important;
-
+::v-deep .el-dialog__body {
+  padding: 30px 20px 0px 20px !important;
 }
-
 </style>

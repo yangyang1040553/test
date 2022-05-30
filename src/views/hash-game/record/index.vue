@@ -170,7 +170,12 @@
       <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
       <el-table-column label="游戏id" align="center" prop="gameId" />
       <el-table-column label="场次id" align="center" prop="sessionId" />
-      <el-table-column label="玩家id" align="center" prop="userId" width="200" />
+      <!-- <el-table-column label="玩家id" align="center" prop="userId" width="200" /> -->
+      <el-table-column label="玩家id" align="center" prop="userId" width="200">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
       <el-table-column label="赔率" align="center" prop="odds" />
       <el-table-column label="投注类型" align="center" prop="betWalletType">
@@ -242,7 +247,7 @@
     />
 
     <!-- 添加或修改游戏投注记录对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="游戏配置id" prop="configId">
           <el-input v-model="form.configId" placeholder="请输入游戏配置id" />
@@ -278,12 +283,12 @@
         <el-form-item label="投注位置" prop="betPosition">
           <el-input v-model="form.betPosition" placeholder="请输入投注位置" />
         </el-form-item>
-        <!-- <el-form-item label="金额状态" prop="awardAmount">
+        <el-form-item label="金额状态" prop="awardAmount">
           <el-select v-model="form.awardAmount" placeholder="请选择中奖金额或退回金额">
             <el-option v-for="dict in dict.type.money_status" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
-        </el-form-item>-->
+        </el-form-item>
         <el-form-item label="手续费" prop="taxAmount">
           <el-input v-model="form.taxAmount" placeholder="请输入手续费" />
         </el-form-item>
@@ -328,18 +333,24 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listRecord, getRecord, delRecord, addRecord, updateRecord } from '@/api/hash-game/record'
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: 'Record',
   dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result', 'game_list'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -389,6 +400,10 @@ export default {
     this.getList()
   },
   methods: {
+    openUserDetail(row) {
+      this.openUser = true;
+      this.userId = row.userId;
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
