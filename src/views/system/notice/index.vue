@@ -1,6 +1,13 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item :label="$t('announcement_title')" prop="noticeTitle">
         <el-input
           v-model="queryParams.noticeTitle"
@@ -12,13 +19,17 @@
       <el-form-item :label="$t('operation_user')" prop="createBy">
         <el-input
           v-model="queryParams.createBy"
-             :placeholder="$t('enter_operation_user')"
+          :placeholder="$t('enter_operation_user')"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
       <el-form-item :label="$t('status')" prop="noticeType">
-        <el-select v-model="queryParams.noticeType" :placeholder="$t('announcement_type')" clearable>
+        <el-select
+          v-model="queryParams.noticeType"
+          :placeholder="$t('announcement_type')"
+          clearable
+        >
           <el-option
             v-for="dict in dict.type.sys_notice_type"
             :key="dict.value"
@@ -28,7 +39,12 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">{{$t('search')}}</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+        >{{$t('search')}}</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">{{$t('reset')}}</el-button>
       </el-form-item>
     </el-form>
@@ -78,23 +94,27 @@
         prop="noticeTitle"
         :show-overflow-tooltip="true"
       />
-      <el-table-column :label="$t('announcement_type')" align="center" prop="noticeType" >
+      <el-table-column :label="$t('announcement_type')" align="center" prop="noticeType">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_notice_type" :value="scope.row.noticeType"/>
+          <dict-tag :options="dict.type.sys_notice_type" :value="scope.row.noticeType" />
         </template>
       </el-table-column>
-      <el-table-column :label="$t('status')" align="center" prop="status" >
+      <el-table-column :label="$t('status')" align="center" prop="status">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_notice_status" :value="scope.row.status"/>
+          <dict-tag :options="dict.type.sys_notice_status" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column :label="$t('creator')" align="center" prop="createBy"  />
-      <el-table-column  :label="$t('create_time')" align="center" prop="createTime">
+      <el-table-column :label="$t('creator')" align="center" prop="createBy" />
+      <el-table-column :label="$t('create_time')" align="center" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('operation')" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        :label="$t('operation')"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -123,8 +143,8 @@
     />
 
     <!-- 添加或修改公告对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="160px">
+    <el-dialog :title="title" :visible.sync="open" class="dialog" width="900px" append-to-body>
+      <el-form ref="form" class="form" :model="form" :rules="rules" label-width="160px">
         <el-row>
           <el-col :span="12">
             <el-form-item :label="$t('announcement_title')" prop="noticeTitle">
@@ -132,7 +152,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('announcement_type')"  prop="noticeType">
+            <el-form-item :label="$t('announcement_type')" prop="noticeType">
               <el-select v-model="form.noticeType" :placeholder="$t('select_announcement_type')">
                 <el-option
                   v-for="dict in dict.type.sys_notice_type"
@@ -156,7 +176,7 @@
           </el-col>
           <el-col :span="24">
             <el-form-item :label="$t('content')">
-              <editor v-model="form.noticeContent" :min-height="192"/>
+              <editor v-model="form.noticeContent" :min-height="192" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -259,7 +279,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.noticeId)
-      this.single = selection.length!=1
+      this.single = selection.length != 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -279,7 +299,7 @@ export default {
       });
     },
     /** 提交按钮 */
-    submitForm: function() {
+    submitForm: function () {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.noticeId != undefined) {
@@ -301,13 +321,18 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const noticeIds = row.noticeId || this.ids
-      this.$modal.confirm('是否确认删除公告编号为"' + noticeIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除公告编号为"' + noticeIds + '"的数据项？').then(function () {
         return delNotice(noticeIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => { });
     }
   }
 };
 </script>
+<style   lang="scss" scoped>
+.form {
+  height: 50vh;
+}
+</style>

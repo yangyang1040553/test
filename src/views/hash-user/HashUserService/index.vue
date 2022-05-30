@@ -100,10 +100,15 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
+      <el-table-column label="用户ID" align="center" prop="id" width="160">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
       <el-table-column label="手机区号" align="center" prop="areaCode" sortable />
-      <el-table-column label="手机号" align="center" prop="phone" sortable />
-      <el-table-column label="用户名" align="center" prop="account" />
+      <el-table-column label="手机号" align="center" prop="phone" sortable width="120" />
+      <el-table-column label="用户名" align="center" prop="account" width="120"/>
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
       <el-table-column label="设备码" align="center" prop="deviceCode" />
       <el-table-column label="平台" align="center" prop="platform" width="100" />
@@ -159,13 +164,13 @@
     <el-dialog :title="title" :visible.sync="openDetail" width="600px" append-to-body>
       <el-form ref="form" :model="detailForm" :rules="rules" label-width="100px">
         <el-form-item label="今日投注金额">
-          <span class="label">{{ detailForm.betAmount }}</span>
+          <span class="label">{{ detailForm.betAmount ||0.00}}</span>
         </el-form-item>
         <el-form-item label="今日充值金额">
-          <span class="label">{{ detailForm.inAmount }}</span>
+          <span class="label">{{ detailForm.inAmount ||0.00}}</span>
         </el-form-item>
         <el-form-item label="今日提现金额">
-          <span class="label">{{ detailForm.outAmount }}</span>
+          <span class="label">{{ detailForm.outAmount ||0.00}}</span>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -219,17 +224,24 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listHashUserService, getHashUserService, delHashUserService, addHashUserService, updateHashUserService, getHashUserServiceDetail } from '@/api/hash-user/HashUserService'
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: 'HashUserService',
   dicts: ['online', 'user_status'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -279,6 +291,10 @@ export default {
     this.getList()
   },
   methods: {
+    openUserDetail(userId) {
+      this.openUser = true;
+      this.userId = userId;
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
