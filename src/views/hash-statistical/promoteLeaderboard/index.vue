@@ -107,7 +107,12 @@
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="用户ID" align="center" prop="id" width="160" />
+      <!-- <el-table-column label="用户ID" align="center" prop="id" width="160" /> -->
+      <el-table-column label="用户ID" align="center" prop="id" width="160">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="手机区号" align="center" prop="areaCode" />
       <el-table-column label="手机号" align="center" prop="phone" />
       <el-table-column label="用户昵称" align="center" prop="nickName" />
@@ -152,7 +157,7 @@
     />
 
     <!-- 添加或修改VIEW对话框 -->
-    <UserInfoDialog v-if="open" :open="open" :id="this.userId" @close="open=false" />
+     <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
     <!-- <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" class="form" :model="form" label-width="120px" disabled>
         <div class="left">
@@ -276,6 +281,8 @@ export default {
   },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -320,6 +327,10 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(userId) {
+      this.openUser = true;
+      this.userId = userId;
+    },
     /** 查询VIEW列表 */
     getList() {
       this.loading = true;
