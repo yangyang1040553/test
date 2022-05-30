@@ -114,7 +114,7 @@
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="佣金等级" align="center" prop="level" width="75" />
@@ -272,9 +272,9 @@ export default {
     this.getList();
   },
   methods: {
-    openUserDetail(row) {
+    openUserDetail(userId) {
       this.openUser = true;
-      this.userId = row.userId;
+      this.userId = userId;
     },
     sortChange(val) {
       console.log(val)

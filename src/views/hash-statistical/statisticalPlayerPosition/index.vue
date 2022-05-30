@@ -92,7 +92,7 @@
       <el-table-column label="id-天为单位" align="center" prop="time" />
       <el-table-column label="用户id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
@@ -215,9 +215,9 @@ export default {
     this.getList();
   },
   methods: {
-    openUserDetail(row) {
+    openUserDetail(userId) {
       this.open = true;
-      this.userId = row.userId;
+      this.userId = userId;
     },
     /** 查询游戏玩家押注位置日统计列表 */
     getList() {

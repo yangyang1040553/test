@@ -123,7 +123,7 @@
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
@@ -279,9 +279,9 @@ export default {
     this.getList();
   },
   methods: {
-    openUserDetail(row) {
+    openUserDetail(userId) {
       this.openUser = true;
-      this.userId = row.userId;
+      this.userId = userId;
     },
     /** 查询游戏玩家日统计列表 */
     getList() {

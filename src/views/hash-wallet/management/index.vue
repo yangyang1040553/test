@@ -113,7 +113,7 @@
       <!-- <el-table-column label="ID" align="center" prop="id" /> -->
       <el-table-column label="ID" align="center" prop="id">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.id}}</div>
+          <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
       <el-table-column label="usdt余额" align="center" prop="usdtAmount" />
@@ -229,9 +229,9 @@ export default {
     this.getList();
   },
   methods: {
-    openUserDetail(row) {
+    openUserDetail(userId) {
       this.openUser = true;
-      this.userId = row.id;
+      this.userId = userId;
     },
     /** 查询用户钱包列表 */
     getList() {

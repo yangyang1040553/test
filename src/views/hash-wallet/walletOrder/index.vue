@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="交易号" prop="transactionNo">
         <el-input
           v-model="queryParams.transactionNo"
@@ -105,7 +99,7 @@
           @click="handleUpdate"
           v-hasPermi="['hash-wallet:walletOrder:edit']"
         >修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="danger"
@@ -116,7 +110,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-wallet:walletOrder:remove']"
         >删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -134,7 +128,15 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="订单id" align="center" prop="id" />
       <el-table-column label="交易号" align="center" prop="transactionNo" />
-      <el-table-column label="玩家id" align="center" prop="userId" />
+      <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
+      <el-table-column label="玩家id" align="center" prop="userId">
+        <template slot-scope="scope">
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="源钱包类型" align="center" prop="sourceWalletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.sourceWalletType" />
@@ -243,17 +245,23 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listWalletOrder, getWalletOrder, delWalletOrder, addWalletOrder, updateWalletOrder } from "@/api/hash-wallet/walletOrder";
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "WalletOrder",
   dicts: ['wallet_type', 'in_status'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -296,6 +304,10 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(userId) {
+      this.openUser = true;
+      this.userId = userId;
+    },
     /** 查询转换订单列表 */
     getList() {
       this.loading = true;
