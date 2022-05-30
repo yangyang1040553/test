@@ -61,8 +61,8 @@
           <pagination
             v-show="total > 0"
             :total="total"
-            :page.sync="queryParams.pageNum"
-            :limit.sync="queryParams.pageSize"
+            :page.sync="queryParams2.pageNum"
+            :limit.sync="queryParams2.pageSize"
             @pagination="getList"
           />
         </el-card>
@@ -74,7 +74,7 @@
             <span>占比</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="usedmemory" style="height: 420px" />
+            <div ref="usedmemory" style="height: 470px" />
           </div>
         </el-card>
       </el-col>
@@ -115,7 +115,7 @@ export default {
       },
       queryParams2: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 20,
         orderByColumn: 'loginTime',
         isAsc: 'desc'
       }
@@ -126,6 +126,7 @@ export default {
   },
   mounted() {
     this.getList();
+    this.getLineChart()
   },
   methods: {
 
@@ -136,20 +137,16 @@ export default {
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
-        this.queryParams.isAsc = 'desc'
+        this.queryParams2.isAsc = 'desc'
       } else {
-        this.queryParams.isAsc = 'asc'
+        this.queryParams2.isAsc = 'asc'
       }
-      this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      this.queryParams2.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams2)
       this.getList()
     },
-    /** 查缓存询信息 */
-    getList() {
-      this.loading = true
-      console.log("查缓存询信息")
+    getLineChart() {
       listStatisticalOperation(this.queryParams).then(response => {
-
         var list = response.rows;
         var labels = []
         var valuesActiveCount = []
@@ -165,6 +162,11 @@ export default {
           this.initLineChart(labels, valuesActiveCount, valuesRegisterCount, valuesPromoteCount);
         }
       })
+    },
+    /** 查缓存询信息 */
+    getList() {
+      this.loading = true
+      console.log("查缓存询信息")
       listRedisOnLineList(this.queryParams2).then(response => {
         this.HashUserServiceList = response.rows
         this.total = response.total

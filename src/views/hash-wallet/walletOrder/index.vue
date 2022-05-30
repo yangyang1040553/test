@@ -106,7 +106,7 @@
           v-hasPermi="['hash-wallet:walletOrder:edit']"
         >修改</el-button>
       </el-col> -->
-      <el-col :span="1.5">
+      <!-- <el-col :span="1.5">
         <el-button
           type="danger"
           plain
@@ -116,7 +116,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-wallet:walletOrder:remove']"
         >删除</el-button>
-      </el-col>
+      </el-col> -->
       <el-col :span="1.5">
         <el-button
           type="warning"
