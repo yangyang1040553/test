@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-dialog title="用户详情" :visible.sync="open" width="1000px" append-to-body @close="cancel">
-      <el-form ref="form" class="form" :model="form" label-width="120px" >
+    <el-dialog title="用户详情" :visible.sync="isOpen" width="1000px" append-to-body @close="cancel">
+      <el-form ref="form" class="form" :model="form" label-width="120px">
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
             <el-input v-model="form.areaCode" placeholder="请输入手机区号" />
@@ -117,7 +117,8 @@ export default {
   dicts: ['online', 'user_status'],
   data() {
     return {
-      form: {}
+      form: {},
+      isOpen: this.open
     }
   },
   props: ["id", "open"],

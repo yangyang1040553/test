@@ -23,7 +23,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -90,9 +90,13 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id-天为单位" align="center" prop="time" />
-      <el-table-column label="用户id" align="center" prop="userId" />
+      <el-table-column label="用户id" align="center" prop="userId">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
-       <el-table-column label="游戏名称" align="center" prop="gameName">
+      <el-table-column label="游戏名称" align="center" prop="gameName">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
         </template>
@@ -102,7 +106,6 @@
       <el-table-column label="usdt总中奖金额" align="center" prop="usdtAwardAmount" />
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-     
     </el-table>
 
     <pagination
@@ -114,7 +117,7 @@
     />
 
     <!-- 添加或修改游戏玩家押注位置日统计对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="id-天为单位" prop="id">
           <el-input v-model="form.id" placeholder="请输入id-天为单位" />
@@ -145,18 +148,24 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog>
+    </el-dialog>-->
+
+    <UserInfoDialog v-if="open" :open="open" :id="userId" @close="open=false" />
   </div>
 </template>
 
 <script>
 import { listStatisticalPlayerPosition, getStatisticalPlayerPosition, delStatisticalPlayerPosition, addStatisticalPlayerPosition, updateStatisticalPlayerPosition } from "@/api/hash-statistical/statisticalPlayerPosition";
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "StatisticalPlayerPosition",
-   dicts: ['game_list'],
+  dicts: ['game_list'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -206,6 +215,10 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(row) {
+      this.open = true;
+      this.userId = row.userId;
+    },
     /** 查询游戏玩家押注位置日统计列表 */
     getList() {
       this.loading = true;
