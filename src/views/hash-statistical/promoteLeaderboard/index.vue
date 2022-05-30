@@ -6,7 +6,6 @@
       size="small"
       :inline="true"
       v-show="showSearch"
-      label-width="68px"
     >
       <el-form-item label="手机号" prop="phone">
         <el-input
