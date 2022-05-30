@@ -23,7 +23,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- <el-form-item label="今日usdt押注金额" prop="usdtBetAmount">
         <el-input
           v-model="queryParams.usdtBetAmount"
@@ -121,7 +121,11 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
-      <el-table-column label="玩家id" align="center" prop="userId" />
+      <el-table-column label="玩家id" align="center" prop="userId">
+        <template slot-scope="scope">
+          <div class="global-text-blue" @click="openUserDetail(scope.row)">{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
       <el-table-column label="游戏名称" align="center" prop="gameName">
         <template slot-scope="scope">
@@ -206,17 +210,24 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listStatisticalUserDay, listChildren, delStatisticalUserDay, addStatisticalUserDay, updateStatisticalUserDay } from "@/api/hash-statistical/statisticalUserDay";
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "StatisticalUserDay",
   dicts: ['game_list'],
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -268,6 +279,10 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(row) {
+      this.openUser = true;
+      this.userId = row.userId;
+    },
     /** 查询游戏玩家日统计列表 */
     getList() {
       this.loading = true;
