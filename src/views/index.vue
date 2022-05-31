@@ -262,7 +262,7 @@ export default {
           {
             type: 'value',
             name: '活跃人数',
-            position: 'right',
+            position: 'left',
             alignTicks: true,
             axisLine: {
               show: true,
@@ -293,7 +293,7 @@ export default {
           {
             type: 'value',
             name: '推广人数',
-            position: 'left',
+            position: 'right',
             alignTicks: true,
             axisLine: {
               show: true,
