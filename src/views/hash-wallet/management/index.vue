@@ -135,7 +135,7 @@
             size="mini"
             type="text"
             icon="el-icon-edit"
-            @click="handleUpdate(scope.row,true)"
+            @click="handleOpenEdit(scope.row)"
             v-hasPermi="['hash-wallet:management:edit']"
           >出入款</el-button>
         </template>
@@ -152,28 +152,55 @@
 
     <!-- 添加或修改用户钱包对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" label-width="100px" :disabled="!isEdit">
+      <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="usdt余额" prop="usdtAmount">
           <el-input v-model="form.usdtAmount" placeholder="usdt余额" />
         </el-form-item>
         <el-form-item label="trx余额" prop="trxAmount">
           <el-input v-model="form.trxAmount" placeholder="trx余额" />
         </el-form-item>
-        <el-form-item label="Usdt地址" v-if="!isEdit" prop="hashAddressUsdt">
+        <el-form-item label="Usdt地址" prop="hashAddressUsdt">
           <el-input v-model="form.hashAddressUsdt" placeholder="Usdt的hash地址" />
         </el-form-item>
-        <el-form-item label="Trx地址" v-if="!isEdit" prop="hashAddressTrx">
+        <el-form-item label="Trx地址" prop="hashAddressTrx">
           <el-input v-model="form.hashAddressTrx" placeholder="Trx的hash地址" />
         </el-form-item>
-        <el-form-item label="总充值金额" v-if="!isEdit" prop="rechargeTotal">
+        <el-form-item label="总充值金额" prop="rechargeTotal">
           <el-input v-model="form.rechargeTotal" placeholder="总充值金额" />
         </el-form-item>
-        <el-form-item label="总提现金额" v-if="!isEdit" prop="withdrawTotal">
+        <el-form-item label="总提现金额" prop="withdrawTotal">
           <el-input v-model="form.withdrawTotal" placeholder="总提现金额" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancel">关 闭</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="送钱" :visible.sync="openEdit" width="800px" append-to-body>
+      <el-form ref="editForm" :model="editForm" label-width="100px" :rules="rules">
+        <el-form-item label="钱包类型" prop="walletType">
+          <!-- <el-input v-model="editForm.walletType" placeholder="请选择钱包类型" /> -->
+          <el-select v-model="editForm.walletType" placeholder="请选择钱包类型" clearable>
+            <el-option
+              v-for="dict in dict.type.wallet_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="金额" prop="amount">
+          <el-input
+            v-model="editForm.amount"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入充值金额"
+          />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="submitEdit">确 定</el-button>
+        <el-button @click="openEdit=false">关 闭</el-button>
       </div>
     </el-dialog>
 
@@ -186,6 +213,7 @@ import { listManagement, getManagement, delManagement, addManagement, updateMana
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "Management",
+  dicts: ['wallet_type'],
   components: {
     UserInfoDialog
   },
@@ -229,13 +257,21 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+        walletType: [{ required: true, message: '请选择钱包类型', trigger: 'blur' }],
+        amount: [{ required: true, message: '请输入金额', trigger: 'blur' }],
+      },
+      openEdit: false,
+      editForm: {}
     };
   },
   created() {
     this.getList();
   },
   methods: {
+    handleOpenEdit(row) {
+      this.openEdit = true;
+      this.editForm.id = row.id
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -301,6 +337,20 @@ export default {
           this.title = "编辑用户钱包";
         } else {
           this.title = "用户钱包";
+        }
+      });
+    },
+    submitEdit() {
+      this.$refs["editForm"].validate(valid => {
+        if (valid) {
+          if (this.editForm.id != null) {
+            updateManagement(this.editForm).then(response => {
+              this.$modal.msgSuccess("提交成功");
+              this.openEdit = false;
+              this.getList();
+              this.resetForm("editForm");
+            });
+          }
         }
       });
     },
