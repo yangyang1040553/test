@@ -128,7 +128,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -136,15 +136,8 @@
             icon="el-icon-zoom-in"
             @click="handleUpdate(scope.row)"
           >详情</el-button>
-          <!-- <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-statistical:promoteLeaderboard:remove']"
-          >删除</el-button>-->
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination
