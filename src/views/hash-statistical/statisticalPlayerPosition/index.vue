@@ -16,6 +16,16 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+       <el-form-item label="选择游戏" prop="gameId">
+        <el-select v-model="queryParams.gameId" placeholder="请选择游戏" clearable>
+          <el-option
+            v-for="dict in dict.type.game_list"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <!-- <el-form-item label="游戏id" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
