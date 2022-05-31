@@ -128,11 +128,16 @@
             size="mini"
             type="text"
             icon="el-icon-detail"
-            @click="handleUpdate(scope.row)"
+            @click="handleUpdate(scope.row,false)"
             v-hasPermi="['hash-wallet:management:edit']"
           >详情</el-button>
-          <!-- <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-          v-hasPermi="['hash-wallet:management:remove']">删除</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row,true)"
+            v-hasPermi="['hash-wallet:management:edit']"
+          >出入款</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -147,23 +152,23 @@
 
     <!-- 添加或修改用户钱包对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" label-width="100px" disabled>
+      <el-form ref="form" :model="form" label-width="100px" :disabled="!isEdit">
         <el-form-item label="usdt余额" prop="usdtAmount">
           <el-input v-model="form.usdtAmount" placeholder="usdt余额" />
         </el-form-item>
         <el-form-item label="trx余额" prop="trxAmount">
           <el-input v-model="form.trxAmount" placeholder="trx余额" />
         </el-form-item>
-        <el-form-item label="Usdt地址" prop="hashAddressUsdt">
+        <el-form-item label="Usdt地址" v-if="!isEdit" prop="hashAddressUsdt">
           <el-input v-model="form.hashAddressUsdt" placeholder="Usdt的hash地址" />
         </el-form-item>
-        <el-form-item label="Trx地址" prop="hashAddressTrx">
+        <el-form-item label="Trx地址" v-if="!isEdit" prop="hashAddressTrx">
           <el-input v-model="form.hashAddressTrx" placeholder="Trx的hash地址" />
         </el-form-item>
-        <el-form-item label="总充值金额" prop="rechargeTotal">
+        <el-form-item label="总充值金额" v-if="!isEdit" prop="rechargeTotal">
           <el-input v-model="form.rechargeTotal" placeholder="总充值金额" />
         </el-form-item>
-        <el-form-item label="总提现金额" prop="withdrawTotal">
+        <el-form-item label="总提现金额" v-if="!isEdit" prop="withdrawTotal">
           <el-input v-model="form.withdrawTotal" placeholder="总提现金额" />
         </el-form-item>
       </el-form>
@@ -192,6 +197,8 @@ export default {
       loading: true,
       // 选中数组
       ids: [],
+      //是否编辑
+      isEdit: false,
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -283,13 +290,18 @@ export default {
       this.title = "用户钱包";
     },
     /** 修改按钮操作 */
-    handleUpdate(row) {
+    handleUpdate(row, isEdit) {
       this.reset();
+      this.isEdit = isEdit;
       const id = row.id || this.ids
       getManagement(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "用户钱包";
+        if (this.isEdit) {
+          this.title = "编辑用户钱包";
+        } else {
+          this.title = "用户钱包";
+        }
       });
     },
     /** 提交按钮 */

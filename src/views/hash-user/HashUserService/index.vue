@@ -32,6 +32,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="用户IP" prop="registerIp">
+        <el-input
+          v-model="queryParams.registerIp"
+          placeholder="请输入用户IP"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="用户状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择用户状态" clearable>
           <el-option
@@ -108,7 +116,7 @@
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
       <el-table-column label="手机区号" align="center" prop="areaCode" sortable />
       <el-table-column label="手机号" align="center" prop="phone" sortable width="120" />
-      <el-table-column label="用户名" align="center" prop="account" width="120"/>
+      <el-table-column label="用户名" align="center" prop="account" width="120" />
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
       <el-table-column label="设备码" align="center" prop="deviceCode" />
       <el-table-column label="平台" align="center" prop="platform" width="100" />
@@ -231,7 +239,9 @@
 
 <script>
 import { listHashUserService, getHashUserService, delHashUserService, addHashUserService, updateHashUserService, getHashUserServiceDetail } from '@/api/hash-user/HashUserService'
+import { mergeOptions } from '../../../utils/dict/DictOptions';
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
+import merge from 'webpack-merge'
 export default {
   name: 'HashUserService',
   dicts: ['online', 'user_status'],
@@ -270,7 +280,8 @@ export default {
         status: null,
         online: null,
         orderByColumn: 'registerTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
+        registerIp: null
       },
       // 表单参数
       form: {},
@@ -288,6 +299,10 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.query.ip)
+    if (this.$route.query.ip) {
+      this.queryParams.registerIp = this.$route.query.ip
+    }
     this.getList()
   },
   methods: {
@@ -330,6 +345,9 @@ export default {
     },
     // 表单重置
     reset() {
+      //修改 路由参数
+      this.$router.push({ query: merge({}, {}) })
+      this.queryParams.registerIp = null
       this.form = {
         id: null,
         userType: null,
@@ -362,7 +380,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm('queryForm')
+
+      // this.resetForm('queryForm')
+      this.reset()
       this.handleQuery()
     },
     // 多选框选中数据
