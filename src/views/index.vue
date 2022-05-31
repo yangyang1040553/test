@@ -15,7 +15,7 @@
       <el-col :span="12" class="card-box">
         <el-card>
           <div slot="header">
-            <span>在线用户</span>
+            <span>在线用户 <span class="global-text-red">{{total}}</span> 人</span>
           </div>
           <el-table
             v-loading="loading"

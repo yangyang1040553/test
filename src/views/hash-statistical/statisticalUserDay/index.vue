@@ -123,7 +123,10 @@
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
@@ -202,8 +205,8 @@
         </el-table-column>
         <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
         <el-table-column label="usdt奖金额" align="center" prop="usdtAwardAmount" />
-        <el-table-column label="trx押注金额" align="center" prop="usdtBetAmount" />
-        <el-table-column label="trx奖金额" align="center" prop="usdtAwardAmount" />
+        <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
+        <el-table-column label="trx奖金额" align="center" prop="trxAwardAmount" />
       </el-table>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
@@ -260,6 +263,8 @@ export default {
         trxBetAmount: null,
         trxAwardAmount: null,
         type: 1,
+        orderByColumn: 'time',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -306,7 +311,9 @@ export default {
         usdtBetAmount: null,
         usdtAwardAmount: null,
         trxBetAmount: null,
-        type: 1
+        type: 1,
+        orderByColumn: 'time',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
