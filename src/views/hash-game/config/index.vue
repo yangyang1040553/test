@@ -45,6 +45,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="权重" prop="weight">
+        <el-input
+          v-model="queryParams.weight"
+          placeholder="请输入权重"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="是否开启" prop="open">
         <el-select v-model="queryParams.open" placeholder="请选择是否开启" clearable>
           <el-option
@@ -166,6 +174,7 @@
           <span v-if="scope.row.tax">{{ scope.row.tax.toFixed(4) }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="权重" align="center" prop="weight" sortable></el-table-column>
       <el-table-column label="是否开启" align="center" prop="open">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_open" :value="scope.row.open" />
@@ -174,6 +183,11 @@
       <el-table-column label="是否活动场" align="center" prop="isActivity">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_activty" :value="scope.row.isActivity" />
+        </template>
+      </el-table-column>
+      <el-table-column label="活动场描述" align="center" prop="activityDesc">
+        <template slot-scope="scope">
+          <div>{{scope.row.activityDesc}}</div>
         </template>
       </el-table-column>
       <el-table-column label="是否返佣" align="center" prop="isBrokerage">
@@ -228,8 +242,8 @@
     <!-- 添加或修改游戏配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="isDetail">
-        <el-form-item label="游戏菜单" prop="menuId">
-          <el-select v-model="form.menuId" placeholder="请选择对应游戏">
+        <el-form-item label="游戏菜单" prop="gameId">
+          <el-select v-model="form.gameId" placeholder="请选择对应游戏">
             <!-- dict.activity   隐藏 特殊活动场 -->
             <el-option
               v-show="dict.activity != 1"
@@ -267,6 +281,13 @@
             oninput="value=value.replace(/[^\d\.]/g,'')"
           />
         </el-form-item>
+        <el-form-item label="权重" prop="weight">
+          <el-input
+            v-model="form.weight"
+            placeholder="请输入权重"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+          />
+        </el-form-item>
         <el-form-item label="是否开启" prop="open">
           <el-select v-model="form.open" placeholder="请选择是否开启">
             <el-option
@@ -286,6 +307,12 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+          <el-input
+            style="width:470px;"
+            v-if="form.isActivity==1"
+            v-model="form.activityDesc"
+            placeholder="请输入活动场描述"
+          />
         </el-form-item>
         <el-form-item label="是否返佣" prop="isBrokerage">
           <el-select v-model="form.isBrokerage" placeholder="请选择是否参与返佣">
@@ -344,7 +371,7 @@ import { listConfig, getConfig, delConfig, addConfig, updateConfig } from '@/api
 import { listGameMenu } from '@/api/hash-game/gameMenu'
 export default {
   name: 'Config',
-  dicts: ['game_open', 'game_session', 'is_activty', 'is_brokerage','game_list'],
+  dicts: ['game_open', 'game_session', 'is_activty', 'is_brokerage', 'game_list'],
   data() {
     return {
       //是否查看详情
@@ -379,20 +406,22 @@ export default {
         finishTime: null,
         sort: 'asc',
         orderByColumn: 'createTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
+        weight: null
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-        menuId: [{ required: true, message: '请选择游戏菜单', trigger: 'blur' }],
+        gameId: [{ required: true, message: '请选择游戏菜单', trigger: 'blur' }],
         gameName: [{ required: true, message: '请输入游戏名称', trigger: 'blur' }],
         gameSession: [{ required: true, message: '请选择游戏场次', trigger: 'blur' }],
         odds: [{ required: true, message: '请输入游戏倍率', trigger: 'blur' }],
         tax: [{ required: true, message: '请输入游戏税收', trigger: 'blur' }],
         open: [{ required: true, message: '请选择是否开启', trigger: 'blur' }],
         isActivity: [{ required: true, message: '请选择活动场', trigger: 'blur' }],
-        isBrokerage: [{ required: true, message: '请选择是否返佣', trigger: 'blur' }]
+        isBrokerage: [{ required: true, message: '请选择是否返佣', trigger: 'blur' }],
+        weight: [{ required: true, message: '请输入权重', trigger: 'blur' }],
       },
       gameMenuList: []
     }
@@ -453,7 +482,8 @@ export default {
         updateTime: null,
         updateBy: null,
         orderByColumn: 'createTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
+        weight: null
       }
       this.resetForm('form')
     },
