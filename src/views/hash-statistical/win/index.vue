@@ -28,8 +28,8 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
+      <!-- <el-col :span="1.5"> -->
+        <!-- <el-button
           type="primary"
           plain
           icon="el-icon-plus"
@@ -59,7 +59,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-statistical:win:remove']"
         >删除</el-button>
-      </el-col>
+      </el-col> -->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -73,9 +73,14 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="winList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="日期" align="center" prop="id" width="180">
+    <el-table
+      v-loading="loading"
+      :data="winList"
+      @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
+    >
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
+      <el-table-column label="日期" align="center" prop="id" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
@@ -83,10 +88,10 @@
       <el-table-column label="用户id" align="center" prop="userId" />
       <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="usdt输赢金额" align="center" prop="usdtWinAmount" />
+      <el-table-column label="usdt输赢金额" align="center" prop="usdtWinAmount" sortable />
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-      <el-table-column label="trx输赢金额" align="center" prop="trxWinAmount" />
+      <el-table-column label="trx输赢金额" align="center" prop="trxWinAmount" sortable />
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -104,7 +109,7 @@
             v-hasPermi="['hash-statistical:win:remove']"
           >删除</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
     </el-table>
 
     <pagination
@@ -195,7 +200,9 @@ export default {
         usdtWinAmount: null,
         trxBetAmount: null,
         trxAwardAmount: null,
-        trxWinAmount: null
+        trxWinAmount: null,
+        orderByColumn: 'id',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -208,6 +215,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     /** 查询玩家输赢列表 */
     getList() {
       this.loading = true;
@@ -237,7 +255,9 @@ export default {
         usdtWinAmount: null,
         trxBetAmount: null,
         trxAwardAmount: null,
-        trxWinAmount: null
+        trxWinAmount: null,
+        orderByColumn: 'id',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
