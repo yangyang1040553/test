@@ -25,6 +25,21 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="IP是否启用" prop="online">
+        <el-select
+          v-model="queryParams.isDisable"
+          placeholder="请选择是否启用"
+          clearable
+          @keyup.enter.native="handleQuery"
+        >
+          <el-option
+            v-for="dict in dict.type.is_disable"
+            :key="dict.value"
+            :label="dict.label"
+            :value="parseInt(dict.value)"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -90,25 +105,22 @@
         </template>
       </el-table-column>
       <el-table-column label="ip的位置信息" align="center" prop="ipAddr" />
-      <el-table-column label="注册次数" align="center" prop="regCount"  sortable/>
-      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="注册次数" align="center" prop="regCount" sortable />
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-statistical:register:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-statistical:register:remove']"
-          >删除</el-button>
+          <el-switch
+            style="display: block;height:32px;"
+            v-model="scope.row.isDisable"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            active-text="启用"
+            inactive-text="禁用"
+            :active-value="1"
+            :inactive-value="0"
+            @change="onSwitchChange(scope.row)"
+          ></el-switch>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -142,6 +154,7 @@ import { listRegister, getRegister, delRegister, addRegister, updateRegister } f
 
 export default {
   name: "Register",
+  dicts: ['is_disable'],
   data() {
     return {
       // 遮罩层
@@ -171,6 +184,7 @@ export default {
         regCount: null,
         orderByColumn: 'regCount',
         isAsc: 'desc',
+        isDisable: null
       },
       // 表单参数
       form: {},
@@ -183,6 +197,13 @@ export default {
     this.getList();
   },
   methods: {
+    onSwitchChange(row) {
+      updateRegister(row).then(response => {
+        this.$modal.msgSuccess("修改成功");
+        // this.open = false;
+        this.getList();
+      });
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
@@ -219,6 +240,7 @@ export default {
         regCount: null,
         orderByColumn: 'regCount',
         isAsc: 'desc',
+        isDisable: null
       };
       this.resetForm("form");
     },
