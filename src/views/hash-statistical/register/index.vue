@@ -106,15 +106,15 @@
       </el-table-column>
       <el-table-column label="ip的位置信息" align="center" prop="ipAddr" />
       <el-table-column label="注册次数" align="center" prop="regCount" sortable />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="是否启用" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-switch
             style="display: block;height:32px;"
             v-model="scope.row.isDisable"
             active-color="#13ce66"
-            inactive-color="#ff4949"
-            active-text="启用"
-            inactive-text="禁用"
+            inactive-color="#DCDFE6"
+            active-text="是"
+            inactive-text="否"
             :active-value="1"
             :inactive-value="0"
             @change="onSwitchChange(scope.row)"
