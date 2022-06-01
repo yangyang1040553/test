@@ -25,10 +25,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="IP是否启用" prop="online">
+      <el-form-item label="IP是否禁用" prop="online">
         <el-select
           v-model="queryParams.isDisable"
-          placeholder="请选择是否启用"
+          placeholder="请选择是否禁用"
           clearable
           @keyup.enter.native="handleQuery"
         >
