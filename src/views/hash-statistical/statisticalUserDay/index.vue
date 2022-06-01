@@ -129,6 +129,7 @@
       v-loading="loading"
       :data="statisticalUserDayList"
       @selection-change="handleSelectionChange"
+
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="玩家id" align="center" prop="userId">
@@ -294,6 +295,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;

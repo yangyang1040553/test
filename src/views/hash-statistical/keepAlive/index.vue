@@ -78,9 +78,15 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="keepAliveList" @selection-change="handleSelectionChange" height="600px">
+    <el-table
+      v-loading="loading"
+      :data="keepAliveList"
+      @selection-change="handleSelectionChange"
+      height="600px"
+      @sort-change="sortChange"
+    >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="注册时间" align="center" prop="registerTime" width="180">
+      <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.registerTime, '{y}-{m}-{d}') }}</span>
         </template>
@@ -228,6 +234,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         registerTime: null,
+        orderByColumn: 'registerTime',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -333,7 +341,9 @@ export default {
     reset() {
       this.form = {
         registerTime: null,
-        type: this.tabPosition
+        type: this.tabPosition,
+        orderByColumn: 'registerTime',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },

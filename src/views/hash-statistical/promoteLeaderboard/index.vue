@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="手机号" prop="phone">
         <el-input
           v-model="queryParams.phone"
@@ -104,6 +98,8 @@
       v-loading="loading"
       :data="promoteLeaderboardList"
       @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
+      height="600"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <!-- <el-table-column label="用户ID" align="center" prop="id" width="160" /> -->
@@ -122,7 +118,7 @@
       <el-table-column label="二级代理人数" align="center" prop="level2Person" />
       <el-table-column label="三级代理人数" align="center" prop="level3Person" />
       <el-table-column label="推广总计" align="center" prop="sumnumber" />
-      <el-table-column label="注册时间" align="center" prop="registerTime" width="180">
+      <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.registerTime, '{y}-{m}-{d}') }}</span>
         </template>
@@ -137,7 +133,7 @@
             @click="handleUpdate(scope.row)"
           >详情</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
     </el-table>
 
     <pagination
@@ -149,7 +145,7 @@
     />
 
     <!-- 添加或修改VIEW对话框 -->
-     <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
     <!-- <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" class="form" :model="form" label-width="120px" disabled>
         <div class="left">
@@ -304,6 +300,8 @@ export default {
         registerTime: null,
         promoteOdds: null,
         sharePromoteOdds: null,
+        orderByColumn: 'registerTime',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -319,6 +317,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -351,7 +360,9 @@ export default {
         registerTime: null,
         promoteOdds: null,
         sharePromoteOdds: null,
-        sumnumber: null
+        sumnumber: null,
+        orderByColumn: 'registerTime',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },

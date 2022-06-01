@@ -16,7 +16,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-       <el-form-item label="选择游戏" prop="gameId">
+      <el-form-item label="选择游戏" prop="gameId">
         <el-select v-model="queryParams.gameId" placeholder="请选择游戏" clearable>
           <el-option
             v-for="dict in dict.type.game_list"
@@ -97,12 +97,16 @@
       v-loading="loading"
       :data="statisticalPlayerPositionList"
       @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id-天为单位" align="center" prop="time" />
+      <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="用户id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="游戏id" align="center" prop="gameId" />
@@ -202,7 +206,9 @@ export default {
         pageSize: 10,
         userId: null,
         gameId: null,
-        type: 1
+        type: 1,
+        orderByColumn: 'time',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -225,6 +231,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     openUserDetail(userId) {
       this.open = true;
       this.userId = userId;
@@ -254,7 +271,9 @@ export default {
         usdtAwardAmount: null,
         trxBetAmount: null,
         trxAwardAmount: null,
-        type: 1
+        type: 1,
+        orderByColumn: 'time',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
