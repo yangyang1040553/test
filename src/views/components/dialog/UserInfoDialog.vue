@@ -5,6 +5,7 @@
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
             <el-input v-model="form.areaCode" placeholder />
+            <!-- <span class="label">{{ form.areaCode || "-"}}</span> -->
           </el-form-item>
           <el-form-item label="手机号" prop="phone">
             <el-input v-model="form.phone" placeholder />
@@ -46,8 +47,20 @@
         </div>
         <div class="line"></div>
         <div class="right">
-          <el-form-item label="头像" prop="head">
+          <!-- <el-form-item label="今日投注金额" prop="head">
             <el-input v-model="form.head" placeholder />
+          </el-form-item>-->
+          <el-form-item label="今日投注金额">
+            <!-- <span class="label">{{ form.betAmount ||0.00}}</span> -->
+            <el-input v-model="form.betAmount" placeholder />
+          </el-form-item>
+          <el-form-item label="今日充值金额">
+            <el-input v-model="form.inAmount" placeholder />
+            <!-- <span class="label">{{ form.inAmount ||0.00}}</span> -->
+          </el-form-item>
+          <el-form-item label="今日提现金额">
+            <el-input v-model="form.outAmount" placeholder />
+            <!-- <span class="label">{{ form.outAmount ||0.00}}</span> -->
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
             <el-select v-model="form.status" placeholder>
@@ -113,10 +126,9 @@
           </el-form-item>
         </div>
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
+      <!-- <div slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
-      </div>
+      </div> -->
     </el-dialog>
   </div>
 </template>
@@ -161,7 +173,7 @@ export default {
   .line {
     width: 1px;
     margin-left: 10px;
-    height: 70vh;
+    height: 80vh;
     background: gainsboro;
   }
 }

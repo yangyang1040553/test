@@ -121,12 +121,12 @@
       <el-table-column label="设备码" align="center" prop="deviceCode" />
       <el-table-column label="平台" align="center" prop="platform" width="100" />
       <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
-        <template slot-scope="scope">
+        <!-- <template slot-scope="scope">
           <span
             class="global-text-blue"
             @click="goToUserFeedBack(scope.row)"
           >{{ scope.row.nickName }}</span>
-        </template>
+        </template> -->
       </el-table-column>
       <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
       <el-table-column label="用户状态" align="center" prop="status">
