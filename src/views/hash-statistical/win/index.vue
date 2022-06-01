@@ -29,7 +29,7 @@
 
     <el-row :gutter="10" class="mb8">
       <!-- <el-col :span="1.5"> -->
-        <!-- <el-button
+      <!-- <el-button
           type="primary"
           plain
           icon="el-icon-plus"
@@ -59,7 +59,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-statistical:win:remove']"
         >删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -85,13 +85,33 @@
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户id" align="center" prop="userId" />
+      <el-table-column label="用户id" align="center" prop="userId">
+        <template slot-scope="scope">
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="usdt输赢金额" align="center" prop="usdtWinAmount" sortable />
+      <el-table-column label="usdt输赢金额" align="center" prop="usdtWinAmount" sortable>
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.usdtWinAmount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.usdtWinAmount }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-      <el-table-column label="trx输赢金额" align="center" prop="trxWinAmount" sortable />
+      <el-table-column label="trx输赢金额" align="center" prop="trxWinAmount" sortable>
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.trxWinAmount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.trxWinAmount }}</span>
+        </template>
+      </el-table-column>
+
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -159,16 +179,22 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+    <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
 import { listWin, getWin, delWin, addWin, updateWin } from "@/api/hash-statistical/win";
-
+import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "Win",
+  components: {
+    UserInfoDialog
+  },
   data() {
     return {
+      openUser: false,
+      userId: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -215,6 +241,10 @@ export default {
     this.getList();
   },
   methods: {
+    openUserDetail(userId) {
+      this.openUser = true;
+      this.userId = userId;
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
