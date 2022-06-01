@@ -317,14 +317,12 @@ export default {
       }
       if (this.tabPosition == 3) {
         cut = -30;
-        this.daterangeRegisterTime[0] = year + "-" + month + "-" + (day - 30)
+        // this.daterangeRegisterTime[0] = year + "-" + month + "-" + (day - 30)
       }
-      var cur = year + "-" + month + "-" + day
+      var cur = year + "-" + month + "-" + (day < 10 ? "0" + day : day)
+      console.log(cur)
       this.daterangeRegisterTime[0] = this.getago(cur, cut)
-      this.daterangeRegisterTime[1] = year + "-" + month + "-" + day
-
-
-
+      this.daterangeRegisterTime[1] = cur
       console.log(this.daterangeRegisterTime)
     },
     /** 查询留存分析列表 */
