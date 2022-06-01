@@ -117,7 +117,7 @@
       <el-table-column label="一级代理人数" align="center" prop="level1Person" />
       <el-table-column label="二级代理人数" align="center" prop="level2Person" />
       <el-table-column label="三级代理人数" align="center" prop="level3Person" />
-      <el-table-column label="推广总计" align="center" prop="sumnumber" />
+      <el-table-column label="推广总计" align="center" prop="sumnumber"  sortable/>
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.registerTime, '{y}-{m}-{d}') }}</span>
@@ -300,7 +300,7 @@ export default {
         registerTime: null,
         promoteOdds: null,
         sharePromoteOdds: null,
-        orderByColumn: 'registerTime',
+        orderByColumn: 'sumnumber',
         isAsc: 'desc',
       },
       // 表单参数
@@ -361,7 +361,7 @@ export default {
         promoteOdds: null,
         sharePromoteOdds: null,
         sumnumber: null,
-        orderByColumn: 'registerTime',
+        orderByColumn: 'sumnumber',
         isAsc: 'desc',
       };
       this.resetForm("form");

@@ -168,7 +168,11 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" width="200" />
       <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
-      <el-table-column label="游戏id" align="center" prop="gameId" />
+      <el-table-column label="游戏" align="center" prop="gameId" >
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
+        </template>
+      </el-table-column>
       <el-table-column label="场次id" align="center" prop="sessionId" />
       <!-- <el-table-column label="玩家id" align="center" prop="userId" width="200" /> -->
       <el-table-column label="玩家id" align="center" prop="userId" width="200">
