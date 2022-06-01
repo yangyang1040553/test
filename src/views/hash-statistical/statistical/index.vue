@@ -78,7 +78,7 @@
             type="text"
             icon="el-icon-zoom-in"
             @click="handleUpdate(scope.row, true)"
-          >详情</el-button>
+          >投注位置详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -92,7 +92,7 @@
     />
 
     <!-- 添加或修改游戏配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog title="" :visible.sync="open" width="800px" append-to-body>
       <el-table v-loading="loading" :data="childrenList" height="500px">
         <!-- <el-table-column label="游戏id" align="center" prop="gameId" />
         <el-table-column label="游戏名称" align="center" prop="gameName">
