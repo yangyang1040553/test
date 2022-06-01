@@ -106,7 +106,7 @@
       </el-table-column>
       <el-table-column label="ip的位置信息" align="center" prop="ipAddr" />
       <el-table-column label="注册次数" align="center" prop="regCount" sortable />
-      <el-table-column label="是否启用" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="是否禁用" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-switch
             style="display: block;height:32px;"
