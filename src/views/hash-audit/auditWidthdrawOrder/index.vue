@@ -170,7 +170,7 @@
       height="600"
       @sort-change="sortChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="订单id" align="center" prop="id" />
       <!-- <el-table-column label="交易号" align="center" prop="transactionNo" /> -->
       <el-table-column label="玩家id" align="center" prop="userId" width="180">
