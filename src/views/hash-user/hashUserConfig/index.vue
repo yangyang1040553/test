@@ -60,12 +60,11 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>-->
 
-    <el-table
+    <!-- <el-table
       v-loading="loading"
       :data="hashUserConfigList"
       @selection-change="handleSelectionChange"
     >
-      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一id" align="center" prop="id" width="160" />
       <el-table-column label="最新的主页地址" align="center" prop="newDomainAddr" width="160" />
       <el-table-column label="在线客服地址" align="center" prop="onlineServiceAddr" width="160" />
@@ -81,7 +80,6 @@
           <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="创建者" align="center" prop="createBy" /> -->
       <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
         <template slot-scope="scope">
           <span>{{ scope.row.updateTime }}</span>
@@ -97,16 +95,43 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['hash-user:hashUserConfig:edit']"
           >修改</el-button>
-          <!-- <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-user:hashUserConfig:remove']"
-          >删除</el-button>-->
         </template>
       </el-table-column>
-    </el-table>
+    </el-table>-->
+
+    <el-form ref="form" :model="form" :rules="rules" label-width="140px" class="my-form">
+      <el-form-item label="最新的主页地址" prop="newDomainAddr">
+        <el-input v-model="form.newDomainAddr" placeholder="请输入最新的主页地址" />
+      </el-form-item>
+      <el-form-item label="在线客服地址" prop="onlineServiceAddr">
+        <el-input v-model="form.onlineServiceAddr" placeholder="请输入在线客服地址" />
+      </el-form-item>
+      <el-form-item label="官方群组地址" prop="groupAddr">
+        <el-input v-model="form.groupAddr" placeholder="请输入官方群组地址" />
+      </el-form-item>
+      <el-form-item label="用户注册协议地址" prop="regProtocolAddr">
+        <el-input v-model="form.regProtocolAddr" placeholder="请输入用户注册协议地址" />
+      </el-form-item>
+      <el-form-item label="推广链接地址" prop="promoteAddr">
+        <el-input v-model="form.promoteAddr" placeholder="请输入推广链接地址" />
+      </el-form-item>
+      <el-form-item label="ios下载地址" prop="iosDownloadAddr">
+        <el-input v-model="form.iosDownloadAddr" placeholder="请输入ios下载地址" />
+      </el-form-item>
+      <el-form-item label="ios版本号" prop="iosVersion">
+        <el-input v-model="form.iosVersion" placeholder="请输入ios版本号" />
+      </el-form-item>
+      <el-form-item label="安卓下载地址" prop="androidDownloadAddr">
+        <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
+      </el-form-item>
+      <el-form-item label="安卓版本号" prop="androidVersion">
+        <el-input v-model="form.androidVersion" placeholder="请输入安卓版本号" />
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button type="primary" size="mini" @click="submitForm">确 定</el-button>
+      <el-button  size="mini" @click="cancel">取 消</el-button>
+    </div>
 
     <!-- <pagination
       v-show="total>0"
@@ -114,10 +139,10 @@
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
-    /> -->
+    />-->
 
     <!-- 添加或修改用户全局配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <!-- <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-form-item label="最新的主页地址" prop="newDomainAddr">
           <el-input v-model="form.newDomainAddr" placeholder="请输入最新的主页地址" />
@@ -151,7 +176,7 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -228,6 +253,7 @@ export default {
       this.loading = true;
       listHashUserConfig(this.queryParams).then(response => {
         this.hashUserConfigList = response.rows;
+        this.form = response.rows[0];
         this.total = response.total;
         this.loading = false;
       });
@@ -328,3 +354,14 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.my-form {
+  width: 800px;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.dialog-footer{
+  margin-left: 400px;
+}
+</style>
