@@ -445,7 +445,7 @@ export default {
       // 1 代表领取订单
       row.checkStatus = 1
       updateAuditWidthdrawOrder(row).then(response => {
-        this.$modal.msgSuccess("修改成功");
+        this.$modal.msgSuccess("领取成功");
         this.open = false;
         this.getList();
       });

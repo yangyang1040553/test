@@ -302,7 +302,7 @@ export default {
         checkPerson: this.$store.state.user.roles[0],
         createTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'desc',
+        isAsc: 'asc',
       },
       // 表单参数
       form: {},
@@ -363,7 +363,7 @@ export default {
         updateTime: null,
         updateBy: null,
         orderByColumn: 'createTime',
-        isAsc: 'desc',
+        isAsc: 'asc',
       };
       this.resetForm("form");
     },
