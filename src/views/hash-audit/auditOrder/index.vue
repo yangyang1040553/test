@@ -423,13 +423,13 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除提现审核编号为"' + ids + '"的数据项？').then(function () {
-        return delAuditWidthdrawOrder(ids);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => { });
+      // const ids = row.id || this.ids;
+      // this.$modal.confirm('是否确认删除提现审核编号为"' + ids + '"的数据项？').then(function () {
+      //   return delAuditWidthdrawOrder(ids);
+      // }).then(() => {
+      //   this.getList();
+      //   this.$modal.msgSuccess("删除成功");
+      // }).catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {
