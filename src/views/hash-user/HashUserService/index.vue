@@ -6,7 +6,6 @@
       size="small"
       :inline="true"
       v-show="showSearch"
-      label-width="68px"
     >
       <el-form-item label="手机号" prop="phone">
         <el-input
@@ -50,7 +49,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="是否在线" prop="online">
+      <!-- <el-form-item label="是否在线" prop="online">
         <el-select v-model="queryParams.online" placeholder="请选择是否在线" clearable>
           <el-option
             v-for="dict in dict.type.online"
@@ -59,7 +58,7 @@
             :value="dict.value"
           />
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -146,11 +145,11 @@
           <dict-tag :options="dict.type.user_status" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="是否在线" align="center" prop="online">
+      <!-- <el-table-column label="是否在线" align="center" prop="online">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.online" :value="scope.row.online" />
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="邀请码" align="center" prop="invitationCode">
         <template slot-scope="scope">
           <div>{{scope.row.invitationCode||"-"}}</div>
