@@ -8,6 +8,14 @@
       v-show="showSearch"
       label-width="100px"
     >
+      <el-form-item label="上级玩家id" prop="id">
+        <el-input
+          v-model="queryParams.id"
+          placeholder="请输入上级玩家id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="玩家邀请码" prop="invitationCode">
         <el-input
           v-model="queryParams.invitationCode"
@@ -364,7 +372,8 @@ export default {
         fatherInvitationCode: null,
         createTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
+        id: null
       },
       // 表单参数
       form: {},
