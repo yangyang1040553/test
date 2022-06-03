@@ -1,18 +1,40 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <!-- <el-form-item label="玩家id" prop="userId">
         <el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item label="国际区号" prop="areaCode">
-        <el-input v-model="queryParams.areaCode" placeholder="请输入国际区号" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.areaCode"
+          placeholder="请输入国际区号"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model="queryParams.phone" placeholder="请输入手机号" clearable @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.phone"
+          placeholder="请输入手机号"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="状态" prop="ok">
         <el-select v-model="queryParams.ok" placeholder="请选择是否成功" clearable>
-          <el-option v-for="dict in dict.type.sms_status" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.sms_status"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -25,29 +47,49 @@
       <!-- <el-col :span="1.5">
         <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
           v-hasPermi="['hash-user:hashUserSms:add']">新增</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
           v-hasPermi="['hash-user:hashUserSms:edit']">修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['hash-user:hashUserSms:remove']">删除</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['hash-user:hashUserSms:remove']"
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-          v-hasPermi="['hash-user:hashUserSms:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-user:hashUserSms:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="hashUserSmsList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="hashUserSmsList"
+      @sort-change="sortChange"
+      @selection-change="handleSelectionChange"
+      height="600"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
       <el-table-column label="国际区号" align="center" prop="areaCode" />
       <el-table-column label="手机号" align="center" prop="phone" />
       <el-table-column label="验证码" align="center" prop="checkCode" />
       <el-table-column label="IP" align="center" prop="ip" />
+      <el-table-column label="时间" align="center" prop="createTime" sortable />
       <el-table-column label="是否成功" align="center" prop="ok">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sms_status" :value="scope.row.ok" />
@@ -64,15 +106,25 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-user:hashUserSms:edit']">修改</el-button> -->
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-user:hashUserSms:remove']">删除</el-button>
+          v-hasPermi="['hash-user:hashUserSms:edit']">修改</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['hash-user:hashUserSms:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改用户短信功能对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -91,8 +143,12 @@
         </el-form-item>
         <el-form-item label="是否成功" prop="ok">
           <el-select v-model="form.ok" placeholder="请选择是否成功">
-            <el-option v-for="dict in dict.type.sms_status" :key="dict.value" :label="dict.label"
-              :value="parseInt(dict.value)"></el-option>
+            <el-option
+              v-for="dict in dict.type.sms_status"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="返回数据" prop="responseData">
@@ -141,6 +197,8 @@ export default {
         areaCode: null,
         phone: null,
         ok: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       },
       // 表单参数
       form: {},
@@ -153,6 +211,15 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      this.getList()
+    },
     /** 查询用户短信功能列表 */
     getList() {
       this.loading = true;
@@ -176,7 +243,9 @@ export default {
         phone: null,
         ok: null,
         responseData: null,
-        createTime: null
+        createTime: null,
+        orderByColumn: 'createTime',
+        isAsc: 'desc'
       };
       this.resetForm("form");
     },
