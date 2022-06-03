@@ -114,11 +114,23 @@
         </template>
       </el-table-column>
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
-      <el-table-column label="手机区号" align="center" prop="areaCode" sortable />
-      <el-table-column label="手机号" align="center" prop="phone" sortable width="120" />
+      <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
+        <template slot-scope="scope">
+          <div>{{scope.row.areaCode||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="手机号" align="center" prop="phone" sortable width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.phone||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="用户名" align="center" prop="account" width="120" />
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
-      <el-table-column label="设备码" align="center" prop="deviceCode" />
+      <el-table-column label="设备码" align="center" prop="deviceCode">
+        <template slot-scope="scope">
+          <div>{{scope.row.deviceCode||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="平台" align="center" prop="platform" width="100" />
       <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
         <!-- <template slot-scope="scope">
@@ -126,7 +138,7 @@
             class="global-text-blue"
             @click="goToUserFeedBack(scope.row)"
           >{{ scope.row.nickName }}</span>
-        </template> -->
+        </template>-->
       </el-table-column>
       <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
       <el-table-column label="用户状态" align="center" prop="status">
@@ -139,10 +151,22 @@
           <dict-tag :options="dict.type.online" :value="scope.row.online" />
         </template>
       </el-table-column>
-      <el-table-column label="邀请码" align="center" prop="invitationCode" />
-      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" />
+      <el-table-column label="邀请码" align="center" prop="invitationCode">
+        <template slot-scope="scope">
+          <div>{{scope.row.invitationCode||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" >
+        <template slot-scope="scope">
+          <div>{{scope.row.fatherInvitationCode||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column>
-      <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180" sortable></el-table-column>
+      <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180" sortable>
+        <template slot-scope="scope">
+          <div>{{scope.row.bindTime||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="注册ip" align="center" prop="registerIp" />
       <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
       <el-table-column label="登录ip" align="center" prop="loginIp" />
