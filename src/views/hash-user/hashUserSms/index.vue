@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="玩家id" prop="userId">
+      <!-- <el-form-item label="玩家id" prop="userId">
         <el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="国际区号" prop="areaCode">
         <el-input v-model="queryParams.areaCode" placeholder="请输入国际区号" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
@@ -43,10 +43,12 @@
 
     <el-table v-loading="loading" :data="hashUserSmsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="玩家id" align="center" prop="userId" />
+      <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
       <el-table-column label="国际区号" align="center" prop="areaCode" />
       <el-table-column label="手机号" align="center" prop="phone" />
-      <el-table-column label="是否成功0失败1成功" align="center" prop="ok">
+      <el-table-column label="验证码" align="center" prop="checkCode" />
+      <el-table-column label="IP" align="center" prop="ip" />
+      <el-table-column label="是否成功" align="center" prop="ok">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sms_status" :value="scope.row.ok" />
         </template>
