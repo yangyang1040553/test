@@ -8,10 +8,10 @@
       v-show="showSearch"
       label-width="100px"
     >
-      <el-form-item label="上级玩家id" prop="id">
+      <el-form-item label="玩家id" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入上级玩家id"
+          placeholder="请输入玩家id"
           clearable
           @keyup.enter.native="handleQuery"
         />
