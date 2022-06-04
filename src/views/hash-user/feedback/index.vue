@@ -2,9 +2,9 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="玩家ID" prop="userId"><el-input v-model="queryParams.userId" placeholder="请输入玩家ID" clearable @keyup.enter.native="handleQuery" /></el-form-item>
-      <el-form-item label="玩家昵称" prop="nickName">
+      <!-- <el-form-item label="玩家昵称" prop="nickName">
         <el-input v-model="queryParams.nickName" placeholder="请输入玩家昵称" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="反馈类型" prop="code">
         <el-select v-model="queryParams.code" placeholder="请选择反馈类型" clearable>
           <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label" :value="dict.value" />
