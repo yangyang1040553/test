@@ -57,6 +57,14 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="邀请码" prop="fatherInvitationCode">
+        <el-input
+          v-model="queryParams.fatherInvitationCode"
+          placeholder="请输入用户邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <!-- <el-form-item label="是否在线" prop="online">
         <el-select v-model="queryParams.online" placeholder="请选择是否在线" clearable>
           <el-option
@@ -313,7 +321,8 @@ export default {
         online: null,
         orderByColumn: 'registerTime',
         isAsc: 'desc',
-        registerIp: null
+        registerIp: null,
+        fatherInvitationCode: null
       },
       // 表单参数
       form: {},

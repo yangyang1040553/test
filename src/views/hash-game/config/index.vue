@@ -297,6 +297,7 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+          <span v-if="form.open==1" class="global-text-red">&nbsp;开启活动不参与代理返佣</span>
         </el-form-item>
         <el-form-item label="活动场" prop="isActivity">
           <el-select v-model="form.isActivity" placeholder="请选择是否活动场">

@@ -44,6 +44,12 @@
           <el-form-item label="总代理人数" prop="sumNumber">
             <el-input v-model="form.sumNumber" placeholder />
           </el-form-item>
+          <el-form-item label="返佣赔率" prop="promoteOdds">
+            <el-input v-model="form.promoteOdds" placeholder />
+          </el-form-item>
+          <el-form-item label="分享返佣赔率" prop="sharePromoteOdds">
+            <el-input v-model="form.sharePromoteOdds" placeholder />
+          </el-form-item>
         </div>
         <div class="line"></div>
         <div class="right">
@@ -128,7 +134,7 @@
       </el-form>
       <!-- <div slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
-      </div> -->
+      </div>-->
     </el-dialog>
   </div>
 </template>
