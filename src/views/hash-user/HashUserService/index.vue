@@ -57,7 +57,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="邀请码" prop="fatherInvitationCode">
+      <el-form-item label="查询下级" prop="fatherInvitationCode">
         <el-input
           v-model="queryParams.fatherInvitationCode"
           placeholder="请输入用户邀请码"
