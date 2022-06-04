@@ -8,6 +8,14 @@
       v-show="showSearch"
       label-width="88px"
     >
+      <el-form-item label="邀请码" prop="invitationCode">
+        <el-input
+          v-model="queryParams.invitationCode"
+          placeholder="请输入用户邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="账单ID" prop="id">
         <el-input
           v-model="queryParams.id"
@@ -116,6 +124,7 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="邀请码" align="center" prop="invitationCode" />
       <el-table-column label="usdt余额" align="center" prop="usdtAmount" />
       <el-table-column label="trx余额" align="center" prop="trxAmount" />
       <el-table-column label="Usdt的hash地址" align="center" prop="hashAddressUsdt" />
@@ -251,7 +260,8 @@ export default {
         hashAddressUsdt: null,
         hashAddressTrx: null,
         rechargeTotal: null,
-        withdrawTotal: null
+        withdrawTotal: null,
+        invitationCode:null
       },
       // 表单参数
       form: {},
@@ -299,7 +309,8 @@ export default {
         hashAddressUsdt: null,
         hashAddressTrx: null,
         rechargeTotal: null,
-        withdrawTotal: null
+        withdrawTotal: null,
+           invitationCode:null
       };
       this.resetForm("form");
     },

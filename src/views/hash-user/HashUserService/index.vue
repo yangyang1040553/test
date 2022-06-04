@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="手机号" prop="phone">
         <el-input
           v-model="queryParams.phone"
@@ -15,10 +9,18 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-       <el-form-item label="用户ID" prop="id">
+      <el-form-item label="用户ID" prop="id">
         <el-input
           v-model="queryParams.id"
           placeholder="请输入用户ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="邀请码" prop="invitationCode">
+        <el-input
+          v-model="queryParams.invitationCode"
+          placeholder="请输入用户邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -74,7 +76,7 @@
             :value="dict.value"
           />
         </el-select>
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -165,13 +167,13 @@
         <template slot-scope="scope">
           <dict-tag :options="dict.type.online" :value="scope.row.online" />
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
       <el-table-column label="邀请码" align="center" prop="invitationCode">
         <template slot-scope="scope">
           <div>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" >
+      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100">
         <template slot-scope="scope">
           <div>{{scope.row.fatherInvitationCode||"-"}}</div>
         </template>
@@ -311,9 +313,10 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
-        id:null,
+        id: null,
         pageNum: 1,
         pageSize: 10,
+        invitationCode: null,
         phone: null,
         account: null,
         nickName: null,
@@ -410,7 +413,7 @@ export default {
         loginTime: null,
         loginIp: null,
         orderByColumn: 'registerTime',
-        isAsc: 'desc'
+        isAsc: 'desc',
       }
       this.resetForm('form')
     },
