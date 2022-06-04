@@ -303,6 +303,7 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
+        id:null,
         pageNum: 1,
         pageSize: 10,
         phone: null,
@@ -377,8 +378,8 @@ export default {
     // 表单重置
     reset() {
       //修改 路由参数
-      this.$router.push({ query: merge({}, {}) })
-      this.queryParams.registerIp = null
+      // this.queryParams.registerIp = null
+      // this.queryParams.id = null
       this.form = {
         id: null,
         userType: null,
@@ -411,8 +412,8 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-
-      // this.resetForm('queryForm')
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
       this.reset()
       this.handleQuery()
     },
