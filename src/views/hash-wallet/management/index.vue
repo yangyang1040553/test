@@ -16,10 +16,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="账单ID" prop="id">
+      <el-form-item label="玩家ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入账单ID"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
