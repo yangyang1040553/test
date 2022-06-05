@@ -15,7 +15,10 @@
       <el-col :span="12" class="card-box">
         <el-card>
           <div slot="header">
-            <span>在线用户 <span class="global-text-red">{{total}}</span> 人</span>
+            <span>
+              在线用户
+              <span class="global-text-red">{{total}}</span> 人
+            </span>
           </div>
           <el-table
             v-loading="loading"
@@ -227,83 +230,139 @@ export default {
       // var myChart = echarts.init(chartDom);
       var option;
       const colors = ['#5470C6', '#91CC75', '#EE6666'];
-      option = {
+      // option = {
+      //   color: colors,
+      //   tooltip: {
+      //     trigger: 'axis',
+      //     axisPointer: {
+      //       type: 'cross'
+      //     }
+      //   },
+      //   grid: {
+      //     right: '10%'
+      //   },
+      //   toolbox: {
+      //     feature: {
+      //       dataView: { show: false, readOnly: false },
+      //       restore: { show: false },
+      //       saveAsImage: { show: false }
+      //     }
+      //   },
+      //   legend: {
+      //     data: ['活跃人数', '注册人数', '推广人数']
+      //   },
+      //   xAxis: [
+      //     {
+      //       type: 'category',
+      //       axisTick: {
+      //         alignWithLabel: true
+      //       },
+      //       // prettier-ignore
+      //       data: labels
+      //     }
+      //   ],
+      //   yAxis: [
+      //     {
+      //       type: 'value',
+      //       name: '活跃人数',
+      //       position: 'left',
+      //       alignTicks: true,
+      //       axisLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: colors[0]
+      //         }
+      //       },
+      //       axisLabel: {
+      //         formatter: '{value}'
+      //       }
+      //     },
+      //     {
+      //       type: 'value',
+      //       name: '注册人数',
+      //       position: 'right',
+      //       alignTicks: true,
+      //       offset: 80,
+      //       axisLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: colors[1]
+      //         }
+      //       },
+      //       axisLabel: {
+      //         formatter: '{value}'
+      //       }
+      //     },
+      //     {
+      //       type: 'value',
+      //       name: '推广人数',
+      //       position: 'right',
+      //       alignTicks: true,
+      //       axisLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: colors[2]
+      //         }
+      //       },
+      //       axisLabel: {
+      //         formatter: '{value}'
+      //       }
+      //     }
+      //   ],
+      //   series: [
+      //     {
+      //       name: '活跃人数',
+      //       type: 'bar',
+      //       data: valuesActiveCount,
+      //       yAxisIndex: 0,
+      //     },
+      //     {
+      //       name: '注册人数',
+      //       type: 'bar',
+      //       yAxisIndex: 1,
+      //       data: valuesRegisterCount
+      //     },
+      //     {
+      //       name: '推广人数',
+      //       type: 'bar',
+      //       yAxisIndex: 2,
+      //       data: valuesPromoteCount
+      //     }
+      //   ]
+      // };
+
+      var option = {
         color: colors,
+        title: {
+          text: '',
+          subtext: ''
+        },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross'
-          }
-        },
-        grid: {
-          right: '20%'
-        },
-        toolbox: {
-          feature: {
-            dataView: { show: false, readOnly: false },
-            restore: { show: false },
-            saveAsImage: { show: false }
-          }
+          trigger: 'axis'
         },
         legend: {
           data: ['活跃人数', '注册人数', '推广人数']
         },
+        toolbox: {
+          show: true,
+          feature: {
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        calculable: true,
         xAxis: [
           {
             type: 'category',
-            axisTick: {
-              alignWithLabel: true
-            },
             // prettier-ignore
             data: labels
           }
         ],
         yAxis: [
           {
-            type: 'value',
-            name: '活跃人数',
-            position: 'left',
-            alignTicks: true,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: colors[0]
-              }
-            },
-            axisLabel: {
-              formatter: '{value}'
-            }
-          },
-          {
-            type: 'value',
-            name: '注册人数',
-            position: 'right',
-            alignTicks: true,
-            offset: 80,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: colors[1]
-              }
-            },
-            axisLabel: {
-              formatter: '{value}'
-            }
-          },
-          {
-            type: 'value',
-            name: '推广人数',
-            position: 'right',
-            alignTicks: true,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: colors[2]
-              }
-            },
-            axisLabel: {
-              formatter: '{value}'
-            }
+            type: 'value'
           }
         ],
         series: [
@@ -311,24 +370,30 @@ export default {
             name: '活跃人数',
             type: 'bar',
             data: valuesActiveCount,
-            yAxisIndex: 0,
+            markLine: {
+              data: [{ type: 'average', name: 'Avg' }]
+            }
           },
           {
             name: '注册人数',
             type: 'bar',
-            yAxisIndex: 1,
-            data: valuesRegisterCount
+            data: valuesRegisterCount,
+            markLine: {
+              data: [{ type: 'average', name: 'Avg' }]
+            }
           },
           {
             name: '推广人数',
             type: 'bar',
-            yAxisIndex: 2,
-            data: valuesPromoteCount
+            data: valuesPromoteCount,
+            markLine: {
+              data: [{ type: 'average', name: 'Avg' }]
+            }
           }
         ]
       };
 
-      option && this.lineChart.setOption(option);
+      this.lineChart.setOption(option);
     },
     // 打开加载层
     openLoading() {
