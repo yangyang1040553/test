@@ -338,7 +338,13 @@ export default {
           subtext: ''
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
         },
         legend: {
           data: ['活跃人数', '注册人数', '推广人数']
@@ -357,7 +363,10 @@ export default {
           {
             type: 'category',
             // prettier-ignore
-            data: labels
+            data: labels,
+            axisPointer: {
+              type: 'shadow'
+            }
           }
         ],
         yAxis: [
