@@ -175,7 +175,11 @@
       </el-table-column>
       <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100">
         <template slot-scope="scope">
-          <div>{{scope.row.fatherInvitationCode||"-"}}</div>
+          <div
+            v-if="queryParams.fatherInvitationCode==scope.row.fatherInvitationCode"
+            class="global-text-green"
+          >{{scope.row.fatherInvitationCode||"-"}}</div>
+          <div v-else>{{scope.row.fatherInvitationCode||"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column>
