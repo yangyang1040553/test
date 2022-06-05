@@ -196,8 +196,12 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['hash-user:HashUserService:edit']"
           >修改</el-button>
-          <!-- <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-          v-hasPermi="['hash-user:HashUserService:remove']">删除</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-search"
+            @click="handleNext(scope.row)"
+          >查询下级</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -470,6 +474,10 @@ export default {
           }
         }
       })
+    },
+    handleNext(row) {
+      this.queryParams.fatherInvitationCode = row.invitationCode
+      this.getList()
     },
     /** 删除按钮操作 */
     handleDelete(row) {
