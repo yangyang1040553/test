@@ -130,6 +130,24 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="用户备注" align="center" prop="noteName" width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.noteName||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.tgId||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="飞机账号" align="center" prop="tgAccount" width="200">
+        <template slot-scope="scope">
+          <div
+            class="global-text-blue"
+            @click="goToTelegram(scope.row)"
+          >{{scope.row.tgAccount||"-"}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
       <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
         <template slot-scope="scope">
@@ -217,24 +235,6 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
-
-    <el-dialog :title="title" :visible.sync="openDetail" width="600px" append-to-body>
-      <el-form ref="form" :model="detailForm" :rules="rules" label-width="100px">
-        <el-form-item label="今日投注金额">
-          <span class="label">{{ detailForm.betAmount ||0.00}}</span>
-        </el-form-item>
-        <el-form-item label="今日充值金额">
-          <span class="label">{{ detailForm.inAmount ||0.00}}</span>
-        </el-form-item>
-        <el-form-item label="今日提现金额">
-          <span class="label">{{ detailForm.outAmount ||0.00}}</span>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="openDetail=false">取 消</el-button>
-      </div>
-    </el-dialog>
-
     <!-- 添加或修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
@@ -258,6 +258,15 @@
         </el-form-item>-->
         <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
+        </el-form-item>
+        <el-form-item label="用户备注" prop="noteName">
+          <el-input v-model="form.noteName" placeholder="请输入用户备注" />
+        </el-form-item>
+        <el-form-item label="飞机ID" prop="tgId">
+          <el-input v-model="form.tgId" placeholder="请输入飞机ID" />
+        </el-form-item>
+        <el-form-item label="飞机账号" prop="tgAccount">
+          <el-input v-model="form.tgAccount" placeholder="请输入飞机账号" />
         </el-form-item>
         <!-- <el-form-item label="邀请码" prop="invitationCode">
           <el-input v-model="form.invitationCode" placeholder="请输入邀请码" />
@@ -358,6 +367,12 @@ export default {
     this.getList()
   },
   methods: {
+    goToTelegram(row) {
+      console.log(row)
+      if (row.tgAccount) {
+        window.open(row.tgAccount, '_blank');
+      }
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -422,6 +437,9 @@ export default {
         loginIp: null,
         orderByColumn: 'registerTime',
         isAsc: 'desc',
+        nickName: null,
+        tgId: null,
+        tgAccount: null,
       }
       this.resetForm('form')
     },

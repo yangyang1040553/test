@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="用户详情" :visible.sync="isOpen" width="1000px" append-to-body @close="cancel">
+    <el-dialog title :visible.sync="isOpen" width="1000px" append-to-body @close="cancel">
       <el-form ref="form" class="form" :model="form" label-width="120px">
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
@@ -49,6 +49,9 @@
           </el-form-item>
           <el-form-item label="分享返佣赔率" prop="sharePromoteOdds">
             <el-input v-model="form.sharePromoteOdds" placeholder />
+          </el-form-item>
+          <el-form-item label="用户备注" prop="noteName">
+            <el-input v-model="form.noteName" placeholder="请输入用户备注" />
           </el-form-item>
         </div>
         <div class="line"></div>
@@ -130,6 +133,15 @@
           <el-form-item label="登录ip" prop="loginIp">
             <el-input v-model="form.loginIp" placeholder />
           </el-form-item>
+          <el-form-item label="用户备注" prop="noteName">
+            <el-input v-model="form.noteName" placeholder="请输入用户备注" />
+          </el-form-item>
+          <el-form-item label="飞机ID" prop="tgId">
+            <el-input v-model="form.tgId" placeholder="请输入飞机ID" />
+          </el-form-item>
+          <el-form-item label="飞机账号" prop="tgAccount">
+            <el-input v-model="form.tgAccount" placeholder="请输入飞机账号" />
+          </el-form-item>
         </div>
       </el-form>
       <!-- <div slot="footer" class="dialog-footer">
@@ -166,9 +178,10 @@ export default {
 <style  lang="scss" scoped>
 .form {
   width: 100%;
-  flex: 1;
+  height: 80vh;
   display: flex;
   flex-direction: row;
+  overflow-y: auto;
 
   .left,
   .right {
@@ -179,7 +192,7 @@ export default {
   .line {
     width: 1px;
     margin-left: 10px;
-    height: 80vh;
+    height: 100vh;
     background: gainsboro;
   }
 }
