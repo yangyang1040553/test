@@ -151,19 +151,7 @@
           <div>{{scope.row.noteName||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
-        <template slot-scope="scope">
-          <div>{{scope.row.tgId||"-"}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column label="飞机账号" align="center" prop="tgAccount" width="200">
-        <template slot-scope="scope">
-          <div
-            class="global-text-blue"
-            @click="goToTelegram(scope.row)"
-          >{{scope.row.tgAccount||"-"}}</div>
-        </template>
-      </el-table-column>
+
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
       <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
         <template slot-scope="scope">
@@ -225,6 +213,19 @@
       <el-table-column label="注册ip" align="center" prop="registerIp" />
       <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
       <el-table-column label="登录ip" align="center" prop="loginIp" />
+      <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.tgId||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="飞机账号" align="center" prop="tgAccount" width="200">
+        <template slot-scope="scope">
+          <div
+            class="global-text-blue"
+            @click="goToTelegram(scope.row)"
+          >{{scope.row.tgAccount||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
         <template slot-scope="scope">
           <el-button
