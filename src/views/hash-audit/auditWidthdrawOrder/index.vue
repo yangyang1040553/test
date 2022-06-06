@@ -6,7 +6,6 @@
       size="small"
       :inline="true"
       v-show="showSearch"
-      label-width="68px"
     >
       <el-form-item label="订单id" prop="id">
         <el-input

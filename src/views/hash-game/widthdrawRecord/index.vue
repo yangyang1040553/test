@@ -194,6 +194,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listWidthdrawRecord, getWidthdrawRecord, delWidthdrawRecord, addWidthdrawRecord, updateWidthdrawRecord } from '@/api/hash-game/widthdrawRecord'
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -226,6 +227,7 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
+        id: null,
         pageNum: 1,
         pageSize: 10,
         id: null,
@@ -244,6 +246,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList()
   },
   methods: {
@@ -298,7 +303,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+      this.$router.push({ query: merge({}, {}) })
       this.resetForm('queryForm')
+      this.queryParams.id = null
       this.handleQuery()
     },
     // 多选框选中数据

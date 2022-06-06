@@ -1,13 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-      label-width="68px"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="订单id" prop="id">
         <el-input
           v-model="queryParams.id"
@@ -261,6 +254,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listAuditWidthdrawOrder, getAuditWidthdrawOrder, delAuditWidthdrawOrder, addAuditWidthdrawOrder, updateAuditWidthdrawOrder } from "@/api/hash-audit/auditWidthdrawOrder";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -293,6 +287,7 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
+        id: null,
         pageNum: 1,
         pageSize: 10,
         id: null,
@@ -304,7 +299,7 @@ export default {
         amount: null,
         minerAmount: null,
         status: null,
-        checkStatus: "2",
+        checkStatus: "3",
         checkPerson: null,
         createTime: null,
         orderByColumn: 'createTime',
@@ -318,6 +313,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList();
   },
   methods: {
@@ -362,7 +360,7 @@ export default {
         amount: null,
         minerAmount: null,
         status: null,
-        checkStatus: "2",
+        checkStatus: "3",
         checkPerson: null,
         remark: null,
         createTime: null,
@@ -380,7 +378,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
+      this.queryParams.id = null
       this.handleQuery();
     },
     // 多选框选中数据

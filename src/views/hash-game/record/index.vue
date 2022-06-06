@@ -26,7 +26,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
           placeholder="请输入玩家id"
@@ -34,14 +34,22 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="玩家昵称" prop="nickName">
+      <el-form-item label="账单ID" prop="id">
+        <el-input
+          v-model="queryParams.id"
+          placeholder="请输入账单ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <!-- <el-form-item label="玩家昵称" prop="nickName">
         <el-input
           v-model="queryParams.nickName"
           placeholder="请输入玩家昵称"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item label="赔率" prop="odds">
         <el-input
           v-model="queryParams.odds"
@@ -60,30 +68,30 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="投注金额" prop="betAmount">
+      <!-- <el-form-item label="投注金额" prop="betAmount">
         <el-input
           v-model="queryParams.betAmount"
           placeholder="请输入投注金额"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="手续费" prop="taxAmount">
+      </el-form-item>-->
+      <!-- <el-form-item label="手续费" prop="taxAmount">
         <el-input
           v-model="queryParams.taxAmount"
           placeholder="请输入手续费"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="hash值" prop="hashValue">
+      </el-form-item>-->
+      <!-- <el-form-item label="hash值" prop="hashValue">
         <el-input
           v-model="queryParams.hashValue"
           placeholder="请输入hash值"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item label="下注结果" prop="betResult">
         <el-select v-model="queryParams.betResult" placeholder="请选择下注结果" clearable>
           <el-option
@@ -166,9 +174,9 @@
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="唯一id" align="center" prop="id" width="200" />
+      <el-table-column label="账单ID" align="center" prop="id" width="200" />
       <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
-      <el-table-column label="游戏" align="center" prop="gameId" >
+      <el-table-column label="游戏" align="center" prop="gameId">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
         </template>
@@ -177,7 +185,10 @@
       <!-- <el-table-column label="玩家id" align="center" prop="userId" width="200" /> -->
       <el-table-column label="玩家id" align="center" prop="userId" width="200">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
@@ -337,12 +348,13 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog> -->
+    </el-dialog>-->
     <UserInfoDialog v-if="openUser" :open="openUser" :id="userId" @close="openUser=false" />
   </div>
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listRecord, getRecord, delRecord, addRecord, updateRecord } from '@/api/hash-game/record'
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -375,6 +387,7 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
+        id: null,
         pageNum: 1,
         pageSize: 10,
         gameId: null,
@@ -401,6 +414,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList()
   },
   methods: {
@@ -466,8 +482,11 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+      this.$router.push({ query: merge({}, {}) })
       this.resetForm('queryForm')
-      this.handleQuery()
+      this.queryParams.id = null
+      // console.log(this.queryParams)
+      this.handleQuery(this.queryParams)
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
