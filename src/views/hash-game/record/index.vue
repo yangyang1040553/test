@@ -165,7 +165,7 @@
       :default-sort="{ prop: 'create_time', order: 'descending' }"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一id" align="center" prop="id" width="200" />
       <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
       <el-table-column label="游戏" align="center" prop="gameId" >

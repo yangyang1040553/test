@@ -86,7 +86,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['hash-wallet:widthdrawRecord:export']"
+          v-hasPermi="['hash-game:widthdrawRecord:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -360,7 +360,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       this.download(
-        'hash-wallet/widthdrawRecord/export',
+        'hash-game/widthdrawRecord/export',
         {
           ...this.queryParams
         },

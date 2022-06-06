@@ -110,7 +110,7 @@
       @sort-change="sortChange"
       :default-sort="{ prop: 'create_time', order: 'descending' }"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
