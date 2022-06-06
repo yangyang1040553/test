@@ -67,6 +67,22 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="飞机ID" prop="tgId">
+        <el-input
+          v-model="queryParams.tgId"
+          placeholder="请输入飞机ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="飞机账号" prop="tgAccount">
+        <el-input
+          v-model="queryParams.tgAccount"
+          placeholder="请输入飞机账号"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <!-- <el-form-item label="是否在线" prop="online">
         <el-select v-model="queryParams.online" placeholder="请选择是否在线" clearable>
           <el-option
@@ -342,7 +358,9 @@ export default {
         orderByColumn: 'registerTime',
         isAsc: 'desc',
         registerIp: null,
-        fatherInvitationCode: null
+        fatherInvitationCode: null,
+        tgId: null,
+        tgAccount: null
       },
       // 表单参数
       form: {},
