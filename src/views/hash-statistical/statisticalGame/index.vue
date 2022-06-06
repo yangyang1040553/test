@@ -15,8 +15,8 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
-       <el-form-item label="选择游戏" prop="gameId">
+      </el-form-item>-->
+      <el-form-item label="选择游戏" prop="gameId">
         <el-select v-model="queryParams.gameId" placeholder="请选择游戏" clearable>
           <el-option
             v-for="dict in dict.type.game_list"
@@ -92,7 +92,7 @@
     />
 
     <!-- 添加或修改游戏配置对话框 -->
-    <el-dialog title="" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog title :visible.sync="open" width="800px" append-to-body>
       <el-table v-loading="loading" :data="childrenList" height="500px">
         <!-- <el-table-column label="游戏id" align="center" prop="gameId" />
         <el-table-column label="游戏名称" align="center" prop="gameName">
