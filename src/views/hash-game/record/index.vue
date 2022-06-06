@@ -417,6 +417,9 @@ export default {
     if (this.$route.query.orderId) {
       this.queryParams.id = this.$route.query.orderId
     }
+     if (this.$route.query.userId) {
+      this.queryParams.userId = this.$route.query.userId
+    }
     this.getList()
   },
   methods: {
@@ -485,6 +488,7 @@ export default {
       this.$router.push({ query: merge({}, {}) })
       this.resetForm('queryForm')
       this.queryParams.id = null
+      this.queryParams.userId = null
       // console.log(this.queryParams)
       this.handleQuery(this.queryParams)
     },

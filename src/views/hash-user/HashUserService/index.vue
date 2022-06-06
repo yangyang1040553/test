@@ -225,7 +225,7 @@
       <el-table-column label="注册ip" align="center" prop="registerIp" />
       <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
       <el-table-column label="登录ip" align="center" prop="loginIp" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -240,6 +240,18 @@
             icon="el-icon-search"
             @click="handleNext(scope.row)"
           >查询下级</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-search"
+            @click="handleGame(scope.row)"
+          >游戏记录</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-search"
+            @click="handleWallet(scope.row)"
+          >流水</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -518,6 +530,12 @@ export default {
     handleNext(row) {
       this.queryParams.fatherInvitationCode = row.invitationCode
       this.getList()
+    },
+    handleGame(row) {
+      this.$router.push({ path: "/hash-game/record", query: { userId: row.id } })
+    },
+    handleWallet(row) {
+      this.$router.push({ path: "/wallet/walletTurnover", query: { userId: row.id } })
     },
     /** 删除按钮操作 */
     handleDelete(row) {

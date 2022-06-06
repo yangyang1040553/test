@@ -113,7 +113,7 @@
       @sort-change="sortChange"
       height="600"
     >
-      <el-table-column label="账单ID" align="center" prop="id"  width="180"/>
+      <el-table-column label="账单ID" align="center" prop="id" width="180" />
       <el-table-column label="玩家id" align="center" prop="userId" width="180">
         <template slot-scope="scope">
           <div
@@ -224,6 +224,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listWalletTurnover, getWalletTurnover, delWalletTurnover, addWalletTurnover, updateWalletTurnover } from "@/api/hash-wallet/walletTurnover";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -273,6 +274,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.userId) {
+      this.queryParams.userId = this.$route.query.userId
+    }
     this.getList();
   },
   methods: {
@@ -353,8 +357,12 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
+      // this.queryParams.id = null
+      this.queryParams.userId = null
+      // console.log(this.queryParams)
+      this.handleQuery(this.queryParams)
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
