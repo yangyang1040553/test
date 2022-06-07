@@ -111,9 +111,9 @@
       :data="walletTurnoverList"
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
-      height="600"
+      height="580"
     >
-      <el-table-column label="账单ID" align="center" prop="id" width="180" />
+      <el-table-column label="账单ID" align="center" prop="id" width="200" />
       <el-table-column label="玩家id" align="center" prop="userId" width="180">
         <template slot-scope="scope">
           <div
@@ -136,7 +136,7 @@
       <el-table-column label="流水金额" align="center" prop="amount" sortable />
       <el-table-column label="当前金额" align="center" prop="currentAmount" sortable />
       <el-table-column label="之后金额" align="center" prop="afterAmount" sortable />
-      <el-table-column label="关联订单" align="center" prop="linkedOrder" width="180">
+      <el-table-column label="关联订单" align="center" prop="linkedOrder" width="200">
         <template slot-scope="scope">
           <div class="global-text-blue" @click="toOrderList(scope.row)">{{scope.row.linkedOrder}}</div>
         </template>

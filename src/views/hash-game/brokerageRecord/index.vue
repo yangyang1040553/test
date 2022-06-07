@@ -117,6 +117,7 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="玩家昵称" align="center" prop="nickName" width="100" />
       <el-table-column label="佣金等级" align="center" prop="level" width="75" />
       <el-table-column label="钱包类型" align="center" prop="walletType" width="85">
         <template slot-scope="scope">
