@@ -210,9 +210,8 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-delete"
+            icon="el-icon-search"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-audit:auditWidthdrawOrder:remove']"
           >查询流水</el-button>
         </template>
       </el-table-column>
@@ -423,6 +422,7 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
+      this.$router.push({ path: "/wallet/walletTurnover", query: { userId: row.userId, createTime: row.createTime } })
       // const ids = row.id || this.ids;
       // this.$modal.confirm('是否确认删除提现审核编号为"' + ids + '"的数据项？').then(function () {
       //   return delAuditWidthdrawOrder(ids);

@@ -114,7 +114,10 @@
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
-          <div class="global-text-blue" @click="openUserDetail(scope.row.userId)">{{scope.row.userId}}</div>
+          <div
+            class="global-text-blue"
+            @click="openUserDetail(scope.row.userId)"
+          >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" width="100" />
@@ -144,6 +147,7 @@
           <div class="blue-text" @click="handleUserInfo(scope.row)">{{ scope.row.childUserId }}</div>
         </template>
       </el-table-column>
+      <el-table-column label="下级玩家昵称" align="center" prop="childNickName"/>
       <el-table-column label="状态" align="center" prop="status" width="75">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.record_status" :value="scope.row.status" />

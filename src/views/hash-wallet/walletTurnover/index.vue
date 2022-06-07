@@ -277,6 +277,12 @@ export default {
     if (this.$route.query.userId) {
       this.queryParams.userId = this.$route.query.userId
     }
+    // if (this.$route.query.createTime) {
+    //   this.queryParams.createTime = this.$route.query.createTime
+    // }
+    // if (this.$route.query.orderId) {
+    //   this.queryParams.id = this.$route.query.orderId
+    // }
     this.getList();
   },
   methods: {
@@ -361,6 +367,8 @@ export default {
       this.resetForm('queryForm')
       // this.queryParams.id = null
       this.queryParams.userId = null
+      this.queryParams.createTime = null
+      this.queryParams.id = null
       // console.log(this.queryParams)
       this.handleQuery(this.queryParams)
     },
