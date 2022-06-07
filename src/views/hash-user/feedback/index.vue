@@ -46,7 +46,7 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家ID" align="center" prop="userId" />
-      <!-- <el-table-column label="玩家昵称" align="center" prop="nickName" /> -->
+      <el-table-column label="玩家昵称" align="center" prop="nickName" />
       <el-table-column label="内容" align="center" prop="content" width="300">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">

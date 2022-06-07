@@ -110,6 +110,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+       <el-table-column label="玩家昵称" align="center" prop="nickName" width="100" />
       <el-table-column label="提现金额" align="center" prop="withdrawAmount" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.withdrawAmount.toFixed(2) }}</div>
