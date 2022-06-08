@@ -1,17 +1,42 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="玩家ID" prop="userId"><el-input v-model="queryParams.userId" placeholder="请输入玩家ID" clearable @keyup.enter.native="handleQuery" /></el-form-item>
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
+      <el-form-item label="玩家ID" prop="userId">
+        <el-input
+          v-model="queryParams.userId"
+          placeholder="请输入玩家ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <!-- <el-form-item label="玩家昵称" prop="nickName">
         <el-input v-model="queryParams.nickName" placeholder="请输入玩家昵称" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item label="反馈类型" prop="code">
         <el-select v-model="queryParams.code" placeholder="请选择反馈类型" clearable>
-          <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.back_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker clearable v-model="queryParams.createTime" type="date" value-format="yyyy-MM-dd" placeholder="请选择创建时间"></el-date-picker>
+        <el-date-picker
+          clearable
+          v-model="queryParams.createTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="请选择创建时间"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -29,15 +54,35 @@
           v-hasPermi="['hash-user:feedback:edit']">修改</el-button>
       </el-col>-->
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['hash-user:feedback:remove']"
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['hash-user:feedback:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-user:feedback:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" @sort-change="sortChange" :data="feedbackList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      @sort-change="sortChange"
+      :data="feedbackList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="反馈类型" align="center" prop="code">
@@ -47,7 +92,7 @@
       </el-table-column>
       <el-table-column label="玩家ID" align="center" prop="userId" />
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
-      <el-table-column label="内容" align="center" prop="content" width="300">
+      <el-table-column label="内容" align="center" prop="content" width="200">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <div class="hover-div">{{ scope.row.content }}</div>
@@ -58,27 +103,55 @@
       <el-table-column label="时间" align="center" prop="createTime" width="160" sortable />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-zoom-in" @click="handleUpdate(scope.row)">详情</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-zoom-in"
+            @click="handleUpdate(scope.row)"
+          >详情</el-button>
           <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
           v-hasPermi="['hash-user:feedback:edit']">修改</el-button>-->
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['hash-user:feedback:remove']">删除</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['hash-user:feedback:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改用户意见反馈对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="dialog">
         <el-form-item label="反馈类型" prop="code">
           <el-select v-model="form.code" placeholder="请选择反馈类型">
-            <el-option v-for="dict in dict.type.back_type" :key="dict.value" :label="dict.label" :value="parseInt(dict.value)"></el-option>
+            <el-option
+              v-for="dict in dict.type.back_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="玩家ID" prop="userId"><el-input v-model="form.userId" placeholder="请输入玩家ID" /></el-form-item>
-        <el-form-item label="玩家昵称" prop="nickName"><el-input v-model="form.nickName" placeholder="请输入玩家昵称" /></el-form-item>
-        <el-form-item label="内容"><editor v-model="form.content" :min-height="400" /></el-form-item>
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
+        </el-form-item>
+        <el-form-item label="玩家昵称" prop="nickName">
+          <el-input v-model="form.nickName" placeholder="请输入玩家昵称" />
+        </el-form-item>
+        <el-form-item label="内容">
+          <editor v-model="form.content" :min-height="400" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
@@ -235,14 +308,14 @@ export default {
       const ids = row.id || this.ids
       this.$modal
         .confirm('是否确认删除用户意见反馈编号为"' + ids + '"的数据项？')
-        .then(function() {
+        .then(function () {
           return delFeedback(ids)
         })
         .then(() => {
           this.getList()
           this.$modal.msgSuccess('删除成功')
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -265,6 +338,12 @@ export default {
 .text-content {
   max-height: 50px !important;
   overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  // height: 50px;
+  // line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hover-div {
