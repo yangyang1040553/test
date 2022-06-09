@@ -379,25 +379,37 @@ export default {
             name: '活跃人数',
             type: 'bar',
             data: valuesActiveCount,
-            markLine: {
-              data: [{ type: 'average', name: 'Avg' }]
-            }
+            // markLine: {
+            //   data: [{ type: 'average', name: 'Avg' }]
+            // },
+            label: {
+              show: true,
+              position: 'top'
+            },
           },
           {
             name: '注册人数',
             type: 'bar',
             data: valuesRegisterCount,
-            markLine: {
-              data: [{ type: 'average', name: 'Avg' }]
-            }
+            // markLine: {
+            //   data: [{ type: 'average', name: 'Avg' }]
+            // },
+            label: {
+              show: true,
+              position: 'top'
+            },
           },
           {
             name: '推广人数',
             type: 'bar',
             data: valuesPromoteCount,
-            markLine: {
-              data: [{ type: 'average', name: 'Avg' }]
-            }
+            // markLine: {
+            //   data: [{ type: 'average', name: 'Avg' }]
+            // },
+            label: {
+              show: true,
+              position: 'top'
+            },
           }
         ]
       };
