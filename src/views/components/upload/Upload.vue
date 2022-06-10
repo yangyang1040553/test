@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-upload class="avatar-uploader" action :show-file-list="false" :http-request="upload">
+    <el-upload
+      class="avatar-uploader"
+      :limit="limit"
+      action
+      :show-file-list="false"
+      :http-request="upload"
+    >
       <img v-if="imageUrl" :src="imageUrl" class="avatar" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
@@ -15,20 +21,27 @@ export default {
       imageUrl: ''
     };
   },
-  props: ["url"],
+  props: ["url", "limit", "index"],
   watch: {
     url(news, old) {
-      console.log("1111===", news)
+      //   console.log("1111===", news)
       this.imageUrl = news
     }
   },
+  created() {
+    this.imageUrl = this.url
+  },
   methods: {
     upload(param) {
-      console.log(param)
+    //   console.log(param)
       uploadFile(param.file).then(res => {
-        console.log("rss===", res.url)
+        // console.log("rss===", res.url)
         this.imageUrl = res.url
-        this.$emit("setImageUrl", res.url)
+        if (this.index) {
+          this.$emit("setImageUrl", { url: res.url, index: this.index })
+        } else {
+          this.$emit("setImageUrl", res.url)
+        }
       })
     },
     beforeAvatarUpload(file) {

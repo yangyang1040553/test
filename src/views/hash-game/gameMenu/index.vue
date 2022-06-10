@@ -1,14 +1,33 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      size="small"
+      :inline="true"
+      v-show="showSearch"
+      label-width="88px"
+    >
       <!-- <el-form-item label="唯一id" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一id" clearable @keyup.enter.native="handleQuery" /></el-form-item> -->
       <!-- <el-form-item label="菜单名称" prop="menuName">
         <el-input v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable @keyup.enter.native="handleQuery" />
-      </el-form-item> -->
-      <el-form-item label="权重值" prop="weight"><el-input v-model="queryParams.weight" placeholder="请输入权重值" clearable @keyup.enter.native="handleQuery" /></el-form-item>
+      </el-form-item>-->
+      <el-form-item label="权重值" prop="weight">
+        <el-input
+          v-model="queryParams.weight"
+          placeholder="请输入权重值"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="活动菜单" prop="activity">
         <el-select v-model="queryParams.activity" placeholder="请选择是否活动菜单" clearable>
-          <el-option v-for="dict in dict.type.is_activity" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option
+            v-for="dict in dict.type.is_activity"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -18,15 +37,47 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5"><el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['hash-game:gameMenu:add']">新增</el-button></el-col>
       <el-col :span="1.5">
-        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['hash-game:gameMenu:edit']">修改</el-button>
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['hash-game:gameMenu:add']"
+        >新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['hash-game:gameMenu:remove']">删除</el-button>
+        <el-button
+          type="success"
+          plain
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['hash-game:gameMenu:edit']"
+        >修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['hash-game:gameMenu:export']">导出</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['hash-game:gameMenu:remove']"
+        >删除</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="warning"
+          plain
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['hash-game:gameMenu:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -43,25 +94,61 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['hash-game:gameMenu:edit']">修改</el-button>
-          <el-button v-if="scope.row.activity != 1" size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['hash-game:gameMenu:remove']">
-            删除
-          </el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['hash-game:gameMenu:edit']"
+          >修改</el-button>
+          <el-button
+            v-if="scope.row.activity != 1"
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['hash-game:gameMenu:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改游戏菜单对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-        <el-form-item label="菜单名称" prop="menuName"><el-input v-model="form.menuName" placeholder="请输入菜单名称" /></el-form-item>
-        <el-form-item label="权重值" prop="weight"><el-input v-model="form.weight" placeholder="请输入权重值" oninput="value=value.replace(/[^\d]/g,'')" /></el-form-item>
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" class="form" label-width="100px">
+        <el-form-item label="菜单名称" prop="menuName">
+          <el-input v-model="form.menuName" placeholder="请输入菜单名称" />
+        </el-form-item>
+        <el-form-item label="权重值" prop="weight">
+          <el-input
+            v-model="form.weight"
+            placeholder="请输入权重值"
+            oninput="value=value.replace(/[^\d]/g,'')"
+          />
+        </el-form-item>
         <el-form-item v-if="isEdit" label="活动菜单" prop="activity">
           <el-select v-model="form.activity" placeholder="请选择是否活动菜单" :disabled="form.activity == 1">
-            <el-option v-for="dict in dict.type.is_activity" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+            <el-option
+              v-for="dict in dict.type.is_activity"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            ></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="默认图标" prop="unSelectedAddr">
+          <UploadVue :index="1" :url="form.unSelectedAddr" @setImageUrl="setImageUrl" />
+        </el-form-item>
+        <el-form-item label="选中图标" prop="selectedAddr" style="margin-top:160px;">
+          <UploadVue :index="2" :url="form.selectedAddr" @setImageUrl="setImageUrl" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -74,10 +161,11 @@
 
 <script>
 import { listGameMenu, getGameMenu, delGameMenu, addGameMenu, updateGameMenu } from '@/api/hash-game/gameMenu'
-
+import UploadVue from '../../components/upload/Upload.vue'
 export default {
   name: 'GameMenu',
   dicts: ['is_activity'],
+  components: { UploadVue },
   data() {
     return {
       isEdit: false,
@@ -114,7 +202,9 @@ export default {
       rules: {
         menuName: [{ required: true, message: '菜单名称不能为空', trigger: 'blur' }],
         weight: [{ required: true, message: '权重值不能为空', trigger: 'blur' }],
-        activity: [{ required: true, message: '添加的时候要进行判定不能为空', trigger: 'change' }]
+        activity: [{ required: true, message: '添加的时候要进行判定不能为空', trigger: 'change' }],
+        selectedAddr: [{ required: true, message: '请选择默认状态图标', trigger: 'change' }],
+        unSelectedAddr: [{ required: true, message: '请选择选中状态图标', trigger: 'change' }],
       }
     }
   },
@@ -122,6 +212,14 @@ export default {
     this.getList()
   },
   methods: {
+    setImageUrl(param) {
+      console.log("url==", param)
+      if (param.index == 1) {
+        this.form.unSelectedAddr = param.url
+      } else {
+        this.form.selectedAddr = param.url
+      }
+    },
     /** 查询游戏菜单列表 */
     getList() {
       this.loading = true
@@ -205,14 +303,14 @@ export default {
       const ids = row.id || this.ids
       this.$modal
         .confirm('是否确认删除游戏菜单编号为"' + ids + '"的数据项？')
-        .then(function() {
+        .then(function () {
           return delGameMenu(ids)
         })
         .then(() => {
           this.getList()
           this.$modal.msgSuccess('删除成功')
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -227,3 +325,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.form {
+  height: 60vh;
+}
+</style>
