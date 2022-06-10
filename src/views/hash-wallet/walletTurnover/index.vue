@@ -122,6 +122,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="昵称" align="center" prop="nickName" />
       <el-table-column label="用户邀请码" align="center" prop="invitationCode" />
       <el-table-column label="流水类型" align="center" prop="code">
         <template slot-scope="scope">

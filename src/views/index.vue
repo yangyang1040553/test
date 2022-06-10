@@ -77,7 +77,7 @@
             <span>占比</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
-            <div ref="usedmemory" style="height: 470px" />
+            <div ref="regionChart" style="height: 470px" />
           </div>
         </el-card>
       </el-col>
@@ -92,6 +92,7 @@ import { listStatisticalOperation } from "@/api/hash-statistical/statisticalOper
 import { listRedisOnLineList } from "@/api/hash-statistical/statisticalRedis";
 import echarts from "echarts";
 import UserInfoDialog from "./components/dialog/UserInfoDialog.vue";
+import { listRegister } from "@/api/hash-statistical/regionRegister";
 
 export default {
   name: "Server",
@@ -121,7 +122,16 @@ export default {
         pageSize: 20,
         orderByColumn: 'loginTime',
         isAsc: 'desc'
-      }
+      },
+      queryParams3: {
+        pageNum: 1,
+        pageSize: 30,
+        region: null,
+        regCount: null,
+        orderByColumn: 'regCount',
+        isAsc: 'desc'
+      },
+      registerList: []
     };
   },
   created() {
@@ -132,7 +142,6 @@ export default {
     this.getLineChart()
   },
   methods: {
-
     handleUserInfo(row) {
       this.userId = row.id
       this.open = true
@@ -166,6 +175,68 @@ export default {
         }
       })
     },
+    initRegionChart(labels, valuesCount) {
+      this.lineChart = echarts.init(this.$refs.regionChart, "macarons");
+      var option;
+      const colors = ['#5470C6', '#91CC75', '#EE6666'];
+
+      var option = {
+        color: colors,
+        title: {
+          text: '',
+          subtext: ''
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
+        },
+        legend: {
+          data: ['区域注册统计']
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            // prettier-ignore
+            data: labels,
+            axisPointer: {
+              type: 'shadow'
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '区域注册统计',
+            type: 'bar',
+            data: valuesCount,
+            label: {
+              show: true,
+              position: 'top'
+            },
+          },
+        ]
+      };
+      this.lineChart.setOption(option);
+    },
     /** 查缓存询信息 */
     getList() {
       this.loading = true
@@ -175,54 +246,21 @@ export default {
         this.total = response.total
         this.loading = false
       })
+      listRegister(this.queryParams3).then(response => {
+        this.registerList = response.rows;
+        var labels = []
+        var valuesCount = []
+        if (this.registerList) {
+          this.registerList.forEach(element => {
+            labels.push(element.id)
+            valuesCount.push(element.promoteCount)
+          });
+          if (valuesCount.length > 0) {
+            this.initRegionChart(labels, valuesCount);
+          }
+        }
+      });
 
-      // getCache().then((response) => {
-      //   this.cache = response.data;
-      //   this.$modal.closeLoading();
-
-      //   this.commandstats = echarts.init(this.$refs.commandstats, "macarons");
-      //   this.commandstats.setOption({
-      //     tooltip: {
-      //       trigger: "item",
-      //       formatter: "{a} <br/>{b} : {c} ({d}%)",
-      //     },
-      //     series: [
-      //       {
-      //         name: "命令",
-      //         type: "pie",
-      //         roseType: "radius",
-      //         radius: [15, 95],
-      //         center: ["50%", "38%"],
-      //         data: response.data.commandStats,
-      //         animationEasing: "cubicInOut",
-      //         animationDuration: 1000,
-      //       },
-      //     ],
-      //   });
-      //   this.usedmemory = echarts.init(this.$refs.usedmemory, "macarons");
-      //   this.usedmemory.setOption({
-      //     tooltip: {
-      //       formatter: "{b} <br/>{a} : " + this.cache.info.used_memory_human,
-      //     },
-      //     series: [
-      //       {
-      //         name: "峰值",
-      //         type: "gauge",
-      //         min: 0,
-      //         max: 1000,
-      //         detail: {
-      //           formatter: this.cache.info.used_memory_human,
-      //         },
-      //         data: [
-      //           {
-      //             value: parseFloat(this.cache.info.used_memory_human),
-      //             name: "内存消耗",
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   });
-      // });
     },
     initLineChart(labels, valuesActiveCount, valuesRegisterCount, valuesPromoteCount) {
       this.lineChart = echarts.init(this.$refs.lineChart, "macarons");
