@@ -1,13 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-      label-width="68px"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <!-- <el-form-item label="玩家id" prop="userId">
         <el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>-->
@@ -90,12 +83,12 @@
       <el-table-column label="验证码" align="center" prop="checkCode" />
       <el-table-column label="IP" align="center" prop="ip" />
       <el-table-column label="时间" align="center" prop="createTime" sortable />
-      <el-table-column label="是否成功" align="center" prop="ok">
+      <el-table-column label="状态" align="center" prop="ok" >
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sms_status" :value="scope.row.ok" />
         </template>
       </el-table-column>
-      <el-table-column label="返回数据" align="center" prop="responseData" width="200">
+      <el-table-column label="返回数据" align="center" prop="responseData" width="180">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <div class="hover-div">{{ scope.row.responseData }}</div>
@@ -324,6 +317,7 @@ export default {
 .text-content {
   max-height: 50px !important;
   overflow: hidden;
+  width: 180px;
 }
 
 .hover-div {

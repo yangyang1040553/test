@@ -1,17 +1,18 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-      label-width="88px"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="玩家id" prop="userId">
         <el-input
           v-model="queryParams.userId"
           placeholder="请输入玩家id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="玩家邀请码" prop="invitationCode">
+        <el-input
+          v-model="queryParams.invitationCode"
+          placeholder="请输入玩家邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -48,6 +49,14 @@
         <el-input
           v-model="queryParams.childUserId"
           placeholder="请输入下级玩家id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="下级玩家邀请码" prop="childInvitationCode">
+        <el-input
+          v-model="queryParams.childInvitationCode"
+          placeholder="请输入下级玩家邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -111,8 +120,8 @@
       :default-sort="{ prop: 'create_time', order: 'descending' }"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="唯一id" align="center" prop="id" />
-      <el-table-column label="玩家id" align="center" prop="userId">
+      <el-table-column label="唯一id" align="center" prop="id"  width="180"/>
+      <el-table-column label="玩家id" align="center" prop="userId"  width="160">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -121,6 +130,7 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" width="100" />
+      <el-table-column label="邀请码" align="center" prop="invitationCode" width="100" />
       <el-table-column label="佣金等级" align="center" prop="level" width="75" />
       <el-table-column label="钱包类型" align="center" prop="walletType" width="85">
         <template slot-scope="scope">
@@ -147,7 +157,7 @@
           <div class="blue-text" @click="handleUserInfo(scope.row)">{{ scope.row.childUserId }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="下级玩家昵称" align="center" prop="childNickName"/>
+      <el-table-column label="下级玩家昵称" align="center" prop="childNickName" />
       <el-table-column label="状态" align="center" prop="status" width="75">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.record_status" :value="scope.row.status" />

@@ -8,18 +8,18 @@
       v-show="showSearch"
       label-width="88px"
     >
-      <el-form-item label="邀请码" prop="invitationCode">
-        <el-input
-          v-model="queryParams.invitationCode"
-          placeholder="请输入用户邀请码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="玩家ID" prop="id">
         <el-input
           v-model="queryParams.id"
           placeholder="请输入玩家ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="邀请码" prop="invitationCode">
+        <el-input
+          v-model="queryParams.invitationCode"
+          placeholder="请输入用户邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -261,7 +261,7 @@ export default {
         hashAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
-        invitationCode:null
+        invitationCode: null
       },
       // 表单参数
       form: {},
@@ -310,7 +310,7 @@ export default {
         hashAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
-           invitationCode:null
+        invitationCode: null
       };
       this.resetForm("form");
     },
