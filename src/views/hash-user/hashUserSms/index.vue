@@ -95,7 +95,7 @@
           <dict-tag :options="dict.type.sms_status" :value="scope.row.ok" />
         </template>
       </el-table-column>
-      <el-table-column label="返回数据" align="center" prop="responseData">
+      <el-table-column label="返回数据" align="center" prop="responseData" width="300">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <div class="hover-div">{{ scope.row.responseData }}</div>
