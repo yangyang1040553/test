@@ -216,7 +216,7 @@ export default {
             axisPointer: {
               type: 'shadow'
             },
-            axisLabel: { interval: 1, rotate: 30 }
+            axisLabel: { interval: 0, rotate: 30 }
           }
         ],
         yAxis: [
@@ -256,7 +256,6 @@ export default {
             labels.push(element.region)
             valuesCount.push(element.regCount)
           });
-          console.log(labels,valuesCount)
           if (labels.length > 0) {
             this.initRegionChart(labels, valuesCount);
           }
@@ -407,7 +406,7 @@ export default {
             axisPointer: {
               type: 'shadow'
             },
-             axisLabel: { interval: 1, rotate: 30 }
+            axisLabel: { interval: 0, rotate: 30 }
           }
         ],
         yAxis: [
