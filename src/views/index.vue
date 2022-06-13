@@ -215,7 +215,8 @@ export default {
             data: labels,
             axisPointer: {
               type: 'shadow'
-            }
+            },
+            axisLabel: { interval: 1, rotate: 30 }
           }
         ],
         yAxis: [
@@ -252,10 +253,11 @@ export default {
         var valuesCount = []
         if (this.registerList) {
           this.registerList.forEach(element => {
-            labels.push(element.id)
-            valuesCount.push(element.promoteCount)
+            labels.push(element.region)
+            valuesCount.push(element.regCount)
           });
-          if (valuesCount.length > 0) {
+          console.log(labels,valuesCount)
+          if (labels.length > 0) {
             this.initRegionChart(labels, valuesCount);
           }
         }
@@ -404,7 +406,8 @@ export default {
             data: labels,
             axisPointer: {
               type: 'shadow'
-            }
+            },
+             axisLabel: { interval: 1, rotate: 30 }
           }
         ],
         yAxis: [
