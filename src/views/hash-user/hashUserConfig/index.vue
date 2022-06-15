@@ -100,37 +100,55 @@
     </el-table>-->
 
     <el-form ref="form" :model="form" :rules="rules" label-width="140px" class="my-form">
-      <el-form-item label="最新的主页地址" prop="newDomainAddr">
-        <el-input v-model="form.newDomainAddr" placeholder="请输入最新的主页地址" />
-      </el-form-item>
-      <el-form-item label="在线客服地址" prop="onlineServiceAddr">
-        <el-input v-model="form.onlineServiceAddr" placeholder="请输入在线客服地址" />
-      </el-form-item>
-      <el-form-item label="官方群组地址" prop="groupAddr">
-        <el-input v-model="form.groupAddr" placeholder="请输入官方群组地址" />
-      </el-form-item>
-      <el-form-item label="用户注册协议地址" prop="regProtocolAddr">
-        <el-input v-model="form.regProtocolAddr" placeholder="请输入用户注册协议地址" />
-      </el-form-item>
-      <el-form-item label="推广链接地址" prop="promoteAddr">
-        <el-input v-model="form.promoteAddr" placeholder="请输入推广链接地址" />
-      </el-form-item>
-      <el-form-item label="ios下载地址" prop="iosDownloadAddr">
-        <el-input v-model="form.iosDownloadAddr" placeholder="请输入ios下载地址" />
-      </el-form-item>
-      <el-form-item label="ios版本号" prop="iosVersion">
-        <el-input v-model="form.iosVersion" placeholder="请输入ios版本号" />
-      </el-form-item>
-      <el-form-item label="安卓下载地址" prop="androidDownloadAddr">
-        <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
-      </el-form-item>
-      <el-form-item label="安卓版本号" prop="androidVersion">
-        <el-input v-model="form.androidVersion" placeholder="请输入安卓版本号" />
-      </el-form-item>
+      <el-card class="box-card">
+        <el-form-item label="最新的主页地址" prop="newDomainAddr">
+          <el-input v-model="form.newDomainAddr" placeholder="请输入最新的主页地址" />
+        </el-form-item>
+        <el-form-item label="在线客服地址" prop="onlineServiceAddr">
+          <el-input v-model="form.onlineServiceAddr" placeholder="请输入在线客服地址" />
+        </el-form-item>
+        <el-form-item label="官方群组地址" prop="groupAddr">
+          <el-input v-model="form.groupAddr" placeholder="请输入官方群组地址" />
+        </el-form-item>
+        <el-form-item label="用户注册协议地址" prop="regProtocolAddr">
+          <el-input v-model="form.regProtocolAddr" placeholder="请输入用户注册协议地址" />
+        </el-form-item>
+        <el-form-item label="推广链接地址" prop="promoteAddr">
+          <el-input v-model="form.promoteAddr" placeholder="请输入推广链接地址" />
+        </el-form-item>
+      </el-card>
+      <el-card class="box-card">
+        <el-form-item label="ios下载地址" prop="iosDownloadAddr">
+          <el-input v-model="form.iosDownloadAddr" placeholder="请输入ios下载地址" />
+        </el-form-item>
+        <el-form-item label="ios版本号" prop="iosVersion">
+          <el-input v-model="form.iosVersion" placeholder="请输入ios版本号" />
+        </el-form-item>
+      </el-card>
+      <el-card class="box-card">
+        <el-form-item label="安卓下载地址" prop="androidDownloadAddr">
+          <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
+        </el-form-item>
+        <el-form-item label="安卓版本号" prop="androidVersion">
+          <el-input v-model="form.androidVersion" placeholder="请输入安卓版本号" />
+        </el-form-item>
+      </el-card>
+      <el-card class="box-card">
+        <el-form-item label="是否强更" prop="force">
+          <el-select v-model="form.force" placeholder="请选择是否强更" clearable>
+            <el-option
+              v-for="dict in dict.type.force"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
+      </el-card>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" size="mini" @click="submitForm">确 定</el-button>
-      <el-button  size="mini" @click="cancel">取 消</el-button>
+      <el-button size="mini" @click="cancel">取 消</el-button>
     </div>
 
     <!-- <pagination
@@ -176,7 +194,7 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog> -->
+    </el-dialog>-->
   </div>
 </template>
 
@@ -184,6 +202,7 @@
 import { listHashUserConfig, getHashUserConfig, delHashUserConfig, addHashUserConfig, updateHashUserConfig } from "@/api/hash-user/hashUserConfig";
 
 export default {
+  dicts: ['force'],
   name: "HashUserConfig",
   data() {
     return {
@@ -240,6 +259,9 @@ export default {
         ],
         androidVersion: [
           { required: true, message: "安卓版本号不能为空", trigger: "blur" }
+        ], 
+        force: [
+          { required: true, message: "请选择是否强更", trigger: "blur" }
         ],
       }
     };
@@ -279,7 +301,8 @@ export default {
         createTime: null,
         createBy: null,
         updateTime: null,
-        updateBy: null
+        updateBy: null,
+        force: null,
       };
       this.resetForm("form");
     },
@@ -357,11 +380,14 @@ export default {
 <style  lang="scss" scoped>
 .my-form {
   width: 800px;
-  margin-left: 100px;
-  margin-top: 50px;
+  margin-left: 30px;
 }
 
-.dialog-footer{
+.dialog-footer {
   margin-left: 400px;
+}
+
+.box-card {
+  margin-bottom: 10px;
 }
 </style>
