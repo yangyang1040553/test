@@ -138,9 +138,9 @@
           <el-select v-model="form.force" placeholder="请选择是否强更" clearable>
             <el-option
               v-for="dict in dict.type.force"
-              :key="dict.value"
+              :key="parseInt(dict.value)"
               :label="dict.label"
-              :value="dict.value"
+              :value="parseInt(dict.value)"
             />
           </el-select>
         </el-form-item>
