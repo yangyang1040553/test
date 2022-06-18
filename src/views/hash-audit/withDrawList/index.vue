@@ -182,7 +182,11 @@
       </el-table-column>
       <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180" />
       <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180" />
-      <el-table-column label="提现金额" align="center" prop="amount" />
+      <el-table-column label="提现金额" align="center" prop="amount">
+        <template slot-scope="scope">
+          <div>{{(scope.row.amount*1.0/10000).toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="订单状态" align="center" prop="status">
         <template slot-scope="scope">

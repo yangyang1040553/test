@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="订单id" prop="id">
         <el-input
           v-model="queryParams.id"
@@ -186,7 +180,11 @@
         </template>
       </el-table-column>
       <!-- <el-table-column label="付款地址" align="center" prop="paymentAddress" /> -->
-      <el-table-column label="提现的金额" align="center" prop="amount" />
+      <el-table-column label="提现的金额" align="center" prop="amount">
+        <template slot-scope="scope">
+          <div>{{(scope.row.amount*1.0/10000).toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="收款地址" align="center" prop="collectionAddress" />
       <el-table-column label="创建时间" align="center" prop="createTime" sortable />
       <!-- <el-table-column label="矿工费" align="center" prop="minerAmount" /> -->
