@@ -17,6 +17,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="邀请码" prop="invitationCode">
+        <el-input
+          v-model="queryParams.invitationCode"
+          placeholder="请输入用户邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="源钱包类型" prop="sourceWalletType">
         <el-select v-model="queryParams.sourceWalletType" placeholder="请选择源钱包类型" clearable>
           <el-option
@@ -135,6 +143,20 @@
             class="global-text-blue"
             @click="openUserDetail(scope.row.userId)"
           >{{scope.row.userId}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="玩家昵称" align="center" prop="nickName">
+        <template slot-scope="scope">
+          <div>{{scope.row.nickName}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="邀请码" align="center" prop="fatherInvitationCode" width="100">
+        <template slot-scope="scope">
+          <div
+            v-if="queryParams.invitationCode==scope.row.invitationCode"
+            class="global-text-green"
+          >{{scope.row.invitationCode||"-"}}</div>
+          <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="源钱包类型" align="center" prop="sourceWalletType">

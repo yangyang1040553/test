@@ -24,7 +24,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="usdt余额" prop="usdtAmount">
+      <!-- <el-form-item label="usdt余额" prop="usdtAmount">
         <el-input
           v-model="queryParams.usdtAmount"
           placeholder="请输入usdt余额"
@@ -39,7 +39,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item label="Usdt地址" prop="hashAddressUsdt">
         <el-input
           v-model="queryParams.hashAddressUsdt"
@@ -56,7 +56,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="总充值金额" prop="rechargeTotal">
+      <!-- <el-form-item label="总充值金额" prop="rechargeTotal">
         <el-input
           v-model="queryParams.rechargeTotal"
           placeholder="请输入总充值金额"
@@ -71,7 +71,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -124,13 +124,24 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="邀请码" align="center" prop="invitationCode" />
+      <el-table-column label="昵称" align="center" prop="nickName" />
+      <el-table-column label="邀请码" align="center" prop="invitationCode" width="100">
+        <template slot-scope="scope">
+          <div
+            v-if="queryParams.invitationCode==scope.row.invitationCode"
+            class="global-text-green"
+          >{{scope.row.invitationCode||"-"}}</div>
+          <div v-else>{{scope.row.invitationCode||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="usdt余额" align="center" prop="usdtAmount" />
       <el-table-column label="trx余额" align="center" prop="trxAmount" />
       <el-table-column label="Usdt的hash地址" align="center" prop="hashAddressUsdt" />
       <el-table-column label="Trx的hash地址" align="center" prop="hashAddressTrx" />
-      <el-table-column label="总充值金额" align="center" prop="rechargeTotal" />
-      <el-table-column label="总提现金额" align="center" prop="withdrawTotal" />
+      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal" />
+      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal" />
+      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal" />
+      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
