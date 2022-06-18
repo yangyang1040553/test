@@ -141,6 +141,7 @@
           <dict-tag :options="dict.type.force" :value="scope.row.status" />
         </template>
       </el-table-column>
+       <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime }}</span>

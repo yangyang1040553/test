@@ -179,6 +179,7 @@
           <dict-tag :options="dict.type.in_status" :value="scope.row.status" />
         </template>
       </el-table-column>
+      <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
