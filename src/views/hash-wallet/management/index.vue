@@ -134,14 +134,48 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="usdt余额" align="center" prop="usdtAmount" />
-      <el-table-column label="trx余额" align="center" prop="trxAmount" />
+      <el-table-column label="usdt余额" align="center" prop="usdtAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtAmount || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="usdt远程余额" align="center" prop="usdtRemoteAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtRemoteAmount || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx余额" align="center" prop="trxAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxAmount || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx远程余额" align="center" prop="trxRemoteAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxRemoteAmount || '-'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="Usdt的hash地址" align="center" prop="hashAddressUsdt" />
       <el-table-column label="Trx的hash地址" align="center" prop="hashAddressTrx" />
-      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal" />
-      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal" />
-      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal" />
-      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" />
+      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtRechargeTotal || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxRechargeTotal || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtWithdrawTotal || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxWithdrawTotal || '-'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
