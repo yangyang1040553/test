@@ -116,6 +116,9 @@
         <el-form-item label="推广链接地址" prop="promoteAddr">
           <el-input v-model="form.promoteAddr" placeholder="请输入推广链接地址" />
         </el-form-item>
+        <el-form-item label="区块链地址" prop="blockChainAddr">
+          <el-input v-model="form.blockChainAddr" placeholder="请输入区块链地址" />
+        </el-form-item>
       </el-card>
       <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
@@ -259,9 +262,12 @@ export default {
         ],
         androidVersion: [
           { required: true, message: "安卓版本号不能为空", trigger: "blur" }
-        ], 
+        ],
         force: [
           { required: true, message: "请选择是否强更", trigger: "blur" }
+        ],
+        blockChainAddr: [
+          { required: true, message: "请输入区块链地址", trigger: "blur" }
         ],
       }
     };
