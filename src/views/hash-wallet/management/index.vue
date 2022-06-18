@@ -43,14 +43,14 @@
       <el-form-item label="Usdt地址" prop="hashAddressUsdt">
         <el-input
           v-model="queryParams.hashAddressUsdt"
-          placeholder="请输入Usdt的hash地址"
+          placeholder="请输入TRC地址"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="Trx地址" prop="hashAddressTrx">
+      <el-form-item label="TRC转换地址" prop="hashTransAddressTrx">
         <el-input
-          v-model="queryParams.hashAddressTrx"
+          v-model="queryParams.hashTransAddressTrx"
           placeholder="请输入Trx的hash地址"
           clearable
           @keyup.enter.native="handleQuery"
@@ -154,8 +154,8 @@
           <div>{{scope.row.trxRemoteAmount || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="Usdt的hash地址" align="center" prop="hashAddressUsdt" />
-      <el-table-column label="Trx的hash地址" align="center" prop="hashAddressTrx" />
+      <el-table-column label="TRC地址" align="center" prop="hashAddressUsdt" />
+      <el-table-column label="TRC转换地址" align="center" prop="hashTransAddressTrx" />
       <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal">
         <template slot-scope="scope">
           <div>{{scope.row.usdtRechargeTotal || '-'}}</div>
@@ -206,24 +206,30 @@
 
     <!-- 添加或修改用户钱包对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" label-width="100px">
+      <el-form ref="form" :model="form" label-width="140px">
         <el-form-item label="usdt余额" prop="usdtAmount">
           <el-input v-model="form.usdtAmount" placeholder="usdt余额" />
         </el-form-item>
         <el-form-item label="trx余额" prop="trxAmount">
           <el-input v-model="form.trxAmount" placeholder="trx余额" />
         </el-form-item>
-        <el-form-item label="Usdt地址" prop="hashAddressUsdt">
-          <el-input v-model="form.hashAddressUsdt" placeholder="Usdt的hash地址" />
+        <el-form-item label="TRC地址" prop="hashAddressUsdt">
+          <el-input v-model="form.hashAddressUsdt" placeholder="TRC地址" />
         </el-form-item>
-        <el-form-item label="Trx地址" prop="hashAddressTrx">
-          <el-input v-model="form.hashAddressTrx" placeholder="Trx的hash地址" />
+        <el-form-item label="TRC转换地址" prop="hashTransAddressTrx">
+          <el-input v-model="form.hashTransAddressTrx" placeholder="TRC转换地址" />
         </el-form-item>
-        <el-form-item label="总充值金额" prop="rechargeTotal">
-          <el-input v-model="form.rechargeTotal" placeholder="总充值金额" />
+        <el-form-item label="USDT总充值金额" prop="rechargeTotal">
+          <el-input v-model="form.usdtRechargeTotal" placeholder="USDT总充值金额" />
         </el-form-item>
-        <el-form-item label="总提现金额" prop="withdrawTotal">
-          <el-input v-model="form.withdrawTotal" placeholder="总提现金额" />
+        <el-form-item label="TRX总充值金额" prop="rechargeTotal">
+          <el-input v-model="form.trxRechargeTotal" placeholder="TRX总充值金额" />
+        </el-form-item>
+        <el-form-item label="USDT总提现金额" prop="withdrawTotal">
+          <el-input v-model="form.usdtWithdrawTotal" placeholder="USDT总提现金额" />
+        </el-form-item>
+         <el-form-item label="TRX总提现金额" prop="withdrawTotal">
+          <el-input v-model="form.trxWithdrawTotal" placeholder="TRX总提现金额" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -303,7 +309,7 @@ export default {
         usdtAmount: null,
         trxAmount: null,
         hashAddressUsdt: null,
-        hashAddressTrx: null,
+        hashTransAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
         invitationCode: null
@@ -352,7 +358,7 @@ export default {
         usdtAmount: null,
         trxAmount: null,
         hashAddressUsdt: null,
-        hashAddressTrx: null,
+        hashTransAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
         invitationCode: null
