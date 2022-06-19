@@ -203,7 +203,11 @@
           <div>{{ scope.row.betAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="投注位置" align="center" prop="betPosition" />
+      <el-table-column label="投注位置" align="center" prop="betPosition">
+        <template slot-scope="scope">
+          <div>{{ scope.row.betPosition||"-" }}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="金额状态" align="center" prop="awardAmount">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
