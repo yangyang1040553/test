@@ -40,7 +40,7 @@
               type="daterange"
               range-separator="-"
               :start-placeholder="$t('start_date')"
-              end-placeholder="$t('end_date')"
+              :end-placeholder="$t('end_date')"
             ></el-date-picker>
           </el-form-item>
           <el-form-item>
