@@ -226,7 +226,8 @@
       </el-table-column>
       <el-table-column label="奖金回调" align="center" prop="awardCallback">
         <template slot-scope="scope">
-          <div>{{ scope.row.awardCallback==1?'已回调':'未回调' }}</div>
+          <div v-if="scope.row.awardAmount>0">{{ scope.row.awardCallback==1?'已回调':'未回调' }}</div>
+          <div v-else>-</div>
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note">
