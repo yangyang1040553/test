@@ -237,7 +237,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       this.download(
-        'hash-game/statisticalGame/export',
+        'hash-statistical/gameStatistcalDay/export',
         {
           ...this.queryParams
         },

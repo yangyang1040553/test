@@ -22,6 +22,7 @@
           v-model="queryParams.regCount"
           placeholder="请输入注册次数"
           clearable
+          oninput="value=value.replace(/[^\d]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
