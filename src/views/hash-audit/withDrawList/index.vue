@@ -186,7 +186,13 @@
         <template slot-scope="scope">
           <div>{{(scope.row.amount*1.0/10000).toFixed(2)}}</div>
         </template>
+      </el-table-column> '
+      <el-table-column label="到账金额" align="center" prop="payAmount">
+        <template slot-scope="scope">
+          <div>{{(scope.row.payAmount*1.0/10000).toFixed(2)}}</div>
+        </template>
       </el-table-column>
+      <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="订单状态" align="center" prop="status">
         <template slot-scope="scope">
