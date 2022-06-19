@@ -209,19 +209,29 @@
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column>-->
-      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="200">
+      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="120">
         <template slot-scope="scope">
           <div>{{ scope.row.awardAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="200">
+      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="120">
         <template slot-scope="scope">
           <div>{{ scope.row.incomeAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" width="200">
+      <el-table-column label="手续费" align="center" prop="taxAmount" width="120">
         <template slot-scope="scope">
           <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="奖金回调" align="center" prop="awardCallback">
+        <template slot-scope="scope">
+          <div>{{ scope.row.awardCallback==1?'已回调':'未回调' }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="说明" align="center" prop="note">
+        <template slot-scope="scope">
+          <div>{{ scope.row.note || '-' }}</div>
         </template>
       </el-table-column>
       <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
@@ -417,7 +427,7 @@ export default {
     if (this.$route.query.orderId) {
       this.queryParams.id = this.$route.query.orderId
     }
-     if (this.$route.query.userId) {
+    if (this.$route.query.userId) {
       this.queryParams.userId = this.$route.query.userId
     }
     this.getList()
