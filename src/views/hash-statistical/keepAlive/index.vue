@@ -232,7 +232,7 @@ export default {
       queryParams: {
         type: this.tabPosition,
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 12,
         registerTime: null,
         orderByColumn: 'registerTime',
         isAsc: 'desc',

@@ -38,7 +38,7 @@
       <el-form-item label="充值状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择充值状态" clearable>
           <el-option
-            v-for="dict in dict.type.force"
+            v-for="dict in dict.type.recharge_status"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -229,7 +229,7 @@ import { listRechargeOrder, getRechargeOrder, delRechargeOrder, addRechargeOrder
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "RechargeOrder",
-  dicts: ['force', 'wallet_type'],
+  dicts: [ 'wallet_type','recharge_status'],
   components: {
     UserInfoDialog
   },
