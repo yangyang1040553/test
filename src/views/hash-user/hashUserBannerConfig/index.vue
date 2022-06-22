@@ -98,6 +98,7 @@
       v-loading="loading"
       @sort-change="sortChange"
       :data="hashUserBannerConfigList"
+      :row-class-name="tableRowClassName"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
@@ -253,6 +254,15 @@ export default {
     this.getList()
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.isSkip == 0) {
+        return 'warning-row'
+      }
+      return ''
+    },
     setImageUrl(url) {
       console.log("url==", url)
       this.form.bannerUrl = url

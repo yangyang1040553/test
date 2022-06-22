@@ -75,6 +75,7 @@
       @sort-change="sortChange"
       @selection-change="handleSelectionChange"
       height="600"
+      :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
@@ -83,7 +84,7 @@
       <el-table-column label="验证码" align="center" prop="checkCode" />
       <el-table-column label="IP" align="center" prop="ip" />
       <el-table-column label="时间" align="center" prop="createTime" sortable />
-      <el-table-column label="状态" align="center" prop="ok" >
+      <el-table-column label="状态" align="center" prop="ok">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sms_status" :value="scope.row.ok" />
         </template>
@@ -204,6 +205,15 @@ export default {
     this.getList();
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.ok == 0) {
+        return 'warning-row'
+      }
+      return ''
+    },
     sortChange(val) {
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'

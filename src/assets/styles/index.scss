@@ -298,3 +298,17 @@ aside {
   background-color: #f3e1f0;
   border-color: #ff40de;
 }
+
+.el-table .warning-row {
+  // background-color: rgb(245, 75, 75);
+
+  .cell {
+    color: red !important;
+  }
+
+  // --el-table-row-hover-bg-color: none !important;
+
+  .table-button ,i,span{
+    color: red !important;
+  }
+}

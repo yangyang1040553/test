@@ -138,6 +138,7 @@
       :data="HashUserServiceList"
       @selection-change="handleSelectionChange"
       height="600"
+      :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
@@ -398,6 +399,15 @@ export default {
     this.getList()
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.status == 1) {
+        return 'warning-row'
+      }
+      return ''
+    },
     goToTelegram(row) {
       console.log(row)
       if (row.tgAccount) {
