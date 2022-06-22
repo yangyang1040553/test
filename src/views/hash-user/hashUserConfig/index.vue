@@ -107,6 +107,17 @@
         <el-form-item label="在线客服地址" prop="onlineServiceAddr">
           <el-input v-model="form.onlineServiceAddr" placeholder="请输入在线客服地址" />
         </el-form-item>
+        <el-form-item label="是否官方客服地址" prop="isSelfOnline">
+          <el-switch
+            v-model="form.isSelfOnline"
+            active-color="#13ce66"
+            inactive-color="#34B7EA"
+            active-text="是"
+            :active-value="1"
+            :inactive-value="0"
+            inactive-text="否"
+          ></el-switch>
+        </el-form-item>
         <el-form-item label="官方群组地址" prop="groupAddr">
           <el-input v-model="form.groupAddr" placeholder="请输入官方群组地址" />
         </el-form-item>
@@ -151,7 +162,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" size="mini" @click="submitForm">确 定</el-button>
-      <el-button size="mini" @click="cancel">取 消</el-button>
+      <!-- <el-button size="mini" @click="cancel">取 消</el-button> -->
     </div>
 
     <!-- <pagination
@@ -244,6 +255,9 @@ export default {
         ],
         groupAddr: [
           { required: true, message: "官方群组地址不能为空", trigger: "blur" }
+        ],
+        isSelfOnline: [
+          { required: true, message: "请选择是否官方客服地址", trigger: "blur" }
         ],
         regProtocolAddr: [
           { required: true, message: "用户注册协议地址不能为空", trigger: "blur" }
