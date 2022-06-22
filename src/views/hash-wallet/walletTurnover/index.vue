@@ -288,6 +288,7 @@ export default {
   },
   methods: {
     toOrderList(row) {
+      console.log(row)
       var path = {}
       var query = { orderId: row.linkedOrder }
       //流水类型 1:下注 2:中奖 3:退回 4:佣金提现 5:充值 6:提现 7:转换 8:后台入款 9:后台扣款
@@ -298,7 +299,7 @@ export default {
         path = "/hash-game/widthdrawRecord"
       }
       else if (row.code == 5) {
-        // path = { path: "/hash-game/widthdrawRecord", query: { orderId: row.id } }
+        path = "/wallet/rechargeOrder"
       }
       else if (row.code == 6) {
         path = "/audit/withDrawList"

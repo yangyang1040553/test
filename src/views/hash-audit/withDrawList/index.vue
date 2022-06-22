@@ -78,7 +78,12 @@
         </el-select>
       </el-form-item>
       <el-form-item label="审核状态" prop="checkStatus">
-        <el-select v-model="queryParams.checkStatus" placeholder="请选择审核状态" clearable>
+        <el-select
+          v-model="queryParams.checkStatusType"
+          @change="onTypeSelect"
+          placeholder="请选择审核状态"
+          clearable
+        >
           <el-option
             v-show="dict.value>=2"
             v-for="dict in dict.type.check_status"
@@ -132,7 +137,7 @@
           @click="handleUpdate"
           v-hasPermi="['hash-audit:auditWidthdrawOrder:edit']"
         >修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="danger"
@@ -186,7 +191,7 @@
         <template slot-scope="scope">
           <div>{{(scope.row.amount*1.0/10000).toFixed(2)}}</div>
         </template>
-      </el-table-column> '
+      </el-table-column>'
       <el-table-column label="到账金额" align="center" prop="payAmount">
         <template slot-scope="scope">
           <div>{{(scope.row.payAmount*1.0/10000).toFixed(2)}}</div>
@@ -309,7 +314,7 @@ export default {
         amount: null,
         minerAmount: null,
         status: null,
-        checkStatus: "3",
+        checkStatus: '2,3',
         checkPerson: null,
         createTime: null,
         orderByColumn: 'createTime',
@@ -329,6 +334,9 @@ export default {
     this.getList();
   },
   methods: {
+    onTypeSelect() {
+      this.queryParams.checkStatus = this.queryParams.checkStatusType
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -370,7 +378,7 @@ export default {
         amount: null,
         minerAmount: null,
         status: null,
-        checkStatus: "3",
+        checkStatus: '2,3',
         checkPerson: null,
         remark: null,
         createTime: null,
