@@ -124,7 +124,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="玩家昵称" align="center" op="nickName" width="120" />
+      <el-table-column label="玩家昵称" align="center" prop="nickName" width="120" />
       <el-table-column label="邀请码" align="center" prop="invitationCode" width="120" />
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
