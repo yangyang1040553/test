@@ -132,10 +132,15 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="walletOrderList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      @sort-change="sortChange"
+      :data="walletOrderList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="订单id" align="center" prop="id" />
-      <el-table-column label="交易号" align="center" prop="transactionNo"  width="180"/>
+      <el-table-column label="交易号" align="center" prop="transactionNo" width="180" />
       <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
@@ -169,10 +174,10 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.toWalletType" />
         </template>
       </el-table-column>
-      <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180"/>
-      <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180"/>
-      <el-table-column label="源金额" align="center" prop="sourceAmount" />
-      <el-table-column label="转入金额" align="center" prop="toAmount" />
+      <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180" />
+      <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180" />
+      <el-table-column label="源金额" align="center" prop="sourceAmount" sortable/>
+      <el-table-column label="转入金额" align="center" prop="toAmount" sortable/>
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="转入状态" align="center" prop="status">
         <template slot-scope="scope">
@@ -180,16 +185,16 @@
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
-      <el-table-column label="时间" align="center" prop="createTime"  width="180"/>
+      <el-table-column label="时间" align="center" prop="createTime" width="180"  sortable/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-            <!-- <el-button
+          <!-- <el-button
               size="mini"
               type="text"
               icon="el-icon-edit"
               @click="handleUpdate(scope.row)"
               v-hasPermi="['hash-wallet:walletOrder:edit']"
-            >修改</el-button> -->
+          >修改</el-button>-->
           <el-button
             size="mini"
             type="text"
@@ -318,6 +323,8 @@ export default {
         collectionAddress: null,
         status: null,
         createTime: null,
+        orderByColumn: 'createTime',
+        isAsc: 'asc'
       },
       // 表单参数
       form: {},
@@ -333,6 +340,16 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      this.getList()
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -366,7 +383,9 @@ export default {
         minerAmount: null,
         status: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
+        orderByColumn: 'createTime',
+        isAsc: 'asc'
       };
       this.resetForm("form");
     },
