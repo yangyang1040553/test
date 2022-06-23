@@ -176,16 +176,21 @@
       </el-table-column>
       <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180" />
       <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180" />
-      <el-table-column label="源金额" align="center" prop="sourceAmount" sortable/>
-      <el-table-column label="转入金额" align="center" prop="toAmount" sortable/>
+      <el-table-column label="源金额" align="center" prop="sourceAmount" sortable />
+      <el-table-column label="转入金额" align="center" prop="toAmount" sortable />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="转入状态" align="center" prop="status">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.in_status" :value="scope.row.status" />
+          <dict-tag
+            v-if="scope.row.status"
+            :options="dict.type.in_status"
+            :value="scope.row.status"
+          />
+          <div v-else>{{"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
-      <el-table-column label="时间" align="center" prop="createTime" width="180"  sortable/>
+      <el-table-column label="时间" align="center" prop="createTime" width="180" sortable />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <!-- <el-button
