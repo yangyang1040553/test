@@ -318,7 +318,7 @@ export default {
         checkPerson: null,
         createTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -385,7 +385,7 @@ export default {
         updateTime: null,
         updateBy: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },

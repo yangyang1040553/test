@@ -265,7 +265,7 @@ export default {
         status: null,
         createTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -323,7 +323,7 @@ export default {
         createTime: null,
         updateTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
