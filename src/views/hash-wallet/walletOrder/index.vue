@@ -129,6 +129,12 @@
           v-hasPermi="['hash-wallet:walletOrder:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <div class="curr-money">
+          <div class="money-text">今日转换 TRX: {{currTrx}}</div>
+          <div class="money-text">今日转换 USDT: {{currUsdt}}</div>
+        </div>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -136,6 +142,7 @@
       v-loading="loading"
       @sort-change="sortChange"
       :data="walletOrderList"
+      :row-class-name="tableRowClassName"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
@@ -182,11 +189,11 @@
       <el-table-column label="转入状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag
-            v-if="scope.row.status"
+            v-if="scope.row.status==1"
             :options="dict.type.in_status"
             :value="scope.row.status"
           />
-          <div v-else>{{"-"}}</div>
+          <div v-else>{{"失败"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
@@ -285,7 +292,7 @@
 
 <script>
 import merge from 'webpack-merge'
-import { listWalletOrder, getWalletOrder, delWalletOrder, addWalletOrder, updateWalletOrder } from "@/api/hash-wallet/walletOrder";
+import { listWalletOrder, getWalletOrder, delWalletOrder, addWalletOrder, updateWalletOrder, getCurrDay } from "@/api/hash-wallet/walletOrder";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "WalletOrder",
@@ -335,7 +342,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      currTrx: 0,
+      currUsdt: 0
     };
   },
   created() {
@@ -345,6 +354,15 @@ export default {
     this.getList();
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.status == 1) {
+        return 'green'
+      }
+      return 'red'
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {
@@ -366,6 +384,15 @@ export default {
         this.walletOrderList = response.rows;
         this.total = response.total;
         this.loading = false;
+      });
+      getCurrDay().then(response => {
+        response.rows.forEach(element => {
+          if (element.walletType == 'USDT') {
+            this.currUsdt = element.payAmount
+          } else {
+            this.currTrx = element.payAmount
+          }
+        });
       });
     },
     // 取消按钮
@@ -467,3 +494,16 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.curr-money {
+  height: 28.5px;
+  line-height: 28.5px;
+  display: flex;
+  flex-direction: row;
+
+  .money-text {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+</style>

@@ -228,7 +228,7 @@ aside {
   color: #3dc1a2;
   background-color: #e2f6f2;
   border-color: #3dc1a2;
- 
+
 }
 
 //中奖
@@ -278,6 +278,7 @@ aside {
   background-color: #f0eaf7;
   border-color: #9c40ff;
 }
+
 //退回未到账
 .global-text-return-no {
   color: #5be000;
@@ -308,7 +309,42 @@ aside {
 
   // --el-table-row-hover-bg-color: none !important;
 
-  .table-button ,i,span{
+  .table-button,
+  i,
+  span {
+    color: red !important;
+  }
+}
+
+.el-table .green {
+  // background-color: rgb(245, 75, 75);
+
+  .cell {
+    color: green !important;
+  }
+
+  // --el-table-row-hover-bg-color: none !important;
+
+  .table-button,
+  i,
+  span {
+    color: green !important;
+  }
+}
+
+
+.el-table .red {
+  // background-color: rgb(245, 75, 75);
+
+  .cell {
+    color: red !important;
+  }
+
+  // --el-table-row-hover-bg-color: none !important;
+
+  .table-button,
+  i,
+  span {
     color: red !important;
   }
 }

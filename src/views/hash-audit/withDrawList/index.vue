@@ -159,6 +159,12 @@
           v-hasPermi="['hash-audit:auditWidthdrawOrder:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <div class="curr-money">
+          <div class="money-text">今日提现 TRX: {{currTrx}}</div>
+          <div class="money-text">今日提现 USDT: {{currUsdt}}</div>
+        </div>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -168,6 +174,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       height="600"
+      :row-class-name="tableRowClassName"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="订单id" align="center" prop="id" width="180" />
@@ -270,7 +277,7 @@
 
 <script>
 import merge from 'webpack-merge'
-import { listAuditWidthdrawOrder, getAuditWidthdrawOrder, delAuditWidthdrawOrder, addAuditWidthdrawOrder, updateAuditWidthdrawOrder } from "@/api/hash-audit/auditWidthdrawOrder";
+import { listAuditWidthdrawOrder, getAuditWidthdrawOrder, delAuditWidthdrawOrder, addAuditWidthdrawOrder, updateAuditWidthdrawOrder, getCurrDay } from "@/api/hash-audit/auditWidthdrawOrder";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "AuditWidthdrawOrder",
@@ -324,7 +331,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      currTrx: 0,
+      currUsdt: 0
     };
   },
   created() {
@@ -334,6 +343,15 @@ export default {
     this.getList();
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.status == 3) {
+        return 'green'
+      }
+      return 'red'
+    },
     onTypeSelect() {
       this.queryParams.checkStatus = this.queryParams.checkStatusType
     },
@@ -360,6 +378,17 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+
+      getCurrDay().then(response => {
+        response.rows.forEach(element => {
+          if (element.walletType == 'USDT') {
+            this.currUsdt = element.payAmount
+          } else {
+            this.currTrx = element.payAmount
+          }
+        });
+      });
+
     },
     // 取消按钮
     cancel() {
@@ -462,3 +491,16 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.curr-money {
+  height: 28.5px;
+  line-height: 28.5px;
+  display: flex;
+  flex-direction: row;
+
+  .money-text {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+</style>

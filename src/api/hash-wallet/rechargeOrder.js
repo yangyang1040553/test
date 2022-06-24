@@ -8,6 +8,13 @@ export function listRechargeOrder(query) {
     params: query
   })
 }
+export function getCurrDay(query) {
+  return request({
+    url: '/hash-wallet/rechargeOrder/getCurrDay',
+    method: 'get',
+    params: query
+  })
+}
 
 // 查询充值详细
 export function getRechargeOrder(id) {

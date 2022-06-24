@@ -7,6 +7,14 @@ export function listWalletOrder(query) {
     method: 'get',
     params: query
   })
+} 
+
+export function getCurrDay(query) {
+  return request({
+    url: '/hash-wallet/walletOrder/getCurrDay',
+    method: 'get',
+    params: query
+  })
 }
 
 // 查询转换订单详细

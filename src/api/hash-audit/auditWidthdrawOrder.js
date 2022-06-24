@@ -9,6 +9,14 @@ export function listAuditWidthdrawOrder(query) {
   })
 }
 
+export function getCurrDay(query) {
+  return request({
+    url: '/hash-audit/auditWidthdrawOrder/getCurrDay',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询提现审核详细
 export function getAuditWidthdrawOrder(id) {
   return request({

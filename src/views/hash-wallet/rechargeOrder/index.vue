@@ -103,6 +103,12 @@
           v-hasPermi="['hash-wallet:rechargeOrder:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <div class="curr-money">
+          <div class="money-text">今日充值 TRX: {{currTrx}}</div>
+          <div class="money-text">今日充值 USDT: {{currUsdt}}</div>
+        </div>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -111,6 +117,7 @@
       :data="rechargeOrderList"
       @selection-change="handleSelectionChange"
       height="600"
+      :row-class-name="tableRowClassName"
       @sort-change="sortChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
@@ -141,7 +148,7 @@
           <dict-tag :options="dict.type.force" :value="scope.row.status" />
         </template>
       </el-table-column>
-       <el-table-column label="说明" align="center" prop="note" />
+      <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime }}</span>
@@ -225,11 +232,14 @@
 </template>
 
 <script>
-import { listRechargeOrder, getRechargeOrder, delRechargeOrder, addRechargeOrder, updateRechargeOrder } from "@/api/hash-wallet/rechargeOrder";
+import { listRechargeOrder, getRechargeOrder, delRechargeOrder, addRechargeOrder, updateRechargeOrder, getCurrDay } from "@/api/hash-wallet/rechargeOrder";
+import { getCurrDay as getCurrDayForTrans } from "@/api/hash-wallet/walletOrder";
+
+
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: "RechargeOrder",
-  dicts: [ 'wallet_type','recharge_status'],
+  dicts: ['wallet_type', 'recharge_status'],
   components: {
     UserInfoDialog
   },
@@ -271,13 +281,24 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      currTrx: 0,
+      currUsdt: 0
     };
   },
   created() {
     this.getList();
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.status == 1) {
+        return 'green'
+      }
+      return 'red'
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
@@ -301,6 +322,26 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+
+      getCurrDay().then(response => {
+        response.rows.forEach(element => {
+          if (element.toWalletType == 'USDT') {
+            this.currUsdt = element.amount + this.currUsdt
+          } else {
+            this.currTrx = element.amount + this.currTrx
+          }
+        });
+      });
+      getCurrDayForTrans().then(response => {
+        response.rows.forEach(element => {
+          if (element.toWalletType == 'USDT') {
+            this.currUsdt = element.amount + this.currUsdt
+          } else {
+            this.currTrx = element.amount + this.currTrx
+          }
+        });
+      });
+
     },
     // 取消按钮
     cancel() {
@@ -398,3 +439,16 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.curr-money {
+  height: 28.5px;
+  line-height: 28.5px;
+  display: flex;
+  flex-direction: row;
+
+  .money-text {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+</style>
