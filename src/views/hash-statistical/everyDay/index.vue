@@ -82,7 +82,7 @@
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="日期" align="center" prop="usdtAmountRecharge" sortable />
+      <el-table-column label="今日usdt充值金额" align="center" prop="usdtAmountRecharge" sortable />
       <el-table-column label="今日trx充值金额" align="center" prop="trxAmountRecharge" sortable />
       <el-table-column label="今日usdt提现金额" align="center" prop="usdtAmountWithdraw" sortable />
       <el-table-column label="今日trx提现金额" align="center" prop="trxAmountWithdraw" sortable />
