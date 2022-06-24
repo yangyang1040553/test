@@ -173,7 +173,7 @@
         <el-form-item label="权重" prop="weight">
           <el-input v-model="form.weight" placeholder="请输入公告权重" />
         </el-form-item>
-        <el-form-item label="活动开启" prop="isOpen">
+        <el-form-item label="公告开启" prop="isOpen">
           <el-select v-model="form.isOpen" placeholder="请选择是否开启">
             <el-option
               v-for="dict in dict.type.is_open"
