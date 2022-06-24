@@ -145,7 +145,7 @@
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="充值状态" align="center" prop="status">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.force" :value="scope.row.status" />
+          <dict-tag :options="dict.type.recharge_status" :value="scope.row.status" />
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
