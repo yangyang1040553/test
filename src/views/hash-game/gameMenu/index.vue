@@ -82,7 +82,12 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="gameMenuList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="gameMenuList"
+      @selection-change="handleSelectionChange"
+      :row-class-name="tableRowClassName"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="菜单名称" align="center" prop="menuName" />
@@ -212,6 +217,15 @@ export default {
     this.getList()
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.activity == 1) {
+        return 'green'
+      }
+      return 'red'
+    },
     setImageUrl(param) {
       console.log("url==", param)
       if (param.index == 1) {
