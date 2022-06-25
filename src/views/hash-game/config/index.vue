@@ -146,6 +146,7 @@
       @selection-change="handleSelectionChange"
       height="600"
       @sort-change="sortChange"
+      :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="配置id" align="center" prop="id" />
@@ -431,6 +432,15 @@ export default {
     this.getList()
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.open == 1) {
+        return 'green'
+      }
+      return 'red'
+    },
     getMenuList() {
       listGameMenu({
         pageNum: 1,
