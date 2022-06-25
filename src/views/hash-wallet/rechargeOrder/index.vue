@@ -105,8 +105,10 @@
       </el-col>
       <el-col :span="1.5">
         <div class="curr-money">
-           <div class="money-text">今日充值 TRX: {{(currTrx/10000).toFixed(2)}}</div>
-          <div class="money-text">今日充值 USDT: {{(currUsdt/10000).toFixed(2)}}</div>
+          <!-- <div class="money-text">今日充值 TRX: {{(currTrx/10000).toFixed(2)}}</div> -->
+          <!-- <div class="money-text">今日充值 USDT: {{(currUsdt/10000).toFixed(2)}}</div> -->
+          <div class="money-text">今日充值 TRX: {{currTrx}}</div>
+          <div class="money-text">今日充值 USDT: {{currUsdt}}</div>
         </div>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -322,23 +324,29 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
-
+      this.currUsdt = 0
+      this.currTrx = 0
       getCurrDay().then(response => {
         response.rows.forEach(element => {
-          if (element.toWalletType == 'USDT') {
-            this.currUsdt = element.amount + this.currUsdt
-          } else {
-            this.currTrx = element.amount + this.currTrx
+          if (element.payAmount) {
+            if (element.toWalletType == 'USDT') {
+              this.currUsdt = element.payAmount + this.currUsdt
+            } else {
+              this.currTrx = element.payAmount + this.currTrx
+            }
           }
         });
       });
       getCurrDayForTrans().then(response => {
         response.rows.forEach(element => {
-          if (element.toWalletType == 'USDT') {
-            this.currUsdt = element.amount + this.currUsdt
-          } else {
-            this.currTrx = element.amount + this.currTrx
+          if (element.toAmount) {
+            if (element.toWalletType == 'USDT') {
+              this.currUsdt = element.toAmount + this.currUsdt
+            } else {
+              this.currTrx = element.toAmount + this.currTrx
+            }
           }
+
         });
       });
 

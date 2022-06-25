@@ -131,8 +131,11 @@
       </el-col>
       <el-col :span="1.5">
         <div class="curr-money">
-          <div class="money-text">今日转换 TRX: {{(currTrx/10000).toFixed(2)}}</div>
-          <div class="money-text">今日转换 USDT: {{(currUsdt/10000).toFixed(2)}}</div>
+          <!-- <div class="money-text">今日转换 TRX: {{(currTrx/10000).toFixed(2)}}</div>
+          <div class="money-text">今日转换 USDT: {{(currUsdt/10000).toFixed(2)}}</div>-->
+
+          <div class="money-text">今日转换 TRX: {{currTrx}}</div>
+          <div class="money-text">今日转换 USDT: {{currUsdt}}</div>
         </div>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -198,15 +201,8 @@
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="时间" align="center" prop="createTime" width="180" sortable />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <!-- <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-edit"
-              @click="handleUpdate(scope.row)"
-              v-hasPermi="['hash-wallet:walletOrder:edit']"
-          >修改</el-button>-->
           <el-button
             size="mini"
             type="text"
@@ -215,7 +211,7 @@
             v-hasPermi="['hash-wallet:walletOrder:remove']"
           >删除</el-button>
         </template>
-      </el-table-column>
+      </el-table-column>-->
     </el-table>
 
     <pagination
@@ -385,12 +381,16 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+      this.currUsdt = 0
+      this.currTrx = 0
       getCurrDay().then(response => {
         response.rows.forEach(element => {
-          if (element.walletType == 'USDT') {
-            this.currUsdt = element.payAmount
-          } else {
-            this.currTrx = element.payAmount
+          if (element.toAmount) {
+            if (element.toWalletType == 'USDT') {
+              this.currUsdt = element.toAmount + this.currUsdt
+            } else {
+              this.currTrx = element.toAmount + this.currTrx
+            }
           }
         });
       });

@@ -378,13 +378,16 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
-
+      this.currUsdt = 0
+      this.currTrx = 0
       getCurrDay().then(response => {
         response.rows.forEach(element => {
-          if (element.walletType == 'USDT') {
-            this.currUsdt = element.payAmount
-          } else {
-            this.currTrx = element.payAmount
+          if (element.payAmount) {
+            if (element.walletType == 'USDT') {
+              this.currUsdt = element.payAmount
+            } else {
+              this.currTrx = element.payAmount
+            }
           }
         });
       });
