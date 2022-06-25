@@ -87,6 +87,7 @@
       :data="gameMenuList"
       @selection-change="handleSelectionChange"
       :row-class-name="tableRowClassName"
+      height="600"
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
