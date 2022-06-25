@@ -102,6 +102,7 @@
       :data="hashUserNoticeList"
       @selection-change="handleSelectionChange"
       height="600"
+      :row-class-name="tableRowClassName"
       @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
@@ -269,6 +270,15 @@ export default {
     this.getList();
   },
   methods: {
+    tableRowClassName({
+      row,
+      rowIndex,
+    }) {
+      if (row.isOpen == 1) {
+        return 'green'
+      }
+      return 'red'
+    },
     sortChange(val) {
       console.log(val)
       if (val.order && val.order == 'descending') {

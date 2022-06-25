@@ -260,10 +260,10 @@ export default {
       row,
       rowIndex,
     }) {
-      if (row.open == 0) {
-        return 'warning-row'
+      if (row.open == 1) {
+        return 'green'
       }
-      return ''
+      return 'red'
     },
     setImageUrl(url) {
       console.log("url==", url)

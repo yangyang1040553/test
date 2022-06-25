@@ -131,8 +131,8 @@
       </el-col>
       <el-col :span="1.5">
         <div class="curr-money">
-          <div class="money-text">今日转换 TRX: {{currTrx}}</div>
-          <div class="money-text">今日转换 USDT: {{currUsdt}}</div>
+          <div class="money-text">今日转换 TRX: {{(currTrx/10000).toFixed(2)}}</div>
+          <div class="money-text">今日转换 USDT: {{(currUsdt/10000).toFixed(2)}}</div>
         </div>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>

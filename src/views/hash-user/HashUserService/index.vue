@@ -403,10 +403,10 @@ export default {
       row,
       rowIndex,
     }) {
-      if (row.status == 1) {
-        return 'warning-row'
+      if (row.status == 0) {
+        return 'green'
       }
-      return ''
+      return 'red'
     },
     goToTelegram(row) {
       console.log(row)
