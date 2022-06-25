@@ -187,6 +187,7 @@
       </el-table-column>
       <el-table-column label="收款地址" align="center" prop="collectionAddress" />
       <el-table-column label="创建时间" align="center" prop="createTime" sortable />
+      <el-table-column label="说明" align="center" prop="note"  />
       <!-- <el-table-column label="矿工费" align="center" prop="minerAmount" /> -->
       <!-- <el-table-column label="订单状态" align="center" prop="status">
         <template slot-scope="scope">

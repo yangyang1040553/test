@@ -132,7 +132,7 @@
           @click="handleUpdate"
           v-hasPermi="['hash-audit:auditWidthdrawOrder:edit']"
         >修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="danger"
@@ -182,7 +182,7 @@
       </el-table-column>
       <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180" />
       <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180" />
-      <el-table-column label="提现金额" align="center" prop="amount" >
+      <el-table-column label="提现金额" align="center" prop="amount">
         <template slot-scope="scope">
           <div>{{(scope.row.amount*1.0/10000).toFixed(2)}}</div>
         </template>
@@ -201,6 +201,7 @@
       <el-table-column label="创建时间" align="center" prop="createTime" sortable width="180" />
       <!-- <el-table-column label="更新时间" align="center" prop="updateTime" sortable width="180" /> -->
       <el-table-column label="审核人" align="center" prop="checkPerson" />
+      <el-table-column label="说明" align="center" prop="note" />
       <!-- <el-table-column label="后台备注" align="center" prop="remark" /> -->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
