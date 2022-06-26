@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-dialog title :visible.sync="isOpen" width="1000px" append-to-body @close="cancel">
-      <el-form ref="form" class="form" :model="form" label-width="120px">
+      <el-form ref="form" class="form" :model="form" label-width="120px" disabled>
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
-            <el-input v-model="form.areaCode" placeholder />
+            <el-input :value="form.areaCode|| '-'" placeholder />
             <!-- <span class="label">{{ form.areaCode || "-"}}</span> -->
           </el-form-item>
           <el-form-item label="手机号" prop="phone">
@@ -33,16 +33,16 @@
             <el-input v-model="form.nickName" placeholder />
           </el-form-item>
           <el-form-item label="一级代理人数" prop="level1Person">
-            <el-input v-model="form.level1Person" placeholder />
+            <el-input :value="form.level1Person||0.00" placeholder />
           </el-form-item>
           <el-form-item label="二级代理人数" prop="level2Person">
-            <el-input v-model="form.level2Person" placeholder />
+            <el-input :value="form.level2Person||0.00" placeholder />
           </el-form-item>
           <el-form-item label="三级代理人数" prop="level3Person">
-            <el-input v-model="form.level3Person" placeholder />
+            <el-input :value="form.level3Person||0.00" placeholder />
           </el-form-item>
           <el-form-item label="总代理人数" prop="sumNumber">
-            <el-input v-model="form.sumNumber" placeholder />
+            <el-input :value="form.sumNumber||0.00" placeholder />
           </el-form-item>
           <el-form-item label="返佣赔率" prop="promoteOdds">
             <el-input v-model="form.promoteOdds" placeholder />
@@ -51,7 +51,13 @@
             <el-input v-model="form.sharePromoteOdds" placeholder />
           </el-form-item>
           <el-form-item label="用户备注" prop="noteName">
-            <el-input v-model="form.noteName" placeholder="请输入用户备注" />
+            <el-input v-model="form.noteName" placeholder />
+          </el-form-item>
+          <el-form-item label="TRC地址" prop="hashAddressTrx">
+            <el-input v-model="form.hashAddressTrx" placeholder />
+          </el-form-item>
+          <el-form-item label="TRC转换地址" prop="hashTransAddressTrx">
+            <el-input v-model="form.hashTransAddressTrx" placeholder />
           </el-form-item>
         </div>
         <div class="line"></div>
@@ -61,14 +67,14 @@
           </el-form-item>-->
           <el-form-item label="今日投注金额">
             <!-- <span class="label">{{ form.betAmount ||0.00}}</span> -->
-            <el-input v-model="form.betAmount" placeholder />
+            <el-input :value="form.betAmount||0.00" placeholder />
           </el-form-item>
           <el-form-item label="今日充值金额">
-            <el-input v-model="form.inAmount" placeholder />
+            <el-input :value="form.inAmount||0.00" placeholder />
             <!-- <span class="label">{{ form.inAmount ||0.00}}</span> -->
           </el-form-item>
           <el-form-item label="今日提现金额">
-            <el-input v-model="form.outAmount" placeholder />
+            <el-input :value="form.outAmount||0.00" placeholder />
             <!-- <span class="label">{{ form.outAmount ||0.00}}</span> -->
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
@@ -127,20 +133,20 @@
               v-model="form.loginTime"
               type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
-              placeholder="请选择登录时间"
+              placeholder
             ></el-date-picker>
           </el-form-item>
           <el-form-item label="登录ip" prop="loginIp">
             <el-input v-model="form.loginIp" placeholder />
           </el-form-item>
           <el-form-item label="用户备注" prop="noteName">
-            <el-input v-model="form.noteName" placeholder="请输入用户备注" />
+            <el-input v-model="form.noteName" placeholder />
           </el-form-item>
           <el-form-item label="飞机ID" prop="tgId">
-            <el-input v-model="form.tgId" placeholder="请输入飞机ID" />
+            <el-input v-model="form.tgId" placeholder />
           </el-form-item>
           <el-form-item label="飞机账号" prop="tgAccount">
-            <el-input v-model="form.tgAccount" placeholder="请输入飞机账号" />
+            <el-input v-model="form.tgAccount" placeholder />
           </el-form-item>
         </div>
       </el-form>
@@ -194,6 +200,21 @@ export default {
     margin-left: 10px;
     height: 100vh;
     background: gainsboro;
+  }
+}
+
+::v-deep .el-input.is-disabled .el-input__inner {
+  background-color: #f5f7fa;
+  border-color: #dfe4ed;
+  color: #1890ff !important;
+  cursor: not-allowed;
+
+  .el-input__icon:after {
+    content: none;
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 </style>
