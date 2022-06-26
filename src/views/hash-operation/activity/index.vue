@@ -322,14 +322,14 @@ export default {
           this.valueText = '奖励'
         } else if (id == 2) {
           this.keyText = '亏损'
-          this.valueText = '赠送'
+          this.valueText = '赠送%'
         } else if (id == 3) {
           this.keyText = '次数'
           this.valueText = '奖励'
         }
         else if (id == 4) {
           this.keyText = '连赢'
-          this.valueText = '奖励'
+          this.valueText = '奖励%'
         }
         else if (id == 5) {
           this.keyText = '累计'
@@ -387,7 +387,8 @@ export default {
 
   .box-lable {
     height: 32px;
-    width: 100px;
+    width: 60px;
+    min-width: 60px;
     display: flex;
     justify-content: center;
     line-height: 32px;
