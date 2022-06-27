@@ -86,6 +86,7 @@
       v-loading="loading"
       :data="versionList"
       height="600"
+      @sort-change="sortChange"
       @selection-change="handleSelectionChange"
       :row-class-name="tableRowClassName"
     >
@@ -97,19 +98,19 @@
           <dict-tag :options="dict.type.devices_type" :value="scope.row.platfrom" />
         </template>
       </el-table-column>
-      <el-table-column label="版本号" align="center" prop="version" />
-      <el-table-column label="更新至版本号" align="center" prop="upToVersion" />
+      <el-table-column label="版本号" align="center" prop="version"  sortable/>
+      <el-table-column label="更新至版本号" align="center" prop="upToVersion"  sortable/>
       <el-table-column label="是否强更" align="center" prop="force">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.force" :value="scope.row.force" />
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
@@ -226,6 +227,8 @@ export default {
         upToVersion: null,
         force: null,
         createTime: null,
+        orderByColumn: 'version',
+        isAsc: 'desc'
       },
       // 表单参数
       form: {},
@@ -251,6 +254,16 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      this.getList()
+    },
     tableRowClassName({
       row,
       rowIndex,
@@ -282,7 +295,9 @@ export default {
         upToVersion: null,
         force: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
+        orderByColumn: 'version',
+        isAsc: 'desc'
       };
       this.resetForm("form");
     },
