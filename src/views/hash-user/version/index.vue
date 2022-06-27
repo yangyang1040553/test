@@ -93,13 +93,13 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="下载地址" align="center" prop="downloadUrl" />
-      <el-table-column label="平台" align="center" prop="platfrom">
+      <el-table-column label="平台" align="center" prop="platfrom" sortable>
         <template slot-scope="scope">
           <dict-tag :options="dict.type.devices_type" :value="scope.row.platfrom" />
         </template>
       </el-table-column>
-      <el-table-column label="版本号" align="center" prop="version"  sortable/>
-      <el-table-column label="更新至版本号" align="center" prop="upToVersion"  sortable/>
+      <el-table-column label="版本号" align="center" prop="version" sortable />
+      <el-table-column label="更新至版本号" align="center" prop="upToVersion" sortable />
       <el-table-column label="是否强更" align="center" prop="force">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.force" :value="scope.row.force" />
@@ -166,13 +166,6 @@
             oninput="value=value.replace(/[^\d\.]/g,'')"
           />
         </el-form-item>
-        <el-form-item label="更新至版本号" prop="upToVersion">
-          <el-input
-            v-model="form.upToVersion"
-            placeholder="请输入更新至版本号"
-            oninput="value=value.replace(/[^\d\.]/g,'')"
-          />
-        </el-form-item>
         <el-form-item label="是否强更" prop="force">
           <el-select v-model="form.force" placeholder="请选择是否强更">
             <el-option
@@ -182,6 +175,13 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="更新至版本号" prop="upToVersion">
+          <el-input
+            v-model="form.upToVersion"
+            placeholder="请输入更新至版本号"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -222,7 +222,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        platfrom: null,
+        platfrom: "ANDROID",
         version: null,
         upToVersion: null,
         force: null,
@@ -231,7 +231,8 @@ export default {
         isAsc: 'desc'
       },
       // 表单参数
-      form: {},
+      form: {
+      },
       // 表单校验
       rules: {
         downloadUrl: [
@@ -245,6 +246,9 @@ export default {
         ],
         force: [
           { required: true, message: "请选择是否强更", trigger: "blur" }
+        ],
+        upToVersion: [
+          // { required: this.form && this.form.force == 1, message: "请输入更新指定版本号", trigger: "blur" }
         ],
 
       }
@@ -268,7 +272,7 @@ export default {
       row,
       rowIndex,
     }) {
-      if (row.force == 0) {
+      if (row.force == 1) {
         return 'red'
       }
     },
