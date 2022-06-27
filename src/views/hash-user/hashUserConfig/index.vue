@@ -131,12 +131,16 @@
           <el-input v-model="form.blockChainAddr" placeholder="请输入区块链地址" />
         </el-form-item>
       </el-card>
-      <el-card class="box-card">
+      <!-- <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
           <el-input v-model="form.iosDownloadAddr" placeholder="请输入ios下载地址" />
         </el-form-item>
         <el-form-item label="ios版本号" prop="iosVersion">
-          <el-input v-model="form.iosVersion" placeholder="请输入ios版本号" />
+          <el-input
+            v-model="form.iosVersion"
+            placeholder="请输入ios版本号"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+          />
         </el-form-item>
       </el-card>
       <el-card class="box-card">
@@ -144,7 +148,11 @@
           <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
         </el-form-item>
         <el-form-item label="安卓版本号" prop="androidVersion">
-          <el-input v-model="form.androidVersion" placeholder="请输入安卓版本号" />
+          <el-input
+            v-model="form.androidVersion"
+            placeholder="请输入安卓版本号"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+          />
         </el-form-item>
       </el-card>
       <el-card class="box-card">
@@ -158,7 +166,7 @@
             />
           </el-select>
         </el-form-item>
-      </el-card>
+      </el-card> -->
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" size="mini" @click="submitForm">确 定</el-button>
@@ -314,15 +322,6 @@ export default {
         groupAddr: null,
         regProtocolAddr: null,
         promoteAddr: null,
-        iosDownloadAddr: null,
-        iosVersion: null,
-        androidDownloadAddr: null,
-        androidVersion: null,
-        createTime: null,
-        createBy: null,
-        updateTime: null,
-        updateBy: null,
-        force: null,
       };
       this.resetForm("form");
     },
