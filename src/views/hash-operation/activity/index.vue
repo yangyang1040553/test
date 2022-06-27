@@ -150,8 +150,7 @@
             />
           </el-select>
         </el-form-item>
-        <div v-if="type==1">
-          <el-form-item label="是否开启" prop="isOpen">
+         <el-form-item label="是否开启" prop="isOpen">
             <el-select v-model="form.isOpen" placeholder="请选择是否开启" clearable>
               <el-option
                 v-for="dict in dict.type.is_open"
@@ -161,6 +160,7 @@
               />
             </el-select>
           </el-form-item>
+        <div v-if="type==1">
           <el-form-item label="配置数据" prop="json">
             <div class="box" v-for="(item,index) in jsonArray" :key="index">
               <div class="box-lable">{{keyText}}</div>
