@@ -35,7 +35,7 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
+      <!-- <el-col :span="1.5">
         <el-button
           type="primary"
           plain
@@ -44,7 +44,7 @@
           @click="handleAdd"
           v-hasPermi="['hash-operation:activity:add']"
         >新增</el-button>
-      </el-col>
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="success"
@@ -55,7 +55,7 @@
           @click="handleUpdate"
           v-hasPermi="['hash-operation:activity:edit']"
         >修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="danger"
@@ -139,53 +139,112 @@
 
     <!-- 添加或修改运营活动对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="from">
-        <el-form-item label="是否开启" prop="isOpen">
-          <el-select v-model="form.isOpen" placeholder="请选择是否开启" clearable>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px" class="from">
+        <el-form-item label="活动类型" prop="id">
+          <el-select v-model="selectValue" @change="onSelectChange" placeholder="请选择活动类型" clearable>
             <el-option
-              v-for="dict in dict.type.is_open"
+              v-for="dict in dict.type.operation_type"
               :key="dict.value"
               :label="dict.label"
-              :value="parseInt(dict.value)"
+              :value="dict.value"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="配置数据" prop="json">
-          <div class="box" v-for="(item,index) in jsonArray" :key="index">
-            <div class="box-lable">{{keyText}}</div>
-            <el-input
-              class="input-text"
-              oninput="value=value.replace(/[^\d\.]/g,'')"
-              v-model="item.key"
-              type="text"
-              placeholder="请输入内容"
-            />
-            <div class="box-lable">{{valueText}}</div>
-            <el-input
-              class="input-text"
-              oninput="value=value.replace(/[^\d\.]/g,'')"
-              v-model="item.value"
-              type="text"
-              placeholder="请输入内容"
-            />
-            <el-select
-              class="input-text"
-              v-model="item.walletType"
-              placeholder="请选择是钱包类型"
-              clearable
-              prop="walletType"
-            >
+        <div v-if="type==1">
+          <el-form-item label="是否开启" prop="isOpen">
+            <el-select v-model="form.isOpen" placeholder="请选择是否开启" clearable>
               <el-option
-                v-for="dict in dict.type.wallet_type"
+                v-for="dict in dict.type.is_open"
                 :key="dict.value"
                 :label="dict.label"
-                :value="dict.value"
+                :value="parseInt(dict.value)"
               />
             </el-select>
-            <div class="add global-bg-blue" @click="addJson">+</div>
-            <div class="reduce global-bg-red" @click="reduceJson(index)">-</div>
-          </div>
-        </el-form-item>
+          </el-form-item>
+          <el-form-item label="配置数据" prop="json">
+            <div class="box" v-for="(item,index) in jsonArray" :key="index">
+              <div class="box-lable">{{keyText}}</div>
+              <el-input
+                class="input-text"
+                oninput="value=value.replace(/[^\d\.]/g,'')"
+                v-model="item.key"
+                type="text"
+                placeholder="请输入内容"
+              />
+              <div class="box-lable">{{valueText}}</div>
+              <el-input
+                class="input-text"
+                oninput="value=value.replace(/[^\d\.]/g,'')"
+                v-model="item.value"
+                type="text"
+                placeholder="请输入内容"
+              />
+              <el-select
+                class="input-text"
+                v-model="item.walletType"
+                placeholder="请选择是钱包类型"
+                clearable
+                prop="walletType"
+              >
+                <el-option
+                  v-for="dict in dict.type.wallet_type"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                />
+              </el-select>
+              <div class="add global-bg-blue" @click="addJson">+</div>
+              <div class="reduce global-bg-red" @click="reduceJson(index)">-</div>
+            </div>
+          </el-form-item>
+        </div>
+        <div v-else>
+          <el-form-item label="累计下注日" prop="day">
+            <el-input
+              class="input-text"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
+              v-model="form.day"
+              type="text"
+              placeholder="请输入天数"
+            />
+          </el-form-item>
+          <el-form-item label="每日注数" prop="bet">
+            <el-input
+              class="input-text"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
+              v-model="form.bet"
+              type="text"
+              placeholder="请输入每日投注数"
+            />
+          </el-form-item>
+          <el-form-item label="赠送" prop="betAward">
+            <el-input
+              class="input-text"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
+              v-model="form.betAward"
+              type="text"
+              placeholder="请输入赠送USDT数量"
+            />
+          </el-form-item>
+          <el-form-item label="邀请人数" prop="inviteBetAward">
+            <el-input
+              class="input-text"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
+              v-model="form.inviteBetAward"
+              type="text"
+              placeholder="请输入邀请人数"
+            />
+          </el-form-item>
+          <el-form-item label="上线人数" prop="inviteLimit">
+            <el-input
+              class="input-text"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
+              v-model="form.inviteLimit"
+              type="text"
+              placeholder="请输入在线人数"
+            />
+          </el-form-item>
+        </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -203,6 +262,7 @@ export default {
   dicts: ['operation_type', 'is_open', 'wallet_type'],
   data() {
     return {
+      selectValue: '',
       // 遮罩层
       loading: true,
       // 选中数组
@@ -221,9 +281,11 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      openWin: false,
       jsonArray: [],
       keyText: '',
       valueText: '',
+      type: 1,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -237,6 +299,11 @@ export default {
       rules: {
         isOpen: [{ required: true, message: '请选择是否开启', trigger: 'blur' }],
         walletType: [{ required: true, message: '请选择活动类型', trigger: 'blur' }],
+        day: [{ required: true, message: '请输入天数', trigger: 'blur' }],
+        bet: [{ required: true, message: '请输入每日投注数', trigger: 'blur' }],
+        betAward: [{ required: true, message: '请输入赠送USDT数量', trigger: 'blur' }],
+        inviteBetAward: [{ required: true, message: '请输入邀请人数', trigger: 'blur' }],
+        inviteLimit: [{ required: true, message: '请输入在线人数', trigger: 'blur' }],
       }
     };
   },
@@ -244,6 +311,31 @@ export default {
     this.getList();
   },
   methods: {
+    onSelectChange(id) {
+      if (id == 1) {
+        this.keyText = '累计'
+        this.valueText = '奖励'
+        this.type = 1
+      } else if (id == 2) {
+        this.keyText = '亏损'
+        this.valueText = '赠送%'
+        this.type = 1
+      } else if (id == 3) {
+        this.keyText = '次数'
+        this.valueText = '奖励'
+        this.type = 1
+      }
+      else if (id == 4) {
+        this.keyText = '连赢'
+        this.valueText = '奖励%'
+        this.type = 1
+      }
+      else if (id == 5) {
+        this.keyText = '累计'
+        this.valueText = '奖励'
+        this.type = 2
+      }
+    },
     tableRowClassName({
       row,
       rowIndex,
@@ -307,6 +399,13 @@ export default {
       this.reset();
       this.open = true;
       this.title = "添加运营活动";
+      this.type == 1;
+      this.keyText = '累计'
+      this.valueText = '奖励'
+      this.selectValue = '1';
+      if (this.jsonArray.length == 0) {
+        this.jsonArray.push({})
+      }
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -316,32 +415,71 @@ export default {
         this.form = response.data;
         this.open = true;
         this.title = "修改运营活动";
-        this.jsonArray = JSON.parse(response.data.json)
+
         if (id == 1) {
           this.keyText = '累计'
           this.valueText = '奖励'
+          this.type = 1
+          this.selectValue = '1'
         } else if (id == 2) {
           this.keyText = '亏损'
           this.valueText = '赠送%'
+          this.type = 1
+          this.selectValue = '2'
         } else if (id == 3) {
           this.keyText = '次数'
           this.valueText = '奖励'
+          this.type = 1
+          this.selectValue = '3'
         }
         else if (id == 4) {
           this.keyText = '连赢'
           this.valueText = '奖励%'
+          this.type = 1
+          this.selectValue = '4'
         }
         else if (id == 5) {
           this.keyText = '累计'
           this.valueText = '奖励'
+          this.type = 2
+          this.selectValue = '5'
         }
+
+        if (this.type == 1) {
+          this.jsonArray = JSON.parse(response.data.json)
+          if (this.jsonArray.length == 0) {
+            this.jsonArray.push({})
+          }
+        } else {
+          var json = JSON.parse(response.data.json)
+          let res = {}
+          res.day = json.day
+          res.bet = json.bet
+          res.betAward = json.betAward
+          res.inviteBetAward = json.inviteBetAward
+          res.inviteLimit = json.inviteLimit
+          this.form = { ... this.form, ...res }
+          console.log(this.form)
+        }
+
       });
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.form.json = JSON.stringify(this.jsonArray)
+          if (this.type == 1) {
+            this.form.json = JSON.stringify(this.jsonArray)
+          } else {
+            let json = {}
+            json.day = this.form.day
+            json.bet = this.form.bet
+            json.betAward = this.form.betAward
+            json.inviteBetAward = this.form.inviteBetAward
+            json.inviteLimit = this.form.inviteLimit
+            this.form.json = JSON.stringify(json)
+          }
+
           if (this.form.id != null) {
             updateActivity(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
