@@ -118,6 +118,13 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['hash-operation:activity:edit']"
           >修改</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleContent(scope.row)"
+            v-hasPermi="['hash-operation:activity:edit']"
+          >编辑活动内容</el-button>
           <!-- <el-button
             size="mini"
             type="text"
@@ -257,6 +264,18 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="编辑活动富文本" :visible.sync="openEdit" width="1000px" append-to-body>
+      <el-form ref="conetntForm" :model="form" :rules="rules" label-width="100px" class="form">
+        <el-form-item label="公告内容" prop="content">
+          <editor v-model="form.content" :min-height="360" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitFormContent">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -271,6 +290,7 @@ export default {
       selectValue: '',
       // 遮罩层
       loading: true,
+      openEdit: false,
       // 选中数组
       ids: [],
       // 非单个禁用
@@ -310,6 +330,7 @@ export default {
         betAward: [{ required: true, message: '请输入赠送USDT数量', trigger: 'blur' }],
         inviteBetAward: [{ required: true, message: '请输入邀请人数', trigger: 'blur' }],
         inviteLimit: [{ required: true, message: '请输入在线人数', trigger: 'blur' }],
+        content: [{ required: true, message: '请编辑活动内容', trigger: 'blur' }],
       }
     };
   },
@@ -371,6 +392,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.openEdit = false;
       this.reset();
     },
     // 表单重置
@@ -413,6 +435,16 @@ export default {
         this.jsonArray.push({})
       }
     },
+
+    handleContent(row) {
+      this.reset();
+      const id = row.id || this.ids
+      getActivity(id).then(response => {
+        this.form = response.data;
+        this.openEdit = true;
+      })
+    },
+
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
@@ -469,6 +501,20 @@ export default {
         }
 
       });
+    },
+
+    submitFormContent() {
+      this.$refs["conetntForm"].validate(valid => {
+        if (valid) {
+          if (this.form.id != null) {
+            updateActivity(this.form).then(response => {
+              this.$modal.msgSuccess("修改成功");
+              this.openEdit = false;
+              this.getList();
+            });
+          }
+        }
+      })
     },
     /** 提交按钮 */
     submitForm() {
@@ -563,9 +609,13 @@ export default {
   // flex: 1;
   height: 60vh;
 
-  .text-box{
+  .text-box {
     margin-left: 100px;
     color: red;
   }
+}
+
+.form {
+  height: 400px;
 }
 </style>
