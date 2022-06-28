@@ -150,16 +150,16 @@
             />
           </el-select>
         </el-form-item>
-         <el-form-item label="是否开启" prop="isOpen">
-            <el-select v-model="form.isOpen" placeholder="请选择是否开启" clearable>
-              <el-option
-                v-for="dict in dict.type.is_open"
-                :key="dict.value"
-                :label="dict.label"
-                :value="parseInt(dict.value)"
-              />
-            </el-select>
-          </el-form-item>
+        <el-form-item label="是否开启" prop="isOpen">
+          <el-select v-model="form.isOpen" placeholder="请选择是否开启" clearable>
+            <el-option
+              v-for="dict in dict.type.is_open"
+              :key="dict.value"
+              :label="dict.label"
+              :value="parseInt(dict.value)"
+            />
+          </el-select>
+        </el-form-item>
         <div v-if="type==1">
           <el-form-item label="配置数据" prop="json">
             <div class="box" v-for="(item,index) in jsonArray" :key="index">
@@ -244,6 +244,12 @@
               placeholder="请输入在线人数"
             />
           </el-form-item>
+          <div class="text-box">
+            <div>规则说明：</div>
+            <div>1. 累计下注7⽇ 每⽇3注 不计输赢 送68.8U</div>
+            <div>2. 通过“推⼴代理” 链接邀请好友下注，每邀请⼀⼈ 送 1USDT 上线10⼈</div>
+            <div>3. ⼋局包赔： 每周前⼋局内 第⼀局：输局 退回下注⾦额（有效期：4周）</div>
+          </div>
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -556,5 +562,10 @@ export default {
   // display: flex;
   // flex: 1;
   height: 60vh;
+
+  .text-box{
+    margin-left: 100px;
+    color: red;
+  }
 }
 </style>
