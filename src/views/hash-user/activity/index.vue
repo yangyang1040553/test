@@ -115,6 +115,11 @@
       <el-table-column label="活动名称" align="center" prop="name" />
       <el-table-column label="banner" align="center" prop="bannerUrl" />
       <el-table-column label="落地页" align="center" prop="landingPageUrl" />
+      <el-table-column label="活动类型" align="center" prop="operationId">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.operation_type" :value="scope.row.operationId" />
+        </template>
+      </el-table-column>
       <el-table-column label="是否开启" align="center" prop="open">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.open" />
@@ -189,6 +194,16 @@
             placeholder="请选择结束时间"
           ></el-date-picker>
         </el-form-item>
+        <el-form-item label="活动类型" prop="operationId">
+          <el-select v-model="form.operationId" placeholder="请选择活动类型">
+            <el-option
+              v-for="dict in dict.type.operation_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="banner" prop="bannerUrl">
           <UploadVue :url="form.bannerUrl" @setImageUrl="setImageUrl" />
         </el-form-item>
@@ -203,10 +218,11 @@
 
 <script>
 import { listActivity, getActivity, delActivity, addActivity, updateActivity } from '@/api/hash-user/activity'
+// import { listActivity as operaListActivity } from "@/api/hash-operation/activity";
 import UploadVue from '../../components/upload/Upload.vue'
 export default {
   name: 'Activity',
-  dicts: ['is_open'],
+  dicts: ['is_open', 'operation_type'],
   components: { UploadVue },
   data() {
     return {
@@ -248,8 +264,10 @@ export default {
         bannerUrl: [{ required: true, message: 'banner图的链接不能为空', trigger: 'blur' }],
         landingPageUrl: [{ required: true, message: '落地页URL地址不能为空', trigger: 'blur' }],
         open: [{ required: true, message: '状态不能为空', trigger: 'change' }],
-        finishTime: [{ required: true, message: '结束时间不能为空', trigger: 'blur' }]
-      }
+        finishTime: [{ required: true, message: '结束时间不能为空', trigger: 'blur' }],
+        operationId: [{ required: true, message: '请选择活动类型', trigger: 'blur' }],
+      },
+      operaList: []
     }
   },
   created() {
@@ -343,6 +361,10 @@ export default {
         this.open = true
         this.title = '修改用户的活动'
       })
+      // operaListActivity().then(response => {
+      //   this.operaList = response.data
+      // })
+
     },
     /** 提交按钮 */
     submitForm() {
