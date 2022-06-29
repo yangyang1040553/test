@@ -133,6 +133,7 @@
           <dict-tag :options="dict.type.is_send" :value="scope.row.status" />
         </template>
       </el-table-column>
+      <el-table-column label="说明" align="center" prop="note" sortable/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
