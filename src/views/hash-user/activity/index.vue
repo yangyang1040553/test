@@ -113,7 +113,11 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="活动名称" align="center" prop="name" />
-      <el-table-column label="banner" align="center" prop="bannerUrl" />
+      <el-table-column label="banner" align="center" prop="bannerUrl" width="200">
+        <template slot-scope="scope">
+          <img style="height:90px;" :src="scope.row.bannerUrl" />
+        </template>
+      </el-table-column>
       <el-table-column label="落地页" align="center" prop="landingPageUrl" />
       <el-table-column label="活动类型" align="center" prop="operationId">
         <template slot-scope="scope">
