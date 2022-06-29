@@ -88,7 +88,6 @@
       height="600"
       @sort-change="sortChange"
       @selection-change="handleSelectionChange"
-      :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
@@ -99,10 +98,19 @@
         </template>
       </el-table-column>
       <el-table-column label="版本号" align="center" prop="version" sortable />
+      <el-table-column label="版本类型" align="center" prop="versionType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.version_type" :value="scope.row.versionType" />
+        </template>
+      </el-table-column>
       <el-table-column label="更新至版本号" align="center" prop="upToVersion" sortable />
       <el-table-column label="是否强更" align="center" prop="force">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.force" :value="scope.row.force" />
+          <dict-tag
+            :class="scope.row.force==1?'global-text-red':''"
+            :options="dict.type.force"
+            :value="scope.row.force"
+          />
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
@@ -129,6 +137,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
+            v-if="scope.row.versionType !=0 "
             v-hasPermi="['hash-user:version:remove']"
           >删除</el-button>
         </template>
@@ -176,7 +185,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="更新至版本号" prop="upToVersion">
+        <el-form-item v-if="isEdit" label="更新至版本号" prop="upToVersion">
           <el-input
             v-model="form.upToVersion"
             placeholder="请输入更新至版本号"
@@ -197,7 +206,7 @@ import { listVersion, getVersion, delVersion, addVersion, updateVersion } from "
 
 export default {
   name: "Version",
-  dicts: ['force', 'devices_type'],
+  dicts: ['force', 'devices_type', 'version_type'],
   data() {
     return {
       // 遮罩层
@@ -218,6 +227,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      isEdit: false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -300,8 +310,9 @@ export default {
         force: null,
         createTime: null,
         updateTime: null,
+        versionType: null,
         orderByColumn: 'version',
-        isAsc: 'desc'
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
@@ -325,15 +336,22 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
+      this.isEdit = true;
+      this.form.versionType = 1;
+      this.form.platfrom = this.queryParams.platfrom;
       this.title = "添加版本更新";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
+      this.isEdit = false;
       const id = row.id || this.ids
       getVersion(id).then(response => {
         this.form = response.data;
         this.open = true;
+        if (this.form.versionType == 1) {
+          this.isEdit = true;
+        }
         this.title = "修改版本更新";
       });
     },
