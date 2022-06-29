@@ -223,6 +223,11 @@
           <div>{{ scope.row.incomeAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
+      <el-table-column label="输赢金额" align="center" prop="winAmount" width="120">
+        <template slot-scope="scope">
+          <div>{{ scope.row.winAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="手续费" align="center" prop="taxAmount" width="120">
         <template slot-scope="scope">
           <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
