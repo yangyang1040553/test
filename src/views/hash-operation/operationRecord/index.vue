@@ -8,6 +8,14 @@
       v-show="showSearch"
       label-width="68px"
     >
+      <el-form-item label="订单ID" prop="id">
+        <el-input
+          v-model="queryParams.id"
+          placeholder="请输入订单id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="玩家id" prop="userId">
         <el-input
           v-model="queryParams.userId"
@@ -122,7 +130,7 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
-      <el-table-column label="奖励金额" align="center" prop="amount" sortable/>
+      <el-table-column label="奖励金额" align="center" prop="amount" sortable />
       <el-table-column label="活动类型" align="center" prop="aType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.operation_type" :value="scope.row.aType" />
@@ -133,7 +141,7 @@
           <dict-tag :options="dict.type.is_send" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="说明" align="center" prop="note" sortable/>
+      <el-table-column label="说明" align="center" prop="note" sortable />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
@@ -221,6 +229,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listOperationRecord, getOperationRecord, delOperationRecord, addOperationRecord, updateOperationRecord } from "@/api/hash-operation/operationRecord";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -261,6 +270,7 @@ export default {
         status: null,
         orderByColumn: 'createTime',
         isAsc: 'desc',
+        id: null
       },
       // 表单参数
       form: {},
@@ -270,6 +280,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList();
   },
   methods: {
@@ -333,7 +346,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
+      this.queryParams.id = null
       this.handleQuery();
     },
     // 多选框选中数据
