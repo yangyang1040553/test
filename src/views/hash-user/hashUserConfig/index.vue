@@ -133,6 +133,13 @@
         <el-form-item label="web端地址" prop="webAddr">
           <el-input v-model="form.webAddr" placeholder="请输入web端地址" />
         </el-form-item>
+        <el-form-item label="ios下载地址" prop="iosDownloadAddr">
+          <el-input v-model="form.iosDownloadAddr" placeholder="请输入ios下载地址" />
+          <div style="color:red;">多个地址 以 英文版 分号 ; 区分</div>
+        </el-form-item>
+        <el-form-item style="margin-top:40px;" label="安卓下载地址" prop="androidDownloadAddr">
+          <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
+        </el-form-item>
       </el-card>
       <!-- <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
@@ -294,7 +301,7 @@ export default {
         blockChainAddr: [
           { required: true, message: "请输入区块链地址", trigger: "blur" }
         ],
-         webAddr: [
+        webAddr: [
           { required: true, message: "请输入web端地址", trigger: "blur" }
         ],
       }
