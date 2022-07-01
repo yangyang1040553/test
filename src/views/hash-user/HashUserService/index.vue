@@ -254,6 +254,7 @@
             icon="el-icon-search"
             @click="handleWallet(scope.row)"
           >流水</el-button>
+          <el-button size="mini" type="text" icon="el-icon-wallet" @click="toWallet(scope.row)">钱包</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -455,7 +456,7 @@ export default {
     reset() {
       //修改 路由参数
       // this.queryParams.registerIp = null
-      // this.queryParams.id = null
+      this.queryParams.id = null
       this.form = {
         id: null,
         userType: null,
@@ -491,7 +492,10 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+      // this.queryParams.id = null
       this.$router.push({ query: merge({}, {}) })
+      this.queryParams.id = null
+
       this.resetForm('queryForm')
       this.reset()
       this.handleQuery()
@@ -547,6 +551,9 @@ export default {
     },
     handleWallet(row) {
       this.$router.push({ path: "/wallet/walletTurnover", query: { userId: row.id } })
+    },  
+    toWallet(row) {
+      this.$router.push({ path: "/wallet/management", query: { userId: row.id } })
     },
     /** 删除按钮操作 */
     handleDelete(row) {

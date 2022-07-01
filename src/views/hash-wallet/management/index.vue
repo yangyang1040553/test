@@ -228,7 +228,7 @@
         <el-form-item label="USDT总提现金额" prop="withdrawTotal">
           <el-input v-model="form.usdtWithdrawTotal" placeholder="USDT总提现金额" />
         </el-form-item>
-         <el-form-item label="TRX总提现金额" prop="withdrawTotal">
+        <el-form-item label="TRX总提现金额" prop="withdrawTotal">
           <el-input v-model="form.trxWithdrawTotal" placeholder="TRX总提现金额" />
         </el-form-item>
       </el-form>
@@ -269,6 +269,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listManagement, getManagement, delManagement, addManagement, updateManagement } from "@/api/hash-wallet/management";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -326,6 +327,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.userId) {
+      this.queryParams.id = this.$route.query.userId
+    }
     this.getList();
   },
   methods: {
@@ -372,7 +376,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+      this.$router.push({ query: merge({}, {}) })
       this.resetForm("queryForm");
+      this.queryParams.id = ''
       this.handleQuery();
     },
     // 多选框选中数据
