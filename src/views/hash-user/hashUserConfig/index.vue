@@ -130,6 +130,9 @@
         <el-form-item label="区块链地址" prop="blockChainAddr">
           <el-input v-model="form.blockChainAddr" placeholder="请输入区块链地址" />
         </el-form-item>
+        <el-form-item label="web端地址" prop="webAddr">
+          <el-input v-model="form.webAddr" placeholder="请输入web端地址" />
+        </el-form-item>
       </el-card>
       <!-- <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
@@ -166,7 +169,7 @@
             />
           </el-select>
         </el-form-item>
-      </el-card> -->
+      </el-card>-->
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" size="mini" @click="submitForm">确 定</el-button>
@@ -290,6 +293,9 @@ export default {
         ],
         blockChainAddr: [
           { required: true, message: "请输入区块链地址", trigger: "blur" }
+        ],
+         webAddr: [
+          { required: true, message: "请输入web端地址", trigger: "blur" }
         ],
       }
     };
