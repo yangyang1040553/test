@@ -129,7 +129,6 @@
       v-loading="loading"
       :data="statisticalUserDayList"
       @selection-change="handleSelectionChange"
-
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="玩家id" align="center" prop="userId">
@@ -159,6 +158,13 @@
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
+      <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.usdtWin }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount">
         <template slot-scope="scope">
           <span v-if="scope.row.trxBetAmount">{{scope.row.trxBetAmount.toFixed(2)}}</span>
@@ -171,7 +177,13 @@
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
-
+      <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.trxWin }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button

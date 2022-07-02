@@ -8,7 +8,7 @@
       v-show="showSearch"
       label-width="78px"
     >
-        <el-form-item label="选择游戏" prop="gameId">
+      <el-form-item label="选择游戏" prop="gameId">
         <el-select v-model="queryParams.gameId" placeholder="请选择游戏" clearable>
           <el-option
             v-for="dict in dict.type.game_list"
@@ -66,8 +66,22 @@
       </el-table-column>
       <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="usdt奖金额" align="center" prop="usdtAwardAmount" />
+       <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+          <template slot-scope="scope">
+            <span
+              :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
+            >{{ scope.row.usdtWin }}</span>
+          </template>
+        </el-table-column>
       <el-table-column label="trx押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="trx奖金额" align="center" prop="usdtAwardAmount" />
+       <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+          <template slot-scope="scope">
+            <span
+              :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"
+            >{{ scope.row.trxWin }}</span>
+          </template>
+        </el-table-column>
     </el-table>
 
     <pagination
@@ -94,8 +108,22 @@
         </el-table-column>
         <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
         <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
+        <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+          <template slot-scope="scope">
+            <span
+              :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
+            >{{ scope.row.usdtWin }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="trx押注金额" align="center" prop="usdtBetAmount" />
         <el-table-column label="trx中奖金额" align="center" prop="usdtAwardAmount" />
+        <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+          <template slot-scope="scope">
+            <span
+              :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"
+            >{{ scope.row.trxWin }}</span>
+          </template>
+        </el-table-column>
       </el-table>
 
       <div slot="footer" class="dialog-footer">
