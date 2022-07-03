@@ -12,6 +12,260 @@
         </el-card>
       </el-col>
 
+      <el-col :span="8" class="card-box">
+        <el-card>
+          <div slot="header">
+            <span>统计报表</span>
+          </div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">注册人数</dir>
+              <dir class="value">{{indexData.register_count}} 人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_yellow"></div>
+              <dir class="lable">首冲人数</dir>
+              <dir class="value">{{indexData.recharge_count}} 人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">投注单量</dir>
+              <dir class="value">{{indexData.bet_count}} 注</dir>
+            </div>
+            <div class="item">
+              <div class="circle_yellow"></div>
+              <dir class="lable">投注人数</dir>
+              <dir class="value">{{indexData.bet_persion_count}} 人</dir>
+            </div>
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">本月TRX盈利</dir>
+              <dir class="value">{{indexData.curr_trx_win_amount}} TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">本月TRX盈利比例</dir>
+              <dir class="value">{{indexData.curr_trx_win_rate||'0'}}</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">本月USDT盈利</dir>
+              <dir class="value">{{indexData.curr_usdt_win_amount}} USDT</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">本月TRX盈利占比</dir>
+              <dir class="value">{{indexData.curr_usdt_win_rate||'0'}}</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">上月TRX盈利</dir>
+              <dir class="value">{{indexData.pre_trx_win_amount}} TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">上月TRX盈利比例</dir>
+              <dir class="value">{{indexData.pre_trx_win_rate||'0'}}</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">上月USDT盈利</dir>
+              <dir class="value">{{indexData.pre_usdt_win_amount}} USDT</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">上月TRX盈利占比</dir>
+              <dir class="value">{{indexData.pre_usdt_win_rate||'0'}}</dir>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :span="8" class="card-box">
+        <el-card>
+          <div slot="header">
+            <span>出入款数据</span>
+          </div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">今日USDT充值金额</dir>
+              <dir class="value">{{currAmountData.usdt_paymount||'0'}}USDT</dir>
+            </div>
+            <div class="item">
+              <div class="circle_yellow"></div>
+              <dir class="lable">今日TRX充值金额</dir>
+              <dir class="value">{{currAmountData.trx_paymount||'0'}}TRX</dir>
+            </div>
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">今日充值单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.recharge_order_count||'0'}}单/{{currAmountData.recharge_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日USDT转换金额</dir>
+              <dir class="value">{{currAmountData.usdt_to_mount||'0'}}USDT</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日TRX转换金额</dir>
+              <dir class="value">{{currAmountData.trx_to_mount||'0'}}TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日转换单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.transaction_count||'0'}}单/{{currAmountData.transaction_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">今日USDT/TRX出款</dir>
+              <dir
+                class="value"
+              >{{currAmountData.usdt_out_amount||'0'}}USDT/{{currAmountData.trx_out_amount||'0'}}TRX</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">今日出款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_pay_count||'0'}}单/{{currAmountData.out_pay_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工入款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.in_count_by_people||'0'}}单/{{currAmountData.in_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工出款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_count_by_people||'0'}}单/{{currAmountData.out_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工入款USDT/TRX</dir>
+              <dir
+                class="value"
+              >{{currAmountData.in_usdt_amount||'0'}}USDT/{{currAmountData.in_trx_amount||'0'}}TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工出款USDT/TRX</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_usdt_amount||'0'}}USDT/{{currAmountData.out_trx_amount||'0'}}TRX</dir>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8" class="card-box">
+        <el-card>
+          <div slot="header">
+            <span>出入款数据</span>
+          </div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">今日USDT充值金额</dir>
+              <dir class="value">{{currAmountData.usdt_paymount||'0'}}USDT</dir>
+            </div>
+            <div class="item">
+              <div class="circle_yellow"></div>
+              <dir class="lable">今日TRX充值金额</dir>
+              <dir class="value">{{currAmountData.trx_paymount||'0'}}TRX</dir>
+            </div>
+            <div class="item">
+              <div class="circle_red"></div>
+              <dir class="lable">今日充值单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.recharge_order_count||'0'}}单/{{currAmountData.recharge_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日USDT转换金额</dir>
+              <dir class="value">{{currAmountData.usdt_to_mount||'0'}}USDT</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日TRX转换金额</dir>
+              <dir class="value">{{currAmountData.trx_to_mount||'0'}}TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle"></div>
+              <dir class="lable">今日转换单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.transaction_count||'0'}}单/{{currAmountData.transaction_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">今日USDT/TRX出款</dir>
+              <dir
+                class="value"
+              >{{currAmountData.usdt_out_amount||'0'}}USDT/{{currAmountData.trx_out_amount||'0'}}TRX</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">今日出款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_pay_count||'0'}}单/{{currAmountData.out_pay_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工入款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.in_count_by_people||'0'}}单/{{currAmountData.in_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工出款单数/人数</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_count_by_people||'0'}}单/{{currAmountData.out_people_count||'0'}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工入款USDT/TRX</dir>
+              <dir
+                class="value"
+              >{{currAmountData.in_usdt_amount||'0'}}USDT/{{currAmountData.in_trx_amount||'0'}}TRX</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">人工出款USDT/TRX</dir>
+              <dir
+                class="value"
+              >{{currAmountData.out_usdt_amount||'0'}}USDT/{{currAmountData.out_trx_amount||'0'}}TRX</dir>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+
       <el-col :span="12" class="card-box">
         <el-card>
           <div slot="header">
@@ -93,6 +347,7 @@ import { listRedisOnLineList } from "@/api/hash-statistical/statisticalRedis";
 import echarts from "echarts";
 import UserInfoDialog from "./components/dialog/UserInfoDialog.vue";
 import { listRegister } from "@/api/hash-statistical/regionRegister";
+import { getIndex, currAmountInfo } from "@/api/hash-statistical/getIndex";
 
 export default {
   name: "Server",
@@ -131,7 +386,9 @@ export default {
         orderByColumn: 'regCount',
         isAsc: 'desc'
       },
-      registerList: []
+      registerList: [],
+      indexData: {},
+      currAmountData: {},
     };
   },
   created() {
@@ -261,6 +518,13 @@ export default {
           }
         }
       });
+
+      getIndex().then(res => {
+        this.indexData = { ...res.data }
+      })
+      currAmountInfo().then(res => {
+        this.currAmountData = { ...res.data }
+      })
 
     },
     initLineChart(labels, valuesActiveCount, valuesRegisterCount, valuesPromoteCount) {
@@ -463,3 +727,57 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.item {
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  flex-direction: row;
+  align-items: center;
+
+  .circle {
+    width: 8px;
+    height: 8px;
+    background: greenyellow;
+    border-radius: 45px;
+  }
+
+  .circle_blue {
+    width: 8px;
+    height: 8px;
+    background: #4092ff;
+    border-radius: 45px;
+  }
+
+  .circle_red {
+    width: 8px;
+    height: 8px;
+    background: #ff40de;
+    border-radius: 45px;
+  }
+  .circle_yellow {
+    width: 8px;
+    height: 8px;
+    background: #ff8640;
+    border-radius: 45px;
+  }
+
+  .lable {
+    font-size: 14px;
+    width: 200px;
+    height: 22px;
+    line-height: 22px;
+    text-align: start;
+  }
+
+  .value {
+    display: flex;
+    flex: 1;
+    height: 22px;
+    line-height: 22px;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(129, 32, 32);
+  }
+}
+</style>

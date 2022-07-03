@@ -239,6 +239,17 @@
 
     <el-dialog title="送钱" :visible.sync="openEdit" width="800px" append-to-body>
       <el-form ref="editForm" :model="editForm" label-width="100px" :rules="rules">
+        <el-form-item label="出入款" prop="type">
+          <!-- <el-input v-model="editForm.walletType" placeholder="请选择钱包类型" /> -->
+          <el-select v-model="editForm.type" placeholder="请选择钱包类型" clearable>
+            <el-option
+              v-for="dict in types"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="钱包类型" prop="walletType">
           <!-- <el-input v-model="editForm.walletType" placeholder="请选择钱包类型" /> -->
           <el-select v-model="editForm.walletType" placeholder="请选择钱包类型" clearable>
@@ -302,6 +313,10 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      types: [
+        { label: '出款', value: 1 },
+        { label: '入款', value: 2 }
+      ],
       // 查询参数
       queryParams: {
         id: null,
@@ -321,6 +336,7 @@ export default {
       rules: {
         walletType: [{ required: true, message: '请选择钱包类型', trigger: 'blur' }],
         amount: [{ required: true, message: '请输入金额', trigger: 'blur' }],
+        type: [{ required: true, message: '请选择类型', trigger: 'blur' }],
       },
       openEdit: false,
       editForm: {}
@@ -334,6 +350,7 @@ export default {
   },
   methods: {
     handleOpenEdit(row) {
+      this.reset();
       this.openEdit = true;
       this.editForm.id = row.id
     },
@@ -368,6 +385,8 @@ export default {
         invitationCode: null
       };
       this.resetForm("form");
+      this.resetForm("editForm");
+
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -412,6 +431,11 @@ export default {
       this.$refs["editForm"].validate(valid => {
         if (valid) {
           if (this.editForm.id != null) {
+            console.log(this.editForm)
+            if (this.editForm.type == 1) {
+              //出款乘以 -1
+              this.editForm.amount = this.editForm.amount * -1
+            }
             updateManagement(this.editForm).then(response => {
               this.$modal.msgSuccess("提交成功");
               this.openEdit = false;
