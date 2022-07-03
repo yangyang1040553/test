@@ -46,8 +46,8 @@
 
             <div class="item">
               <div class="circle"></div>
-              <dir class="lable">本月TRX盈利比例</dir>
-              <dir class="value">{{indexData.curr_trx_win_rate||'0'}}</dir>
+              <dir class="lable">本月TRX盈利占比</dir>
+              <dir class="value">{{(indexData.curr_trx_win_rate*100).toFixed(2) ||'0'}}%</dir>
             </div>
 
             <div class="item">
@@ -58,8 +58,8 @@
 
             <div class="item">
               <div class="circle"></div>
-              <dir class="lable">本月TRX盈利占比</dir>
-              <dir class="value">{{indexData.curr_usdt_win_rate||'0'}}</dir>
+              <dir class="lable">本月USDT盈利占比</dir>
+              <dir class="value">{{(indexData.curr_usdt_win_rate*100).toFixed(2)||'0'}}%</dir>
             </div>
 
             <div class="item">
@@ -70,8 +70,8 @@
 
             <div class="item">
               <div class="circle_blue"></div>
-              <dir class="lable">上月TRX盈利比例</dir>
-              <dir class="value">{{indexData.pre_trx_win_rate||'0'}}</dir>
+              <dir class="lable">上月TRX盈利占比</dir>
+              <dir class="value">{{(indexData.pre_trx_win_rate*100).toFixed(2)||'0'}}%</dir>
             </div>
 
             <div class="item">
@@ -82,8 +82,8 @@
 
             <div class="item">
               <div class="circle_blue"></div>
-              <dir class="lable">上月TRX盈利占比</dir>
-              <dir class="value">{{indexData.pre_usdt_win_rate||'0'}}</dir>
+              <dir class="lable">上月USDT盈利占比</dir>
+              <dir class="value">{{(indexData.pre_usdt_win_rate*100).toFixed(2)||'0'}}%</dir>
             </div>
           </div>
         </el-card>
