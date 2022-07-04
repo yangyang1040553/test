@@ -140,8 +140,16 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
-      <el-table-column label="付款地址" align="center" prop="paymentAddress" width="130" />
-      <el-table-column label="收款地址" align="center" prop="collectionAddress" width="130" />
+      <el-table-column label="付款地址" align="center" prop="paymentAddress" width="200">
+        <template slot-scope="scope">
+          <div class="global-text-blue">{{scope.row.paymentAddress}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="收款地址" align="center" prop="collectionAddress" width="200">
+        <template slot-scope="scope">
+          <div class="global-text-green">{{scope.row.collectionAddress}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
       <el-table-column label="实际交易金额" align="center" prop="payAmount" width="120" sortable />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />

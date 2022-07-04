@@ -223,7 +223,7 @@
       <el-col :span="8" class="card-box">
         <el-card>
           <div slot="header">
-            <span>优惠活动</span>
+            <span>活动</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
             <div class="item">
@@ -267,14 +267,14 @@
               <dir class="lable">USDT游戏返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_game_amount||0}}USDT/{{indexActiveAmountData.usdt_back_people_conut}}人</dir>
+              >{{indexActiveAmountData.usdt_game_amount||0}}USDT/{{indexActiveAmountData.usdt_back_people_conut||0}}人</dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">USDT代理返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_dl_amount||0}}USDT/{{indexActiveAmountData.usdt_dl_back_people_conut}}人</dir>
+              >{{indexActiveAmountData.usdt_dl_amount||0}}USDT/{{indexActiveAmountData.usdt_dl_back_people_conut||0}}人</dir>
             </div>
 
             <div class="item">
@@ -290,14 +290,14 @@
               <dir class="lable">TRX游戏返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_game_amount||0}}TRX/{{indexActiveAmountData.trx_back_people_conut}}人</dir>
+              >{{indexActiveAmountData.trx_game_amount||0}}TRX/{{indexActiveAmountData.trx_back_people_conut||0}}人</dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">TRX代理返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_dl_amount||0}}TRX/{{indexActiveAmountData.trx_dl_back_people_conut}}人</dir>
+              >{{indexActiveAmountData.trx_dl_amount||0}}TRX/{{indexActiveAmountData.trx_dl_back_people_conut||0}}人</dir>
             </div>
              <div class="item"></div>
           </div>
