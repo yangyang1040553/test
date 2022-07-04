@@ -117,7 +117,44 @@
       <el-table-column label="一级代理人数" align="center" prop="level1Person" />
       <el-table-column label="二级代理人数" align="center" prop="level2Person" />
       <el-table-column label="三级代理人数" align="center" prop="level3Person" />
-      <el-table-column label="推广总计" align="center" prop="sumnumber"  sortable/>
+      <el-table-column label="推广总计" align="center" prop="sumnumber" sortable />
+      <el-table-column
+        label="邀请奖励人数"
+        align="center"
+        prop="invite_award_person"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <div>{{ scope.row.invite_award_person||0 }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="团队USDT总输赢"
+        align="center"
+        prop="team_usdt_win_amount"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.team_usdt_win_amount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.team_usdt_win_amount||0 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="团队TRX总输赢"
+        align="center"
+        prop="team_trx_win_amount"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <span
+            :class="scope.row.team_trx_win_amount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.team_trx_win_amount||0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.registerTime, '{y}-{m}-{d}') }}</span>

@@ -208,7 +208,9 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.team_usdt_win_amount||0 }}</div>
+          <span
+            :class="scope.row.team_usdt_win_amount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.team_usdt_win_amount||0 }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -219,7 +221,9 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.team_trx_win_amount||0 }}</div>
+          <span
+            :class="scope.row.team_trx_win_amount>0?'global-text-green':'global-text-red'"
+          >{{ scope.row.team_trx_win_amount||0 }}</span>
         </template>
       </el-table-column>
 
