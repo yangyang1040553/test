@@ -65,7 +65,7 @@
         </template>
       </el-table-column>
       <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
-      <el-table-column label="usdt奖金额" align="center" prop="usdtAwardAmount" />
+      <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
        <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
           <template slot-scope="scope">
             <span
@@ -74,7 +74,7 @@
           </template>
         </el-table-column>
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
-      <el-table-column label="trx奖金额" align="center" prop="trxAwardAmount" />
+      <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
        <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
           <template slot-scope="scope">
             <span
