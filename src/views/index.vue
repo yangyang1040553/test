@@ -85,6 +85,47 @@
               <dir class="lable">上月USDT盈利占比</dir>
               <dir class="value">{{(indexData.pre_usdt_win_rate*100).toFixed(2)||'0'}}%</dir>
             </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">本月USDT最多盈利</dir>
+              <dir class="value">
+                {{indexData.maxUsdt||'0'}}USDT
+                <span v-if="indexData.maxUsdtGameId">/</span>
+                <dict-tag :options="dict.type.game_list" :value="indexData.maxUsdtGameId" />
+              </dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">本月USDT最多亏损</dir>
+              <dir class="value">
+                {{indexData.minUsdt||'0'}}USDT
+                <span v-if="indexData.minUsdtGameId">/</span>
+                <dict-tag :options="dict.type.game_list" :value="indexData.minUsdtGameId" />
+              </dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">本月TRX最多盈利</dir>
+              <dir class="value">
+                {{indexData.maxTrx||'0'}}TRX
+                <span v-if="indexData.maxTrxGameId">/</span>
+                <dict-tag :options="dict.type.game_list" :value="indexData.maxTrxGameId" />
+              </dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">本月TRX最多亏损</dir>
+              <dir class="value">
+                {{indexData.minTrx||'0'}}TRX
+                <span v-if="indexData.minTrxGameId">/</span>
+                <dict-tag :options="dict.type.game_list" :value="indexData.minTrxGameId" />
+              </dir>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
           </div>
         </el-card>
       </el-col>
@@ -174,93 +215,95 @@
                 class="value"
               >{{currAmountData.out_usdt_amount||'0'}}USDT/{{currAmountData.out_trx_amount||'0'}}TRX</dir>
             </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8" class="card-box">
         <el-card>
           <div slot="header">
-            <span>出入款数据</span>
+            <span>优惠活动</span>
+          </div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">活动优惠USDT</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.usdt_active_amount}}USDT/{{indexActiveAmountData.usdt_people_count}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">活动优惠TRX</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.trx_active_amount}}TRX/{{indexActiveAmountData.trx_people_count}}人</dir>
+            </div>
+            <div class="item" v-for="(item,index) in indexActiveData" :key="index">
+              <div class="circle_red"></div>
+              <dir class="lable">
+                <dict-tag :options="dict.type.operation_type" :value="item.a_type" />
+              </dir>
+              <dir class="value">{{item.amount||'0'}}{{item.wallet_type}}</dir>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8" class="card-box">
+        <el-card>
+          <div slot="header">
+            <span>返佣</span>
           </div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
             <div class="item">
               <div class="circle_red"></div>
-              <dir class="lable">今日USDT充值金额</dir>
-              <dir class="value">{{currAmountData.usdt_paymount||'0'}}USDT</dir>
+              <dir class="lable">USDT返佣</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.usdt_game_amount+indexActiveAmountData.usdt_dl_amount}}USDT/{{indexActiveAmountData.usdt_back_people_conut+indexActiveAmountData.usdt_dl_back_people_count}}人</dir>
+            </div>
+
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">USDT游戏返佣</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.usdt_game_amount||0}}USDT/{{indexActiveAmountData.usdt_back_people_conut}}人</dir>
             </div>
             <div class="item">
-              <div class="circle_yellow"></div>
-              <dir class="lable">今日TRX充值金额</dir>
-              <dir class="value">{{currAmountData.trx_paymount||'0'}}TRX</dir>
+              <div class="circle_blue"></div>
+              <dir class="lable">USDT代理返佣</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.usdt_dl_amount||0}}USDT/{{indexActiveAmountData.usdt_dl_back_people_conut}}人</dir>
             </div>
+
             <div class="item">
               <div class="circle_red"></div>
-              <dir class="lable">今日充值单数/人数</dir>
+              <dir class="lable">TRX返佣</dir>
               <dir
                 class="value"
-              >{{currAmountData.recharge_order_count||'0'}}单/{{currAmountData.recharge_count||'0'}}人</dir>
-            </div>
-            <div class="item">
-              <div class="circle"></div>
-              <dir class="lable">今日USDT转换金额</dir>
-              <dir class="value">{{currAmountData.usdt_to_mount||'0'}}USDT</dir>
-            </div>
-
-            <div class="item">
-              <div class="circle"></div>
-              <dir class="lable">今日TRX转换金额</dir>
-              <dir class="value">{{currAmountData.trx_to_mount||'0'}}TRX</dir>
-            </div>
-
-            <div class="item">
-              <div class="circle"></div>
-              <dir class="lable">今日转换单数/人数</dir>
-              <dir
-                class="value"
-              >{{currAmountData.transaction_count||'0'}}单/{{currAmountData.transaction_people_count||'0'}}人</dir>
-            </div>
-            <div class="item">
-              <div class="circle_blue"></div>
-              <dir class="lable">今日USDT/TRX出款</dir>
-              <dir
-                class="value"
-              >{{currAmountData.usdt_out_amount||'0'}}USDT/{{currAmountData.trx_out_amount||'0'}}TRX</dir>
-            </div>
-            <div class="item">
-              <div class="circle_blue"></div>
-              <dir class="lable">今日出款单数/人数</dir>
-              <dir
-                class="value"
-              >{{currAmountData.out_pay_count||'0'}}单/{{currAmountData.out_pay_people_count||'0'}}人</dir>
-            </div>
-            <div class="item">
-              <div class="circle_blue"></div>
-              <dir class="lable">人工入款单数/人数</dir>
-              <dir
-                class="value"
-              >{{currAmountData.in_count_by_people||'0'}}单/{{currAmountData.in_people_count||'0'}}人</dir>
-            </div>
-            <div class="item">
-              <div class="circle_blue"></div>
-              <dir class="lable">人工出款单数/人数</dir>
-              <dir
-                class="value"
-              >{{currAmountData.out_count_by_people||'0'}}单/{{currAmountData.out_people_count||'0'}}人</dir>
-            </div>
-            <div class="item">
-              <div class="circle_blue"></div>
-              <dir class="lable">人工入款USDT/TRX</dir>
-              <dir
-                class="value"
-              >{{currAmountData.in_usdt_amount||'0'}}USDT/{{currAmountData.in_trx_amount||'0'}}TRX</dir>
+              >{{indexActiveAmountData.trx_game_amount+indexActiveAmountData.trx_dl_amount}}TRX/{{indexActiveAmountData.trx_back_people_conut+indexActiveAmountData.trx_dl_back_people_count}}人</dir>
             </div>
 
             <div class="item">
               <div class="circle_blue"></div>
-              <dir class="lable">人工出款USDT/TRX</dir>
+              <dir class="lable">TRX游戏返佣</dir>
               <dir
                 class="value"
-              >{{currAmountData.out_usdt_amount||'0'}}USDT/{{currAmountData.out_trx_amount||'0'}}TRX</dir>
+              >{{indexActiveAmountData.trx_game_amount||0}}TRX/{{indexActiveAmountData.trx_back_people_conut}}人</dir>
+            </div>
+            <div class="item">
+              <div class="circle_blue"></div>
+              <dir class="lable">TRX代理返佣</dir>
+              <dir
+                class="value"
+              >{{indexActiveAmountData.trx_dl_amount||0}}TRX/{{indexActiveAmountData.trx_dl_back_people_conut}}人</dir>
             </div>
           </div>
         </el-card>
@@ -280,13 +323,7 @@
             :data="HashUserServiceList"
             height="420"
           >
-            <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
-            <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
-            <!-- <el-table-column label="手机区号" align="center" prop="areaCode" sortable /> -->
-            <!-- <el-table-column label="手机号" align="center" prop="phone" sortable /> -->
             <el-table-column label="用户名" align="center" prop="account" />
-            <!-- <el-table-column label="密码" align="center" prop="password" /> -->
-            <!-- <el-table-column label="设备码" align="center" prop="deviceCode" /> -->
             <el-table-column label="平台" align="center" prop="platform" width="100" />
             <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
               <template slot-scope="scope">
@@ -296,22 +333,6 @@
                 >{{ scope.row.nickName }}</span>
               </template>
             </el-table-column>
-            <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
-            <!-- <el-table-column label="用户状态" align="center" prop="status">
-              <template slot-scope="scope">
-                <dict-tag :options="dict.type.user_status" :value="scope.row.status" />
-              </template>
-            </el-table-column>-->
-            <!-- <el-table-column label="是否在线" align="center" prop="online">
-              <template slot-scope="scope">
-                <dict-tag :options="dict.type.online" :value="scope.row.online" />
-              </template>
-            </el-table-column>-->
-            <!-- <el-table-column label="邀请码" align="center" prop="invitationCode" /> -->
-            <!-- <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" /> -->
-            <!-- <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column> -->
-            <!-- <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180" sortable></el-table-column> -->
-            <!-- <el-table-column label="注册ip" align="center" prop="registerIp" /> -->
             <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
             <el-table-column label="登录ip" align="center" prop="loginIp" />
           </el-table>
@@ -347,10 +368,11 @@ import { listRedisOnLineList } from "@/api/hash-statistical/statisticalRedis";
 import echarts from "echarts";
 import UserInfoDialog from "./components/dialog/UserInfoDialog.vue";
 import { listRegister } from "@/api/hash-statistical/regionRegister";
-import { getIndex, currAmountInfo } from "@/api/hash-statistical/getIndex";
+import { getIndex, currAmountInfo, indexActive, selectCurrActiveAmount } from "@/api/hash-statistical/getIndex";
 
 export default {
   name: "Server",
+  dicts: ['game_list', 'operation_type'],
   components: {
     UserInfoDialog
   },
@@ -389,6 +411,8 @@ export default {
       registerList: [],
       indexData: {},
       currAmountData: {},
+      indexActiveData: [],
+      indexActiveAmountData: {},
     };
   },
   created() {
@@ -524,6 +548,13 @@ export default {
       })
       currAmountInfo().then(res => {
         this.currAmountData = { ...res.data }
+      })
+
+      indexActive().then(res => {
+        this.indexActiveData = { ...res.data }
+      })
+      selectCurrActiveAmount().then(res => {
+        this.indexActiveAmountData = { ...res.data }
       })
 
     },
