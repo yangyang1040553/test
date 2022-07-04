@@ -41,7 +41,7 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">本月TRX盈利</dir>
-              <dir class="value">{{indexData.curr_trx_win_amount}} TRX</dir>
+              <dir class="value"><span class="trx">{{indexData.curr_trx_win_amount}} TRX</span></dir>
             </div>
 
             <div class="item">
@@ -53,7 +53,7 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">本月USDT盈利</dir>
-              <dir class="value">{{indexData.curr_usdt_win_amount}} USDT</dir>
+              <dir class="value"><span class="usdt">{{indexData.curr_usdt_win_amount}} USDT</span></dir>
             </div>
 
             <div class="item">
@@ -65,7 +65,7 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">上月TRX盈利</dir>
-              <dir class="value">{{indexData.pre_trx_win_amount}} TRX</dir>
+              <dir class="value"><span class="trx">{{indexData.pre_trx_win_amount}} TRX</span></dir>
             </div>
 
             <div class="item">
@@ -77,7 +77,7 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">上月USDT盈利</dir>
-              <dir class="value">{{indexData.pre_usdt_win_amount}} USDT</dir>
+              <dir class="value"><span class="usdt">{{indexData.pre_usdt_win_amount}} USDT</span></dir>
             </div>
 
             <div class="item">
@@ -90,7 +90,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">本月USDT最多盈利</dir>
               <dir class="value">
-                {{indexData.maxUsdt||'0'}}USDT
+                <span class="usdt">{{indexData.maxUsdt||'0'}}USDT</span>
                 <span v-if="indexData.maxUsdtGameId">/</span>
                 <dict-tag :options="dict.type.game_list" :value="indexData.maxUsdtGameId" />
               </dir>
@@ -100,7 +100,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">本月USDT最多亏损</dir>
               <dir class="value">
-                {{indexData.minUsdt||'0'}}USDT
+                <span class="usdt">{{indexData.minUsdt||'0'}}USDT</span>
                 <span v-if="indexData.minUsdtGameId">/</span>
                 <dict-tag :options="dict.type.game_list" :value="indexData.minUsdtGameId" />
               </dir>
@@ -110,7 +110,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">本月TRX最多盈利</dir>
               <dir class="value">
-                {{indexData.maxTrx||'0'}}TRX
+                <span class="trx">{{indexData.maxTrx||'0'}}TRX</span>
                 <span v-if="indexData.maxTrxGameId">/</span>
                 <dict-tag :options="dict.type.game_list" :value="indexData.maxTrxGameId" />
               </dir>
@@ -119,7 +119,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">本月TRX最多亏损</dir>
               <dir class="value">
-                {{indexData.minTrx||'0'}}TRX
+                <span class="trx">{{indexData.minTrx||'0'}}TRX</span>
                 <span v-if="indexData.minTrxGameId">/</span>
                 <dict-tag :options="dict.type.game_list" :value="indexData.minTrxGameId" />
               </dir>
@@ -137,12 +137,12 @@
             <div class="item">
               <div class="circle_red"></div>
               <dir class="lable">今日USDT充值金额</dir>
-              <dir class="value">{{currAmountData.usdt_paymount||'0'}}USDT</dir>
+              <dir class="value"><span class="usdt">{{currAmountData.usdt_paymount||'0'}}USDT</span></dir>
             </div>
             <div class="item">
               <div class="circle_yellow"></div>
               <dir class="lable">今日TRX充值金额</dir>
-              <dir class="value">{{currAmountData.trx_paymount||'0'}}TRX</dir>
+              <dir class="value"><span class="trx">{{currAmountData.trx_paymount||'0'}}TRX</span></dir>
             </div>
             <div class="item">
               <div class="circle_red"></div>
@@ -154,13 +154,13 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">今日USDT转换金额</dir>
-              <dir class="value">{{currAmountData.usdt_to_mount||'0'}}USDT</dir>
+              <dir class="value"><span class="usdt">{{currAmountData.usdt_to_mount||'0'}}USDT</span></dir>
             </div>
 
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">今日TRX转换金额</dir>
-              <dir class="value">{{currAmountData.trx_to_mount||'0'}}TRX</dir>
+              <dir class="value"><span class="trx">{{currAmountData.trx_to_mount||'0'}}TRX</span></dir>
             </div>
 
             <div class="item">
@@ -175,7 +175,7 @@
               <dir class="lable">今日USDT/TRX出款</dir>
               <dir
                 class="value"
-              >{{currAmountData.usdt_out_amount||'0'}}USDT/{{currAmountData.trx_out_amount||'0'}}TRX</dir>
+              ><span class="usdt">{{currAmountData.usdt_out_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.trx_out_amount||'0'}}TRX</span></dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
@@ -203,7 +203,7 @@
               <dir class="lable">人工入款USDT/TRX</dir>
               <dir
                 class="value"
-              >{{currAmountData.in_usdt_amount||'0'}}USDT/{{currAmountData.in_trx_amount||'0'}}TRX</dir>
+              ><span class="usdt">{{currAmountData.in_usdt_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.in_trx_amount||'0'}}TRX</span></dir>
             </div>
 
             <div class="item">
@@ -211,7 +211,7 @@
               <dir class="lable">人工出款USDT/TRX</dir>
               <dir
                 class="value"
-              >{{currAmountData.out_usdt_amount||'0'}}USDT/{{currAmountData.out_trx_amount||'0'}}TRX</dir>
+              ><span class="usdt">{{currAmountData.out_usdt_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.out_trx_amount||'0'}}TRX</span></dir>
             </div>
             <div class="item"></div>
             <div class="item"></div>
@@ -231,7 +231,7 @@
               <dir class="lable">活动优惠USDT</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_active_amount}}USDT/{{indexActiveAmountData.usdt_people_count}}人</dir>
+              ><span class="usdt">{{indexActiveAmountData.usdt_active_amount}}USDT</span>/{{indexActiveAmountData.usdt_people_count}}人</dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
@@ -243,7 +243,7 @@
             <div class="item" v-for="(item,index) in indexActiveData" :key="index">
               <div class="circle_red"></div>
               <dir class="lable">{{item.label}}</dir>
-              <dir class="value">{{item.usdt_amount||'0'}}USDT |  {{item.trx_amount||'0'}}TRX</dir>
+              <dir class="value"><span class="usdt">{{item.usdt_amount||'0'}}USDT</span> |  <span class="trx">{{item.trx_amount||'0'}}TRX</span></dir>
             </div>
           </div>
         </el-card>
@@ -259,7 +259,7 @@
               <dir class="lable">USDT返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_game_amount+indexActiveAmountData.usdt_dl_amount}}USDT/{{indexActiveAmountData.usdt_back_people_conut+indexActiveAmountData.usdt_dl_back_people_count}}人</dir>
+              ><span class="usdt">{{indexActiveAmountData.usdt_game_amount+indexActiveAmountData.usdt_dl_amount}}USDT</span>/{{indexActiveAmountData.usdt_back_people_conut+indexActiveAmountData.usdt_dl_back_people_count}}人</dir>
             </div>
 
             <div class="item">
@@ -267,14 +267,14 @@
               <dir class="lable">USDT游戏返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_game_amount||0}}USDT/{{indexActiveAmountData.usdt_back_people_conut||0}}人</dir>
+              ><span class="usdt">{{indexActiveAmountData.usdt_game_amount||0}}USDT</span>/{{indexActiveAmountData.usdt_back_people_conut||0}}人</dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">USDT代理返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.usdt_dl_amount||0}}USDT/{{indexActiveAmountData.usdt_dl_back_people_conut||0}}人</dir>
+              ><span class="usdt">{{indexActiveAmountData.usdt_dl_amount||0}}USDT</span>/{{indexActiveAmountData.usdt_dl_back_people_conut||0}}人</dir>
             </div>
 
             <div class="item">
@@ -282,7 +282,7 @@
               <dir class="lable">TRX返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_game_amount+indexActiveAmountData.trx_dl_amount}}TRX/{{indexActiveAmountData.trx_back_people_conut+indexActiveAmountData.trx_dl_back_people_count}}人</dir>
+              ><span class="trx">{{indexActiveAmountData.trx_game_amount+indexActiveAmountData.trx_dl_amount}}TRX</span>/{{indexActiveAmountData.trx_back_people_conut+indexActiveAmountData.trx_dl_back_people_count}}人</dir>
             </div>
 
             <div class="item">
@@ -290,14 +290,14 @@
               <dir class="lable">TRX游戏返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_game_amount||0}}TRX/{{indexActiveAmountData.trx_back_people_conut||0}}人</dir>
+              ><span class="trx">{{indexActiveAmountData.trx_game_amount||0}}TRX</span>/{{indexActiveAmountData.trx_back_people_conut||0}}人</dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">TRX代理返佣</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_dl_amount||0}}TRX/{{indexActiveAmountData.trx_dl_back_people_conut||0}}人</dir>
+              ><span class="trx">{{indexActiveAmountData.trx_dl_amount||0}}TRX</span>/{{indexActiveAmountData.trx_dl_back_people_conut||0}}人</dir>
             </div>
              <div class="item"></div>
           </div>
@@ -825,5 +825,13 @@ export default {
     align-items: center;
     color: rgb(129, 32, 32);
   }
+}
+
+.usdt{
+  color: #4092ff;
+}
+
+.trx{
+  color: #ff40de;
 }
 </style>
