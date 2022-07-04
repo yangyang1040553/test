@@ -140,6 +140,9 @@
         <el-form-item style="margin-top:40px;" label="安卓下载地址" prop="androidDownloadAddr">
           <el-input v-model="form.androidDownloadAddr" placeholder="请输入安卓下载地址" />
         </el-form-item>
+        <el-form-item style="margin-top:40px;" label="中间下载页地址" prop="h5_qr_addr">
+          <el-input v-model="form.h5_qr_addr" placeholder="请输入中间下载页地址" />
+        </el-form-item>
       </el-card>
       <!-- <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
@@ -303,6 +306,9 @@ export default {
         ],
         webAddr: [
           { required: true, message: "请输入web端地址", trigger: "blur" }
+        ], 
+        h5_qr_addr: [
+          { required: true, message: "请输入中间下载页地址", trigger: "blur" }
         ],
       }
     };

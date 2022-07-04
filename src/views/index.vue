@@ -41,7 +41,9 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">本月TRX盈利</dir>
-              <dir class="value"><span class="trx">{{indexData.curr_trx_win_amount}} TRX</span></dir>
+              <dir class="value">
+                <span class="trx">{{indexData.curr_trx_win_amount}} TRX</span>
+              </dir>
             </div>
 
             <div class="item">
@@ -53,7 +55,9 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">本月USDT盈利</dir>
-              <dir class="value"><span class="usdt">{{indexData.curr_usdt_win_amount}} USDT</span></dir>
+              <dir class="value">
+                <span class="usdt">{{indexData.curr_usdt_win_amount}} USDT</span>
+              </dir>
             </div>
 
             <div class="item">
@@ -65,7 +69,9 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">上月TRX盈利</dir>
-              <dir class="value"><span class="trx">{{indexData.pre_trx_win_amount}} TRX</span></dir>
+              <dir class="value">
+                <span class="trx">{{indexData.pre_trx_win_amount}} TRX</span>
+              </dir>
             </div>
 
             <div class="item">
@@ -77,7 +83,9 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">上月USDT盈利</dir>
-              <dir class="value"><span class="usdt">{{indexData.pre_usdt_win_amount}} USDT</span></dir>
+              <dir class="value">
+                <span class="usdt">{{indexData.pre_usdt_win_amount}} USDT</span>
+              </dir>
             </div>
 
             <div class="item">
@@ -137,12 +145,16 @@
             <div class="item">
               <div class="circle_red"></div>
               <dir class="lable">今日USDT充值金额</dir>
-              <dir class="value"><span class="usdt">{{currAmountData.usdt_paymount||'0'}}USDT</span></dir>
+              <dir class="value">
+                <span class="usdt">{{currAmountData.usdt_paymount||'0'}}USDT</span>
+              </dir>
             </div>
             <div class="item">
               <div class="circle_yellow"></div>
               <dir class="lable">今日TRX充值金额</dir>
-              <dir class="value"><span class="trx">{{currAmountData.trx_paymount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="trx">{{currAmountData.trx_paymount||'0'}}TRX</span>
+              </dir>
             </div>
             <div class="item">
               <div class="circle_red"></div>
@@ -154,13 +166,17 @@
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">今日USDT转换金额</dir>
-              <dir class="value"><span class="usdt">{{currAmountData.usdt_to_mount||'0'}}USDT</span></dir>
+              <dir class="value">
+                <span class="usdt">{{currAmountData.usdt_to_mount||'0'}}USDT</span>
+              </dir>
             </div>
 
             <div class="item">
               <div class="circle"></div>
               <dir class="lable">今日TRX转换金额</dir>
-              <dir class="value"><span class="trx">{{currAmountData.trx_to_mount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="trx">{{currAmountData.trx_to_mount||'0'}}TRX</span>
+              </dir>
             </div>
 
             <div class="item">
@@ -173,9 +189,10 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">今日USDT/TRX出款</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{currAmountData.usdt_out_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.trx_out_amount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="usdt">{{currAmountData.usdt_out_amount||'0'}}USDT</span>/
+                <span class="trx">{{currAmountData.trx_out_amount||'0'}}TRX</span>
+              </dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
@@ -201,17 +218,19 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">人工入款USDT/TRX</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{currAmountData.in_usdt_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.in_trx_amount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="usdt">{{currAmountData.in_usdt_amount||'0'}}USDT</span>/
+                <span class="trx">{{currAmountData.in_trx_amount||'0'}}TRX</span>
+              </dir>
             </div>
 
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">人工出款USDT/TRX</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{currAmountData.out_usdt_amount||'0'}}USDT</span>/<span class="trx">{{currAmountData.out_trx_amount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="usdt">{{currAmountData.out_usdt_amount||'0'}}USDT</span>/
+                <span class="trx">{{currAmountData.out_trx_amount||'0'}}TRX</span>
+              </dir>
             </div>
             <div class="item"></div>
             <div class="item"></div>
@@ -229,21 +248,25 @@
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">活动优惠USDT</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{indexActiveAmountData.usdt_active_amount}}USDT</span>/{{indexActiveAmountData.usdt_people_count}}人</dir>
+              <dir class="value">
+                <span class="usdt">{{indexActiveAmountData.usdt_active_amount}}USDT</span>
+                /{{indexActiveAmountData.usdt_count}}人
+              </dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">活动优惠TRX</dir>
               <dir
                 class="value"
-              >{{indexActiveAmountData.trx_active_amount}}TRX/{{indexActiveAmountData.trx_people_count}}人</dir>
+              >{{indexActiveAmountData.trx_active_amount}}TRX/{{indexActiveAmountData.trx_count}}人</dir>
             </div>
             <div class="item" v-for="(item,index) in indexActiveData" :key="index">
               <div class="circle_red"></div>
               <dir class="lable">{{item.label}}</dir>
-              <dir class="value"><span class="usdt">{{item.usdt_amount||'0'}}USDT</span> |  <span class="trx">{{item.trx_amount||'0'}}TRX</span></dir>
+              <dir class="value">
+                <span class="usdt">{{item.usdt_amount||'0'}}USDT</span> |
+                <span class="trx">{{item.trx_amount||'0'}}TRX</span>
+              </dir>
             </div>
           </div>
         </el-card>
@@ -257,49 +280,59 @@
             <div class="item">
               <div class="circle_red"></div>
               <dir class="lable">USDT返佣</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{indexActiveAmountData.usdt_game_amount+indexActiveAmountData.usdt_dl_amount}}USDT</span>/{{indexActiveAmountData.usdt_back_people_conut+indexActiveAmountData.usdt_dl_back_people_count}}人</dir>
+              <dir class="value">
+                <span
+                  class="usdt"
+                >{{indexActiveAmountData.usdt_game_amount+indexActiveAmountData.usdt_dl_amount}}USDT</span>
+                /{{indexActiveAmountData.usdt_back_people_conut+indexActiveAmountData.usdt_dl_back_people_count}}人
+              </dir>
             </div>
 
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">USDT游戏返佣</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{indexActiveAmountData.usdt_game_amount||0}}USDT</span>/{{indexActiveAmountData.usdt_back_people_conut||0}}人</dir>
+              <dir class="value">
+                <span class="usdt">{{indexActiveAmountData.usdt_game_amount||0}}USDT</span>
+                /{{indexActiveAmountData.usdt_back_people_conut||0}}人
+              </dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">USDT代理返佣</dir>
-              <dir
-                class="value"
-              ><span class="usdt">{{indexActiveAmountData.usdt_dl_amount||0}}USDT</span>/{{indexActiveAmountData.usdt_dl_back_people_conut||0}}人</dir>
+              <dir class="value">
+                <span class="usdt">{{indexActiveAmountData.usdt_dl_amount||0}}USDT</span>
+                /{{indexActiveAmountData.usdt_dl_back_people_conut||0}}人
+              </dir>
             </div>
 
             <div class="item">
               <div class="circle_red"></div>
               <dir class="lable">TRX返佣</dir>
-              <dir
-                class="value"
-              ><span class="trx">{{indexActiveAmountData.trx_game_amount+indexActiveAmountData.trx_dl_amount}}TRX</span>/{{indexActiveAmountData.trx_back_people_conut+indexActiveAmountData.trx_dl_back_people_count}}人</dir>
+              <dir class="value">
+                <span
+                  class="trx"
+                >{{indexActiveAmountData.trx_game_amount+indexActiveAmountData.trx_dl_amount}}TRX</span>
+                /{{indexActiveAmountData.trx_back_people_conut+indexActiveAmountData.trx_dl_back_people_count}}人
+              </dir>
             </div>
 
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">TRX游戏返佣</dir>
-              <dir
-                class="value"
-              ><span class="trx">{{indexActiveAmountData.trx_game_amount||0}}TRX</span>/{{indexActiveAmountData.trx_back_people_conut||0}}人</dir>
+              <dir class="value">
+                <span class="trx">{{indexActiveAmountData.trx_game_amount||0}}TRX</span>
+                /{{indexActiveAmountData.trx_back_people_conut||0}}人
+              </dir>
             </div>
             <div class="item">
               <div class="circle_blue"></div>
               <dir class="lable">TRX代理返佣</dir>
-              <dir
-                class="value"
-              ><span class="trx">{{indexActiveAmountData.trx_dl_amount||0}}TRX</span>/{{indexActiveAmountData.trx_dl_back_people_conut||0}}人</dir>
+              <dir class="value">
+                <span class="trx">{{indexActiveAmountData.trx_dl_amount||0}}TRX</span>
+                /{{indexActiveAmountData.trx_dl_back_people_conut||0}}人
+              </dir>
             </div>
-             <div class="item"></div>
+            <div class="item"></div>
           </div>
         </el-card>
       </el-col>
@@ -414,6 +447,8 @@ export default {
     // this.openLoading();
   },
   mounted() {
+     console.log(window.location)
+
     this.getList();
     this.getLineChart()
   },
@@ -827,11 +862,11 @@ export default {
   }
 }
 
-.usdt{
+.usdt {
   color: #4092ff;
 }
 
-.trx{
+.trx {
   color: #ff40de;
 }
 </style>
