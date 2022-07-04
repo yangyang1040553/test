@@ -124,8 +124,6 @@
                 <dict-tag :options="dict.type.game_list" :value="indexData.minTrxGameId" />
               </dir>
             </div>
-            <div class="item"></div>
-            <div class="item"></div>
           </div>
         </el-card>
       </el-col>
@@ -219,8 +217,6 @@
             <div class="item"></div>
             <div class="item"></div>
             <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
           </div>
         </el-card>
       </el-col>
@@ -246,10 +242,8 @@
             </div>
             <div class="item" v-for="(item,index) in indexActiveData" :key="index">
               <div class="circle_red"></div>
-              <dir class="lable">
-                <dict-tag :options="dict.type.operation_type" :value="item.a_type" />
-              </dir>
-              <dir class="value">{{item.amount||'0'}}{{item.wallet_type}}</dir>
+              <dir class="lable">{{item.label}}</dir>
+              <dir class="value">{{item.usdt_amount||'0'}}USDT |  {{item.trx_amount||'0'}}TRX</dir>
             </div>
           </div>
         </el-card>
@@ -305,6 +299,7 @@
                 class="value"
               >{{indexActiveAmountData.trx_dl_amount||0}}TRX/{{indexActiveAmountData.trx_dl_back_people_conut}}人</dir>
             </div>
+             <div class="item"></div>
           </div>
         </el-card>
       </el-col>
@@ -551,7 +546,27 @@ export default {
       })
 
       indexActive().then(res => {
-        this.indexActiveData = { ...res.data }
+        // this.indexActiveData = { ...res.data }
+        var data = res.data
+        var list = this.dict.type.operation_type
+        list.map((el) => {
+          // console.log(el)
+          data.map((element) => {
+            // console.log(elment)
+            if (el.value == element.a_type) {
+              if (!el.usdt_amount && element.wallet_type == 'USDT') {
+                el.usdt_amount = element.amount || 0
+              }
+              if (!el.trx_amount && element.wallet_type == 'TRX') {
+                el.trx_amount = element.amount || 0
+              }
+            }
+          })
+        })
+        this.indexActiveData = list
+        console.log(list)
+
+
       })
       selectCurrActiveAmount().then(res => {
         this.indexActiveAmountData = { ...res.data }

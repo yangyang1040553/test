@@ -189,6 +189,39 @@
       <el-table-column label="一级代理" align="center" prop="level1Person" width="100" sortable />
       <el-table-column label="二级代理" align="center" prop="level2Person" width="100" sortable />
       <el-table-column label="三级代理" align="center" prop="level3Person" width="100" sortable />
+      <el-table-column
+        label="邀请奖励人数"
+        align="center"
+        prop="invite_award_person"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <div>{{ scope.row.invite_award_person||0 }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="团队USDT总输赢"
+        align="center"
+        prop="team_usdt_win_amount"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <div>{{ scope.row.team_usdt_win_amount||0 }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="团队TRX总输赢"
+        align="center"
+        prop="team_trx_win_amount"
+        width="100"
+        sortable
+      >
+        <template slot-scope="scope">
+          <div>{{ scope.row.team_trx_win_amount||0 }}</div>
+        </template>
+      </el-table-column>
 
       <el-table-column
         label="usdt游戏返佣"
