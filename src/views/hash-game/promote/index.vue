@@ -100,12 +100,12 @@
         </template>
       </el-table-column>
       <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" />
-      <el-table-column label="usdt总收益" align="center" prop="incomeUsdtAmount" width="200" sortable>
+      <el-table-column label="usdt总收益" align="center" prop="incomeUsdtAmount" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeUsdtAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="usdt今日收益" align="center" prop="incomeUsdtToday" width="200" sortable>
+      <el-table-column label="usdt今日收益" align="center" prop="incomeUsdtToday" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeUsdtToday.toFixed(2) }}</div>
         </template>
@@ -125,19 +125,19 @@
         label="usdt直推收益"
         align="center"
         prop="incomeUsdtDirectPromote"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
           <div>{{ scope.row.incomeUsdtDirectPromote.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="trx总收益" align="center" prop="incomeTrxAmount" width="200" sortable>
+      <el-table-column label="trx总收益" align="center" prop="incomeTrxAmount" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeTrxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="200" sortable>
+      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeTrxToday.toFixed(2) }}</div>
         </template>
@@ -146,7 +146,7 @@
         label="trx昨日收益"
         align="center"
         prop="incomeTrxYesterday"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -157,7 +157,7 @@
         label="trx直推收益"
         align="center"
         prop="incomeTrxDirectPromote"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -168,7 +168,7 @@
         label="可提现usdt"
         align="center"
         prop="canWithdrawUsdtAmount"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -179,7 +179,7 @@
         label="可提现trx"
         align="center"
         prop="canWithdrawTrxAmount"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -231,7 +231,7 @@
         label="usdt游戏返佣"
         align="center"
         prop="usdtGameBrokerageToFather"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -242,7 +242,7 @@
         label="usdt代理返佣"
         align="center"
         prop="usdtPromoteBrokerageToFather"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -253,7 +253,7 @@
         label="trx游戏返佣"
         align="center"
         prop="trxGameBrokerageToFather"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -264,7 +264,7 @@
         label="trx代理返佣"
         align="center"
         prop="trxPromoteBrokerageToFather"
-        width="200"
+        width="150"
         sortable
       >
         <template slot-scope="scope">
@@ -373,6 +373,7 @@
 <script>
 import { listPromote, getPromote, delPromote, addPromote, updatePromote } from '@/api/hash-game/promote'
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
+import merge from 'webpack-merge'
 export default {
   name: 'Promote',
   components: {
@@ -419,6 +420,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.parentId) {
+      this.queryParams.fatherUserId = this.$route.query.parentId
+    }
     this.getList()
   },
   methods: {
@@ -489,7 +493,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+      this.$router.push({ query: merge({}, {}) })
       this.resetForm('queryForm')
+      this.queryParams.fatherUserId = ''
       this.handleQuery()
     },
     // 多选框选中数据

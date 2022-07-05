@@ -161,16 +161,16 @@
         </template>
       </el-table-column>
 
-      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-zoom-in"
             @click="handleUpdate(scope.row)"
-          >详情</el-button>
+          >查询下级</el-button>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -427,10 +427,11 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset()
-      const id = row.id || this.ids
-      this.userId = id
-      this.open = true
+      // this.reset()
+      // const id = row.id || this.ids
+      // this.userId = id
+      // this.open = true
+      this.$router.push({ path: '/hash-game/promote', query: { parentId: row.id } })
       // getHashUserService(id).then(response => {
       //   this.form = response.data
       //   this.form.level1Person = row.level1Person
