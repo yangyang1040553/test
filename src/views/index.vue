@@ -13,7 +13,7 @@
       </el-col>
 
       <el-col :span="8" class="card-box">
-        <el-card>
+        <el-card style="height:735px;">
           <div slot="header">
             <span>统计报表</span>
           </div>
@@ -137,7 +137,7 @@
       </el-col>
 
       <el-col :span="8" class="card-box">
-        <el-card>
+        <el-card style="height:735px;">
           <div slot="header">
             <span>出入款数据</span>
           </div>
