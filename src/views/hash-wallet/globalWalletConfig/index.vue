@@ -88,7 +88,7 @@
           v-hasPermi="['hash-wallet:globalWalletConfig:remove']"
         >删除</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <!-- <el-col :span="1.5">
         <el-button
           type="warning"
           plain
@@ -97,7 +97,7 @@
           @click="handleExport"
           v-hasPermi="['hash-wallet:globalWalletConfig:export']"
         >导出</el-button>
-      </el-col>
+      </el-col> -->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
