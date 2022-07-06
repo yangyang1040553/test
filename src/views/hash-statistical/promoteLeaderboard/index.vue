@@ -372,6 +372,7 @@ export default {
     /** 查询VIEW列表 */
     getList() {
       this.loading = true;
+      this.promoteLeaderboardList = []
       listPromoteLeaderboard(this.queryParams).then(response => {
         this.promoteLeaderboardList = response.rows;
         this.total = response.total;
@@ -411,6 +412,8 @@ export default {
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm("queryForm");
+      this.queryParams.orderByColumn = 'sumnumber'
+      this.queryParams.isAsc = 'desc'
       this.handleQuery();
     },
     // 多选框选中数据

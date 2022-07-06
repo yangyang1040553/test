@@ -17,7 +17,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="注册次数" prop="regCount">
+      <!-- <el-form-item label="注册次数" prop="regCount">
         <el-input
           v-model="queryParams.regCount"
           placeholder="请输入注册次数"
@@ -25,8 +25,8 @@
           oninput="value=value.replace(/[^\d]/g,'')"
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="IP是否禁用" prop="online">
+      </el-form-item> -->
+      <el-form-item label="IP是否禁用" prop="isDisable">
         <el-select
           v-model="queryParams.isDisable"
           placeholder="请选择是否禁用"

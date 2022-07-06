@@ -82,10 +82,26 @@
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="今日usdt充值金额" align="center" prop="usdtAmountRecharge" sortable />
-      <el-table-column label="今日trx充值金额" align="center" prop="trxAmountRecharge" sortable />
-      <el-table-column label="今日usdt提现金额" align="center" prop="usdtAmountWithdraw" sortable />
-      <el-table-column label="今日trx提现金额" align="center" prop="trxAmountWithdraw" sortable />
+      <el-table-column label="今日usdt充值金额" align="center" prop="usdtAmountRecharge" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.usdtAmountRecharge || '-'}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日trx充值金额" align="center" prop="trxAmountRecharge" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.trxAmountRecharge|| '-'}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日usdt提现金额" align="center" prop="usdtAmountWithdraw" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.usdtAmountWithdraw|| '-'}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日trx提现金额" align="center" prop="trxAmountWithdraw" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.trxAmountWithdraw || '-'}}</span>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
