@@ -99,7 +99,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="用户id" align="center" prop="userId">
         <template slot-scope="scope">

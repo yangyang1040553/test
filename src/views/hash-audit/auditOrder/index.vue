@@ -77,7 +77,7 @@
           />
         </el-select>
       </el-form-item>-->
-      <el-form-item label="审核状态" prop="checkStatus">
+      <!-- <el-form-item label="审核状态" prop="checkStatus">
         <el-select v-model="queryParams.checkStatus" placeholder="请选择审核状态" clearable>
           <el-option
             v-show="dict.value==1"
@@ -87,7 +87,7 @@
             :value="dict.value"
           />
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <!-- <el-form-item label="审核人" prop="checkPerson">
         <el-input
           v-model="queryParams.checkPerson"

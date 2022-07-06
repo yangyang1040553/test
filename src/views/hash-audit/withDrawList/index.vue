@@ -373,6 +373,9 @@ export default {
     /** 查询提现审核列表 */
     getList() {
       this.loading = true;
+      if (this.queryParams.checkStatus == '') {
+        this.queryParams.checkStatus = '2,3'
+      }
       listAuditWidthdrawOrder(this.queryParams).then(response => {
         this.auditWidthdrawOrderList = response.rows;
         this.total = response.total;

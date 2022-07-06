@@ -92,7 +92,7 @@
       @sort-change="sortChange"
       height="600"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="日期" align="center" prop="id" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
