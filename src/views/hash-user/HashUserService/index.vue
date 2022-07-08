@@ -82,7 +82,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- <el-form-item label="是否在线" prop="online">
         <el-select v-model="queryParams.online" placeholder="请选择是否在线" clearable>
           <el-option
@@ -226,7 +226,7 @@
             @click="goToTelegram(scope.row)"
           >{{scope.row.tgAccount||"-"}}</div>
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
         <template slot-scope="scope">
           <el-button
@@ -314,6 +314,15 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="查看日志时间" prop="createTime">
+          <el-date-picker
+            clearable
+            v-model="form.showClientLogTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm"
+            placeholder="请选择查看日志时间"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -551,7 +560,7 @@ export default {
     },
     handleWallet(row) {
       this.$router.push({ path: "/wallet/walletTurnover", query: { userId: row.id } })
-    },  
+    },
     toWallet(row) {
       this.$router.push({ path: "/wallet/management", query: { userId: row.id } })
     },
