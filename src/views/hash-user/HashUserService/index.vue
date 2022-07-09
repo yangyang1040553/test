@@ -25,7 +25,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <!-- <el-form-item label="用户名" prop="account">
+      <el-form-item label="用户名" prop="account">
         <el-input
           v-model="queryParams.account"
           placeholder="请输入用户名"
@@ -40,7 +40,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item label="用户IP" prop="registerIp">
         <el-input
           v-model="queryParams.registerIp"
@@ -323,7 +323,7 @@
             value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择查看日志时间"
           ></el-date-picker>
-        </el-form-item> -->
+        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

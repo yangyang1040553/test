@@ -150,7 +150,9 @@
       <el-table-column label="飞机账户" align="center" prop="tgAccount" sortable />
       <el-table-column label="飞机ID" align="center" prop="tgId" sortable />
       <el-table-column label="飞机昵称" align="center" prop="tgName" sortable />
-      <el-table-column label="应用id" align="center" prop="tgAppId" sortable />
+      <el-table-column label="APPID" align="center" prop="tgAppId" sortable />
+      <el-table-column label="APPKEY" align="center" prop="tg_app_key" sortable />
+      <el-table-column label="RANDOMNO" align="center" prop="tg_random_no" sortable />
       <el-table-column label="飞机类型" align="center" prop="tgType" sortable>
         <template slot-scope="scope">
           <dict-tag
@@ -174,7 +176,7 @@
           <dict-tag :options="dict.type.tg_status" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="时间" align="center" prop="createTime" width="180" sortable/>
+      <el-table-column label="时间" align="center" prop="createTime" width="180" sortable />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -205,17 +207,17 @@
 
     <!-- 添加或修改用户飞机对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="130px">
         <el-form-item label="飞机账户" prop="tgAccount">
           <el-input v-model="form.tgAccount" placeholder="请输入tg账户" />
         </el-form-item>
         <!-- <el-form-item label="飞机id" prop="tgId">
           <el-input v-model="form.tgId" placeholder="请输入tg唯一id" />
-        </el-form-item>-->
+        </el-form-item> -->
         <el-form-item label="飞机昵称" prop="tgName">
           <el-input v-model="form.tgName" placeholder="请输入tg昵称" />
         </el-form-item>
-        <el-form-item label="应用id" prop="tgAppId">
+        <el-form-item label="飞机APPID" prop="tgAppId">
           <el-input v-model="form.tgAppId" placeholder="请输入应用id" />
         </el-form-item>
         <el-form-item label="飞机群主" prop="tgGourp">
@@ -224,7 +226,13 @@
         <el-form-item label="玩家id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入玩家id" />
         </el-form-item>
-        <el-form-item label="飞机类型" prop="tgType">
+        <el-form-item label="飞机APPKEY" prop="tg_app_key">
+          <el-input v-model="form.tg_app_key" placeholder="请输入APPKEY" />
+        </el-form-item>
+        <!-- <el-form-item label="tg_random_no" prop="tg_random_no">
+          <el-input v-model="form.userId" placeholder="请输入RANDOMNO" />
+        </el-form-item> -->
+        <!-- <el-form-item label="飞机类型" prop="tgType">
           <el-select v-model="form.tgType" placeholder="请选择飞机类型">
             <el-option
               v-for="dict in dict.type.tg_type"
@@ -233,7 +241,7 @@
               :value="dict.value"
             ></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item>-->
         <!-- <el-form-item label="状态" prop="status">
           <el-select v-model="form.status" placeholder="请选择状态">
             <el-option
@@ -294,7 +302,7 @@ export default {
         tgId: null,
         tgName: null,
         tgAppId: null,
-        tgType: null,
+        tgType: 'user',
         tgGourp: null,
         userId: null,
         status: null,
@@ -313,7 +321,9 @@ export default {
         tgType: [{ required: true, message: 'tg类型 master user不能为空', trigger: 'change' }],
         tgGourp: [{ required: true, message: 'tg群主不能为空', trigger: 'blur' }],
         userId: [{ required: true, message: '玩家id不能为空', trigger: 'blur' }],
-        status: [{ required: true, message: '状态不能为空', trigger: 'change' }]
+        status: [{ required: true, message: '状态不能为空', trigger: 'change' }],
+        tg_app_id: [{ required: true, message: 'appid不能为空', trigger: 'change' }],
+        tg_app_key: [{ required: true, message: 'appkey不能为空', trigger: 'change' }],
       }
     };
   },
@@ -356,7 +366,7 @@ export default {
         tgId: null,
         tgName: null,
         tgAppId: null,
-        tgType: null,
+        tgType: 'user',
         tgGourp: null,
         userId: null,
         status: null,
