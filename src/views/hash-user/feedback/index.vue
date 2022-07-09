@@ -83,7 +83,7 @@
       :data="feedbackList"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一id" align="center" prop="id" />
       <el-table-column label="反馈类型" align="center" prop="code">
         <template slot-scope="scope">

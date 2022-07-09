@@ -9,10 +9,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>-->
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="邀请码" prop="invitationCode">
         <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          v-model="queryParams.invitationCode"
+          placeholder="请输入玩家邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -27,13 +27,11 @@
       </el-form-item>-->
       <el-form-item label="创建时间">
         <el-date-picker
-          v-model="daterangeCreateTime"
+          v-model="queryParams.showClientLogTime"
           style="width: 240px"
-          value-format="yyyy-MM-dd"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+          value-format="yyyy-MM-dd HH:mm"
+          type="datetime"
+          placeholder="请选择日期"
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -74,7 +72,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-user:clientLog:remove']"
         >删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -106,21 +104,21 @@
         </template>
       </el-table-column>
       <el-table-column label="昵称" align="center" prop="nickName" />
-      <el-table-column label="日志" align="center" prop="logs" />
+      <!-- <el-table-column label="日志" align="center" prop="logs" /> -->
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}-{i}-{s}') }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-edit"
+            icon="el-icon-search"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['hash-user:clientLog:edit']"
-          >修改</el-button>
+          >详情</el-button>
           <el-button
             size="mini"
             type="text"
@@ -129,7 +127,7 @@
             v-hasPermi="['hash-user:clientLog:remove']"
           >删除</el-button>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -141,21 +139,23 @@
     />
 
     <!-- 添加或修改客户端日志对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="玩家id" prop="userId">
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" class="form" label-width="0px">
+        <!-- <el-form-item label="玩家id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入玩家id" />
         </el-form-item>
         <el-form-item label="昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入昵称" />
-        </el-form-item>
-        <el-form-item label="日志" prop="logs">
-          <el-input v-model="form.logs" type="textarea" placeholder="请输入内容" />
+        </el-form-item>-->
+        <el-form-item label="" prop="logs">
+          <!-- <Editor v-model="form.logs" type="textarea" placeholder="请输入内容" /> -->
+          <!-- <editor v-model="form.logs" :min-height="400"  class="editor" /> -->
+          <div class="editor">{{form.logs}}</div>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
+        <!-- <el-button @click="cancel">取 消</el-button> -->
       </div>
     </el-dialog>
 
@@ -237,10 +237,10 @@ export default {
     getList() {
       this.loading = true;
       this.queryParams.params = {};
-      if (null != this.daterangeCreateTime && '' != this.daterangeCreateTime) {
-        this.queryParams.params["beginCreateTime"] = this.daterangeCreateTime[0];
-        this.queryParams.params["endCreateTime"] = this.daterangeCreateTime[1];
-      }
+      // if (null != this.daterangeCreateTime && '' != this.daterangeCreateTime) {
+      //   this.queryParams.params["beginCreateTime"] = this.daterangeCreateTime[0];
+      //   this.queryParams.params["endCreateTime"] = this.daterangeCreateTime[1];
+      // }
       listClientLog(this.queryParams).then(response => {
         this.clientLogList = response.rows;
         this.total = response.total;
@@ -286,7 +286,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加客户端日志";
+      this.title = "客户端日志";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -295,7 +295,7 @@ export default {
       getClientLog(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改客户端日志";
+        this.title = "客户端日志";
       });
     },
     /** 提交按钮 */
@@ -337,3 +337,17 @@ export default {
   }
 };
 </script>
+<style   scoped>
+
+.form{
+  height: 60vh;
+}
+
+.editor{
+  height: 580px;
+  max-height: 580px;
+  overflow-y: scroll;
+  border: 1px solid gainsboro;
+  padding: 10px;
+}
+</style>
