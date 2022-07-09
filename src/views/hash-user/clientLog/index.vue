@@ -83,7 +83,7 @@
           v-hasPermi="['hash-user:clientLog:export']"
         >导出</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <!-- <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar> -->
     </el-row>
 
     <el-table
@@ -110,7 +110,7 @@
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="搜索时间" align="center" prop="searchTime" width="180" sortable>
+       <el-table-column label="搜索时间" align="center" prop="searchTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.searchTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
@@ -152,7 +152,7 @@
         <el-form-item label="昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入昵称" />
         </el-form-item>-->
-        <el-form-item label prop="logs">
+        <el-form-item label="" prop="logs">
           <!-- <Editor v-model="form.logs" type="textarea" placeholder="请输入内容" /> -->
           <!-- <editor v-model="form.logs" :min-height="400"  class="editor" /> -->
           <div class="editor">{{form.logs}}</div>
@@ -325,7 +325,7 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      this.queryParams.invitationCode = null
+      this.queryParams.invitationCode=null
       const ids = row.id || this.ids;
       this.$modal.confirm('是否确认删除客户端日志编号为"' + ids + '"的数据项？').then(function () {
         return delClientLog(ids);
@@ -344,11 +344,12 @@ export default {
 };
 </script>
 <style   scoped>
-.form {
+
+.form{
   height: 60vh;
 }
 
-.editor {
+.editor{
   height: 580px;
   max-height: 580px;
   overflow-y: scroll;
