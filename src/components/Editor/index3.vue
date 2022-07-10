@@ -12,17 +12,17 @@
       ref="upload"
       v-if="this.type == 'url'"
     ></el-upload>
-    <div id="toolbar-container" class="toolbar-container"></div>
-    <div id="editor-container" class="editor-container"></div>
+    <div class="editor" ref="editor" :style="styles"></div>
   </div>
 </template>
 
 <script>
-import '@wangeditor/editor/dist/css/style.css'
-import { createEditor, createToolbar, IEditorConfig, IDomEditor } from '@wangeditor/editor'
+import Quill from "quill";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 import { getToken } from "@/utils/auth";
-
-let editor = null
+import { lineHeightStyle } from "./lineHeight";
 
 export default {
   name: "Editor",
@@ -64,8 +64,34 @@ export default {
       headers: {
         Authorization: "Bearer " + getToken()
       },
-      currValue: '',
-      editor: null
+      Quill: null,
+      currentValue: "",
+      options: {
+        theme: "snow",
+        bounds: document.body,
+        debug: "warn",
+        modules: {
+          // 工具栏配置
+          toolbar: [
+            ["bold", "italic", "underline", "strike"],       // 加粗 斜体 下划线 删除线
+            ["blockquote", "code-block"],                    // 引用  代码块
+            [{ list: "ordered" }, { list: "bullet" }],       // 有序、无序列表
+            [{ indent: "-1" }, { indent: "+1" }],            // 缩进
+            [{ size: ["small", false, "large", "huge"] }],   // 字体大小
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'direction': 'rtl' }],        // 标题
+            [{ color: ['#ffd601', '#000000', '#ffd601', 'red', 'white', 'green', 'blue', '#ff4040', '#249eff'] },
+            { background: ['#ffd601', '#000000', '#ffd601', 'red', 'white', 'green', 'blue', '#ff4040', '#249eff'] }],             // 字体颜色、字体背景颜色
+            [{ align: [] }],                                 // 对齐方式
+            ["clean"],                                       // 清除文本格式
+            ["link", "image", "video"],
+            // [{ lineheight: ["1", "1.5", "1.75", "2", "3", "4", "5"] }], // 对齐方式                   // 链接、图片、视频
+          ],
+        },
+        placeholder: "请输入内容",
+        readOnly: this.readOnly,
+       
+      },
     };
   },
   computed: {
@@ -81,108 +107,59 @@ export default {
     },
   },
   watch: {
-    value(news, old) {
-      // console.log("this.editor==", editor)
-      // console.log("nes==", news)
-      this.currValue = news
-      editor.setHtml(this.currValue)
-    }
+    value: {
+      handler(val) {
+        if (val !== this.currentValue) {
+          this.currentValue = val === null ? "" : val;
+          if (this.Quill) {
+            this.Quill.pasteHTML(this.currentValue);
+          }
+        }
+      },
+      immediate: true,
+    },
   },
   mounted() {
     this.init();
+    Quill.register({ "formats/lineHeight": lineHeightStyle }, true);
   },
   beforeDestroy() {
     this.Quill = null;
   },
   methods: {
     init() {
-      const editorConfig = { MENU_CONF: {} }
-      editorConfig.MENU_CONF['uploadImage'] = {
-        server: process.env.VUE_APP_BASE_API + "/common/upload",
-        fieldName: 'file',
-        // 单个文件的最大体积限制，默认为 2M
-        maxFileSize: 2 * 1024 * 1024, // 1M
-        // 最多可上传几个文件，默认为 100
-        maxNumberOfFiles: 1,
-        // 选择文件时的类型限制，默认为 ['image/*'] 。如不想限制，则设置为 []
-        allowedFileTypes: ['image/*'],
-        // 自定义上传参数，例如传递验证的 token 等。参数会被添加到 formData 中，一起上传到服务端。
-        meta: {
-          // Authorization: "Bearer " + getToken()
-        },
-        // 将 meta 拼接到 url 参数中，默认 false
-        metaWithUrl: false,
-        // 自定义增加 http  header
-        headers: {
-          // Accept: 'text/x-json',
-          Authorization: "Bearer " + getToken()
-        },
-        // 跨域是否传递 cookie ，默认为 false
-        // withCredentials: true,
-        // 超时时间，默认为 10 秒
-        timeout: 5 * 1000, // 5 秒
-        // 上传之前触发
-        onBeforeUpload(file) {
-          // file 选中的文件，格式如 { key: file }
-          return file
-        },
-        // 上传进度的回调函数
-        onProgress(progress) {
-          // progress 是 0-100 的数字
-          // console.log('progress', progress)
-        },
-        // 单个文件上传成功之后
-        onSuccess(file, res) {
-          // console.log(`${file.name} 上传成功`, res)
-        },
-        // 单个文件上传失败
-        onFailed(file, res) {
-          // console.log(`${file.name} 上传失败`, res)
-        },
-        // 上传错误，或者触发 timeout 超时
-        onError(file, err, res) {
-          // console.log(`${file.name} 上传出错`, err, res)
-        },
+      const editor = this.$refs.editor;
+      this.Quill = new Quill(editor, this.options);
+      // 如果设置了上传地址则自定义图片上传事件
+      if (this.type == 'url') {
+        let toolbar = this.Quill.getModule("toolbar");
+        toolbar.addHandler("image", (value) => {
+          this.uploadType = "image";
+          if (value) {
+            this.$refs.upload.$children[0].$refs.input.click();
+          } else {
+            this.quill.format("image", false);
+          }
+        });
       }
-
-      editorConfig.MENU_CONF['lineHeight'] = {
-        lineHeightList: ['0.5', '0.75', '1', '1.5', '2', '2.5']
-      }
-
-      editorConfig.placeholder = '请输入内容'
-      editorConfig.onChange = (editor) => {
-        // 当编辑器选区、内容变化时，即触发
-        // console.log('content---', editor.children)
-        // console.log('html---', editor.getHtml())
-        const html = editor.getHtml();
-        const text = editor.getText()
-
+      this.Quill.pasteHTML(this.currentValue);
+      this.Quill.on("text-change", (delta, oldDelta, source) => {
+        const html = this.$refs.editor.children[0].innerHTML;
+        const text = this.Quill.getText();
+        const quill = this.Quill;
+        this.currentValue = html;
         this.$emit("input", html);
-        this.$emit("on-change", { html, text, editor });
-      }
-
-      // 工具栏配置
-      const toolbarConfig = {}
-
-      // 创建编辑器
-      editor = createEditor({
-        selector: '#editor-container',
-        config: editorConfig,
-        mode: 'default',
-        html: this.value
-      })
-
-      console.log(" this.editor", this.editor)
-
-      // 创建工具栏
-      const toolbar = createToolbar({
-        editor,
-        selector: '#toolbar-container',
-        config: toolbarConfig,
-        mode: 'default' // 或 'simple' 参考下文
-      })
-
-
+        this.$emit("on-change", { html, text, quill });
+      });
+      this.Quill.on("text-change", (delta, oldDelta, source) => {
+        this.$emit("on-text-change", delta, oldDelta, source);
+      });
+      this.Quill.on("selection-change", (range, oldRange, source) => {
+        this.$emit("on-selection-change", range, oldRange, source);
+      });
+      this.Quill.on("editor-change", (eventName, ...args) => {
+        this.$emit("on-editor-change", eventName, ...args);
+      });
     },
     // 上传前校检格式和大小
     handleBeforeUpload(file) {
@@ -218,35 +195,8 @@ export default {
 };
 </script>
 
-
 <style>
-.w-e-bar-item button .title {
-  margin-left: 5px;
-  margin-top: 30px;
-  height: 32px;
-  line-height: 32px;
-  /* padding-top: 30px !important; */
-}
-</style>
-
-<style scoped>
-.editor {
-  width: 100%;
-  height: 420px;
-  border: 1px solid gainsboro;
-}
-
-.toolbar-container {
-  position: relative;
-  border-bottom: 1px solid gainsboro !important;
-}
-
-.editor-container {
-  height: 420px;
-  width: 100%;
-}
-
-/* .editor,
+.editor,
 .ql-toolbar {
   white-space: pre-wrap !important;
   line-height: normal !important;
@@ -366,5 +316,5 @@ export default {
 }
 .ql-snow .ql-picker.ql-lineheight {
   width: 70px;
-} */
+}
 </style>

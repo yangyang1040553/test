@@ -265,9 +265,9 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="编辑活动富文本" :visible.sync="openEdit" width="1000px" append-to-body>
-      <el-form ref="conetntForm" :model="form" :rules="rules" label-width="100px" class="form">
-        <el-form-item label="公告内容" prop="content">
+    <el-dialog title="编辑活动富文本" :visible.sync="openEdit" width="1200px" append-to-body>
+      <el-form ref="conetntForm" :model="form" :rules="rules" label-width="0px" class="form">
+        <el-form-item label="" prop="content">
           <editor v-model="form.content" class="editor"  />
         </el-form-item>
       </el-form>
@@ -616,11 +616,11 @@ export default {
 }
 
 .form {
-  height: 400px;
+  height: 500px;
 
   .editor {
-    height: 360px;
-    max-height: 400px;
+    height: 500px;
+    max-height: 500px;
     overflow-y: auto;
   }
 }
