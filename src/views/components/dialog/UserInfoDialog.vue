@@ -1,6 +1,12 @@
 <template>
   <div>
     <el-dialog title :visible.sync="isOpen" width="1000px" append-to-body @close="cancel">
+      <el-radio-group class="button" v-model="tabPosition">
+        <el-radio-button label="1">游戏记录</el-radio-button>
+        <el-radio-button label="2">流水</el-radio-button>
+        <el-radio-button label="3">钱包</el-radio-button>
+      </el-radio-group>
+
       <el-form ref="form" class="form" :model="form" label-width="120px" disabled>
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
@@ -147,7 +153,7 @@
           </el-form-item>
           <el-form-item label="飞机账号" prop="tgAccount">
             <el-input v-model="form.tgAccount" placeholder />
-          </el-form-item> -->
+          </el-form-item>-->
         </div>
       </el-form>
       <!-- <div slot="footer" class="dialog-footer">
@@ -164,7 +170,8 @@ export default {
   data() {
     return {
       form: {},
-      isOpen: this.open
+      isOpen: this.open,
+      tabPosition: -1,
     }
   },
   props: ["id", "open"],
@@ -174,14 +181,39 @@ export default {
       this.form = response.data
     })
   },
+  watch: {
+    tabPosition(news, old) {
+      console.log(news, old)
+      if (news == 1) { this.handleGame() }
+      if (news == 2) { this.handleWallet() }
+      if (news == 3) { this.toWallet() }
+    }
+  },
   methods: {
     cancel() {
       this.$emit("close", true)
-    }
+    },
+    handleGame() {
+      this.$router.push({ path: "/hash-game/record", query: { userId: this.form.id } })
+    },
+    handleWallet() {
+      this.$router.push({ path: "/wallet/walletTurnover", query: { userId: this.form.id } })
+    },
+    toWallet() {
+      this.$router.push({ path: "/wallet/management", query: { userId: this.form.id } })
+    },
   }
 }
 </script>
 <style  lang="scss" scoped>
+::v-deep .el-dialog__body {
+  padding-top: 0px;
+  // display: none;
+}
+.button {
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
 .form {
   width: 100%;
   height: 80vh;

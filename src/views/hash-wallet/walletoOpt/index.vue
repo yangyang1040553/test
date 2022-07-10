@@ -258,6 +258,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listWalletoOpt, getWalletoOpt, delWalletoOpt, addWalletoOpt, updateWalletoOpt } from "@/api/hash-wallet/walletoOpt";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -312,6 +313,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList();
   },
   methods: {
@@ -377,7 +381,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
+      this.queryParams.id = null
       this.handleQuery();
     },
     // 多选框选中数据

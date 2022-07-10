@@ -307,6 +307,9 @@ export default {
       else if (row.code == 7) {
         path = "/wallet/walletOrder"
       }
+      else if (row.code == 8 || row.code == 9) {
+        path = "/wallet/walletoOpt"
+      }
       else if (row.code == 11) {
         path = "/audit/withDrawList"
       }
