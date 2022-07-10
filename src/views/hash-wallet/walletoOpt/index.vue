@@ -137,7 +137,7 @@
       :data="walletoOptList"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55" align="center" />
+      <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="玩家id" align="center" prop="userId">
         <template slot-scope="scope">
@@ -153,7 +153,11 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
-      <el-table-column label="金额" align="center" prop="amount" sortable />
+      <el-table-column label="金额" align="center" prop="amount" sortable>
+        <template slot-scope="scope">
+          <div>{{scope.row.amount||'0.00'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="是否成功" align="center" prop="isCallback" sortable>
         <template slot-scope="scope">
           <dict-tag
@@ -164,7 +168,11 @@
         </template>
       </el-table-column>
       <el-table-column label="操作人" align="center" prop="optPerson" />
-      <el-table-column label="备注说明" align="center" prop="note" />
+      <el-table-column label="备注说明" align="center" prop="note">
+        <template slot-scope="scope">
+          <div>{{scope.row.note||'-'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>

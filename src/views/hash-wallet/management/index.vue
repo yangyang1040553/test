@@ -435,10 +435,14 @@ export default {
         if (valid) {
           if (this.editForm.id != null) {
             console.log(this.editForm)
+
+            if (!this.editForm.note) {
+              this.editForm.note = ""
+            }
             if (this.editForm.type == 1) {
               //出款乘以 -1
               this.editForm.amount = this.editForm.amount * -1
-              this.editForm.note = this.editForm.note + "-(出款)"
+              this.editForm.note = this.editForm.note + "(出款)"
             }
             updateManagement(this.editForm).then(response => {
               this.$modal.msgSuccess("提交成功");
