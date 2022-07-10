@@ -213,25 +213,28 @@
         </el-form-item>
         <!-- <el-form-item label="飞机id" prop="tgId">
           <el-input v-model="form.tgId" placeholder="请输入tg唯一id" />
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="飞机昵称" prop="tgName">
           <el-input v-model="form.tgName" placeholder="请输入tg昵称" />
         </el-form-item>
         <el-form-item label="飞机APPID" prop="tgAppId">
           <el-input v-model="form.tgAppId" placeholder="请输入应用id" />
         </el-form-item>
-        <el-form-item label="飞机群主" prop="tgGourp">
+        <!-- <el-form-item label="飞机群主" prop="tgGourp">
           <el-input v-model="form.tgGourp" placeholder="请输入tg群主" />
         </el-form-item>
         <el-form-item label="玩家id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入玩家id" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="飞机APPKEY" prop="tg_app_key">
           <el-input v-model="form.tg_app_key" placeholder="请输入APPKEY" />
         </el-form-item>
+        <el-form-item label="飞机TOKEN" prop="rob_token">
+          <el-input v-model="form.rob_token" placeholder="请输入TOKEN" />
+        </el-form-item>
         <!-- <el-form-item label="tg_random_no" prop="tg_random_no">
           <el-input v-model="form.userId" placeholder="请输入RANDOMNO" />
-        </el-form-item> -->
+        </el-form-item>-->
         <!-- <el-form-item label="飞机类型" prop="tgType">
           <el-select v-model="form.tgType" placeholder="请选择飞机类型">
             <el-option
