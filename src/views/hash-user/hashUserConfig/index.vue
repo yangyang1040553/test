@@ -144,7 +144,7 @@
           <el-input v-model="form.h5_qr_addr" placeholder="请输入中间下载页地址" />
         </el-form-item>
         <el-form-item style="margin-top:40px;" label="欢迎语" prop="welecome_txt">
-          <el-input v-model="form.welecome_txt" placeholder="请输入欢迎语" />
+          <el-input v-model="form.welecome_txt" type="textarea" placeholder="请输入欢迎语" />
         </el-form-item>
       </el-card>
       <!-- <el-card class="box-card">
