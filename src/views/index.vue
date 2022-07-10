@@ -369,7 +369,7 @@
             :total="total"
             :page.sync="queryParams2.pageNum"
             :limit.sync="queryParams2.pageSize"
-            @pagination="getList"
+            @pagination="getOnlineList"
           />
         </el-card>
       </el-col>
@@ -424,7 +424,7 @@ export default {
       },
       queryParams2: {
         pageNum: 1,
-        pageSize: 20,
+        pageSize: 10,
         orderByColumn: 'loginTime',
         isAsc: 'desc'
       },
@@ -447,7 +447,7 @@ export default {
     // this.openLoading();
   },
   mounted() {
-     console.log(window.location)
+    // console.log(window.location)
 
     this.getList();
     this.getLineChart()
@@ -549,15 +549,26 @@ export default {
       };
       this.lineChart.setOption(option);
     },
-    /** 查缓存询信息 */
-    getList() {
-      this.loading = true
-      console.log("查缓存询信息")
+    getOnlineList() {
       listRedisOnLineList(this.queryParams2).then(response => {
         this.HashUserServiceList = response.rows
         this.total = response.total
         this.loading = false
+        window.scrollTo(0, document.documentElement.clientHeight)
+        // window.scrollY(-document.documentElement.clientHeight)
       })
+    },
+    /** 查缓存询信息 */
+    getList() {
+      this.loading = true
+      console.log("查缓存询信息")
+
+      listRedisOnLineList(this.queryParams2).then(response => {
+        this.HashUserServiceList = response.rows
+        this.total = response.total 
+        this.loading = false
+      })
+
       listRegister(this.queryParams3).then(response => {
         this.registerList = response.rows;
         var labels = []
