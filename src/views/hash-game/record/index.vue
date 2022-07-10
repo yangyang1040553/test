@@ -55,6 +55,7 @@
           v-model="queryParams.odds"
           placeholder="请输入赔率"
           clearable
+              oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -181,7 +182,7 @@
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
         </template>
       </el-table-column>
-      <el-table-column label="场次id" align="center" prop="sessionId" />
+      <!-- <el-table-column label="场次id" align="center" prop="sessionId" /> -->
       <!-- <el-table-column label="玩家id" align="center" prop="userId" width="200" /> -->
       <el-table-column label="玩家id" align="center" prop="userId" width="200">
         <template slot-scope="scope">

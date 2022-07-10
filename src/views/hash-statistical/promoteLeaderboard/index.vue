@@ -6,6 +6,7 @@
           v-model="queryParams.phone"
           placeholder="请输入手机号"
           clearable
+              oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>

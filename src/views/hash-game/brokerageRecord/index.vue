@@ -22,6 +22,7 @@
           v-model="queryParams.level"
           placeholder="请输入第几级的佣金"
           clearable
+              oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>

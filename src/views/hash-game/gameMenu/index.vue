@@ -17,6 +17,7 @@
           v-model="queryParams.weight"
           placeholder="请输入权重值"
           clearable
+          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -78,7 +79,7 @@
           @click="handleExport"
           v-hasPermi="['hash-game:gameMenu:export']"
         >导出</el-button>
-      </el-col> -->
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 

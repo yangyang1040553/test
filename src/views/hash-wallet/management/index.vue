@@ -265,8 +265,11 @@
           <el-input
             v-model="editForm.amount"
             oninput="value=value.replace(/[^\d\.]/g,'')"
-            placeholder="请输入充值金额"
+            placeholder="请输入金额"
           />
+        </el-form-item>
+        <el-form-item label="备注" prop="note">
+          <el-input v-model="editForm.note" placeholder="请输入备注" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -435,6 +438,7 @@ export default {
             if (this.editForm.type == 1) {
               //出款乘以 -1
               this.editForm.amount = this.editForm.amount * -1
+              this.editForm.note = this.editForm.note + "-(出款)"
             }
             updateManagement(this.editForm).then(response => {
               this.$modal.msgSuccess("提交成功");
