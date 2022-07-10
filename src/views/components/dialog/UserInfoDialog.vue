@@ -148,12 +148,12 @@
           <el-form-item label="用户备注" prop="noteName">
             <el-input v-model="form.noteName" placeholder />
           </el-form-item>
-          <!-- <el-form-item label="飞机ID" prop="tgId">
+          <el-form-item label="飞机ID" prop="tgId">
             <el-input v-model="form.tgId" placeholder />
           </el-form-item>
           <el-form-item label="飞机账号" prop="tgAccount">
             <el-input v-model="form.tgAccount" placeholder />
-          </el-form-item>-->
+          </el-form-item>
         </div>
       </el-form>
       <!-- <div slot="footer" class="dialog-footer">
