@@ -173,7 +173,11 @@
       </el-table-column>
       <el-table-column label="状态" align="center" prop="status" sortable>
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.tg_status" :value="scope.row.status" />
+          <dict-tag
+            :class="scope.row.status?'global-text-green':'global-text-red'"
+            :options="dict.type.tg_status"
+            :value="scope.row.status"
+          />
         </template>
       </el-table-column>
       <el-table-column label="时间" align="center" prop="createTime" width="180" sortable />
@@ -225,12 +229,22 @@
         </el-form-item>
         <el-form-item label="玩家id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入玩家id" />
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="飞机APPKEY" prop="tg_app_key">
           <el-input v-model="form.tg_app_key" placeholder="请输入APPKEY" />
         </el-form-item>
         <el-form-item label="飞机TOKEN" prop="rob_token">
           <el-input v-model="form.rob_token" placeholder="请输入TOKEN" />
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status" placeholder="请选择是否禁用" clearable>
+            <el-option
+              v-for="dict in useStatus"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
         </el-form-item>
         <!-- <el-form-item label="tg_random_no" prop="tg_random_no">
           <el-input v-model="form.userId" placeholder="请输入RANDOMNO" />
@@ -296,6 +310,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      useStatus: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -327,6 +342,7 @@ export default {
         status: [{ required: true, message: '状态不能为空', trigger: 'change' }],
         tg_app_id: [{ required: true, message: 'appid不能为空', trigger: 'change' }],
         tg_app_key: [{ required: true, message: 'appkey不能为空', trigger: 'change' }],
+        rob_token: [{ required: true, message: 'token不能为空', trigger: 'change' }],
       }
     };
   },
