@@ -278,18 +278,18 @@
         <el-form-item label="用户名" prop="account">
           <el-input v-model="form.account" placeholder="请输入用户名" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <!-- <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="设备码" prop="deviceCode">
           <el-input v-model="form.deviceCode" placeholder="请输入设备码" />
         </el-form-item>-->
         <!-- <el-form-item label="平台" prop="platform">
           <el-input v-model="form.platform" placeholder="请输入平台-IOS、android" />
         </el-form-item>-->
-        <el-form-item label="用户昵称" prop="nickName">
+        <!-- <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="用户备注" prop="noteName">
           <el-input v-model="form.noteName" placeholder="请输入用户备注" />
         </el-form-item>
