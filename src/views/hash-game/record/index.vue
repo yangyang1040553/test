@@ -55,7 +55,7 @@
           v-model="queryParams.odds"
           placeholder="请输入赔率"
           clearable
-              oninput="value=value.replace(/[^\d\.]/g,'')"
+          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -117,6 +117,16 @@
         <el-select v-model="queryParams.winner" placeholder="请选择赢家" clearable>
           <el-option
             v-for="dict in dict.type.winner"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="奖金回调" prop="winner">
+        <el-select v-model="queryParams.awardCallback" placeholder="请选择赢家" clearable>
+          <el-option
+            v-for="dict in dict.type.award_callback"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -236,7 +246,10 @@
       </el-table-column>
       <el-table-column label="奖金回调" align="center" prop="awardCallback">
         <template slot-scope="scope">
-          <div v-if="scope.row.awardAmount>0">{{ scope.row.awardCallback==1?'已回调':'未回调' }}</div>
+          <div
+            v-if="scope.row.awardAmount>0"
+            :class="scope.row.awardCallback !=1? 'global-text-red':''"
+          >{{ scope.row.awardCallback==1?'已回调':'未回调' }}</div>
           <div v-else>-</div>
         </template>
       </el-table-column>
@@ -380,7 +393,7 @@ import { listRecord, getRecord, delRecord, addRecord, updateRecord } from '@/api
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: 'Record',
-  dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result', 'game_list'],
+  dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result', 'game_list','award_callback'],
   components: {
     UserInfoDialog
   },
