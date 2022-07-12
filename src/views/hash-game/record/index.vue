@@ -123,7 +123,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="奖金回调" prop="winner">
+      <el-form-item label="奖金回调" prop="awardCallback">
         <el-select v-model="queryParams.awardCallback" placeholder="请选择赢家" clearable>
           <el-option
             v-for="dict in dict.type.award_callback"
