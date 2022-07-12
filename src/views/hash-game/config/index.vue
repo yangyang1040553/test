@@ -42,7 +42,7 @@
           v-model="queryParams.odds"
           placeholder="请输入倍率配置"
           clearable
-          oninput="value=value.replace(/[^\d\.]/g,'')"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -51,7 +51,7 @@
           v-model="queryParams.weight"
           placeholder="请输入权重"
           clearable
-          oninput="value=value.replace(/[^\d\.]/g,'')"
+              oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -138,7 +138,7 @@
           @click="handleExport"
           v-hasPermi="['hash-game:config:export']"
         >导出</el-button>
-      </el-col>-->
+      </el-col> -->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -245,11 +245,11 @@
     <!-- 添加或修改游戏配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="isDetail">
-        <el-form-item label="游戏菜单" prop="gameId">
-          <el-select v-model="form.gameId" placeholder="请选择对应游戏">
+        <el-form-item label="游戏菜单" prop="menuId">
+          <el-select v-model="form.menuId" placeholder="请选择对应游戏">
             <!-- dict.activity   隐藏 特殊活动场 -->
+              <!-- v-show="dict.activity != 1" -->
             <el-option
-              v-show="dict.activity != 1"
               v-for="dict in gameMenuList"
               :key="dict.id"
               :label="dict.menuName"
