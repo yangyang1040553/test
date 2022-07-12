@@ -50,7 +50,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>-->
-      <el-form-item label="赔率" prop="odds">
+      <!-- <el-form-item label="赔率" prop="odds">
         <el-input
           v-model="queryParams.odds"
           placeholder="请输入赔率"
@@ -58,7 +58,7 @@
           oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="投注类型" prop="betWalletType">
         <el-select v-model="queryParams.betWalletType" placeholder="请选择投注的钱包类型" clearable>
           <el-option
