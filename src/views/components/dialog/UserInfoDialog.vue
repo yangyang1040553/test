@@ -88,8 +88,8 @@
           <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
             <el-input v-model="form.usdt_remote_amount" placeholder />
           </el-form-item>
-          <el-form-item label="TRX远程总额" prop="usdt_remote_amount">
-            <el-input v-model="form.usdt_remote_amount" placeholder />
+          <el-form-item label="TRX远程总额" prop="trx_remote_amount">
+            <el-input v-model="form.trx_remote_amount" placeholder />
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
             <el-select v-model="form.status" placeholder>
