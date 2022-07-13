@@ -22,10 +22,6 @@
           <!-- <el-form-item label="密码" prop="password">
             <el-input v-model="form.password" placeholder="请输入密码" />
           </el-form-item>-->
-          <el-form-item label="用户备注" prop="noteName">
-            <el-input v-model="form.noteName" placeholder />
-          </el-form-item>
-
           <el-form-item label="设备码" prop="deviceCode">
             <el-input v-model="form.deviceCode" placeholder />
           </el-form-item>
@@ -34,6 +30,9 @@
           </el-form-item>
           <el-form-item label="用户昵称" prop="nickName">
             <el-input v-model="form.nickName" placeholder />
+          </el-form-item>
+          <el-form-item label="用户备注" prop="noteName">
+            <el-input v-model="form.noteName" placeholder />
           </el-form-item>
           <el-form-item label="一级代理人数" prop="level1Person">
             <el-input :value="form.level1Person||0.00" placeholder />
