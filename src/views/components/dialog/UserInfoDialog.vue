@@ -22,6 +22,12 @@
           <!-- <el-form-item label="密码" prop="password">
             <el-input v-model="form.password" placeholder="请输入密码" />
           </el-form-item>-->
+          <el-form-item label="USDT总额" prop="usdtAmount">
+            <el-input v-model="form.usdtAmount" placeholder />
+          </el-form-item>
+          <el-form-item label="TRX总额" prop="trxAmount">
+            <el-input v-model="form.trxAmount" placeholder />
+          </el-form-item>
           <el-form-item label="设备码" prop="deviceCode">
             <el-input v-model="form.deviceCode" placeholder />
           </el-form-item>
@@ -34,6 +40,7 @@
           <el-form-item label="用户备注" prop="noteName">
             <el-input v-model="form.noteName" placeholder />
           </el-form-item>
+
           <el-form-item label="一级代理人数" prop="level1Person">
             <el-input :value="form.level1Person||0.00" placeholder />
           </el-form-item>
@@ -78,11 +85,11 @@
             <!-- <span class="label">{{ form.outAmount ||0.00}}</span> -->
           </el-form-item>
 
-          <el-form-item label="USDT总额" prop="usdtAmount">
-            <el-input v-model="form.usdtAmount" placeholder />
+          <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
+            <el-input v-model="form.usdt_remote_amount" placeholder />
           </el-form-item>
-          <el-form-item label="TRX总额" prop="trxAmount">
-            <el-input v-model="form.trxAmount" placeholder />
+          <el-form-item label="TRX远程总额" prop="usdt_remote_amount">
+            <el-input v-model="form.usdt_remote_amount" placeholder />
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
             <el-select v-model="form.status" placeholder>
