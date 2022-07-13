@@ -22,11 +22,8 @@
           <!-- <el-form-item label="密码" prop="password">
             <el-input v-model="form.password" placeholder="请输入密码" />
           </el-form-item>-->
-          <el-form-item label="USDT总额" prop="usdtAmount">
-            <el-input v-model="form.usdtAmount" placeholder />
-          </el-form-item>
-          <el-form-item label="TRX总额" prop="trxAmount">
-            <el-input v-model="form.trxAmount" placeholder />
+          <el-form-item label="用户备注" prop="noteName">
+            <el-input v-model="form.noteName" placeholder />
           </el-form-item>
 
           <el-form-item label="设备码" prop="deviceCode">
@@ -56,9 +53,7 @@
           <el-form-item label="分享返佣赔率" prop="sharePromoteOdds">
             <el-input v-model="form.sharePromoteOdds" placeholder />
           </el-form-item>
-          <el-form-item label="用户备注" prop="noteName">
-            <el-input v-model="form.noteName" placeholder />
-          </el-form-item>
+
           <el-form-item label="TRC地址" prop="hashAddressTrx">
             <el-input v-model="form.hashAddressTrx" placeholder />
           </el-form-item>
@@ -82,6 +77,13 @@
           <el-form-item label="今日提现金额">
             <el-input :value="form.outAmount||0.00" placeholder />
             <!-- <span class="label">{{ form.outAmount ||0.00}}</span> -->
+          </el-form-item>
+
+          <el-form-item label="USDT总额" prop="usdtAmount">
+            <el-input v-model="form.usdtAmount" placeholder />
+          </el-form-item>
+          <el-form-item label="TRX总额" prop="trxAmount">
+            <el-input v-model="form.trxAmount" placeholder />
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
             <el-select v-model="form.status" placeholder>
@@ -145,9 +147,9 @@
           <el-form-item label="登录ip" prop="loginIp">
             <el-input v-model="form.loginIp" placeholder />
           </el-form-item>
-          <el-form-item label="用户备注" prop="noteName">
+          <!-- <el-form-item label="用户备注" prop="noteName">
             <el-input v-model="form.noteName" placeholder />
-          </el-form-item>
+          </el-form-item>-->
           <el-form-item label="飞机ID" prop="tgId">
             <el-input v-model="form.tgId" placeholder />
           </el-form-item>

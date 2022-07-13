@@ -358,7 +358,7 @@
                 <span
                   class="global-text-blue"
                   @click="handleUserInfo(scope.row)"
-                >{{ scope.row.nickName }}</span>
+                >{{ scope.row.note_name? scope.row.note_name: scope.row.nickName }}</span>
               </template>
             </el-table-column>
             <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
@@ -565,7 +565,7 @@ export default {
 
       listRedisOnLineList(this.queryParams2).then(response => {
         this.HashUserServiceList = response.rows
-        this.total = response.total 
+        this.total = response.total
         this.loading = false
       })
 

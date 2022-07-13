@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
+      <el-form-item label="订单ID" prop="id">
+        <el-input
+          v-model="queryParams.id"
+          placeholder="请输入订单ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="交易号" prop="transactionNo">
         <el-input
           v-model="queryParams.transactionNo"
@@ -244,7 +252,7 @@
 <script>
 import { listRechargeOrder, getRechargeOrder, delRechargeOrder, addRechargeOrder, updateRechargeOrder, getCurrDay } from "@/api/hash-wallet/rechargeOrder";
 import { getCurrDay as getCurrDayForTrans } from "@/api/hash-wallet/walletOrder";
-
+import merge from 'webpack-merge'
 
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
@@ -297,6 +305,9 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.orderId) {
+      this.queryParams.id = this.$route.query.orderId
+    }
     this.getList();
   },
   methods: {
@@ -391,7 +402,10 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
+      this.$router.push({ query: merge({}, {}) })
+      this.resetForm('queryForm')
+      this.queryParams.id = null
+      // this.resetForm("queryForm");
       this.handleQuery();
     },
     // 多选框选中数据
