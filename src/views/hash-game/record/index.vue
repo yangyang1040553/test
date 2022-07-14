@@ -124,7 +124,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="奖金回调" prop="awardCallback">
-        <el-select v-model="queryParams.awardCallback" placeholder="请选择赢家" clearable>
+        <el-select v-model="queryParams.awardCallback" placeholder="请选择回调状态" clearable>
           <el-option
             v-for="dict in dict.type.award_callback"
             :key="dict.value"
@@ -436,6 +436,7 @@ export default {
         rewardStatus: null,
         winner: null,
         createTime: null,
+        awardCallback: null,
         // sort: 'desc',
         // prop: 'create_time',
         orderByColumn: 'createTime',
