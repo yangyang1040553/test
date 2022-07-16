@@ -70,7 +70,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">上月TRX盈利</dir>
               <dir class="value">
-                <span class="trx">{{indexData.pre_trx_win_amount}} TRX</span>
+                <span class="trx">{{indexData.pre_trx_win_amount||0}} TRX</span>
               </dir>
             </div>
 
@@ -84,7 +84,7 @@
               <div class="circle_blue"></div>
               <dir class="lable">上月USDT盈利</dir>
               <dir class="value">
-                <span class="usdt">{{indexData.pre_usdt_win_amount}} USDT</span>
+                <span class="usdt">{{indexData.pre_usdt_win_amount||0}} USDT</span>
               </dir>
             </div>
 
@@ -350,6 +350,7 @@
             @sort-change="sortChange"
             :data="HashUserServiceList"
             height="420"
+            ref="multipleTable"
           >
             <el-table-column label="用户名" align="center" prop="account" />
             <el-table-column label="平台" align="center" prop="platform" width="100" />
@@ -448,7 +449,7 @@ export default {
   },
   mounted() {
     // console.log(window.location)
-
+    this.$refs.multipleTable.bodyWrapper.scrollTop = 0;
     this.getList();
     this.getLineChart()
   },
