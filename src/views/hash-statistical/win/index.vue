@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="用户id" prop="userId">
+      <el-form-item label="用户ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入用户id"
+          placeholder="请输入用户ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -86,7 +86,7 @@
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户id" align="center" prop="userId">
+      <el-table-column label="用户ID" align="center" prop="userId">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -94,18 +94,18 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
-      <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="usdt输赢金额" align="center" prop="usdtWinAmount" sortable>
+      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
+      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
+      <el-table-column label="USDT输赢金额" align="center" prop="usdtWinAmount" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.usdtWinAmount>0?'global-text-green':'global-text-red'"
           >{{ scope.row.usdtWinAmount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
-      <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-      <el-table-column label="trx输赢金额" align="center" prop="trxWinAmount" sortable>
+      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount" />
+      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount" />
+      <el-table-column label="TRX输赢金额" align="center" prop="trxWinAmount" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.trxWinAmount>0?'global-text-green':'global-text-red'"
@@ -153,8 +153,8 @@
             placeholder="请选择id-天为单位"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="用户id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入用户id" />
+        <el-form-item label="用户ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入用户ID" />
         </el-form-item>
         <el-form-item label="今日usdt押注金额" prop="usdtBetAmount">
           <el-input v-model="form.usdtBetAmount" placeholder="请输入今日usdt押注金额" />

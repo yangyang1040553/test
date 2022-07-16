@@ -141,7 +141,7 @@
       :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <!-- <el-table-column label="用户id" align="center" prop="id" /> -->
+      <!-- <el-table-column label="用户ID" align="center" prop="id" /> -->
       <el-table-column label="用户ID" align="center" prop="id" width="160">
         <template slot-scope="scope">
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>

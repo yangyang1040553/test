@@ -16,10 +16,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="tg唯一id" prop="createTgId">
+      <el-form-item label="tg唯一ID" prop="createTgId">
         <el-input
           v-model="queryParams.createTgId"
-          placeholder="请输入tg唯一id"
+          placeholder="请输入tg唯一ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -109,8 +109,8 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="群组id" align="center" prop="groupId" sortable/>
-      <el-table-column label="tg唯一id" align="center" prop="createTgId" sortable/>
+      <el-table-column label="群组ID" align="center" prop="groupId" sortable/>
+      <el-table-column label="飞机ID" align="center" prop="createTgId" sortable/>
       <el-table-column label="群组名称" align="center" prop="name" />
       <el-table-column label="群组链接" align="center" prop="tgUrl" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
@@ -149,8 +149,8 @@
     <!-- 添加或修改群组列表对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="tg唯一id" prop="createTgId">
-          <el-input v-model="form.createTgId" placeholder="请输入tg唯一id" />
+        <el-form-item label="tg唯一ID" prop="createTgId">
+          <el-input v-model="form.createTgId" placeholder="请输入tg唯一ID" />
         </el-form-item>
         <el-form-item label="群组名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入群组名称" />

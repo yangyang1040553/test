@@ -8,10 +8,10 @@
       v-show="showSearch"
       label-width="100px"
     >
-      <el-form-item label="玩家id" prop="id">
+      <el-form-item label="玩家ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -24,10 +24,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="上级玩家id" prop="fatherUserId">
+      <el-form-item label="上级玩家ID" prop="fatherUserId">
         <el-input
           v-model="queryParams.fatherUserId"
-          placeholder="请输入上级玩家id"
+          placeholder="请输入上级玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -83,15 +83,15 @@
       @selection-change="handleSelectionChange"
       height="600"
     >
-      <!-- <el-table-column label="玩家id" align="center" prop="id" width="200" /> -->
-      <el-table-column label="玩家id" align="center" prop="id" width="200">
+      <!-- <el-table-column label="玩家ID" align="center" prop="id" width="200" /> -->
+      <el-table-column label="玩家ID" align="center" prop="id" width="200">
         <template slot-scope="scope">
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
       <el-table-column label="玩家邀请码" align="center" prop="invitationCode" width="100" />
-      <!-- <el-table-column label="上级玩家id" align="center" prop="fatherUserId" width="200" /> -->
-      <el-table-column label="上级玩家id" align="center" prop="fatherUserId" width="200">
+      <!-- <el-table-column label="上级玩家ID" align="center" prop="fatherUserId" width="200" /> -->
+      <el-table-column label="上级玩家ID" align="center" prop="fatherUserId" width="200">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -303,8 +303,8 @@
         <el-form-item label="玩家的邀请码" prop="invitationCode">
           <el-input v-model="form.invitationCode" placeholder="请输入玩家的邀请码" />
         </el-form-item>
-        <el-form-item label="上级玩家id" prop="fatherUserId">
-          <el-input v-model="form.fatherUserId" placeholder="请输入上级玩家id" />
+        <el-form-item label="上级玩家ID" prop="fatherUserId">
+          <el-input v-model="form.fatherUserId" placeholder="请输入上级玩家ID" />
         </el-form-item>
         <el-form-item label="上级玩家的邀请码" prop="fatherInvitationCode">
           <el-input v-model="form.fatherInvitationCode" placeholder="请输入上级玩家的邀请码" />

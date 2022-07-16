@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <!-- <el-form-item label="玩家id" prop="userId">
-        <el-input v-model="queryParams.userId" placeholder="请输入玩家id" clearable @keyup.enter.native="handleQuery" />
+      <!-- <el-form-item label="玩家ID" prop="userId">
+        <el-input v-model="queryParams.userId" placeholder="请输入玩家ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>-->
       <el-form-item label="国际区号" prop="areaCode">
         <el-input
@@ -78,7 +78,7 @@
       :row-class-name="tableRowClassName"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
+      <!-- <el-table-column label="玩家ID" align="center" prop="userId" /> -->
       <el-table-column label="国际区号" align="center" prop="areaCode" />
       <el-table-column label="手机号" align="center" prop="phone" />
       <el-table-column label="验证码" align="center" prop="checkCode" />
@@ -123,11 +123,11 @@
     <!-- 添加或修改用户短信功能对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="唯一id" prop="id">
-          <el-input v-model="form.id" placeholder="请输入唯一id" />
+        <el-form-item label="唯一ID" prop="id">
+          <el-input v-model="form.id" placeholder="请输入唯一ID" />
         </el-form-item>
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="国际区号" prop="areaCode">
           <el-input v-model="form.areaCode" placeholder="请输入国际区号" />

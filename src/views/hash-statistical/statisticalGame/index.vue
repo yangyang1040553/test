@@ -8,7 +8,7 @@
       v-show="showSearch"
       label-width="78px"
     >
-      <!-- <el-form-item label="游戏id" prop="gameId">
+      <!-- <el-form-item label="游戏ID" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
           placeholder="请输入游戏名称"
@@ -61,7 +61,7 @@
       @sort-change="sortChange"
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
-      <!-- <el-table-column label="游戏id" align="center" prop="gameId" /> -->
+      <!-- <el-table-column label="游戏ID" align="center" prop="gameId" /> -->
       <el-table-column label="游戏名称" align="center" prop="gameName">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
@@ -72,18 +72,18 @@
       <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />-->
 
-      <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
-      <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
+      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
+      <el-table-column label="USDT输赢金额" align="center" prop="usdtWin" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
           >{{ scope.row.usdtWin }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
-      <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-      <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount" />
+      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount" />
+      <el-table-column label="TRX输赢金额" align="center" prop="trxWin" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"
@@ -114,7 +114,7 @@
     <!-- 添加或修改游戏配置对话框 -->
     <el-dialog title :visible.sync="open" width="800px" append-to-body>
       <el-table v-loading="loading" :data="childrenList" height="500px">
-        <!-- <el-table-column label="游戏id" align="center" prop="gameId" />
+        <!-- <el-table-column label="游戏ID" align="center" prop="gameId" />
         <el-table-column label="游戏名称" align="center" prop="gameName">
           <template slot-scope="scope">
             <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />

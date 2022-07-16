@@ -17,10 +17,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
@@ -104,8 +104,8 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
-      <!-- <el-table-column label="玩家id" align="center" prop="userId" /> -->
-      <el-table-column label="玩家id" align="center" prop="userId" width="200">
+      <!-- <el-table-column label="玩家ID" align="center" prop="userId" /> -->
+      <el-table-column label="玩家ID" align="center" prop="userId" width="200">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -158,8 +158,8 @@
     <!-- 添加或修改佣金提现记录对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="提现金额" prop="withdrawAmount">
           <el-input v-model="form.withdrawAmount" placeholder="请输入提现金额" />

@@ -62,7 +62,7 @@
 
     <el-table v-loading="loading" :data="globalGameList" @selection-change="handleSelectionChange">
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <!-- <el-table-column label="唯一id" align="center" prop="id" /> -->
+      <!-- <el-table-column label="唯一ID" align="center" prop="id" /> -->
       <el-table-column label="usdt池金额" align="center" prop="usdtPoolAmount" />
       <el-table-column label="trx池金额" align="center" prop="trxPoolAmount" />
       <el-table-column label="结算代理佣金的时间" align="center" prop="calcPromoteTime" width="180">

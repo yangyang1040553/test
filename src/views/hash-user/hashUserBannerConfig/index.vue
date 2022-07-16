@@ -102,7 +102,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="banner" align="center" prop="bannerUrl" width="300">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">

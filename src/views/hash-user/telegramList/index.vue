@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <!-- <el-form-item label="id" prop="id">
+      <!-- <el-form-item label="ID" prop="id">
         <el-input
           v-model="queryParams.id"
           placeholder="请输入id"
@@ -12,15 +12,15 @@
       <el-form-item label="飞机账户" prop="tgAccount">
         <el-input
           v-model="queryParams.tgAccount"
-          placeholder="请输入tg账户"
+          placeholder="请输入飞机账户"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <!-- <el-form-item label="tg唯一id" prop="tgId">
+      <!-- <el-form-item label="tg唯一ID" prop="tgId">
         <el-input
           v-model="queryParams.tgId"
-          placeholder="请输入tg唯一id"
+          placeholder="请输入tg唯一ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -28,7 +28,7 @@
       <el-form-item label="飞机昵称" prop="tgName">
         <el-input
           v-model="queryParams.tgName"
-          placeholder="请输入tg昵称"
+          placeholder="请输入飞机昵称"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -54,15 +54,15 @@
       <el-form-item label="飞机群主" prop="tgGourp">
         <el-input
           v-model="queryParams.tgGourp"
-          placeholder="请输入tg群主"
+          placeholder="请输入飞机群主"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <!-- <el-form-item label="玩家id" prop="userId">
+      <!-- <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -163,7 +163,7 @@
         </template>
       </el-table-column>
       <el-table-column label="飞机群主" align="center" prop="tgGourp" sortable />
-      <el-table-column label="玩家id" align="center" prop="userId" sortable>
+      <el-table-column label="玩家ID" align="center" prop="userId" sortable>
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -216,7 +216,7 @@
           <el-input v-model="form.tgAccount" placeholder="请输入tg账户" />
         </el-form-item>
         <!-- <el-form-item label="飞机id" prop="tgId">
-          <el-input v-model="form.tgId" placeholder="请输入tg唯一id" />
+          <el-input v-model="form.tgId" placeholder="请输入tg唯一ID" />
         </el-form-item>-->
         <el-form-item label="飞机昵称" prop="tgName">
           <el-input v-model="form.tgName" placeholder="请输入tg昵称" />
@@ -227,8 +227,8 @@
         <!-- <el-form-item label="飞机群主" prop="tgGourp">
           <el-input v-model="form.tgGourp" placeholder="请输入tg群主" />
         </el-form-item>
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>-->
         <el-form-item label="飞机APPKEY" prop="tg_app_key">
           <el-input v-model="form.tg_app_key" placeholder="请输入APPKEY" />
@@ -333,12 +333,12 @@ export default {
       // 表单校验
       rules: {
         tgAccount: [{ required: true, message: 'tg账户不能为空', trigger: 'blur' }],
-        tgId: [{ required: true, message: 'tg唯一id不能为空', trigger: 'blur' }],
+        tgId: [{ required: true, message: 'tg唯一ID不能为空', trigger: 'blur' }],
         tgName: [{ required: true, message: 'tg昵称不能为空', trigger: 'blur' }],
         tgAppId: [{ required: true, message: '应用id不能为空', trigger: 'blur' }],
         tgType: [{ required: true, message: 'tg类型 master user不能为空', trigger: 'change' }],
         tgGourp: [{ required: true, message: 'tg群主不能为空', trigger: 'blur' }],
-        userId: [{ required: true, message: '玩家id不能为空', trigger: 'blur' }],
+        userId: [{ required: true, message: '玩家ID不能为空', trigger: 'blur' }],
         status: [{ required: true, message: '状态不能为空', trigger: 'change' }],
         tg_app_id: [{ required: true, message: 'appid不能为空', trigger: 'change' }],
         tg_app_key: [{ required: true, message: 'appkey不能为空', trigger: 'change' }],

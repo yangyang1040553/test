@@ -100,12 +100,12 @@
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="ip地址" align="center" prop="ip">
+      <el-table-column label="IP地址" align="center" prop="ip">
         <template slot-scope="scope">
           <div class="global-text-blue" @click="goToUser(scope.row.ip)">{{scope.row.ip}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="ip的位置信息" align="center" prop="ipAddr" />
+      <el-table-column label="IP的位置信息" align="center" prop="ipAddr" />
       <el-table-column label="注册次数" align="center" prop="regCount" sortable />
       <el-table-column label="是否禁用" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">

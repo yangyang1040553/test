@@ -17,10 +17,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -131,9 +131,9 @@
       @sort-change="sortChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单id" align="center" prop="id" width="130" />
+      <el-table-column label="订单ID" align="center" prop="id" width="130" />
       <el-table-column label="交易号" align="center" prop="transactionNo" width="130" />
-      <el-table-column label="玩家id" align="center" prop="userId" width="130">
+      <el-table-column label="玩家ID" align="center" prop="userId" width="130">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -211,8 +211,8 @@
         <el-form-item label="交易号" prop="transactionNo">
           <el-input v-model="form.transactionNo" placeholder="请输入交易号" />
         </el-form-item>
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="付款地址" prop="paymentAddress">
           <el-input v-model="form.paymentAddress" placeholder="请输入付款地址" />

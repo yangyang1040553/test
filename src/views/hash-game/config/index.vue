@@ -152,7 +152,7 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="配置id" align="center" prop="id" />
-      <el-table-column label="游戏id" align="center" prop="gameId" />
+      <el-table-column label="游戏ID" align="center" prop="gameId" />
       <el-table-column label="游戏名称" align="center" prop="gameName" />
       <el-table-column label="游戏场次" align="center" prop="gameSession">
         <template slot-scope="scope">

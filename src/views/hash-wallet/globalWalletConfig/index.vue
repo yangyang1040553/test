@@ -108,17 +108,17 @@
       @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="trx转usdt比例" align="center" prop="trxToUsdt" sortable>
+      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" sortable>
         <template slot-scope="scope">
           <span>{{ (scope.row.trxToUsdt.sourceScale+':'+scope.row.trxToUsdt.toScale) || "-" }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="usdt转trx比例" align="center" prop="usdtToTrx" sortable>
+      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" sortable>
         <template slot-scope="scope">
           <span>{{ (scope.row.usdtToTrx.sourceScale+':'+scope.row.usdtToTrx.toScale) || "-" }}</span>
         </template>

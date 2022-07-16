@@ -4,7 +4,7 @@
       <el-form-item label="ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入唯一id"
+          placeholder="请输入唯一ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -104,7 +104,7 @@
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="反馈问题类型" align="center" prop="items" sortable />
       <el-table-column label="反馈内容" align="center" prop="content" />
       <el-table-column label="ip" align="center" prop="ip" sortable />

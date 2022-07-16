@@ -8,10 +8,10 @@
       v-show="showSearch"
       label-width="88px"
     >
-      <!-- <el-form-item label="游戏id" prop="gameId">
+      <!-- <el-form-item label="游戏ID" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
-          placeholder="请输入游戏id"
+          placeholder="请输入游戏ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -29,7 +29,7 @@
       <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -193,8 +193,8 @@
         </template>
       </el-table-column>
       <!-- <el-table-column label="场次id" align="center" prop="sessionId" /> -->
-      <!-- <el-table-column label="玩家id" align="center" prop="userId" width="200" /> -->
-      <el-table-column label="玩家id" align="center" prop="userId" width="200">
+      <!-- <el-table-column label="玩家ID" align="center" prop="userId" width="200" /> -->
+      <el-table-column label="玩家ID" align="center" prop="userId" width="200">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -301,14 +301,14 @@
         <el-form-item label="游戏配置id" prop="configId">
           <el-input v-model="form.configId" placeholder="请输入游戏配置id" />
         </el-form-item>
-        <el-form-item label="游戏id" prop="gameId">
-          <el-input v-model="form.gameId" placeholder="请输入游戏id" />
+        <el-form-item label="游戏ID" prop="gameId">
+          <el-input v-model="form.gameId" placeholder="请输入游戏ID" />
         </el-form-item>
         <el-form-item label="场次id" prop="sessionId">
           <el-input v-model="form.sessionId" placeholder="请输入场次id" />
         </el-form-item>
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="玩家昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入玩家昵称" />

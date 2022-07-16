@@ -114,7 +114,7 @@
       height="580"
     >
       <el-table-column label="账单ID" align="center" prop="id" width="200" />
-      <el-table-column label="玩家id" align="center" prop="userId" width="180">
+      <el-table-column label="玩家ID" align="center" prop="userId" width="180">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -182,8 +182,8 @@
     <!-- 添加或修改钱包流水记录对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="用户id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入用户id" />
+        <el-form-item label="用户ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入用户ID" />
         </el-form-item>
         <el-form-item label="流水类型" prop="code">
           <el-select v-model="form.code" placeholder="请选择流水类型">

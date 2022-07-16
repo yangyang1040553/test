@@ -8,10 +8,10 @@
       v-show="showSearch"
       label-width="68px"
     >
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
               oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
@@ -27,10 +27,10 @@
           />
         </el-select>
       </el-form-item>
-      <!-- <el-form-item label="游戏id" prop="gameId">
+      <!-- <el-form-item label="游戏ID" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
-          placeholder="请输入游戏id"
+          placeholder="请输入游戏ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -132,7 +132,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
-      <el-table-column label="玩家id" align="center" prop="userId">
+      <el-table-column label="玩家ID" align="center" prop="userId">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -140,45 +140,45 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="游戏id" align="center" prop="gameId" />
+      <el-table-column label="游戏ID" align="center" prop="gameId" />
       <el-table-column label="游戏名称" align="center" prop="gameName">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
         </template>
       </el-table-column>
-      <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount">
+      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount">
         <template slot-scope="scope">
           <span v-if="scope.row.usdtBetAmount">{{scope.row.usdtBetAmount.toFixed(2)}}</span>
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount">
+      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount">
         <template slot-scope="scope">
           <span v-if="scope.row.usdtAwardAmount">{{scope.row.usdtAwardAmount.toFixed(2)}}</span>
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+      <el-table-column label="USDT输赢金额" align="center" prop="usdtWin" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
           >{{ scope.row.usdtWin }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="trx押注金额" align="center" prop="trxBetAmount">
+      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount">
         <template slot-scope="scope">
           <span v-if="scope.row.trxBetAmount">{{scope.row.trxBetAmount.toFixed(2)}}</span>
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount">
+      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount">
         <template slot-scope="scope">
           <span v-if="scope.row.trxAwardAmount">{{scope.row.trxAwardAmount.toFixed(2)}}</span>
           <span v-else>{{"-"}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+      <el-table-column label="TRX输赢金额" align="center" prop="trxWin" sortable>
         <template slot-scope="scope">
           <span
             :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"
@@ -216,7 +216,7 @@
     <!-- 添加或修改游戏玩家日统计对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-table v-loading="loading" :data="childrenList" height="500px">
-        <!-- <el-table-column label="游戏id" align="center" prop="gameId" />
+        <!-- <el-table-column label="游戏ID" align="center" prop="gameId" />
         <el-table-column label="游戏名称" align="center" prop="gameName">
           <template slot-scope="scope">
             <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />

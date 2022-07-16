@@ -17,10 +17,10 @@
           placeholder="请选择日期"
         ></el-date-picker>
       </el-form-item>
-      <el-form-item label="用户id" prop="userId">
+      <el-form-item label="用户ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入用户id"
+          placeholder="请输入用户ID"
           clearable
               oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
@@ -116,8 +116,8 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="usdt收益金额" align="center" prop="usdtIncomeAmount" sortable />
-      <el-table-column label="trx收益金额" align="center" prop="trxIncomeAmount" sortable />
+      <el-table-column label="USDT收益金额" align="center" prop="usdtIncomeAmount" sortable />
+      <el-table-column label="TRX收益金额" align="center" prop="trxIncomeAmount" sortable />
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -158,8 +158,8 @@
             placeholder="请选择id-天为单位"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="用户id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入用户id" />
+        <el-form-item label="用户ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入用户ID" />
         </el-form-item>
         <el-form-item label="邀请码" prop="invitationCode">
           <el-input v-model="form.invitationCode" placeholder="请输入邀请码" />

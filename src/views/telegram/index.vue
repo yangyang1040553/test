@@ -79,7 +79,7 @@
 
     <el-table v-loading="loading" :data="botList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Id" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="Token" align="center" prop="token" />
       <el-table-column label="飞机号" align="center" prop="userName" />
       <el-table-column label="描述" align="center" prop="description" />

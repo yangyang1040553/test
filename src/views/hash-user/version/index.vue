@@ -90,7 +90,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="下载地址" align="center" prop="downloadUrl" />
       <el-table-column label="平台" align="center" prop="platfrom" sortable>
         <template slot-scope="scope">

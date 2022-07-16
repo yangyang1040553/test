@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <!-- <el-form-item label="唯一id" prop="id">
+      <!-- <el-form-item label="唯一ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入唯一id"
+          placeholder="请输入唯一ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -94,8 +94,8 @@
       @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
-      <el-table-column label="玩家id" align="center" prop="userId">
+      <el-table-column label="唯一ID" align="center" prop="id" />
+      <el-table-column label="玩家ID" align="center" prop="userId">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -146,8 +146,8 @@
     <!-- 添加或修改客户端日志对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" class="form" label-width="0px">
-        <!-- <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <!-- <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入昵称" />

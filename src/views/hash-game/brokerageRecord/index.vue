@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -46,10 +46,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="下级玩家id" prop="childUserId">
+      <el-form-item label="下级玩家ID" prop="childUserId">
         <el-input
           v-model="queryParams.childUserId"
-          placeholder="请输入下级玩家id"
+          placeholder="请输入下级玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -121,8 +121,8 @@
       :default-sort="{ prop: 'create_time', order: 'descending' }"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="唯一id" align="center" prop="id"  width="180"/>
-      <el-table-column label="玩家id" align="center" prop="userId"  width="160">
+      <el-table-column label="唯一ID" align="center" prop="id"  width="180"/>
+      <el-table-column label="玩家ID" align="center" prop="userId"  width="160">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -153,7 +153,7 @@
           <div>{{scope.row.brokerageAmount.toFixed(2)}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="下级玩家id" align="center" prop="childUserId">
+      <el-table-column label="下级玩家ID" align="center" prop="childUserId">
         <template slot-scope="scope">
           <div class="blue-text" @click="handleUserInfo(scope.row)">{{ scope.row.childUserId }}</div>
         </template>
@@ -186,8 +186,8 @@
     <!-- 添加或修改玩家返佣记录对话框 -->
     <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="佣金等级" prop="level">
           <el-input v-model="form.level" placeholder="请输入第几级的佣金" />
@@ -210,8 +210,8 @@
         <el-form-item label="反佣金额" prop="brokerageAmount">
           <el-input v-model="form.brokerageAmount" placeholder="请输入反佣金额" />
         </el-form-item>
-        <el-form-item label="下级玩家id" prop="childUserId">
-          <el-input v-model="form.childUserId" placeholder="请输入下级玩家id" />
+        <el-form-item label="下级玩家ID" prop="childUserId">
+          <el-input v-model="form.childUserId" placeholder="请输入下级玩家ID" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-select v-model="form.status" placeholder="请选择">

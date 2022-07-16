@@ -65,7 +65,7 @@
       :data="hashUserConfigList"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column label="唯一id" align="center" prop="id" width="160" />
+      <el-table-column label="唯一ID" align="center" prop="id" width="160" />
       <el-table-column label="最新的主页地址" align="center" prop="newDomainAddr" width="160" />
       <el-table-column label="在线客服地址" align="center" prop="onlineServiceAddr" width="160" />
       <el-table-column label="官方群组地址" align="center" prop="groupAddr" width="160" />

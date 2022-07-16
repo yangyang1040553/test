@@ -346,7 +346,7 @@ export default {
       // 表单校验
       rules: {
         id: [
-          { required: true, message: "玩家id不能为空", trigger: "blur" }
+          { required: true, message: "玩家ID不能为空", trigger: "blur" }
         ],
       }
     };

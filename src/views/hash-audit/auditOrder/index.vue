@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="订单id" prop="id">
+      <el-form-item label="订单ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入订单id"
+          placeholder="请输入订单ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -17,10 +17,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>-->
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -165,9 +165,9 @@
       height="600"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单id" align="center" prop="id" width="180" />
+      <el-table-column label="订单ID" align="center" prop="id" width="180" />
       <el-table-column label="交易号" align="center" prop="transactionNo" width="180" />
-      <el-table-column label="玩家id" align="center" prop="userId" width="180">
+      <el-table-column label="玩家ID" align="center" prop="userId" width="180">
         <template slot-scope="scope">
           <div
             class="global-text-blue"

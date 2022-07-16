@@ -11,15 +11,15 @@
       <el-form-item label="订单ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入订单id"
+          placeholder="请输入订单ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="玩家id" prop="userId">
+      <el-form-item label="玩家ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入玩家id"
+          placeholder="请输入玩家ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -115,7 +115,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="用户ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
           <div
@@ -178,8 +178,8 @@
     <!-- 添加或修改运营活动奖励记录对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="玩家id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入玩家id" />
+        <el-form-item label="玩家ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入玩家ID" />
         </el-form-item>
         <el-form-item label="玩家昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入玩家昵称" />

@@ -8,7 +8,7 @@
       v-show="showSearch"
       label-width="88px"
     >
-      <!-- <el-form-item label="唯一id" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一id" clearable @keyup.enter.native="handleQuery" /></el-form-item> -->
+      <!-- <el-form-item label="唯一ID" prop="id"><el-input v-model="queryParams.id" placeholder="请输入唯一ID" clearable @keyup.enter.native="handleQuery" /></el-form-item> -->
       <!-- <el-form-item label="菜单名称" prop="menuName">
         <el-input v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>-->
@@ -91,7 +91,7 @@
       height="600"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="菜单名称" align="center" prop="menuName" />
       <el-table-column label="权重值" align="center" prop="weight" />
       <el-table-column label="是否活动菜单" align="center" prop="activity">

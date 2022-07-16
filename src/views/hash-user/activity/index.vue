@@ -8,10 +8,10 @@
       v-show="showSearch"
       label-width="68px"
     >
-      <el-form-item label="唯一id" prop="id">
+      <el-form-item label="唯一ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入唯一id"
+          placeholder="请输入唯一ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -111,7 +111,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="唯一id" align="center" prop="id" />
+      <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="活动名称" align="center" prop="name" />
       <el-table-column label="banner" align="center" prop="bannerUrl" width="200">
         <template slot-scope="scope">
