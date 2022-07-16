@@ -296,7 +296,7 @@ export default {
       var path = {}
       var query = { orderId: row.linkedOrder }
       //流水类型 1:下注 2:中奖 3:退回 4:佣金提现 5:充值 6:提现 7:转换 8:后台入款 9:后台扣款
-      if (row.code == 1 || row.code == 2 || row.code == 3) {
+      if (row.code == 1 || row.code == 2 || row.code == 3 || row.code == 13) {
         path = "/hash-game/record"
       }
       else if (row.code == 4) {
