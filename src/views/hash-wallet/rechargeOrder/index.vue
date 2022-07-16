@@ -348,7 +348,7 @@ export default {
       getCurrDay().then(response => {
         response.rows.forEach(element => {
           if (element.payAmount) {
-            if (element.toWalletType == 'USDT') {
+            if (element.walletType == 'USDT') {
               this.currUsdt = element.payAmount + this.currUsdt
             } else {
               this.currTrx = element.payAmount + this.currTrx
