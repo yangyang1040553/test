@@ -124,7 +124,11 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="昵称" align="center" prop="nickName" />
+      <el-table-column label="昵称" align="center" prop="nickName">
+        <template slot-scope="scope">
+          <div>{{ scope.row.note_name? scope.row.note_name: scope.row.nickName}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="邀请码" align="center" prop="invitationCode" width="100">
         <template slot-scope="scope">
           <div

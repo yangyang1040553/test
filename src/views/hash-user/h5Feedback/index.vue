@@ -19,10 +19,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="ip" prop="ip">
+      <el-form-item label="IP" prop="ip">
         <el-input
           v-model="queryParams.ip"
-          placeholder="请输入ip"
+          placeholder="请输入IP"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -107,7 +107,7 @@
       <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="反馈问题类型" align="center" prop="items" sortable />
       <el-table-column label="反馈内容" align="center" prop="content" />
-      <el-table-column label="ip" align="center" prop="ip" sortable />
+      <el-table-column label="IP" align="center" prop="ip" sortable />
       <el-table-column label="邮箱" align="center" prop="email" sortable />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
@@ -151,7 +151,7 @@
         <el-form-item label="反馈内容">
           <editor v-model="form.content" :min-height="192" />
         </el-form-item>
-        <el-form-item label="ip" prop="ip">
+        <el-form-item label="IP" prop="ip">
           <el-input v-model="form.ip" placeholder="请输入ip" />
         </el-form-item>
         <el-form-item label="邮箱" prop="email">

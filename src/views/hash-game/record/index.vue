@@ -186,7 +186,7 @@
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="账单ID" align="center" prop="id" width="200" />
-      <!-- <el-table-column label="配置id" align="center" prop="configId" /> -->
+      <!-- <el-table-column label="配置ID" align="center" prop="configId" /> -->
       <el-table-column label="游戏" align="center" prop="gameId">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.game_list" :value="scope.row.gameId" />
@@ -298,8 +298,8 @@
     <!-- 添加或修改游戏投注记录对话框 -->
     <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="游戏配置id" prop="configId">
-          <el-input v-model="form.configId" placeholder="请输入游戏配置id" />
+        <el-form-item label="游戏配置ID" prop="configId">
+          <el-input v-model="form.configId" placeholder="请输入游戏配置ID" />
         </el-form-item>
         <el-form-item label="游戏ID" prop="gameId">
           <el-input v-model="form.gameId" placeholder="请输入游戏ID" />

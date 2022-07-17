@@ -113,7 +113,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一ID" align="center" prop="id" />
       <el-table-column label="活动名称" align="center" prop="name" />
-      <el-table-column label="banner" align="center" prop="bannerUrl" width="200">
+      <el-table-column label="BANNER" align="center" prop="bannerUrl" width="200">
         <template slot-scope="scope">
           <img style="height:90px;" :src="scope.row.bannerUrl" />
         </template>
@@ -208,7 +208,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="banner" prop="bannerUrl">
+        <el-form-item label="BANNER" prop="bannerUrl">
           <UploadVue :url="form.bannerUrl" @setImageUrl="setImageUrl" />
         </el-form-item>
       </el-form>
