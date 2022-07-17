@@ -270,8 +270,8 @@
               placeholder="请选择账户绑定时间"
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="注册ip" prop="registerIp">
-            <el-input v-model="form.registerIp" placeholder="请输入注册ip" />
+          <el-form-item label="注册IP" prop="registerIp">
+            <el-input v-model="form.registerIp" placeholder="请输入注册IP" />
           </el-form-item>
           <el-form-item label="登录时间" prop="loginTime">
             <el-date-picker
@@ -282,8 +282,8 @@
               placeholder="请选择登录时间"
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="登录ip" prop="loginIp">
-            <el-input v-model="form.loginIp" placeholder="请输入登录ip" />
+          <el-form-item label="登录IP" prop="loginIp">
+            <el-input v-model="form.loginIp" placeholder="请输入登录IP" />
           </el-form-item>
         </div>
       </el-form>

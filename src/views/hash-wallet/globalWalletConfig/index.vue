@@ -112,18 +112,18 @@
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" sortable>
+      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" width="160" sortable>
         <template slot-scope="scope">
           <span>{{ (scope.row.trxToUsdt.sourceScale+':'+scope.row.trxToUsdt.toScale) || "-" }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" sortable>
+      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" width="160" sortable>
         <template slot-scope="scope">
           <span>{{ (scope.row.usdtToTrx.sourceScale+':'+scope.row.usdtToTrx.toScale) || "-" }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable />
+      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable  width="130"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime || "-" }}</span>

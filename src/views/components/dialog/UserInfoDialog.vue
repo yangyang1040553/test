@@ -135,7 +135,7 @@
               placeholder
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="注册ip" prop="registerIp">
+          <el-form-item label="注册IP" prop="registerIp">
             <el-input v-model="form.registerIp" placeholder />
           </el-form-item>
           <el-form-item label="IP地址" prop="ipAddr">
@@ -150,7 +150,7 @@
               placeholder
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="登录ip" prop="loginIp">
+          <el-form-item label="登录IP" prop="loginIp">
             <el-input v-model="form.loginIp" placeholder />
           </el-form-item>
           <!-- <el-form-item label="用户备注" prop="noteName">

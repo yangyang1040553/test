@@ -363,7 +363,7 @@
               </template>
             </el-table-column>
             <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
-            <el-table-column label="登录ip" align="center" prop="loginIp" />
+            <el-table-column label="登录IP" align="center" prop="loginIp" />
           </el-table>
           <pagination
             v-show="total > 0"

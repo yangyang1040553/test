@@ -186,8 +186,8 @@
       </el-table-column>
       <el-table-column label="付款地址" align="center" prop="paymentAddress" width="180" />
       <el-table-column label="收款地址" align="center" prop="collectionAddress" width="180" />
-      <el-table-column label="源金额" align="center" prop="sourceAmount" sortable />
-      <el-table-column label="转入金额" align="center" prop="toAmount" sortable />
+      <el-table-column label="源金额" align="center" prop="sourceAmount" width="120" sortable />
+      <el-table-column label="转入金额" align="center" prop="toAmount" width="120" sortable />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="转入状态" align="center" prop="status">
         <template slot-scope="scope">

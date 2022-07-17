@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="ip地址" prop="ip">
+      <el-form-item label="IP地址" prop="ip">
         <el-input
           v-model="queryParams.ip"
-          placeholder="请输入ip地址"
+          placeholder="请输入IP地址"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="ip归属地" prop="ipAddr">
+      <el-form-item label="IP归属地" prop="ipAddr">
         <el-input
           v-model="queryParams.ipAddr"
-          placeholder="请输入ip归属地 如深圳"
+          placeholder="请输入IP归属地 如深圳"
           clearable
           @keyup.enter.native="handleQuery"
         />

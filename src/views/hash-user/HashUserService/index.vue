@@ -211,9 +211,9 @@
           <div>{{scope.row.bindTime||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="注册ip" align="center" prop="registerIp" />
+      <el-table-column label="注册IP" align="center" prop="registerIp" />
       <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
-      <el-table-column label="登录ip" align="center" prop="loginIp" />
+      <el-table-column label="登录IP" align="center" prop="loginIp" />
       <!-- <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
         <template slot-scope="scope">
           <div>{{scope.row.tgId||"-"}}</div>

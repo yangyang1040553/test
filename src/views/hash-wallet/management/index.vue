@@ -6,7 +6,6 @@
       size="small"
       :inline="true"
       v-show="showSearch"
-      label-width="88px"
     >
       <el-form-item label="玩家ID" prop="id">
         <el-input
@@ -40,10 +39,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>-->
-      <el-form-item label="Usdt地址" prop="hashAddressUsdt">
+      <el-form-item label="USDT地址" prop="hashAddressUsdt">
         <el-input
           v-model="queryParams.hashAddressUsdt"
-          placeholder="请输入TRC地址"
+          placeholder="请输入USDT地址"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -51,7 +50,7 @@
       <el-form-item label="TRC转换地址" prop="hashTransAddressTrx">
         <el-input
           v-model="queryParams.hashTransAddressTrx"
-          placeholder="请输入Trx的hash地址"
+          placeholder="请输入TRX的hash地址"
           clearable
           @keyup.enter.native="handleQuery"
         />

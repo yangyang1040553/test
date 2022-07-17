@@ -100,18 +100,18 @@
         </template>
       </el-table-column>
       <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" />
-      <el-table-column label="usdt总收益" align="center" prop="incomeUsdtAmount" width="150" sortable>
+      <el-table-column label="USDT总收益" align="center" prop="incomeUsdtAmount" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeUsdtAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="usdt今日收益" align="center" prop="incomeUsdtToday" width="150" sortable>
+      <el-table-column label="USDT今日收益" align="center" prop="incomeUsdtToday" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeUsdtToday.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column
-        label="usdt昨日收益"
+        label="USDT昨日收益"
         align="center"
         prop="incomeUsdtYesterday"
         width="200"
@@ -122,7 +122,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="usdt直推收益"
+        label="USDT直推收益"
         align="center"
         prop="incomeUsdtDirectPromote"
         width="150"
@@ -132,18 +132,18 @@
           <div>{{ scope.row.incomeUsdtDirectPromote.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="trx总收益" align="center" prop="incomeTrxAmount" width="150" sortable>
+      <el-table-column label="TRX总收益" align="center" prop="incomeTrxAmount" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeTrxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="trx今日收益" align="center" prop="incomeTrxToday" width="150" sortable>
+      <el-table-column label="TRX今日收益" align="center" prop="incomeTrxToday" width="150" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.incomeTrxToday.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column
-        label="trx昨日收益"
+        label="TRX昨日收益"
         align="center"
         prop="incomeTrxYesterday"
         width="150"
@@ -154,7 +154,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="trx直推收益"
+        label="TRX直推收益"
         align="center"
         prop="incomeTrxDirectPromote"
         width="150"
@@ -165,7 +165,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="可提现usdt"
+        label="可提现USDT"
         align="center"
         prop="canWithdrawUsdtAmount"
         width="150"
@@ -176,7 +176,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="可提现trx"
+        label="可提现TRX"
         align="center"
         prop="canWithdrawTrxAmount"
         width="150"
@@ -228,7 +228,7 @@
       </el-table-column>
 
       <el-table-column
-        label="usdt游戏返佣"
+        label="USDT游戏返佣"
         align="center"
         prop="usdtGameBrokerageToFather"
         width="150"
@@ -239,7 +239,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="usdt代理返佣"
+        label="USDT代理返佣"
         align="center"
         prop="usdtPromoteBrokerageToFather"
         width="150"
@@ -250,7 +250,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="trx游戏返佣"
+        label="TRX游戏返佣"
         align="center"
         prop="trxGameBrokerageToFather"
         width="150"
@@ -261,7 +261,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="trx代理返佣"
+        label="TRX代理返佣"
         align="center"
         prop="trxPromoteBrokerageToFather"
         width="150"

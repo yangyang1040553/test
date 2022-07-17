@@ -159,7 +159,7 @@
         </template>
       </el-table-column>
       <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
-      <el-table-column label="实际交易金额" align="center" prop="payAmount" width="120" sortable />
+      <el-table-column label="实际交易金额" align="center" prop="payAmount" width="140" sortable />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
       <el-table-column label="充值状态" align="center" prop="status">
         <template slot-scope="scope">

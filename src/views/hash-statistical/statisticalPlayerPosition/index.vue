@@ -150,7 +150,7 @@
     <!-- <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="id-天为单位" prop="id">
-          <el-input v-model="form.id" placeholder="请输入id-天为单位" />
+          <el-input v-model="form.id" placeholder="请输入ID-天为单位" />
         </el-form-item>
         <el-form-item label="用户ID" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入用户ID" />

@@ -64,18 +64,18 @@
           <span>{{scope.row.betPosition||"-"}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="usdt押注金额" align="center" prop="usdtBetAmount" />
-      <el-table-column label="usdt中奖金额" align="center" prop="usdtAwardAmount" />
-       <el-table-column label="usdt输赢金额" align="center" prop="usdtWin" sortable>
+      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
+      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
+       <el-table-column label="USDT输赢金额" align="center" prop="usdtWin" sortable>
           <template slot-scope="scope">
             <span
               :class="scope.row.usdtWin>0?'global-text-green':'global-text-red'"
             >{{ scope.row.usdtWin }}</span>
           </template>
         </el-table-column>
-      <el-table-column label="trx押注金额" align="center" prop="trxBetAmount" />
-      <el-table-column label="trx中奖金额" align="center" prop="trxAwardAmount" />
-       <el-table-column label="trx输赢金额" align="center" prop="trxWin" sortable>
+      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount" />
+      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount" />
+       <el-table-column label="TRX输赢金额" align="center" prop="trxWin" sortable>
           <template slot-scope="scope">
             <span
               :class="scope.row.trxWin>0?'global-text-green':'global-text-red'"

@@ -4,7 +4,7 @@
       <el-form-item label="ID" prop="id">
         <el-input
           v-model="queryParams.id"
-          placeholder="请输入id"
+          placeholder="请输入ID"
           clearable
           oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
