@@ -13,7 +13,6 @@
           v-model="queryParams.id"
           placeholder="请输入ID"
           clearable
-          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>

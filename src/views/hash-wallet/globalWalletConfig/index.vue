@@ -106,19 +106,20 @@
       :data="globalWalletConfigList"
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
+      height="600"
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" width="160" sortable>
+      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" width="160" >
         <template slot-scope="scope">
           <span>{{ (scope.row.trxToUsdt.sourceScale+':'+scope.row.trxToUsdt.toScale) || "-" }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" width="160" sortable>
+      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" width="160" >
         <template slot-scope="scope">
           <span>{{ (scope.row.usdtToTrx.sourceScale+':'+scope.row.usdtToTrx.toScale) || "-" }}</span>
         </template>

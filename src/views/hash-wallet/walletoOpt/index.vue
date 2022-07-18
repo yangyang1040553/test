@@ -6,7 +6,6 @@
           v-model="queryParams.id"
           placeholder="请输入ID"
           clearable
-          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -15,7 +14,6 @@
           v-model="queryParams.userId"
           placeholder="请输入玩家ID"
           clearable
-          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>

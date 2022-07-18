@@ -39,7 +39,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>-->
-      <el-form-item label="USDT地址" prop="hashAddressUsdt">
+      <!-- <el-form-item label="USDT地址" prop="hashAddressUsdt">
         <el-input
           v-model="queryParams.hashAddressUsdt"
           placeholder="请输入USDT地址"
@@ -54,7 +54,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item> -->
       <!-- <el-form-item label="总充值金额" prop="rechargeTotal">
         <el-input
           v-model="queryParams.rechargeTotal"

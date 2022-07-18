@@ -94,6 +94,11 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="用户昵称" align="center" prop="nick_name">
+        <template slot-scope="scope">
+          <div>{{scope.row.note_name?scope.row.note_name:scope.row.nick_name}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
       <el-table-column label="USDT输赢金额" align="center" prop="usdtWinAmount" sortable>
