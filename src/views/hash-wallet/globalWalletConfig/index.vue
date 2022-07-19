@@ -40,7 +40,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- <el-form-item label="矿工费比例" prop="minerScala">
         <el-input
           v-model="queryParams.minerScala"
@@ -48,7 +48,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -97,7 +97,7 @@
           @click="handleExport"
           v-hasPermi="['hash-wallet:globalWalletConfig:export']"
         >导出</el-button>
-      </el-col> -->
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -113,18 +113,18 @@
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="TRX转USDT比例" align="center" prop="trxToUsdt" width="160" >
+      <el-table-column label="USDT免审核金额" align="center" prop="usdt_free_check" width="160">
         <template slot-scope="scope">
-          <span>{{ (scope.row.trxToUsdt.sourceScale+':'+scope.row.trxToUsdt.toScale) || "-" }}</span>
+          <span>{{ scope.row.usdt_free_check || "-" }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="USDT转TRX比例" align="center" prop="usdtToTrx" width="160" >
+      <el-table-column label="TRX免审核金额" align="center" prop="trx_free_check" width="160">
         <template slot-scope="scope">
-          <span>{{ (scope.row.usdtToTrx.sourceScale+':'+scope.row.usdtToTrx.toScale) || "-" }}</span>
+          <span>{{ scope.row.trx_free_check || "-" }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable  width="130"/>
+      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime || "-" }}</span>
@@ -171,7 +171,7 @@
 
     <!-- 添加或修改钱包全局配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-form-item label="商户号" prop="merchantNo">
           <el-input v-model="form.merchantNo" placeholder="请输入商户号" />
         </el-form-item>
@@ -181,7 +181,21 @@
         <el-form-item label="私钥" prop="privateKey">
           <el-input v-model="form.privateKey" placeholder="请输入私钥" />
         </el-form-item>
-        <el-form-item label="trx转usdt比例" prop="trxToUsdt">
+        <el-form-item label="USDT免审核金额" prop="usdt_free_check">
+          <el-input
+            v-model="form.usdt_free_check"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入金额"
+          />
+        </el-form-item>
+        <el-form-item label="TRX免审核金额" prop="trx_free_check">
+          <el-input
+            v-model="form.trx_free_check"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入金额"
+          />
+        </el-form-item>
+        <!-- <el-form-item label="trx转usdt比例" prop="trxToUsdt">
           <el-row>
             <el-col :span="12" class="card-box">
               <el-input v-model="form.trxToUsdt.sourceScale" placeholder="请输入trx转usdt比例" />
@@ -206,9 +220,13 @@
               <el-input v-model="form.usdtToTrx.toScale" placeholder="请输入usdt转trx比例" />
             </el-col>
           </el-row>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item label="矿工费比例" prop="minerScala">
-          <el-input v-model="form.minerScala" placeholder="请输入矿工费比例" />
+          <el-input
+            v-model="form.minerScala"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入矿工费比例"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -257,14 +275,14 @@ export default {
       },
       // 表单参数
       form: {
-        trxToUsdt: {
-          sourceScale: 0,
-          toScale: 0
-        },
-        usdtToTrx: {
-          sourceScale: 0,
-          toScale: 0
-        }
+        // trxToUsdt: {
+        //   sourceScale: 0,
+        //   toScale: 0
+        // },
+        // usdtToTrx: {
+        //   sourceScale: 0,
+        //   toScale: 0
+        // }
       },
       // 表单校验
       rules: {
@@ -285,6 +303,12 @@ export default {
         ],
         minerScala: [
           { required: true, message: "矿工费比例不能为空", trigger: "blur" }
+        ], 
+        usdt_free_check: [
+          { required: true, message: "USDT免审核金额不能为空", trigger: "blur" }
+        ], 
+        trx_free_check: [
+          { required: true, message: "TRX免审核金额不能为空", trigger: "blur" }
         ],
       }
     };
@@ -377,8 +401,8 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.form.usdtTransTrxScale=JSON.stringify(this.form.usdtToTrx)
-          this.form.trxTransUsdtScale=JSON.stringify(this.form.trxToUsdt)
+          // this.form.usdtTransTrxScale = JSON.stringify(this.form.usdtToTrx)
+          // this.form.trxTransUsdtScale = JSON.stringify(this.form.trxToUsdt)
           if (this.form.id != null) {
             updateGlobalWalletConfig(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
