@@ -166,6 +166,11 @@
           <dict-tag :options="dict.type.recharge_status" :value="scope.row.status" />
         </template>
       </el-table-column>
+      <el-table-column label="是否首冲" align="center" prop="frist_recharge">
+        <template slot-scope="scope">
+          <div>{{scope.row.frist_recharge?"是":"否"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
       <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
         <template slot-scope="scope">
