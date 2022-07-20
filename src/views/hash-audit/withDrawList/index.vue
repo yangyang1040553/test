@@ -205,7 +205,12 @@
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
-      <el-table-column label="矿工费" align="center" prop="minerAmount" />
+      <!-- <el-table-column label="矿工费" align="center" prop="minerAmount" /> -->
+      <el-table-column label="矿工费" align="center" prop="minerAmount">
+        <template slot-scope="scope">
+          <div>{{(scope.row.minerAmount/10000).toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="订单状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.order_status" :value="scope.row.status" />
