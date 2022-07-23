@@ -112,6 +112,17 @@
         >导出</el-button>
       </el-col>
       <el-col :span="1.5">
+        <span>定时刷新 &nbsp;</span>
+        <el-select v-model="timeRange" @change="onTimeChane" placeholder="定时刷新" clearable>
+          <el-option
+            v-for="dict in flushTime"
+            :key="dict.value"
+            :label="dict.key"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-col>
+      <el-col :span="1.5">
         <div class="curr-money">
           <!-- <div class="money-text">今日充值 TRX: {{(currTrx/10000).toFixed(2)}}</div> -->
           <!-- <div class="money-text">今日充值 USDT: {{(currUsdt/10000).toFixed(2)}}</div> -->
@@ -270,6 +281,16 @@ export default {
     return {
       openUser: false,
       userId: null,
+      flushTime: [
+        { key: "5S", value: 5000 },
+        { key: "10S", value: 10000 },
+        { key: "15S", value: 15000 },
+        { key: "20S", value: 20000 },
+        { key: "25S", value: 25000 },
+        { key: "30S", value: 30000 },
+      ],
+      timeRange: 5000,
+      timer: null,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -306,7 +327,7 @@ export default {
       rules: {
       },
       currTrx: 0,
-      currUsdt: 0
+      currUsdt: 0,
     };
   },
   created() {
@@ -316,6 +337,20 @@ export default {
     this.getList();
   },
   methods: {
+    onTimeChane() {
+      var vm = this
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.timer = null
+      if (!this.timeRange) {
+        this.timeRange = 5000
+      }
+      console.log("this.timeRange=", this.timeRange)
+      this.timer = setInterval(() => {
+        vm.getList()
+      }, this.timeRange)
+    },
     tableRowClassName({
       row,
       rowIndex,

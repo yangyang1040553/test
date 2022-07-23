@@ -131,7 +131,7 @@
           @click="handleUpdate"
           v-hasPermi="['hash-audit:auditWidthdrawOrder:edit']"
         >修改</el-button>
-      </el-col> -->
+      </el-col>-->
       <!-- <el-col :span="1.5">
         <el-button
           type="danger"
@@ -152,6 +152,17 @@
           @click="handleExport"
           v-hasPermi="['hash-audit:auditWidthdrawOrder:export']"
         >导出</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <span>定时刷新  &nbsp;</span>
+        <el-select   v-model="timeRange" @change="onTimeChane" placeholder="定时刷新" clearable>
+          <el-option
+            v-for="dict in flushTime"
+            :key="dict.value"
+            :label="dict.key"
+            :value="dict.value"
+          />
+        </el-select>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -187,7 +198,7 @@
       </el-table-column>
       <el-table-column label="收款地址" align="center" prop="collectionAddress" />
       <el-table-column label="创建时间" align="center" prop="createTime" sortable />
-      <el-table-column label="说明" align="center" prop="note"  />
+      <el-table-column label="说明" align="center" prop="note" />
       <!-- <el-table-column label="矿工费" align="center" prop="minerAmount" /> -->
       <!-- <el-table-column label="订单状态" align="center" prop="status">
         <template slot-scope="scope">
@@ -311,6 +322,16 @@ export default {
       userId: null,
       // 遮罩层
       loading: true,
+      flushTime: [
+        { key: "5S", value: 5000 },
+        { key: "10S", value: 10000 },
+        { key: "15S", value: 15000 },
+        { key: "20S", value: 20000 },
+        { key: "25S", value: 25000 },
+        { key: "30S", value: 30000 },
+      ],
+      timeRange: 5000,
+      timer: null,
       // 选中数组
       ids: [],
       // 非单个禁用
@@ -357,6 +378,20 @@ export default {
     this.getList();
   },
   methods: {
+    onTimeChane() {
+      var vm = this
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.timer = null
+      if (!this.timeRange) {
+        this.timeRange = 5000
+      }
+      console.log("this.timeRange=", this.timeRange)
+      this.timer = setInterval(() => {
+        vm.getList()
+      }, this.timeRange)
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
