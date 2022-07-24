@@ -186,7 +186,7 @@
             type="text"
             icon="el-icon-detail"
             @click="handleUpdate(scope.row,false)"
-            v-hasPermi="['hash-wallet:management:edit']"
+            v-hasPermi="['hash-wallet:management:query']"
           >详情</el-button>
           <el-button
             size="mini"
