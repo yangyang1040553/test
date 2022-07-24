@@ -76,7 +76,7 @@
           @click="handleExport"
           v-hasPermi="['hash-operation:activity:export']"
         >导出</el-button>
-      </el-col> -->
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -169,39 +169,41 @@
         </el-form-item>
         <div v-if="type==1">
           <el-form-item label="配置数据" prop="json">
-            <div class="box" v-for="(item,index) in jsonArray" :key="index">
-              <div class="box-lable">{{keyText}}</div>
-              <el-input
-                class="input-text"
-                oninput="value=value.replace(/[^\d\.]/g,'')"
-                v-model="item.key"
-                type="text"
-                placeholder="请输入内容"
-              />
-              <div class="box-lable">{{valueText}}</div>
-              <el-input
-                class="input-text"
-                oninput="value=value.replace(/[^\d\.]/g,'')"
-                v-model="item.value"
-                type="text"
-                placeholder="请输入内容"
-              />
-              <el-select
-                class="input-text"
-                v-model="item.walletType"
-                placeholder="请选择是钱包类型"
-                clearable
-                prop="walletType"
-              >
-                <el-option
-                  v-for="dict in dict.type.wallet_type"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
+            <div class="box-out">
+              <div class="box" v-for="(item,index) in jsonArray" :key="index">
+                <div class="box-lable">{{keyText}}</div>
+                <el-input
+                  class="input-text"
+                  oninput="value=value.replace(/[^\d\.]/g,'')"
+                  v-model="item.key"
+                  type="text"
+                  placeholder="请输入内容"
                 />
-              </el-select>
-              <div class="add global-bg-blue" @click="addJson">+</div>
-              <div class="reduce global-bg-red" @click="reduceJson(index)">-</div>
+                <div class="box-lable">{{valueText}}</div>
+                <el-input
+                  class="input-text"
+                  oninput="value=value.replace(/[^\d\.]/g,'')"
+                  v-model="item.value"
+                  type="text"
+                  placeholder="请输入内容"
+                />
+                <el-select
+                  class="input-text"
+                  v-model="item.walletType"
+                  placeholder="请选择是钱包类型"
+                  clearable
+                  prop="walletType"
+                >
+                  <el-option
+                    v-for="dict in dict.type.wallet_type"
+                    :key="dict.value"
+                    :label="dict.label"
+                    :value="dict.value"
+                  />
+                </el-select>
+                <div class="add global-bg-blue" @click="addJson(index)">+</div>
+                <div class="reduce global-bg-red" @click="reduceJson(index)">-</div>
+              </div>
             </div>
           </el-form-item>
         </div>
@@ -267,8 +269,8 @@
 
     <el-dialog title="编辑活动富文本" :visible.sync="openEdit" width="1200px" append-to-body>
       <el-form ref="conetntForm" :model="form" :rules="rules" label-width="0px" class="form">
-        <el-form-item label="" prop="content">
-          <editor v-model="form.content" class="editor"  />
+        <el-form-item label prop="content">
+          <editor v-model="form.content" class="editor" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -348,7 +350,7 @@ export default {
         this.valueText = '赠送%'
         this.type = 1
       } else if (id == 3) {
-        this.keyText = '次数'
+        this.keyText = '下注次数'
         this.valueText = '奖励'
         this.type = 1
       }
@@ -372,8 +374,9 @@ export default {
       }
       return 'red'
     },
-    addJson() {
-      this.jsonArray.push({})
+    addJson(index) {
+      // this.jsonArray.push({})
+      this.jsonArray.splice(index + 1, 0, {})
     },
     reduceJson(index) {
       if (this.jsonArray.length > 1) {
@@ -465,7 +468,7 @@ export default {
           this.type = 1
           this.selectValue = '2'
         } else if (id == 3) {
-          this.keyText = '次数'
+          this.keyText = '下注次数'
           this.valueText = '奖励'
           this.type = 1
           this.selectValue = '3'
@@ -569,38 +572,44 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-.box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 10px;
+.box-out {
+  max-height: 400px;
+  height: 400px;
+  overflow-y: auto;
 
-  .box-lable {
-    height: 32px;
-    width: 60px;
-    min-width: 60px;
+  .box {
     display: flex;
-    justify-content: center;
-    line-height: 32px;
-  }
-  .input-text {
-    margin-right: 20px;
-    min-width: 100px;
-  }
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
 
-  .add,
-  .reduce {
-    width: 32px;
-    min-width: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 32px;
-    height: 32px;
-    border-radius: 90px;
-    color: white;
-    font-weight: 900;
-    margin-right: 10px;
+    .box-lable {
+      height: 32px;
+      width: 60px;
+      min-width: 60px;
+      display: flex;
+      justify-content: center;
+      line-height: 32px;
+    }
+    .input-text {
+      margin-right: 20px;
+      min-width: 100px;
+    }
+
+    .add,
+    .reduce {
+      width: 32px;
+      min-width: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 32px;
+      height: 32px;
+      border-radius: 90px;
+      color: white;
+      font-weight: 900;
+      margin-right: 10px;
+    }
   }
 }
 
