@@ -4,29 +4,51 @@
       <h3 class="title">{{ $t('login.title') }}</h3>
       <!-- <lang-select class="set-language" /> -->
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username" type="text" auto-complete="off" :placeholder="$t('login.username')">
+        <el-input
+          v-model="loginForm.username"
+          type="text"
+          auto-complete="off"
+          :placeholder="$t('login.username')"
+        >
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password" type="password" auto-complete="off" :placeholder="$t('login.password')"
-          @keyup.enter.native="handleLogin">
+        <el-input
+          v-model="loginForm.password"
+          type="password"
+          auto-complete="off"
+          :placeholder="$t('login.password')"
+          @keyup.enter.native="handleLogin"
+        >
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
-        <el-input v-model="loginForm.code" auto-complete="off" placeholder="验证码" style="width: 63%"
-          @keyup.enter.native="handleLogin">
+        <el-input
+          v-model="loginForm.code"
+          oninput="value=value.replace(/[^\d\.]/g,'')"
+          auto-complete="off"
+          placeholder="验证码"
+          style="width: 63%"
+          @keyup.enter.native="handleLogin"
+        >
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode" />
+          <!-- <img :src="codeUrl" @click="getCode" /> -->
+          <div class="notice">谷歌验证码</div>
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
-        <el-button :loading="loading" size="medium" type="primary" style="width:100%;"
-          @click.native.prevent="handleLogin">
+        <el-button
+          :loading="loading"
+          size="medium"
+          type="primary"
+          style="width:100%;"
+          @click.native.prevent="handleLogin"
+        >
           <span v-if="!loading">{{ $t('login.logIn') }}</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -35,7 +57,7 @@
     <!--  底部  -->
     <!-- <div class="el-login-footer">
       <span>Copyright © 2018-2019 ruoyi.vip All Rights Reserved.</span>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
@@ -86,10 +108,10 @@ export default {
   },
   methods: {
     getCode() {
-      getCodeImg().then(res => {
-        this.codeUrl = "data:image/gif;base64," + res.img;
-        this.loginForm.uuid = res.uuid;
-      });
+      // getCodeImg().then(res => {
+      //   this.codeUrl = "data:image/gif;base64," + res.img;
+      //   this.loginForm.uuid = res.uuid;
+      // });
     },
     getCookie() {
       const username = Cookies.get("username");
@@ -139,6 +161,16 @@ export default {
   height: 100%;
   background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
+}
+
+.notice {
+  width: 115px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  background: whitesmoke;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
 }
 
 .title {

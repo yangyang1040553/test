@@ -138,7 +138,7 @@ export default {
   delete: "删除",
 
   user_id: "用户编号",
-  user_name_en: "用户名称",
+  user_name_en: "用户账号",
   operate: "操作",
   more: "更多",
   reset_password: "充值密码",

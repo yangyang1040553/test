@@ -4,7 +4,14 @@
       <!--部门数据-->
       <el-col :span="4" :xs="24">
         <div class="head-container">
-          <el-input v-model="deptName" :placeholder="$t('type_department_name')" clearable size="small" prefix-icon="el-icon-search" style="margin-bottom: 20px" />
+          <el-input
+            v-model="deptName"
+            :placeholder="$t('type_department_name')"
+            clearable
+            size="small"
+            prefix-icon="el-icon-search"
+            style="margin-bottom: 20px"
+          />
         </div>
         <div class="head-container">
           <el-tree
@@ -20,16 +27,44 @@
       </el-col>
       <!--用户数据-->
       <el-col :span="20" :xs="24">
-        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
+        <el-form
+          :model="queryParams"
+          ref="queryForm"
+          size="small"
+          :inline="true"
+          v-show="showSearch"
+        >
           <el-form-item :label="$t('user_name')" prop="userName">
-            <el-input v-model="queryParams.userName" :placeholder="$t('type_user_name')" clearable style="width: 240px" @keyup.enter.native="handleQuery" />
+            <el-input
+              v-model="queryParams.userName"
+              :placeholder="$t('type_user_name')"
+              clearable
+              style="width: 240px"
+              @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item :label="$t('phone')" prop="phonenumber">
-            <el-input v-model="queryParams.phonenumber" :placeholder="$t('type_phone')" clearable style="width: 240px" @keyup.enter.native="handleQuery" />
+            <el-input
+              v-model="queryParams.phonenumber"
+              :placeholder="$t('type_phone')"
+              clearable
+              style="width: 240px"
+              @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item :label="$t('status')" prop="status">
-            <el-select v-model="queryParams.status" :placeholder="$t('user_status')" clearable style="width: 240px">
-              <el-option v-for="dict in dict.type.sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
+            <el-select
+              v-model="queryParams.status"
+              :placeholder="$t('user_status')"
+              clearable
+              style="width: 240px"
+            >
+              <el-option
+                v-for="dict in dict.type.sys_normal_disable"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('create_time')">
@@ -44,68 +79,199 @@
             ></el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">{{ $t('search') }}</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >{{ $t('search') }}</el-button>
             <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">{{ $t('reset') }}</el-button>
           </el-form-item>
         </el-form>
 
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:user:add']">{{ $t('new') }}</el-button>
+            <el-button
+              type="primary"
+              plain
+              icon="el-icon-plus"
+              size="mini"
+              @click="handleAdd"
+              v-hasPermi="['system:user:add']"
+            >{{ $t('new') }}</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['system:user:edit']">{{ $t('edit') }}</el-button>
+            <el-button
+              type="success"
+              plain
+              icon="el-icon-edit"
+              size="mini"
+              :disabled="single"
+              @click="handleUpdate"
+              v-hasPermi="['system:user:edit']"
+            >{{ $t('edit') }}</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:user:remove']">
-              {{ $t('delete') }}
-            </el-button>
+            <el-button
+              type="danger"
+              plain
+              icon="el-icon-delete"
+              size="mini"
+              :disabled="multiple"
+              @click="handleDelete"
+              v-hasPermi="['system:user:remove']"
+            >{{ $t('delete') }}</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="info" plain icon="el-icon-upload2" size="mini" @click="handleImport" v-hasPermi="['system:user:import']">{{ $t('import') }}</el-button>
+            <el-button
+              type="info"
+              plain
+              icon="el-icon-upload2"
+              size="mini"
+              @click="handleImport"
+              v-hasPermi="['system:user:import']"
+            >{{ $t('import') }}</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['system:user:export']">{{ $t('export') }}</el-button>
+            <el-button
+              type="warning"
+              plain
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExport"
+              v-hasPermi="['system:user:export']"
+            >{{ $t('export') }}</el-button>
           </el-col>
           <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
         </el-row>
 
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column :label="$t('user_id')" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
-          <el-table-column :label="$t('user_name_en')" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('user_name')" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('department')" align="center" key="deptName" prop="dept.deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('phone')" align="center" key="phonenumber" prop="phonenumber" v-if="columns[4].visible" width="120" />
-          <el-table-column :label="$t('status')" align="center" key="status" v-if="columns[5].visible">
+          <el-table-column
+            :label="$t('user_id')"
+            align="center"
+            key="userId"
+            prop="userId"
+            v-if="columns[0].visible"
+          />
+          <el-table-column
+            :label="$t('user_name_en')"
+            align="center"
+            key="userName"
+            prop="userName"
+            v-if="columns[1].visible"
+            :show-overflow-tooltip="true"
+          />
+          <el-table-column
+            :label="$t('user_name')"
+            align="center"
+            key="nickName"
+            prop="nickName"
+            v-if="columns[2].visible"
+            :show-overflow-tooltip="true"
+          />
+          <el-table-column
+            :label="$t('department')"
+            align="center"
+            key="deptName"
+            prop="dept.deptName"
+            v-if="columns[3].visible"
+            :show-overflow-tooltip="true"
+          />
+          <el-table-column
+            :label="$t('phone')"
+            align="center"
+            key="phonenumber"
+            prop="phonenumber"
+            v-if="columns[4].visible"
+            width="120"
+          />
+          <el-table-column label="谷歌二维码" align="center" key="qr_code" prop="qr_code" width="100">
             <template slot-scope="scope">
-              <el-switch v-model="scope.row.status" active-value="0" inactive-value="1" @change="handleStatusChange(scope.row)"></el-switch>
+              <!-- <img class="qr_code" :src="scope.row.qr_code" alt="无" /> -->
+              <div class="global-text-blue" @click="openQRCode(scope.row.qr_code)">查看二维码</div>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('create_time')" align="center" prop="createTime" v-if="columns[6].visible" width="160">
+          <el-table-column
+            :label="$t('status')"
+            align="center"
+            key="status"
+            v-if="columns[5].visible"
+          >
+            <template slot-scope="scope">
+              <el-switch
+                v-model="scope.row.status"
+                active-value="0"
+                inactive-value="1"
+                @change="handleStatusChange(scope.row)"
+              ></el-switch>
+            </template>
+          </el-table-column>
+          <el-table-column
+            :label="$t('create_time')"
+            align="center"
+            prop="createTime"
+            v-if="columns[6].visible"
+            width="160"
+          >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('operate')" align="center" width="160" class-name="small-padding fixed-width">
+          <el-table-column
+            :label="$t('operate')"
+            align="center"
+            width="160"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope" v-if="scope.row.userId !== 1">
-              <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']">{{ $t('edit') }}</el-button>
-              <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">{{ $t('delete') }}</el-button>
-              <el-dropdown size="mini" @command="command => handleCommand(command, scope.row)" v-hasPermi="['system:user:resetPwd', 'system:user:edit']">
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="handleUpdate(scope.row)"
+                v-hasPermi="['system:user:edit']"
+              >{{ $t('edit') }}</el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-delete"
+                @click="handleDelete(scope.row)"
+                v-hasPermi="['system:user:remove']"
+              >{{ $t('delete') }}</el-button>
+              <el-dropdown
+                size="mini"
+                @command="command => handleCommand(command, scope.row)"
+                v-hasPermi="['system:user:resetPwd', 'system:user:edit']"
+              >
                 <span class="el-dropdown-link">
                   <i class="el-icon-d-arrow-right el-icon--right"></i>
                   {{ $t('more') }}
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="handleResetPwd" icon="el-icon-key" v-hasPermi="['system:user:resetPwd']">{{ $t('reset_password') }}</el-dropdown-item>
-                  <el-dropdown-item command="handleAuthRole" icon="el-icon-circle-check" v-hasPermi="['system:user:edit']">{{ $t('assigning_roles') }}</el-dropdown-item>
+                  <el-dropdown-item
+                    command="handleResetPwd"
+                    icon="el-icon-key"
+                    v-hasPermi="['system:user:resetPwd']"
+                  >{{ $t('reset_password') }}</el-dropdown-item>
+                  <el-dropdown-item
+                    command="handleAuthRole"
+                    icon="el-icon-circle-check"
+                    v-hasPermi="['system:user:edit']"
+                  >{{ $t('assigning_roles') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
 
-        <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+        <pagination
+          v-show="total > 0"
+          :total="total"
+          :page.sync="queryParams.pageNum"
+          :limit.sync="queryParams.pageSize"
+          @pagination="getList"
+        />
       </el-col>
     </el-row>
 
@@ -114,31 +280,48 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-row>
           <el-col :span="12">
-            <el-form-item :label="$t('user_name_en')" prop="nickName"><el-input v-model="form.nickName" :placeholder="$t('type_user_name')" maxlength="30" /></el-form-item>
+            <el-form-item label="用具名称" prop="nickName">
+              <el-input v-model="form.nickName" :placeholder="$t('type_user_name')" maxlength="30" />
+            </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('department')" prop="deptId">
-              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" :placeholder="$t('select_department')" />
+              <treeselect
+                v-model="form.deptId"
+                :options="deptOptions"
+                :show-count="true"
+                :placeholder="$t('select_department')"
+              />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item :label="$t('phone')" prop="phonenumber"><el-input v-model="form.phonenumber" :placeholder="$t('type_phone')" maxlength="11" /></el-form-item>
+            <el-form-item :label="$t('phone')" prop="phonenumber">
+              <el-input v-model="form.phonenumber" :placeholder="$t('type_phone')" maxlength="11" />
+            </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('email')" prop="email"><el-input v-model="form.email" :placeholder="$t('type_email')" maxlength="50" /></el-form-item>
+            <el-form-item :label="$t('email')" prop="email">
+              <el-input v-model="form.email" :placeholder="$t('type_email')" maxlength="50" />
+            </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" :label="$t('user_name')" prop="userName">
+            <el-form-item v-if="form.userId == undefined" label="用户账号" prop="userName">
               <el-input v-model="form.userName" :placeholder="$t('type_user_name')" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.userId == undefined" :label="$t('password')" prop="password">
-              <el-input v-model="form.password" :placeholder="$t('type_password')" type="password" maxlength="20" show-password />
+              <el-input
+                v-model="form.password"
+                :placeholder="$t('type_password')"
+                type="password"
+                maxlength="20"
+                show-password
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -146,14 +329,23 @@
           <el-col :span="12">
             <el-form-item :label="$t('sex')">
               <el-select v-model="form.sex" :placeholder="$t('select_sex')">
-                <el-option v-for="dict in dict.type.sys_user_sex" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                <el-option
+                  v-for="dict in dict.type.sys_user_sex"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                ></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('status')">
               <el-radio-group v-model="form.status">
-                <el-radio v-for="dict in dict.type.sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
+                <el-radio
+                  v-for="dict in dict.type.sys_normal_disable"
+                  :key="dict.value"
+                  :label="dict.value"
+                >{{ dict.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -162,21 +354,35 @@
           <el-col :span="12">
             <el-form-item :label="$t('department')">
               <el-select v-model="form.postIds" multiple :placeholder="$t('select_job')">
-                <el-option v-for="item in postOptions" :key="item.postId" :label="item.postName" :value="item.postId" :disabled="item.status == 1"></el-option>
+                <el-option
+                  v-for="item in postOptions"
+                  :key="item.postId"
+                  :label="item.postName"
+                  :value="item.postId"
+                  :disabled="item.status == 1"
+                ></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('role')">
               <el-select v-model="form.roleId" :placeholder="$t('select_role')">
-                <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId" :disabled="item.status == 1"></el-option>
+                <el-option
+                  v-for="item in roleOptions"
+                  :key="item.roleId"
+                  :label="item.roleName"
+                  :value="item.roleId"
+                  :disabled="item.status == 1"
+                ></el-option>
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item :label="$t('remark')"><el-input v-model="form.remark" type="textarea" :placeholder="$t('type_content')"></el-input></el-form-item>
+            <el-form-item :label="$t('remark')">
+              <el-input v-model="form.remark" type="textarea" :placeholder="$t('type_content')"></el-input>
+            </el-form-item>
           </el-col>
         </el-row>
       </el-form>
@@ -207,11 +413,15 @@
         </div>
         <div class="el-upload__tip text-center" slot="tip">
           <div class="el-upload__tip" slot="tip">
-            <el-checkbox v-model="upload.updateSupport" />
-            是否更新已经存在的用户数据
+            <el-checkbox v-model="upload.updateSupport" />是否更新已经存在的用户数据
           </div>
           <span>仅允许导入xls、xlsx格式文件。</span>
-          <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;" @click="importTemplate">下载模板</el-link>
+          <el-link
+            type="primary"
+            :underline="false"
+            style="font-size:12px;vertical-align: baseline;"
+            @click="importTemplate"
+          >下载模板</el-link>
         </div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
@@ -341,6 +551,9 @@ export default {
     })
   },
   methods: {
+    openQRCode(url) {
+      window.open(url,"_blank")
+    },
     /** 查询用户列表 */
     getList() {
       this.loading = true
@@ -371,13 +584,13 @@ export default {
       let text = row.status === '0' ? '启用' : '停用'
       this.$modal
         .confirm('确认要"' + text + '""' + row.userName + '"用户吗？')
-        .then(function() {
+        .then(function () {
           return changeUserStatus(row.userId, row.status)
         })
         .then(() => {
           this.$modal.msgSuccess(text + '成功')
         })
-        .catch(function() {
+        .catch(function () {
           row.status = row.status === '0' ? '1' : '0'
         })
     },
@@ -480,15 +693,15 @@ export default {
             this.$modal.msgSuccess('修改成功，新密码是：' + value)
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     /** 分配角色操作 */
-    handleAuthRole: function(row) {
+    handleAuthRole: function (row) {
       const userId = row.userId
       this.$router.push('/system/user-auth/role/' + userId)
     },
     /** 提交按钮 */
-    submitForm: function() {
+    submitForm: function () {
       this.$refs['form'].validate(valid => {
         if (valid) {
           this.form.roleIds = [this.form.roleId]
@@ -513,14 +726,14 @@ export default {
       const userIds = row.userId || this.ids
       this.$modal
         .confirm('是否确认删除用户编号为"' + userIds + '"的数据项？')
-        .then(function() {
+        .then(function () {
           return delUser(userIds)
         })
         .then(() => {
           this.getList()
           this.$modal.msgSuccess('删除成功')
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -562,3 +775,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.qr_code {
+  width: 100px;
+}
+</style>
