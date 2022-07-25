@@ -303,7 +303,7 @@ export default {
         minerAmount: null,
         status: null,
         checkStatus: "1",
-        checkPerson: this.$store.state.user.roles[0],
+        checkPerson: this.$store.state.user.name,
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'asc',
@@ -316,6 +316,7 @@ export default {
     };
   },
   created() {
+    console.log(this.$store.state.user.name)
     this.getList();
   },
   methods: {
