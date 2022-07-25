@@ -316,7 +316,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.user.name)
+    // console.log(this.$store.state.user.roles)
     this.getList();
   },
   methods: {
