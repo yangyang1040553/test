@@ -280,7 +280,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="用具名称" prop="nickName">
+            <el-form-item label="用户名称" prop="nickName">
               <el-input v-model="form.nickName" :placeholder="$t('type_user_name')" maxlength="30" />
             </el-form-item>
           </el-col>
@@ -309,7 +309,7 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户账号" prop="userName">
+            <el-form-item v-if="form.userId == undefined" label="登录账号" prop="userName">
               <el-input v-model="form.userName" :placeholder="$t('type_user_name')" maxlength="30" />
             </el-form-item>
           </el-col>

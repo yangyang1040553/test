@@ -141,7 +141,7 @@ export default {
   user_name_en: "用户名称",
   operate: "操作",
   more: "更多",
-  reset_password: "充值密码",
+  reset_password: "重置密码",
   assigning_roles: "分配角色",
   email: "邮箱",
   type_email: "请输入邮箱地址",
