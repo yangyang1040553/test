@@ -137,22 +137,22 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT余额" align="center" prop="usdtAmount">
+      <el-table-column label="USDT余额" align="center" prop="usdtAmount" sortable  width="130"> 
         <template slot-scope="scope">
           <div>{{scope.row.usdtAmount || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT远程余额" align="center" prop="usdtRemoteAmount">
+      <el-table-column label="USDT远程余额" align="center" prop="usdtRemoteAmount" width="130">
         <template slot-scope="scope">
           <div>{{scope.row.usdtRemoteAmount || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX余额" align="center" prop="trxAmount">
+      <el-table-column label="TRX余额" align="center" prop="trxAmount" sortable width="130">
         <template slot-scope="scope">
           <div>{{scope.row.trxAmount || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX远程余额" align="center" prop="trxRemoteAmount">
+      <el-table-column label="TRX远程余额" align="center" prop="trxRemoteAmount" width="130">
         <template slot-scope="scope">
           <div>{{scope.row.trxRemoteAmount || '-'}}</div>
         </template>
