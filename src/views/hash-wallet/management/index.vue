@@ -159,22 +159,22 @@
       </el-table-column>
       <el-table-column label="TRC地址" align="center" prop="hashAddressUsdt" />
       <el-table-column label="TRC转换地址" align="center" prop="hashTransAddressTrx" />
-      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal">
+      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal" sortable  width="150">
         <template slot-scope="scope">
           <div>{{scope.row.usdtRechargeTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal">
+      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal" sortable  width="150">
         <template slot-scope="scope">
           <div>{{scope.row.trxRechargeTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal">
+      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal" sortable  width="150">
         <template slot-scope="scope">
           <div>{{scope.row.usdtWithdrawTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal">
+      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" sortable  width="150">
         <template slot-scope="scope">
           <div>{{scope.row.trxWithdrawTotal || '-'}}</div>
         </template>
