@@ -229,7 +229,7 @@
                 size="mini"
                 type="text"
                 icon="el-icon-edit"
-                @click="updateGoogle(scope.row)"
+                @click="resetShowSure(scope.row)"
                 v-hasPermi="['system:user:edit']"
               >生成二维码</el-button>
               <el-button
@@ -436,6 +436,14 @@
         <el-button @click="upload.open = false">取 消</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="重要提示" :visible.sync="showSure" width="400px" append-to-body>
+      <div>确定要重置谷歌登录验证二维码吗？</div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updateGoogle">确 定</el-button>
+        <el-button @click="showSure = false">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -452,6 +460,7 @@ export default {
   components: { Treeselect },
   data() {
     return {
+      showSure: false,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -484,6 +493,7 @@ export default {
       roleOptions: [],
       // 表单参数
       form: {},
+      googleForm: {},
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -558,9 +568,14 @@ export default {
     })
   },
   methods: {
-    updateGoogle(data) {
+    resetShowSure(data) {
+      this.googleForm = data
+      this.showSure = true
+    },
+    updateGoogle() {
+      this.showSure=false
       this.loading = true
-      editGoogle(data).then(response => {
+      editGoogle(this.googleForm).then(response => {
         this.loading = false
         this.getList()
       })
