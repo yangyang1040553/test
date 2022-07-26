@@ -229,6 +229,13 @@
                 size="mini"
                 type="text"
                 icon="el-icon-edit"
+                @click="updateGoogle(scope.row)"
+                v-hasPermi="['system:user:edit']"
+              >生成二维码</el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
                 @click="handleUpdate(scope.row)"
                 v-hasPermi="['system:user:edit']"
               >{{ $t('edit') }}</el-button>
@@ -433,7 +440,7 @@
 </template>
 
 <script>
-import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus } from '@/api/system/user'
+import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus, editGoogle } from '@/api/system/user'
 import { getToken } from '@/utils/auth'
 import { treeselect } from '@/api/system/dept'
 import Treeselect from '@riophae/vue-treeselect'
@@ -551,8 +558,16 @@ export default {
     })
   },
   methods: {
+    updateGoogle(data) {
+      this.loading = true
+      editGoogle(data).then(response => {
+        this.loading = false
+        this.getList()
+      })
+    }
+    ,
     openQRCode(url) {
-      window.open(url,"_blank")
+      window.open(url, "_blank")
     },
     /** 查询用户列表 */
     getList() {

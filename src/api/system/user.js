@@ -78,6 +78,14 @@ export function getUserProfile() {
   })
 }
 
+export function editGoogle(data) {
+  return request({
+    url: '/system/user/editGoogle',
+    method: 'post',
+    data: data
+  })
+}
+
 // 修改用户个人信息
 export function updateUserProfile(data) {
   return request({
