@@ -275,9 +275,9 @@
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="form.phone" placeholder="请输入手机号" />
         </el-form-item>
-        <el-form-item label="用户名" prop="account">
+        <!-- <el-form-item label="用户名" prop="account">
           <el-input v-model="form.account" placeholder="请输入用户名" />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
         </el-form-item> -->
