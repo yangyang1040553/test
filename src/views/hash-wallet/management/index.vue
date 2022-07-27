@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="玩家ID" prop="id">
         <el-input
           v-model="queryParams.id"
@@ -137,7 +131,7 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT余额" align="center" prop="usdtAmount" sortable  width="130"> 
+      <el-table-column label="USDT余额" align="center" prop="usdtAmount" sortable width="130">
         <template slot-scope="scope">
           <div>{{scope.row.usdtAmount || '-'}}</div>
         </template>
@@ -159,22 +153,34 @@
       </el-table-column>
       <el-table-column label="TRC地址" align="center" prop="hashAddressUsdt" />
       <el-table-column label="TRC转换地址" align="center" prop="hashTransAddressTrx" />
-      <el-table-column label="USDT总充值金额" align="center" prop="usdtRechargeTotal" sortable  width="150">
+      <el-table-column
+        label="USDT总充值金额"
+        align="center"
+        prop="usdtRechargeTotal"
+        sortable
+        width="150"
+      >
         <template slot-scope="scope">
           <div>{{scope.row.usdtRechargeTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal" sortable  width="150">
+      <el-table-column label="TRX总充值金额" align="center" prop="trxRechargeTotal" sortable width="150">
         <template slot-scope="scope">
           <div>{{scope.row.trxRechargeTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT总提现金额" align="center" prop="usdtWithdrawTotal" sortable  width="150">
+      <el-table-column
+        label="USDT总提现金额"
+        align="center"
+        prop="usdtWithdrawTotal"
+        sortable
+        width="150"
+      >
         <template slot-scope="scope">
           <div>{{scope.row.usdtWithdrawTotal || '-'}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" sortable  width="150">
+      <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" sortable width="150">
         <template slot-scope="scope">
           <div>{{scope.row.trxWithdrawTotal || '-'}}</div>
         </template>
@@ -443,13 +449,15 @@ export default {
               this.editForm.note = ""
             }
             if (this.editForm.type == 1) {
-              //出款乘以 -1
-              this.editForm.amount = this.editForm.amount * -1
+              //出款乘以 -1 为保出款失败，再次点击负负得正
+              if (this.editForm.amount > 0) {
+                this.editForm.amount = this.editForm.amount * -1
+              }
               this.editForm.note = this.editForm.note + "(出款)"
             }
+            this.openEdit = false;
             updateManagement(this.editForm).then(response => {
               this.$modal.msgSuccess("提交成功");
-              this.openEdit = false;
               this.getList();
               this.resetForm("editForm");
             });
