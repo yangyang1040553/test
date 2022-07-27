@@ -124,7 +124,7 @@
           <dict-tag :options="dict.type.operation_type" :value="scope.row.operationId" />
         </template>
       </el-table-column>
-      <el-table-column label="权重" align="center" prop="weight"></el-table-column>
+      <el-table-column label="权重" align="center" prop="weight" sortable/>
       <el-table-column label="是否开启" align="center" prop="open">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.open" />
