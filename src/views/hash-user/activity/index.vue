@@ -99,7 +99,7 @@
           @click="handleExport"
           v-hasPermi="['hash-user:activity:export']"
         >导出</el-button>
-      </el-col> -->
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -124,6 +124,7 @@
           <dict-tag :options="dict.type.operation_type" :value="scope.row.operationId" />
         </template>
       </el-table-column>
+      <el-table-column label="权重" align="center" prop="weight"></el-table-column>
       <el-table-column label="是否开启" align="center" prop="open">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_open" :value="scope.row.open" />
@@ -178,6 +179,9 @@
         </el-form-item>-->
         <el-form-item label="落地页" prop="landingPageUrl">
           <el-input v-model="form.landingPageUrl" placeholder="请输入落地页URL地址" />
+        </el-form-item>
+        <el-form-item label="权重" prop="weight">
+          <el-input v-model="form.weight" placeholder="请输入活动权重" />
         </el-form-item>
         <el-form-item label="是否开启" prop="open">
           <el-select v-model="form.open" placeholder="请选择是否开启">
@@ -270,6 +274,7 @@ export default {
         open: [{ required: true, message: '状态不能为空', trigger: 'change' }],
         finishTime: [{ required: true, message: '结束时间不能为空', trigger: 'blur' }],
         operationId: [{ required: true, message: '请选择活动类型', trigger: 'blur' }],
+        weight: [{ required: true, message: '请输入活动权重', trigger: 'blur' }],
       },
       operaList: []
     }
