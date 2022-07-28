@@ -53,6 +53,16 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="出入款" prop="opt_type">
+        <el-select v-model="queryParams.opt_type" placeholder="请选择是否成功" clearable>
+          <el-option
+            v-for="dict in types"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <!-- <el-form-item label="操作人" prop="optPerson">
         <el-input
           v-model="queryParams.optPerson"
@@ -302,12 +312,17 @@ export default {
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc',
+        opt_type: null,
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      types: [
+        { label: '出款', value: 1 },
+        { label: '入款', value: 2 }
+      ],
     };
   },
   created() {
