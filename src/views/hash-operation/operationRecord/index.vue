@@ -54,6 +54,15 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="创建时间" prop="createTime">
+        <el-date-picker
+          clearable
+          v-model="queryParams.createTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="请选择创建时间"
+        ></el-date-picker>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -270,7 +279,8 @@ export default {
         status: null,
         orderByColumn: 'createTime',
         isAsc: 'desc',
-        id: null
+        id: null,
+        createTime: null,
       },
       // 表单参数
       form: {},
@@ -336,6 +346,7 @@ export default {
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc',
+        createTime: null
       };
       this.resetForm("form");
     },
