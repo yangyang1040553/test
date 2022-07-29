@@ -87,19 +87,29 @@
           <span>{{ scope.row.usdtAmountRecharge || '-'}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="今日TRX充值金额" align="center" prop="trxAmountRecharge" sortable>
-        <template slot-scope="scope">
-          <span>{{ scope.row.trxAmountRecharge|| '-'}}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="今日USDT提现金额" align="center" prop="usdtAmountWithdraw" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.usdtAmountWithdraw|| '-'}}</span>
         </template>
       </el-table-column>
+      <el-table-column label="今日USDT转换金额" align="center" prop="usdt_amount_trans" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.usdt_amount_trans || '-'}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日TRX充值金额" align="center" prop="trxAmountRecharge" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.trxAmountRecharge|| '-'}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="今日TRX提现金额" align="center" prop="trxAmountWithdraw" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.trxAmountWithdraw || '-'}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日TRX转换金额" align="center" prop="trx_amount_trans" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.trx_amount_trans|| '-'}}</span>
         </template>
       </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
