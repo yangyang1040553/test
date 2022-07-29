@@ -453,8 +453,10 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
+       let obj = { ...this.queryParams }
+      obj.pageSize = 5000
       this.download('hash-wallet/walletoOpt/export', {
-        ...this.queryParams
+        ...obj
       }, `walletoOpt_${new Date().getTime()}.xlsx`)
     }
   }

@@ -502,8 +502,10 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
+      let obj = { ...this.queryParams }
+      obj.pageSize = 5000
       this.download('hash-wallet/rechargeOrder/export', {
-        ...this.queryParams
+        ...obj
       }, `rechargeOrder_${new Date().getTime()}.xlsx`)
     }
   }

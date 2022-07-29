@@ -369,10 +369,12 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
+      let obj = { ...this.queryParams }
+      obj.pageSize = 5000
       this.download(
         'hash-game/widthdrawRecord/export',
         {
-          ...this.queryParams
+          ...obj
         },
         `widthdrawRecord_${new Date().getTime()}.xlsx`
       )

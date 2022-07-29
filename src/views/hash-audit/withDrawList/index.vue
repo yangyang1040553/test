@@ -495,8 +495,10 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
+      let obj = { ...this.queryParams }
+      obj.pageSize = 5000
       this.download('hash-audit/auditWidthdrawOrder/export', {
-        ...this.queryParams
+        ...obj
       }, `auditWidthdrawOrder_${new Date().getTime()}.xlsx`)
     }
   }

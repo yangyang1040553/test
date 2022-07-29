@@ -58,7 +58,7 @@
           oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item label="投注类型" prop="betWalletType">
         <el-select v-model="queryParams.betWalletType" placeholder="请选择投注的钱包类型" clearable>
           <el-option
@@ -393,7 +393,7 @@ import { listRecord, getRecord, delRecord, addRecord, updateRecord } from '@/api
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
 export default {
   name: 'Record',
-  dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result', 'game_list','award_callback'],
+  dicts: ['winner', 'wallet_type', 'bet_money_status', , 'money_status', 'reward_status', 'bet_result', 'game_list', 'award_callback'],
   components: {
     UserInfoDialog
   },
@@ -585,10 +585,12 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
+      let obj = { ...this.queryParams }
+      obj.pageSize = 5000
       this.download(
         'hash-game/record/export',
         {
-          ...this.queryParams
+          ...obj
         },
         `record_${new Date().getTime()}.xlsx`
       )
