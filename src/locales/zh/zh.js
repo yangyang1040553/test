@@ -246,7 +246,7 @@ export default {
   parameter_key: "参数键名",
   enter_parameter_key: "请输入参数键名",
   system_built_in: "系统内置",
-  parameter_primary_key: "参数主键",
+  parameter_primary_key: "参数ID",
   parameter_value: "参数键值",
   enter_parameter_value: "请输入参数键值",
   add_parameter: "添加参数",
