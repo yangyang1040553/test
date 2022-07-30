@@ -170,6 +170,7 @@
       :data="walletChannelList"
       height="580"
       @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="ID" align="center" prop="id" /> -->
@@ -180,7 +181,7 @@
           <dict-tag :options="dict.type.merchant_code" :value="scope.row.merchantCode" />
         </template>
       </el-table-column>
-      <el-table-column label="支付方式号" align="center" prop="payTypeNo" />
+      <el-table-column label="支付方式号" align="center" prop="payTypeNo" sortable />
       <!-- <el-table-column label="渠道编码" align="center" prop="channelNo" /> -->
       <el-table-column label="权重" align="center" prop="weight" />
       <el-table-column label="状态" align="center" prop="isEnable">
@@ -277,7 +278,7 @@
         </el-form-item>
         <!-- <el-form-item label="渠道编码" prop="channelNo">
           <el-input v-model="form.channelNo" placeholder="请输入渠道编码" />
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="权重" prop="weight">
           <el-input v-model="form.weight" placeholder="请输入权重" />
         </el-form-item>
@@ -360,6 +361,8 @@ export default {
         minAmount: null,
         maxAmount: null,
         fixAmount: null,
+        orderByColumn: 'payTypeNo',
+        isAsc: 'asc',
       },
       // 表单参数
       form: {},
@@ -411,6 +414,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     getFixAmount(data) {
       if (data) {
         return data.split(",")
@@ -446,7 +460,9 @@ export default {
         maxAmount: null,
         fixAmount: null,
         createTime: null,
-        updateTime: null
+        updateTime: null,
+        orderByColumn: 'payTypeNo',
+        isAsc: 'asc'
       };
       this.resetForm("form");
     },
