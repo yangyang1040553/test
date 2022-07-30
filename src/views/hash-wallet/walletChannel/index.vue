@@ -175,9 +175,13 @@
       <!-- <el-table-column label="ID" align="center" prop="id" /> -->
       <el-table-column label="通道名称" align="center" prop="channelName" />
       <el-table-column label="通道编码" align="center" prop="channelCode" />
-      <el-table-column label="商户编号" align="center" prop="merchantCode" />
+      <el-table-column label="商户编号" align="center" prop="merchantCode">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.merchant_code" :value="scope.row.merchantCode" />
+        </template>
+      </el-table-column>
       <el-table-column label="支付方式号" align="center" prop="payTypeNo" />
-      <el-table-column label="渠道编码" align="center" prop="channelNo" />
+      <!-- <el-table-column label="渠道编码" align="center" prop="channelNo" /> -->
       <el-table-column label="权重" align="center" prop="weight" />
       <el-table-column label="状态" align="center" prop="isEnable">
         <template slot-scope="scope">
