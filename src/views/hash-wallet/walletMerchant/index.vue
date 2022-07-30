@@ -158,7 +158,7 @@
       <el-table-column label="商户密钥" align="center" prop="appKey" />
       <el-table-column label="回调通知地址" align="center" prop="notifyUrl" />
       <el-table-column label="接口请求地址" align="center" prop="apiUrl" />
-      <el-table-column label="接口查询地址" align="center" prop="queryUrl" />
+      <el-table-column label="接口查询地址" align="center" prop="query_url" />
       <el-table-column label="IP白名单地址" align="center" prop="ipWhiteList" />
       <el-table-column label="超时时间" align="center" prop="timeout" />
       <el-table-column label="状态" align="center" prop="isEnable">
@@ -233,8 +233,8 @@
         <el-form-item label="接口请求地址" prop="apiUrl">
           <el-input v-model="form.apiUrl" placeholder="请输入接口请求地址" />
         </el-form-item>
-        <el-form-item label="接口查询地址" prop="queryUrl">
-          <el-input v-model="form.queryUrl" placeholder="请输入接口查询地址" />
+        <el-form-item label="接口查询地址" prop="query_url">
+          <el-input v-model="form.query_url" placeholder="请输入接口查询地址" />
         </el-form-item>
         <el-form-item label="IP白名单地址" prop="ipWhiteList">
           <el-input v-model="form.ipWhiteList" placeholder="请输入IP白名单地址" />
@@ -332,7 +332,7 @@ export default {
         updateTime: [
           { required: true, message: "更新时间不能为空", trigger: "blur" }
         ],
-        queryUrl: [
+        query_url: [
           { required: true, message: "接口查询地址不能为空", trigger: "blur" }
         ],
         merchant_no: [
