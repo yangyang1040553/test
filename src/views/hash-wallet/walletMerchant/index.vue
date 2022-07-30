@@ -317,9 +317,9 @@ export default {
         apiUrl: [
           { required: true, message: "接口请求地址不能为空", trigger: "blur" }
         ],
-        ipWhiteList: [
-          { required: true, message: "IP白名单地址不能为空", trigger: "blur" }
-        ],
+        // ipWhiteList: [
+        //   { required: true, message: "IP白名单地址不能为空", trigger: "blur" }
+        // ],
         timeout: [
           { required: true, message: "超时时间不能为空", trigger: "blur" }
         ],
