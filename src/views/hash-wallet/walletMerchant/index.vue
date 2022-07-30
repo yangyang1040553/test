@@ -154,6 +154,7 @@
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="商户名" align="center" prop="merchantName" />
       <el-table-column label="商户号" align="center" prop="merchantCode" />
+      <el-table-column label="商户ID" align="center" prop="merchant_no" />
       <el-table-column label="商户密钥" align="center" prop="appKey" />
       <el-table-column label="回调通知地址" align="center" prop="notifyUrl" />
       <el-table-column label="接口请求地址" align="center" prop="apiUrl" />
@@ -222,6 +223,9 @@
         </el-form-item>
         <el-form-item label="商户密钥" prop="appKey">
           <el-input v-model="form.appKey" placeholder="请输入商户密钥" />
+        </el-form-item>
+        <el-form-item label="商户ID" prop="merchant_no">
+          <el-input v-model="form.merchant_no" placeholder="请输入商户ID" />
         </el-form-item>
         <el-form-item label="回调通知地址" prop="notifyUrl">
           <el-input v-model="form.notifyUrl" placeholder="请输入回调通知地址" />
@@ -330,6 +334,9 @@ export default {
         ],
         queryUrl: [
           { required: true, message: "接口查询地址不能为空", trigger: "blur" }
+        ],
+        merchant_no: [
+          { required: true, message: "商户ID不能为空", trigger: "blur" }
         ]
       }
     };
