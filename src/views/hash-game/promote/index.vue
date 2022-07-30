@@ -1,13 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-      label-width="100px"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="玩家ID" prop="id">
         <el-input
           v-model="queryParams.id"
@@ -94,20 +87,26 @@
       <el-table-column label="上级玩家ID" align="center" prop="fatherUserId" width="200">
         <template slot-scope="scope">
           <div
+            v-if="scope.row.fatherUserId"
             class="global-text-blue"
             @click="openUserDetail(scope.row.fatherUserId)"
           >{{scope.row.fatherUserId}}</div>
+          <div v-else>-</div>
         </template>
       </el-table-column>
-      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100" />
+      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100">
+        <template slot-scope="scope">
+          <div>{{scope.row.fatherInvitationCode||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="USDT总收益" align="center" prop="incomeUsdtAmount" width="150" sortable>
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeUsdtAmount.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeUsdtAmount? scope.row.incomeUsdtAmount.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column label="USDT今日收益" align="center" prop="incomeUsdtToday" width="150" sortable>
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeUsdtToday.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeUsdtToday? scope.row.incomeUsdtToday.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -118,7 +117,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeUsdtYesterday.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeUsdtYesterday?scope.row.incomeUsdtYesterday.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -129,17 +128,17 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeUsdtDirectPromote.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeUsdtDirectPromote?scope.row.incomeUsdtDirectPromote.toFixed(2) :"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="TRX总收益" align="center" prop="incomeTrxAmount" width="150" sortable>
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeTrxAmount.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeTrxAmount?scope.row.incomeTrxAmount.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column label="TRX今日收益" align="center" prop="incomeTrxToday" width="150" sortable>
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeTrxToday.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeTrxToday?scope.row.incomeTrxToday.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -150,7 +149,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeTrxYesterday.toFixed(2) }}</div>
+          <div>{{ scope.row.incomeTrxYesterday?scope.row.incomeTrxYesterday.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -161,7 +160,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.incomeTrxDirectPromote.toFixed(2) }}</div>
+          <div>{{scope.row.incomeTrxDirectPromote? scope.row.incomeTrxDirectPromote.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -172,7 +171,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.canWithdrawUsdtAmount.toFixed(2) }}</div>
+          <div>{{scope.row.canWithdrawUsdtAmount? scope.row.canWithdrawUsdtAmount.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -183,12 +182,24 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.canWithdrawTrxAmount.toFixed(2) }}</div>
+          <div>{{ scope.row.canWithdrawTrxAmount? scope.row.canWithdrawTrxAmount.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="一级代理" align="center" prop="level1Person" width="100" sortable />
-      <el-table-column label="二级代理" align="center" prop="level2Person" width="100" sortable />
-      <el-table-column label="三级代理" align="center" prop="level3Person" width="100" sortable />
+      <el-table-column label="一级代理" align="center" prop="level1Person" width="100" sortable>
+        <template slot-scope="scope">
+          <div>{{ scope.row.level1Person? scope.row.level1Person:"-" }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="二级代理" align="center" prop="level2Person" width="100" sortable>
+        <template slot-scope="scope">
+          <div>{{ scope.row.level2Person? scope.row.level2Person:"-" }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="三级代理" align="center" prop="level3Person" width="100" sortable>
+        <template slot-scope="scope">
+          <div>{{ scope.row.level3Person? scope.row.level3Person:"-" }}</div>
+        </template>
+      </el-table-column>
       <el-table-column
         label="邀请奖励人数"
         align="center"
@@ -197,7 +208,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.invite_award_person||0 }}</div>
+          <div>{{scope.row.invite_award_person>0? scope.row.invite_award_person:"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -210,7 +221,7 @@
         <template slot-scope="scope">
           <span
             :class="scope.row.team_usdt_win_amount>0?'global-text-green':'global-text-red'"
-          >{{ scope.row.team_usdt_win_amount||0 }}</span>
+          >{{ scope.row.team_usdt_win_amount? scope.row.team_usdt_win_amount.toFixed(2):"-"}}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -223,7 +234,7 @@
         <template slot-scope="scope">
           <span
             :class="scope.row.team_trx_win_amount>0?'global-text-green':'global-text-red'"
-          >{{ scope.row.team_trx_win_amount||0 }}</span>
+          >{{ scope.row.team_trx_win_amount?scope.row.team_trx_win_amount.toFixed(2):"-" }}</span>
         </template>
       </el-table-column>
 
@@ -235,7 +246,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.usdtGameBrokerageToFather.toFixed(2) }}</div>
+          <div>{{scope.row.usdtGameBrokerageToFather? scope.row.usdtGameBrokerageToFather.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -246,7 +257,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.usdtPromoteBrokerageToFather.toFixed(2) }}</div>
+          <div>{{scope.row.usdtPromoteBrokerageToFather? scope.row.usdtPromoteBrokerageToFather.toFixed(2) :"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -257,7 +268,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.trxGameBrokerageToFather.toFixed(2) }}</div>
+          <div>{{ scope.row.trxGameBrokerageToFather?scope.row.trxGameBrokerageToFather.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -268,7 +279,7 @@
         sortable
       >
         <template slot-scope="scope">
-          <div>{{ scope.row.trxPromoteBrokerageToFather.toFixed(2) }}</div>
+          <div>{{scope.row.trxPromoteBrokerageToFather? scope.row.trxPromoteBrokerageToFather.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>

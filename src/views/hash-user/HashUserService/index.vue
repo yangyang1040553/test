@@ -552,6 +552,7 @@ export default {
       })
     },
     handleNext(row) {
+      this.reset()
       this.queryParams.fatherInvitationCode = row.invitationCode
       this.getList()
     },
