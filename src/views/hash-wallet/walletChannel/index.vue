@@ -275,9 +275,9 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="渠道编码" prop="channelNo">
+        <!-- <el-form-item label="渠道编码" prop="channelNo">
           <el-input v-model="form.channelNo" placeholder="请输入渠道编码" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="权重" prop="weight">
           <el-input v-model="form.weight" placeholder="请输入权重" />
         </el-form-item>
