@@ -211,7 +211,7 @@
         </el-form-item>
         <el-form-item label="商户号" prop="merchantCode">
           <!-- <el-input v-model="form.merchantCode" placeholder="请输入商户号" /> -->
-          <el-select v-model="form.merchantCode" placeholder="请选择商户编号" clearable disabled>
+          <el-select v-model="form.merchantCode" placeholder="请选择商户编号" clearable>
             <el-option
               v-for="dict in dict.type.merchant_code"
               :key="dict.value"
