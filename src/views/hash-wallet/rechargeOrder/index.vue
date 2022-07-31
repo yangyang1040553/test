@@ -172,6 +172,9 @@
       <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
       <el-table-column label="实际交易金额" align="center" prop="payAmount" width="140" sortable />
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
+      <el-table-column label="充值方式" align="center" prop="pay_type" />
+      <el-table-column label="转换比例" align="center" prop="scale"/>
+      <el-table-column label="原始金额" align="center" prop="source_amount" />
       <el-table-column label="充值状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.recharge_status" :value="scope.row.status" />

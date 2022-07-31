@@ -153,11 +153,7 @@
           <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus" />
         </template>
       </el-table-column>
-      <el-table-column label="转换比例" align="center" prop="scale">
-        <template slot-scope="scope">
-          <div>{{scope.row.scale>0?scope.row.scale.toFixed(2):'-'}}</div>
-        </template>
-      </el-table-column>
+      <el-table-column label="转换比例" align="center" prop="scale"/>
       <el-table-column label="充值金额" align="center" prop="rechargeMoney" sortable width="160" />
       <el-table-column label="支付金额" align="center" prop="payMoney" sortable width="160" />
       <el-table-column label="支付状态" align="center" prop="payStatus">
