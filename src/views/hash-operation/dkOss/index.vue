@@ -139,7 +139,14 @@
       <el-table-column label="访问ID配置" align="center" prop="accessId" />
       <el-table-column label="访问Key配置" align="center" prop="accessKey" />
       <el-table-column label="上传地址" align="center" prop="uploadAddr" />
-      <el-table-column label="访问地址" align="center" prop="accessAddr" />
+      <el-table-column label="访问地址" align="center" prop="accessAddr">
+        <template slot-scope="scope">
+          <div
+            @click="openBlank(scope.row.accessAddr)"
+            class="global-text-blue"
+          >{{scope.row.accessAddr}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="健康状态" align="center" prop="satus">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.healthy_status" :value="scope.row.satus" />
@@ -302,6 +309,9 @@ export default {
     this.getList();
   },
   methods: {
+    openBlank(url){
+      window.open(url,"_blank")
+    },
     /** 查询对抗存储列列表 */
     getList() {
       this.loading = true;

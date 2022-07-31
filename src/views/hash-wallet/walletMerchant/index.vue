@@ -156,7 +156,8 @@
       <el-table-column label="商户号" align="center" prop="merchantCode" />
       <el-table-column label="商户ID" align="center" prop="merchant_no" />
       <el-table-column label="商户密钥" align="center" prop="appKey" />
-      <el-table-column label="回调通知地址" align="center" prop="notifyUrl" />
+      <el-table-column label="回调通知地址" align="center" prop="notifyUrl">
+      </el-table-column>
       <el-table-column label="接口请求地址" align="center" prop="apiUrl" />
       <el-table-column label="接口查询地址" align="center" prop="query_url" />
       <el-table-column label="IP白名单地址" align="center" prop="ipWhiteList" />
@@ -345,6 +346,9 @@ export default {
     this.getList();
   },
   methods: {
+    openBlank(url) {
+      window.open(url, "_blank")
+    },
     /** 查询支付商户配置列表 */
     getList() {
       this.loading = true;
