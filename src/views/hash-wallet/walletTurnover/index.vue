@@ -302,7 +302,7 @@ export default {
       else if (row.code == 4) {
         path = "/hash-game/widthdrawRecord"
       }
-      else if (row.code == 5) {
+      else if (row.code == 5 || row.code == 14) {
         path = "/wallet/rechargeOrder"
       }
       else if (row.code == 6) {
@@ -320,6 +320,7 @@ export default {
       else if (row.code == 12) {
         path = "/hash-operation/operationRecord"
       }
+
       // else if (row.code == 8) { }
       // else if (row.code == 9) { }
       console.log(path)
@@ -441,7 +442,7 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
-       let obj = { ...this.queryParams }
+      let obj = { ...this.queryParams }
       obj.pageSize = 5000
       this.download('hash-wallet/walletTurnover/export', {
         ...obj
