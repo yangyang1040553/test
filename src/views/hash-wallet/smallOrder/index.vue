@@ -36,7 +36,7 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item label=" 支付状态" prop="payStatus">
         <el-select v-model="queryParams.payStatus" placeholder="请选择支付状态" clearable>
           <el-option
@@ -153,7 +153,11 @@
           <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus" />
         </template>
       </el-table-column>
-      <el-table-column label="转换比例" align="center" prop="scale" />
+      <el-table-column label="转换比例" align="center" prop="scale">
+        <template slot-scope="scope">
+          <div>{{scope.row.scale>0?scope.row.scale.toFixed(2):'-'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="充值金额" align="center" prop="rechargeMoney" sortable width="160" />
       <el-table-column label="支付金额" align="center" prop="payMoney" sortable width="160" />
       <el-table-column label="支付状态" align="center" prop="payStatus">
@@ -168,7 +172,7 @@
       </el-table-column>
       <el-table-column label="支付类型" align="center" prop="payTypeNo" />
       <el-table-column label="通道编码" align="center" prop="channelCode" />
-      <el-table-column label="渠道编码" align="center" prop="channelNo" />
+      <!-- <el-table-column label="渠道编码" align="center" prop="channelNo" /> -->
       <el-table-column label="支付时间" align="center" prop="payTime" width="180" sortable></el-table-column>
       <el-table-column label="失效时间" align="center" prop="invalidTime" width="180" sortable></el-table-column>
       <el-table-column label="三方支付" align="center" prop="thirdOrderNo" />
