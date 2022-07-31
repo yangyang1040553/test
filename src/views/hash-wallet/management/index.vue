@@ -280,6 +280,9 @@
         <el-form-item label="备注" prop="note">
           <el-input v-model="editForm.note" placeholder="请输入备注" />
         </el-form-item>
+        <el-form-item label="谷歌验证码" prop="googleCode">
+          <el-input v-model="editForm.googleCode" placeholder="请输入谷歌验证码" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="submitEdit">确 定</el-button>
@@ -349,6 +352,7 @@ export default {
         walletType: [{ required: true, message: '请选择钱包类型', trigger: 'blur' }],
         amount: [{ required: true, message: '请输入金额', trigger: 'blur' }],
         type: [{ required: true, message: '请选择类型', trigger: 'blur' }],
+        googleCode: [{ required: true, message: '请输入谷歌验证码', trigger: 'blur' }],
       },
       openEdit: false,
       editForm: {}
@@ -394,7 +398,8 @@ export default {
         hashTransAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
-        invitationCode: null
+        invitationCode: null,
+        googleCode: null,
       };
       this.resetForm("form");
       this.resetForm("editForm");
@@ -455,8 +460,8 @@ export default {
               }
               this.editForm.note = this.editForm.note + "(出款)"
             }
-            this.openEdit = false;
             updateManagement(this.editForm).then(response => {
+              this.openEdit = false;
               this.$modal.msgSuccess("提交成功");
               this.getList();
               this.resetForm("editForm");
