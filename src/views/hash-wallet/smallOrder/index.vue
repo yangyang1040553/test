@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
+      <el-form-item label="订单ID" prop="id">
+        <el-input
+          v-model="queryParams.id"
+          placeholder="请输入订单ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="用户ID" prop="userId">
         <el-input
           v-model="queryParams.userId"
@@ -134,7 +142,7 @@
       @sort-change="sortChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单id" align="center" prop="id" width="180" />
+      <el-table-column label="订单ID" align="center" prop="id" width="200" />
       <!-- <el-table-column label="用户ID" align="center" prop="userId" /> -->
       <el-table-column label="用户ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
