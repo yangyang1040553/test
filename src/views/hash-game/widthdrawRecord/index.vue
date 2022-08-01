@@ -25,6 +25,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+        <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="提现金额" prop="withdrawAmount">
         <el-input
           v-model="queryParams.withdrawAmount"
@@ -113,6 +121,7 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" width="100" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code" width="100" />
       <el-table-column label="提现金额" align="center" prop="withdrawAmount" sortable>
         <template slot-scope="scope">
           <div>{{ scope.row.withdrawAmount.toFixed(2) }}</div>
@@ -238,6 +247,7 @@ export default {
         withdrawAmount: null,
         walletType: null,
         status: null,
+        invitation_code: null,
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc'
@@ -293,6 +303,7 @@ export default {
         walletType: null,
         afterAmount: null,
         status: null,
+        invitation_code: null,
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc'

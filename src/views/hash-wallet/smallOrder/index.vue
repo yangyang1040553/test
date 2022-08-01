@@ -9,6 +9,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="目标钱包类型" prop="toWallet">
         <el-select v-model="queryParams.toWallet" placeholder="请选择目标钱包类型" clearable>
           <el-option
@@ -137,6 +145,7 @@
         </template>
       </el-table-column>
       <el-table-column label="用户昵称" align="center" prop="nickName" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="通道ID" align="center" prop="channelId" />
       <el-table-column label="商户编号" align="center" prop="rechargeMerchantCode">
         <template slot-scope="scope">
@@ -153,7 +162,7 @@
           <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus" />
         </template>
       </el-table-column>
-      <el-table-column label="转换比例" align="center" prop="scale"/>
+      <el-table-column label="转换比例" align="center" prop="scale" />
       <el-table-column label="充值金额" align="center" prop="rechargeMoney" sortable width="160" />
       <el-table-column label="支付金额" align="center" prop="payMoney" sortable width="160" />
       <el-table-column label="支付状态" align="center" prop="payStatus">
@@ -372,6 +381,7 @@ export default {
         payStatus: null,
         orderStatus: null,
         createTime: null,
+        invitation_code: null,
         orderByColumn: 'createTime',
         isAsc: 'desc',
       },
@@ -430,6 +440,7 @@ export default {
         payMoney: null,
         isFirstRecharge: null,
         payStatus: null,
+        invitation_code: null,
         orderStatus: null,
         payTypeNo: null,
         channelCode: null,

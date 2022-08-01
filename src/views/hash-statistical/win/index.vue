@@ -9,6 +9,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="日期">
         <el-date-picker
           v-model="daterangeId"
@@ -99,6 +107,7 @@
           <div>{{scope.row.note_name?scope.row.note_name:scope.row.nick_name}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
       <el-table-column label="USDT输赢金额" align="center" prop="usdtWinAmount" sortable>
@@ -233,6 +242,7 @@ export default {
         trxBetAmount: null,
         trxAwardAmount: null,
         trxWinAmount: null,
+        invitation_code: null,
         orderByColumn: 'id',
         isAsc: 'desc',
       },
@@ -292,6 +302,7 @@ export default {
         trxBetAmount: null,
         trxAwardAmount: null,
         trxWinAmount: null,
+        invitation_code: null,
         orderByColumn: 'id',
         isAsc: 'desc',
       };

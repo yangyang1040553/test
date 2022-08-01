@@ -13,7 +13,15 @@
           v-model="queryParams.userId"
           placeholder="请输入用户ID"
           clearable
-              oninput="value=value.replace(/[^\d\.]/g,'')"
+          oninput="value=value.replace(/[^\d\.]/g,'')"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -111,6 +119,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="游戏ID" align="center" prop="gameId" />
       <el-table-column label="游戏名称" align="center" prop="gameName">
         <template slot-scope="scope">
@@ -220,6 +229,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        invitation_code: null,
         userId: null,
         gameId: null,
         type: 1,
@@ -281,6 +291,7 @@ export default {
       this.form = {
         id: null,
         userId: null,
+        invitation_code: null,
         gameId: null,
         betPosition: null,
         usdtBetAmount: null,
