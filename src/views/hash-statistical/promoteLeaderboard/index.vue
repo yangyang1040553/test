@@ -18,6 +18,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+        <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="注册时间" prop="registerTime">
         <el-date-picker
           clearable
@@ -113,6 +121,7 @@
       <el-table-column label="手机号" align="center" prop="phone" />
       <el-table-column label="用户昵称" align="center" prop="nickName" />
       <el-table-column label="用户名" align="center" prop="account" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="代理返佣赔率" align="center" prop="promoteOdds" />
       <el-table-column label="分享返佣赔率" align="center" prop="sharePromoteOdds" />
       <el-table-column label="一级代理人数" align="center" prop="level1Person" />
@@ -337,6 +346,7 @@ export default {
         account: null,
         registerTime: null,
         promoteOdds: null,
+        invitation_code: null,
         sharePromoteOdds: null,
         orderByColumn: 'sumnumber',
         isAsc: 'desc',
@@ -400,6 +410,7 @@ export default {
         promoteOdds: null,
         sharePromoteOdds: null,
         sumnumber: null,
+        invitation_code: null,
         orderByColumn: 'sumnumber',
         isAsc: 'desc',
       };

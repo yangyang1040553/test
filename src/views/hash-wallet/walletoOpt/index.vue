@@ -17,6 +17,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+       <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <!-- <el-form-item label="玩家昵称" prop="nickName">
         <el-input
           v-model="queryParams.nickName"
@@ -158,6 +166,7 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
@@ -313,6 +322,7 @@ export default {
         orderByColumn: 'createTime',
         isAsc: 'desc',
         opt_type: null,
+        invitation_code: null,
       },
       // 表单参数
       form: {},
@@ -377,6 +387,7 @@ export default {
         userId: null,
         nickName: null,
         walletType: null,
+        invitation_code: null,
         amount: null,
         isCallback: null,
         optPerson: null,

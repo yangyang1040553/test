@@ -6,7 +6,6 @@
       size="small"
       :inline="true"
       v-show="showSearch"
-      label-width="88px"
     >
       <!-- <el-form-item label="游戏ID" prop="gameId">
         <el-input
@@ -30,6 +29,14 @@
         <el-input
           v-model="queryParams.userId"
           placeholder="请输入玩家ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -203,6 +210,7 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="赔率" align="center" prop="odds" />
       <el-table-column label="投注类型" align="center" prop="betWalletType">
         <template slot-scope="scope">
@@ -437,6 +445,7 @@ export default {
         winner: null,
         createTime: null,
         awardCallback: null,
+        invitation_code: null,
         // sort: 'desc',
         // prop: 'create_time',
         orderByColumn: 'createTime',
@@ -507,6 +516,7 @@ export default {
         rewardStatus: null,
         winner: null,
         gameCollect: null,
+        invitation_code: null,
         createTime: null,
         orderByColumn: 'createTime',
         isAsc: 'desc'

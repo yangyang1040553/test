@@ -25,6 +25,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+       <el-form-item label="邀请码" prop="invitation_code">
+        <el-input
+          v-model="queryParams.invitation_code"
+          placeholder="请输入邀请码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="钱包类型" prop="walletType">
         <el-select v-model="queryParams.walletType" placeholder="请选择钱包类型" clearable>
           <el-option
@@ -187,6 +195,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
@@ -328,6 +337,7 @@ export default {
         status: null,
         checkStatus: '2,3',
         checkPerson: null,
+        invitation_code: null,
         createTime: null,
         orderByColumn: 'updateTime',
         isAsc: 'desc',
@@ -424,6 +434,7 @@ export default {
         createTime: null,
         updateTime: null,
         updateBy: null,
+        invitation_code: null,
         orderByColumn: 'updateTime',
         isAsc: 'desc',
       };
