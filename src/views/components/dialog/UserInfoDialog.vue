@@ -7,7 +7,7 @@
         <el-radio-button label="3">钱包</el-radio-button>
       </el-radio-group>
 
-      <el-form ref="form" class="form" :model="form" label-width="120px" disabled>
+      <el-form ref="form" class="form" :model="form" label-width="140px" disabled>
         <div class="left">
           <el-form-item label="手机区号" prop="areaCode">
             <el-input :value="form.areaCode|| '-'" placeholder />
