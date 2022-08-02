@@ -118,7 +118,13 @@
     />
 
     <!-- 添加或修改对抗配置文件对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
+    <el-dialog
+      :title="title"
+      :visible.sync="open"
+      width="1000px"
+      append-to-body
+      v-loading="loading"
+    >
       <el-form ref="form" :model="form" :rules="rules" class="form" label-width="100px">
         <el-form-item label="存储桶列表" prop="upOssList">
           <!-- <el-input placeholder="请输入存储桶列表" /> -->
@@ -408,6 +414,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid && this.hasJsonFlag) {
           this.form.json = JSON.stringify(this.resultInfo)
+          this.loading = true
           if (this.form.id != null) {
             updateDkFile(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
