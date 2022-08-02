@@ -72,19 +72,24 @@
           <!-- <el-form-item label="今日投注金额" prop="head">
             <el-input v-model="form.head" placeholder />
           </el-form-item>-->
-          <el-form-item label="今日投注金额">
-            <!-- <span class="label">{{ form.betAmount ||0.00}}</span> -->
-            <el-input :value="form.betAmount||0.00" placeholder />
+          <el-form-item label="今日TRX投注金额">
+            <el-input :value="form.trx_bet_amount||0.00" placeholder />
           </el-form-item>
-          <el-form-item label="今日充值金额">
-            <el-input :value="form.inAmount||0.00" placeholder />
-            <!-- <span class="label">{{ form.inAmount ||0.00}}</span> -->
+          <el-form-item label="今日USDT投注金额">
+            <el-input :value="form.usdt_bet_amount||0.00" placeholder />
           </el-form-item>
-          <el-form-item label="今日提现金额">
-            <el-input :value="form.outAmount||0.00" placeholder />
-            <!-- <span class="label">{{ form.outAmount ||0.00}}</span> -->
+          <el-form-item label="今日TRX充值金额">
+            <el-input :value="form.trx_in_amount||0.00" placeholder />
           </el-form-item>
-
+          <el-form-item label="今日USDT充值金额">
+            <el-input :value="form.usdt_in_amount||0.00" placeholder />
+          </el-form-item>
+          <el-form-item label="今日TRX提现金额">
+            <el-input :value="form.trx_out_mount||0.00" placeholder />
+          </el-form-item>
+          <el-form-item label="今日USDT提现金额">
+            <el-input :value="form.usdt_out_mount||0.00" placeholder />
+          </el-form-item>
           <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
             <el-input v-model="form.usdt_remote_amount" placeholder />
           </el-form-item>

@@ -142,7 +142,7 @@
       @sort-change="sortChange"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单ID" align="center" prop="id" width="200" />
+      <el-table-column label="订单ID" align="center" prop="id" width="210" />
       <!-- <el-table-column label="用户ID" align="center" prop="userId" /> -->
       <el-table-column label="用户ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
