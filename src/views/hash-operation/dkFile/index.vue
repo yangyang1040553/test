@@ -128,7 +128,6 @@
             v-model="selecOssList"
             multiple
             style="width:500px;"
-            collapse-tags
             placeholder="请选存储桶"
             @change="onOssSelect"
           >
@@ -155,7 +154,6 @@
             v-model="selectDomain"
             multiple
             style="width:500px;"
-            collapse-tags
             placeholder="请选域名"
             @change="onDomainSelect"
           >
@@ -395,6 +393,12 @@ export default {
         this.resultInfo = JSON.parse(this.form.json)
         this.open = true;
         this.title = "修改对抗配置文件";
+
+        var list = this.form.upOssList.split(",")
+        list.forEach(element => {
+          this.selecOssList.push(element)
+        })
+
       });
       this.getDomainList()
       this.getOssList()
