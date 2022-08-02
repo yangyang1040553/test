@@ -69,6 +69,28 @@
         </div>
         <div class="line"></div>
         <div class="right">
+           <el-form-item label="是否在线" prop="online">
+            <el-select v-model="form.online" placeholder>
+              <el-option
+                v-for="dict in dict.type.online"
+                :key="dict.value"
+                :label="dict.label"
+                :value="parseInt(dict.value)"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="邀请码" prop="invitationCode">
+            <el-input v-model="form.invitationCode" placeholder />
+          </el-form-item>
+          <el-form-item label="上级邀请码" prop="fatherInvitationCode">
+            <el-input v-model="form.fatherInvitationCode" placeholder />
+          </el-form-item>
+           <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
+            <el-input v-model="form.usdt_remote_amount" placeholder />
+          </el-form-item>
+          <el-form-item label="TRX远程总额" prop="trx_remote_amount">
+            <el-input v-model="form.trx_remote_amount" placeholder />
+          </el-form-item>
           <!-- <el-form-item label="今日投注金额" prop="head">
             <el-input v-model="form.head" placeholder />
           </el-form-item>-->
@@ -90,12 +112,7 @@
           <el-form-item label="今日USDT提现金额">
             <el-input :value="form.usdt_out_mount||0.00" placeholder />
           </el-form-item>
-          <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
-            <el-input v-model="form.usdt_remote_amount" placeholder />
-          </el-form-item>
-          <el-form-item label="TRX远程总额" prop="trx_remote_amount">
-            <el-input v-model="form.trx_remote_amount" placeholder />
-          </el-form-item>
+
           <el-form-item label="用户状态" prop="status">
             <el-select v-model="form.status" placeholder>
               <el-option
@@ -106,22 +123,7 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="是否在线" prop="online">
-            <el-select v-model="form.online" placeholder>
-              <el-option
-                v-for="dict in dict.type.online"
-                :key="dict.value"
-                :label="dict.label"
-                :value="parseInt(dict.value)"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="邀请码" prop="invitationCode">
-            <el-input v-model="form.invitationCode" placeholder />
-          </el-form-item>
-          <el-form-item label="上级邀请码" prop="fatherInvitationCode">
-            <el-input v-model="form.fatherInvitationCode" placeholder />
-          </el-form-item>
+
           <el-form-item label="注册时间" prop="registerTime">
             <el-date-picker
               clearable
