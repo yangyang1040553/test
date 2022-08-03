@@ -79,6 +79,7 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="名称" align="center" prop="name" />
       <el-table-column label="配置文件" align="center" prop="json">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
@@ -126,6 +127,9 @@
       v-loading="loading"
     >
       <el-form ref="form" :model="form" :rules="rules" class="form" label-width="100px">
+        <el-form-item label="文件名称" prop="name">
+          <el-input v-model="form.name" type="text" placeholder="请输入名称" />
+        </el-form-item>
         <el-form-item label="存储桶列表" prop="upOssList">
           <!-- <el-input placeholder="请输入存储桶列表" /> -->
           <!-- <el-select v-model="form.upOssList" style="width:500px;" placeholder="请选择存储桶" clearable></el-select> -->
@@ -133,7 +137,7 @@
           <el-select
             v-model="selecOssList"
             multiple
-            style="width:500px;"
+            style="width:860px;"
             placeholder="请选存储桶"
             @change="onOssSelect"
           >
@@ -159,7 +163,7 @@
           <el-select
             v-model="selectDomain"
             multiple
-            style="width:500px;"
+            style="width:860px;"
             placeholder="请选域名"
             @change="onDomainSelect"
           >
@@ -246,6 +250,9 @@ export default {
         ],
         createTime: [
           { required: true, message: "创建时间不能为空", trigger: "blur" }
+        ],
+        name: [
+          { required: true, message: "名称不能为空", trigger: "blur" }
         ]
       },
       hasJsonFlag: true,
@@ -452,7 +459,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .form {
-  height: 60vh;
+  height: 70vh;
 
   .editor,
   .jsoneditor-vue {
