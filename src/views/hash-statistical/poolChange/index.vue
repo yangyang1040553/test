@@ -25,11 +25,11 @@
           value-format="yyyy-MM-dd"
           placeholder="请选择创建时间"
         ></el-date-picker>
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item> -->
+      </el-form-item>-->
     </el-form>
 
     <el-row :gutter="10" class="mb8">
@@ -64,7 +64,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-statistical:poolChange:remove']"
         >删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -118,7 +118,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 1000,
         usdtAmount: null,
         trxAmount: null,
         createTime: null
@@ -132,6 +132,7 @@ export default {
   },
   created() {
     this.getList();
+
   },
   methods: {
     initLineChart(labels, trxList, usdtList) {
@@ -207,10 +208,10 @@ export default {
             // markLine: {
             //   data: [{ type: 'average', name: 'Avg' }]
             // },
-            label: {
-              show: true,
-              position: 'top'
-            },
+            // label: {
+            //   show: true,
+            //   position: 'top'
+            // },
           },
 
           {
@@ -220,10 +221,10 @@ export default {
             // markLine: {
             //   data: [{ type: 'average', name: 'Avg' }]
             // },
-            label: {
-              show: true,
-              position: 'top'
-            },
+            // label: {
+            //   show: true,
+            //   position: 'top'
+            // },
           },
         ]
       };
@@ -238,12 +239,18 @@ export default {
         this.total = response.total;
         this.loading = false;
 
+
+        // this.poolChangeList = this.poolChangeList.concat(this.poolChangeList)
+        // this.poolChangeList = this.poolChangeList.concat(this.poolChangeList)
+        // this.poolChangeList = this.poolChangeList.concat(this.poolChangeList)
+
         var labels = []
         var trxList = []
         var usdtList = []
         if (this.poolChangeList) {
           this.poolChangeList.forEach(element => {
-            labels.push(element.createTime)
+            // labels.push(element.createTime)
+            // labels.push("")
             trxList.push(element.trxAmount)
             usdtList.push(element.usdtAmount)
           });
