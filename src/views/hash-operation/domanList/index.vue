@@ -101,6 +101,7 @@
       height="600px"
       :data="domanListList"
       @selection-change="handleSelectionChange"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />

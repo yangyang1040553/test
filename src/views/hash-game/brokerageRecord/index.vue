@@ -119,6 +119,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       :default-sort="{ prop: 'create_time', order: 'descending' }"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一ID" align="center" prop="id"  width="180"/>

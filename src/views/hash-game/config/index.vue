@@ -149,6 +149,7 @@
       height="600"
       @sort-change="sortChange"
       :row-class-name="tableRowClassName"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="配置ID" align="center" prop="id" />

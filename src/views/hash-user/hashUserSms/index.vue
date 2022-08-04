@@ -76,6 +76,7 @@
       @selection-change="handleSelectionChange"
       height="600"
       :row-class-name="tableRowClassName"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="玩家ID" align="center" prop="userId" /> -->

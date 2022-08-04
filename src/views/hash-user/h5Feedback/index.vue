@@ -102,6 +102,7 @@
       :data="h5FeedbackList"
       @sort-change="sortChange"
       @selection-change="handleSelectionChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="唯一ID" align="center" prop="id" />

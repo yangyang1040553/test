@@ -92,6 +92,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       height="600"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="日期" align="center" prop="id" width="180" sortable>

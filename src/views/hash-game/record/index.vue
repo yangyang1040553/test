@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <!-- <el-form-item label="游戏ID" prop="gameId">
         <el-input
           v-model="queryParams.gameId"
@@ -188,11 +182,29 @@
       :data="recordList"
       @sort-change="sortChange"
       height="600"
+      border
       :default-sort="{ prop: 'create_time', order: 'descending' }"
       @selection-change="handleSelectionChange"
     >
+      <el-table-column label="下注时间" align="center" prop="createTime" sortable width="180" />
+      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" />
+      <el-table-column label="下注结果" align="center" prop="betResult">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
+        </template>
+      </el-table-column>
+      <el-table-column label="到账结果" align="center" prop="rewardStatus" width="120">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.reward_status" :value="scope.row.rewardStatus" />
+        </template>
+      </el-table-column>
+      <el-table-column label="赢家" align="center" prop="winner">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.winner" :value="scope.row.winner" />
+        </template>
+      </el-table-column>
+      <el-table-column label="游戏汇总" align="center" prop="gameCollect" />
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="账单ID" align="center" prop="id" width="200" />
       <!-- <el-table-column label="配置ID" align="center" prop="configId" /> -->
       <el-table-column label="游戏" align="center" prop="gameId">
         <template slot-scope="scope">
@@ -212,6 +224,8 @@
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
       <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="赔率" align="center" prop="odds" />
+      <el-table-column label="账单ID" align="center" prop="id" width="200" />
+
       <el-table-column label="投注类型" align="center" prop="betWalletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.betWalletType" />
@@ -267,24 +281,8 @@
         </template>
       </el-table-column>
       <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
-      <el-table-column label="下注时间" align="center" prop="createTime" sortable width="180" />
-      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" />
-      <el-table-column label="下注结果" align="center" prop="betResult">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
-        </template>
-      </el-table-column>
-      <el-table-column label="到账结果" align="center" prop="rewardStatus" width="120">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.reward_status" :value="scope.row.rewardStatus" />
-        </template>
-      </el-table-column>
-      <el-table-column label="赢家" align="center" prop="winner">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.winner" :value="scope.row.winner" />
-        </template>
-      </el-table-column>
-      <el-table-column label="游戏汇总" align="center" prop="gameCollect" />
+
+
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"

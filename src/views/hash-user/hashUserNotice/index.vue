@@ -104,6 +104,7 @@
       height="600"
       :row-class-name="tableRowClassName"
       @sort-change="sortChange"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />

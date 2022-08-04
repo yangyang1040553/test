@@ -351,6 +351,7 @@
             :data="HashUserServiceList"
             height="420"
             ref="multipleTable"
+            border
           >
             <el-table-column label="用户名" align="center" prop="account" />
             <el-table-column label="平台" align="center" prop="platform" width="100" />

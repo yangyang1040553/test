@@ -75,6 +75,7 @@
       @sort-change="sortChange"
       :data="everyDayList"
       @selection-change="handleSelectionChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="日期" align="center" prop="id" width="180" sortable>

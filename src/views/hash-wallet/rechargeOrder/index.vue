@@ -140,11 +140,23 @@
       height="600"
       :row-class-name="tableRowClassName"
       @sort-change="sortChange"
+      border
     >
+      <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.createTime }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="到账时间" align="center" prop="updateTime" width="160" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.updateTime }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
+      <el-table-column label="实际交易金额" align="center" prop="payAmount" width="140" sortable />
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单ID" align="center" prop="id" width="130" />
-      <el-table-column label="交易号" align="center" prop="transactionNo" width="130" />
-      <el-table-column label="玩家ID" align="center" prop="userId" width="130">
+      <el-table-column label="充值方式" align="center" prop="pay_type" />
+      <el-table-column label="玩家ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -159,6 +171,11 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
         </template>
       </el-table-column>
+        <el-table-column label="充值状态" align="center" prop="status">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.recharge_status" :value="scope.row.status" />
+        </template>
+      </el-table-column>
       <el-table-column label="付款地址" align="center" prop="paymentAddress" width="200">
         <template slot-scope="scope">
           <div class="global-text-blue">{{scope.row.paymentAddress}}</div>
@@ -169,33 +186,19 @@
           <div class="global-text-green">{{scope.row.collectionAddress}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
-      <el-table-column label="实际交易金额" align="center" prop="payAmount" width="140" sortable />
+
       <el-table-column label="矿工费" align="center" prop="minerAmount" />
-      <el-table-column label="充值方式" align="center" prop="pay_type" />
-      <el-table-column label="转换比例" align="center" prop="scale"/>
+      <el-table-column label="转换比例" align="center" prop="scale" />
       <el-table-column label="原始金额" align="center" prop="source_amount" />
-      <el-table-column label="充值状态" align="center" prop="status">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.recharge_status" :value="scope.row.status" />
-        </template>
-      </el-table-column>
+
       <el-table-column label="是否首冲" align="center" prop="frist_recharge">
         <template slot-scope="scope">
           <div>{{scope.row.frist_recharge?"是":"否"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="说明" align="center" prop="note" />
-      <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
-        <template slot-scope="scope">
-          <span>{{ scope.row.createTime }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="到账时间" align="center" prop="updateTime" width="160" sortable>
-        <template slot-scope="scope">
-          <span>{{ scope.row.updateTime }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column label="订单ID" align="center" prop="id" width="130" />
+      <el-table-column label="交易号" align="center" prop="transactionNo" width="130" />
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button

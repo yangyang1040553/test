@@ -76,6 +76,7 @@
       :data="dkFileList"
       @sort-change="sortChange"
       @selection-change="handleSelectionChange"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />

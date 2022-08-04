@@ -140,10 +140,13 @@
       :data="smallOrderList"
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单ID" align="center" prop="id" width="210" />
       <!-- <el-table-column label="用户ID" align="center" prop="userId" /> -->
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable></el-table-column>
+      <el-table-column label="支付时间" align="center" prop="payTime" width="180" sortable></el-table-column>
+      <el-table-column label="失效时间" align="center" prop="invalidTime" width="180" sortable></el-table-column>
       <el-table-column label="用户ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
           <div
@@ -165,7 +168,7 @@
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.toWallet" />
         </template>
       </el-table-column>
-      <el-table-column label="转换状态" align="center" prop="transStatus">
+      <el-table-column label="转换状态" align="center" prop="transStatus" width="100">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus" />
         </template>
@@ -186,8 +189,7 @@
       <el-table-column label="支付类型" align="center" prop="payTypeNo" />
       <el-table-column label="通道编码" align="center" prop="channelCode" />
       <!-- <el-table-column label="渠道编码" align="center" prop="channelNo" /> -->
-      <el-table-column label="支付时间" align="center" prop="payTime" width="180" sortable></el-table-column>
-      <el-table-column label="失效时间" align="center" prop="invalidTime" width="180" sortable></el-table-column>
+
       <el-table-column label="三方支付" align="center" prop="thirdOrderNo" />
       <el-table-column label="备注" align="center" prop="remark" />
       <!-- <el-table-column label="支付跳转地址" align="center" prop="payUrl" /> -->
@@ -195,7 +197,8 @@
       <el-table-column label="回调报文" align="center" prop="callbackMessage" />
       <!-- <el-table-column label="注册渠道" align="center" prop="regChannel" /> -->
       <!-- <el-table-column label="操作人" align="center" prop="updateUser" /> -->
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable></el-table-column>
+      <el-table-column label="订单ID" align="center" prop="id" width="210" />
+
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button

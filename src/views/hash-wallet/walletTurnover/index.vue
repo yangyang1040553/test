@@ -112,6 +112,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       height="580"
+      border
     >
       <el-table-column label="账单ID" align="center" prop="id" width="200" />
       <el-table-column label="玩家ID" align="center" prop="userId" width="180">

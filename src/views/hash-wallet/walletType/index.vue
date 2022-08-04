@@ -121,7 +121,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table height="580"  v-loading="loading" :data="walletTypeList" @selection-change="handleSelectionChange">
+    <el-table height="580" border  v-loading="loading" :data="walletTypeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="支付列别名称" align="center" prop="name" />

@@ -149,6 +149,7 @@
       :data="walletMerchantList"
       @selection-change="handleSelectionChange"
       height="580"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />

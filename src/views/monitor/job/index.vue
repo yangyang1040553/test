@@ -91,7 +91,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="jobList" @selection-change="handleSelectionChange">
+    <el-table  border v-loading="loading" :data="jobList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column :label="$t('mission_number')" width="100" align="center" prop="jobId" />
       <el-table-column :label="$t('mission_name')" align="center" prop="jobName" :show-overflow-tooltip="true" />

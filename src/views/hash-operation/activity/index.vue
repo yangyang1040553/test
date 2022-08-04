@@ -86,6 +86,7 @@
       :data="activityList"
       :row-class-name="tableRowClassName"
       @selection-change="handleSelectionChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="活动类型" align="center" prop="id">

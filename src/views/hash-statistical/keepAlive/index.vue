@@ -84,6 +84,7 @@
       @selection-change="handleSelectionChange"
       height="600px"
       @sort-change="sortChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable>

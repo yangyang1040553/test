@@ -107,6 +107,7 @@
       v-loading="loading"
       :data="groupList"
       @selection-change="handleSelectionChange"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="群组ID" align="center" prop="groupId" sortable/>

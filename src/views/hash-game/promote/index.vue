@@ -75,6 +75,7 @@
       :data="promoteList"
       @selection-change="handleSelectionChange"
       height="600"
+      border
     >
       <!-- <el-table-column label="玩家ID" align="center" prop="id" width="200" /> -->
       <el-table-column label="玩家ID" align="center" prop="id" width="200">

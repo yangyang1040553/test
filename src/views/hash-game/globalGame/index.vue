@@ -60,7 +60,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="globalGameList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="globalGameList" @selection-change="handleSelectionChange" border>
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <!-- <el-table-column label="唯一ID" align="center" prop="id" /> -->
       <el-table-column label="USDT池金额" align="center" prop="usdtPoolAmount" />

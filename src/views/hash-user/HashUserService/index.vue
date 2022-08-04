@@ -138,7 +138,9 @@
       :data="HashUserServiceList"
       @selection-change="handleSelectionChange"
       height="600"
+      border
       :row-class-name="tableRowClassName"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户ID" align="center" prop="id" /> -->
@@ -147,31 +149,10 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="用户备注" align="center" prop="noteName" width="120">
-        <template slot-scope="scope">
-          <div>{{scope.row.noteName||"-"}}</div>
-        </template>
-      </el-table-column>
+
 
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
-      <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
-        <template slot-scope="scope">
-          <div>{{scope.row.areaCode||"-"}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column label="手机号" align="center" prop="phone" sortable width="120">
-        <template slot-scope="scope">
-          <div>{{scope.row.phone||"-"}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column label="用户名" align="center" prop="account" width="120" />
-      <!-- <el-table-column label="密码" align="center" prop="password" /> -->
-      <el-table-column label="设备码" align="center" prop="deviceCode">
-        <template slot-scope="scope">
-          <div>{{scope.row.deviceCode||"-"}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column label="平台" align="center" prop="platform" width="100" />
+
       <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
         <!-- <template slot-scope="scope">
           <span
@@ -214,6 +195,29 @@
       <el-table-column label="注册IP" align="center" prop="registerIp" />
       <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
       <el-table-column label="登录IP" align="center" prop="loginIp" />
+      <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
+        <template slot-scope="scope">
+          <div>{{scope.row.areaCode||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="手机号" align="center" prop="phone" sortable width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.phone||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="用户名" align="center" prop="account" width="120" />
+      <!-- <el-table-column label="密码" align="center" prop="password" /> -->
+      <el-table-column label="设备码" align="center" prop="deviceCode">
+        <template slot-scope="scope">
+          <div>{{scope.row.deviceCode||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="平台" align="center" prop="platform" width="100" />
+         <el-table-column label="用户备注" align="center" prop="noteName" width="120">
+        <template slot-scope="scope">
+          <div>{{scope.row.noteName||"-"}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
         <template slot-scope="scope">
           <div>{{scope.row.tgId||"-"}}</div>
@@ -277,10 +281,10 @@
         </el-form-item>
         <!-- <el-form-item label="用户名" prop="account">
           <el-input v-model="form.account" placeholder="请输入用户名" />
-        </el-form-item> -->
+        </el-form-item>-->
         <!-- <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
-        </el-form-item> -->
+        </el-form-item>-->
         <!-- <el-form-item label="设备码" prop="deviceCode">
           <el-input v-model="form.deviceCode" placeholder="请输入设备码" />
         </el-form-item>-->
@@ -289,7 +293,7 @@
         </el-form-item>-->
         <!-- <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="用户备注" prop="noteName">
           <el-input v-model="form.noteName" placeholder="请输入用户备注" />
         </el-form-item>

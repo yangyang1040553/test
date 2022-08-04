@@ -138,6 +138,7 @@
       v-loading="loading"
       :data="statisticalUserDayList"
       @selection-change="handleSelectionChange"
+      border
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="玩家ID" align="center" prop="userId">

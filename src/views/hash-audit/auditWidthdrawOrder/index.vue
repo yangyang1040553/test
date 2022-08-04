@@ -173,6 +173,7 @@
       @selection-change="handleSelectionChange"
       height="600"
       @sort-change="sortChange"
+      border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="订单ID" align="center" prop="id" />

@@ -107,6 +107,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       height="600"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
@@ -303,10 +304,10 @@ export default {
         ],
         minerScala: [
           { required: true, message: "矿工费比例不能为空", trigger: "blur" }
-        ], 
+        ],
         usdt_free_check: [
           { required: true, message: "USDT免审核金额不能为空", trigger: "blur" }
-        ], 
+        ],
         trx_free_check: [
           { required: true, message: "TRX免审核金额不能为空", trigger: "blur" }
         ],

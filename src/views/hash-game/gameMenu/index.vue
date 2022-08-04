@@ -89,6 +89,7 @@
       @selection-change="handleSelectionChange"
       :row-class-name="tableRowClassName"
       height="600"
+      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="唯一ID" align="center" prop="id" />

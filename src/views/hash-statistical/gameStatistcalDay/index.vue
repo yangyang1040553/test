@@ -51,6 +51,7 @@
       @selection-change="handleSelectionChange"
       height="600"
       @sort-change="sortChange"
+      border
     >
       <el-table-column label="日期" align="center" prop="time" sortable />
       <el-table-column label="游戏ID" align="center" prop="gameId" />
