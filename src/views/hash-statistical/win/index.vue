@@ -17,7 +17,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="日期">
+      <el-form-item label="日期" prop="id">
         <el-date-picker
           v-model="queryParams.id"
           style="width: 240px"
