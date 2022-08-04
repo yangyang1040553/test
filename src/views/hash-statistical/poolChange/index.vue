@@ -117,8 +117,6 @@ export default {
       lineChart: null,
       // 查询参数
       queryParams: {
-        pageNum: 1,
-        pageSize: 1000,
         usdtAmount: null,
         trxAmount: null,
         createTime: null
