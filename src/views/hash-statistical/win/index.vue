@@ -19,13 +19,11 @@
       </el-form-item>
       <el-form-item label="日期">
         <el-date-picker
-          v-model="daterangeId"
+          v-model="queryParams.id"
           style="width: 240px"
+          placeholder="请选择时间"
           value-format="yyyy-MM-dd"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+          type="date"
         ></el-date-picker>
       </el-form-item>
 
