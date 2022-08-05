@@ -140,7 +140,6 @@
       height="600"
       border
       :row-class-name="tableRowClassName"
-      border
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户ID" align="center" prop="id" /> -->

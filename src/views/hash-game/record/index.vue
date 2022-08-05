@@ -146,25 +146,6 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-row :gutter="10" class="mb8">
-      <!-- <el-col :span="1.5">
-        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
-          v-hasPermi="['hash-game:record:add']">新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
-          v-hasPermi="['hash-game:record:edit']">修改</el-button>
-      </el-col>-->
-      <!-- <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['hash-game:record:remove']">
-          删除
-        </el-button>
-      </el-col>-->
-      <el-col :span="1.5">
         <el-button
           type="warning"
           plain
@@ -173,9 +154,12 @@
           @click="handleExport"
           v-hasPermi="['hash-game:record:export']"
         >导出</el-button>
-      </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
-    </el-row>
+        <!-- <el-row :gutter="8" class="mb8"> -->
+        <!-- <el-col :span="1.5"></el-col> -->
+        <!-- <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar> -->
+        <!-- </el-row> -->
+      </el-form-item>
+    </el-form>
 
     <el-table
       v-loading="loading"
@@ -186,8 +170,15 @@
       :default-sort="{ prop: 'create_time', order: 'descending' }"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column label="下注时间" align="center" prop="createTime" sortable width="180" />
-      <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" />
+      <el-table-column label="下注时间/开奖时间" align="center" prop="createTime" sortable width="200">
+        <template slot-scope="scope">
+          <div>
+            <div>下注:{{scope.row.createTime||"-"}}</div>
+            <div>开奖:{{scope.row.finishTime||"-"}}</div>
+          </div>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="开奖时间" align="center" prop="finishTime" sortable width="180" /> -->
       <el-table-column label="下注结果" align="center" prop="betResult">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.bet_result" :value="scope.row.betResult" />
@@ -281,7 +272,6 @@
         </template>
       </el-table-column>
       <el-table-column label="hash值" align="center" prop="hashValue" width="300" />
-
 
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">

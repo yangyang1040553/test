@@ -185,8 +185,16 @@
       :row-class-name="tableRowClassName"
       border
     >
-      <el-table-column label="创建时间" align="center" prop="createTime" sortable width="180" />
-      <el-table-column label="更新时间" align="center" prop="updateTime" sortable width="180" />
+    <el-table-column label="申请时间/审核时间" align="center" prop="createTime" sortable width="200">
+        <template slot-scope="scope">
+          <div>
+            <div>申请:{{scope.row.createTime||"-"}}</div>
+            <div>审核:{{scope.row.updateTime||"-"}}</div>
+          </div>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="创建时间" align="center" prop="createTime" sortable width="180" /> -->
+      <!-- <el-table-column label="更新时间" align="center" prop="updateTime" sortable width="180" /> -->
       <el-table-column label="审核人" align="center" prop="checkPerson" />
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
 

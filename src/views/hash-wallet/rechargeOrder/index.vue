@@ -142,7 +142,15 @@
       @sort-change="sortChange"
       border
     >
-      <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
+     <el-table-column label="充值时间/到账时间" align="center" prop="createTime" sortable width="200">
+        <template slot-scope="scope">
+          <div>
+            <div>充值:{{scope.row.createTime||"-"}}</div>
+            <div>到账:{{scope.row.updateTime||"-"}}</div>
+          </div>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="充值时间" align="center" prop="createTime" width="160" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime }}</span>
         </template>
@@ -151,7 +159,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.updateTime }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="充值金额" align="center" prop="amount" width="120" sortable />
       <el-table-column label="实际交易金额" align="center" prop="payAmount" width="140" sortable />
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
