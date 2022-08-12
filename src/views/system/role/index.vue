@@ -94,6 +94,9 @@
         <el-form-item :label="$t('role_name')" prop="roleName">
           <el-input v-model="form.roleName" :placeholder="$t('type_role_name')" />
         </el-form-item>
+         <el-form-item label="最大金额上限" prop="max_money">
+          <el-input v-model="form.max_money" placeholder="请输入角色最大人工出入款" />
+        </el-form-item>
         <el-form-item prop="roleKey">
           <span slot="label">
             <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
@@ -260,6 +263,9 @@ export default {
       rules: {
         roleName: [
           { required: true, message: "角色名称不能为空", trigger: "blur" }
+        ],
+         max_money: [
+          { required: true, message: "最大人工出入款上限不得为空", trigger: "blur" }
         ],
         roleKey: [
           { required: true, message: "权限字符不能为空", trigger: "blur" }
