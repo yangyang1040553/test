@@ -50,6 +50,7 @@
       <el-table-column :label="$t('ID')" prop="roleId" width="120" />
       <el-table-column :label="$t('role_name')" prop="roleName" :show-overflow-tooltip="true" />
       <el-table-column :label="$t('permission_character')" prop="roleKey" :show-overflow-tooltip="true" />
+      <el-table-column label="最大人工出入款" prop="max_money"/>
       <el-table-column :label="$t('display_order')" prop="roleSort" />
       <el-table-column :label="$t('status')" align="center">
         <template slot-scope="scope">
