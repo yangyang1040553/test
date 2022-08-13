@@ -410,7 +410,9 @@ export default {
         registerIp: null,
         fatherInvitationCode: null,
         tgId: null,
-        tgAccount: null
+        tgAccount: null,
+        loginTime: null,
+        registerTime: null,
       },
       // 表单参数
       form: {},
