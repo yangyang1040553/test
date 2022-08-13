@@ -67,6 +67,24 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="注册时间" prop="registerTime">
+        <el-date-picker
+          clearable
+          v-model="queryParams.registerTime"
+          type="date"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          placeholder="请选择注册时间"
+        ></el-date-picker>
+      </el-form-item>
+       <el-form-item label="登录时间" prop="loginTime">
+        <el-date-picker
+          clearable
+          v-model="queryParams.loginTime"
+          type="date"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          placeholder="请选择登录时间"
+        ></el-date-picker>
+      </el-form-item>
       <!-- <el-form-item label="飞机ID" prop="tgId">
         <el-input
           v-model="queryParams.tgId"
@@ -188,8 +206,8 @@
       <el-table-column label="注册|绑定|登录" align="left" prop="bindTime" width="200" sortable>
         <template slot-scope="scope">
           <div>注册:{{scope.row.registerTime||"-"}}</div>
-          <div>登录:{{scope.row.bindTime||"-"}}</div>
-          <div>绑定:{{scope.row.loginTime||"-"}}</div>
+          <div>绑定:{{scope.row.bindTime||"-"}}</div>
+          <div>登录:{{scope.row.loginTime||"-"}}</div>
         </template>
       </el-table-column>
       <el-table-column label="注册|登录IP" align="left" prop="registerIp" width="160">
@@ -199,7 +217,7 @@
         </template>
       </el-table-column>
       <el-table-column label="登录地址" align="center" prop="login_addr" width="100">
-         <template slot-scope="scope">
+        <template slot-scope="scope">
           <div>{{scope.row.login_addr||"-"}}</div>
         </template>
       </el-table-column>
@@ -216,7 +234,7 @@
       </el-table-column>
       <el-table-column label="用户名" align="center" prop="account" width="100" />
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
-      <el-table-column label="设备码/平台" align="center" prop="deviceCode"   width="160">
+      <el-table-column label="设备码/平台" align="center" prop="deviceCode" width="160">
         <template slot-scope="scope">
           <div>{{scope.row.deviceCode||"-"}}/{{scope.row.platform||"-"}}</div>
         </template>
