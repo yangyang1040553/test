@@ -143,22 +143,21 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="用户ID" align="center" prop="id" /> -->
-      <el-table-column label="用户ID" align="center" prop="id" width="160">
+      <el-table-column label="用户ID" align="center" prop="id" width="100">
         <template slot-scope="scope">
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
 
-
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
 
-      <el-table-column label="用户昵称" align="center" prop="nickName" width="100">
-        <!-- <template slot-scope="scope">
-          <span
-            class="global-text-blue"
-            @click="goToUserFeedBack(scope.row)"
-          >{{ scope.row.nickName }}</span>
-        </template>-->
+      <el-table-column label="用户昵称" align="center" prop="nickName" width="120">
+        <template slot-scope="scope">
+          <div>
+            <div>{{scope.row.nickName}}</div>
+            <div>{{scope.row.noteName}}</div>
+          </div>
+        </template>
       </el-table-column>
       <!-- <el-table-column label="头像" align="center" prop="head" width="300" /> -->
       <el-table-column label="用户状态" align="center" prop="status">
@@ -176,7 +175,7 @@
           <div>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="100">
+      <el-table-column label="上级邀请码" align="center" prop="fatherInvitationCode" width="90">
         <template slot-scope="scope">
           <div
             v-if="queryParams.fatherInvitationCode==scope.row.fatherInvitationCode"
@@ -185,38 +184,44 @@
           <div v-else>{{scope.row.fatherInvitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column>
-      <el-table-column label="账户绑定时间" align="center" prop="bindTime" width="180" sortable>
+      <!-- <el-table-column label="注册时间" align="center" prop="registerTime" width="180" sortable></el-table-column> -->
+      <el-table-column label="注册|绑定|登录" align="left" prop="bindTime" width="200" sortable>
         <template slot-scope="scope">
-          <div>{{scope.row.bindTime||"-"}}</div>
+          <div>注册:{{scope.row.registerTime||"-"}}</div>
+          <div>登录:{{scope.row.bindTime||"-"}}</div>
+          <div>绑定:{{scope.row.loginTime||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="注册IP" align="center" prop="registerIp" />
-      <el-table-column label="登录时间" align="center" prop="loginTime" width="180" sortable></el-table-column>
-      <el-table-column label="登录IP" align="center" prop="loginIp" />
-      <el-table-column label="手机区号" align="center" prop="areaCode" sortable width="100">
+      <el-table-column label="注册|登录IP" align="left" prop="registerIp" width="160">
+        <template slot-scope="scope">
+          <div>注册:{{scope.row.registerIp||"-"}}</div>
+          <div>登录:{{scope.row.loginIp||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="登录地址" align="center" prop="login_addr" width="100">
+         <template slot-scope="scope">
+          <div>{{scope.row.login_addr||"-"}}</div>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="登录IP" align="center" prop="loginIp" /> -->
+      <el-table-column label="区号" align="center" prop="areaCode" sortable width="80">
         <template slot-scope="scope">
           <div>{{scope.row.areaCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="手机号" align="center" prop="phone" sortable width="120">
+      <el-table-column label="手机" align="center" prop="phone" sortable width="120">
         <template slot-scope="scope">
           <div>{{scope.row.phone||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="用户名" align="center" prop="account" width="120" />
+      <el-table-column label="用户名" align="center" prop="account" width="100" />
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
-      <el-table-column label="设备码" align="center" prop="deviceCode">
+      <el-table-column label="设备码/平台" align="center" prop="deviceCode"   width="160">
         <template slot-scope="scope">
-          <div>{{scope.row.deviceCode||"-"}}</div>
+          <div>{{scope.row.deviceCode||"-"}}/{{scope.row.platform||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="平台" align="center" prop="platform" width="100" />
-         <el-table-column label="用户备注" align="center" prop="noteName" width="120">
-        <template slot-scope="scope">
-          <div>{{scope.row.noteName||"-"}}</div>
-        </template>
-      </el-table-column>
+      <!-- <el-table-column label="平台" align="center" prop="platform" width="100" /> -->
       <!-- <el-table-column label="飞机ID" align="center" prop="tgId" width="120">
         <template slot-scope="scope">
           <div>{{scope.row.tgId||"-"}}</div>
