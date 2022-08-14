@@ -103,7 +103,7 @@
           @click="handleDelete"
           v-hasPermi="['hash-statistical:gameWin:remove']"
         >删除</el-button>
-      </el-col> -->
+      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -117,15 +117,32 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" height="580" :data="gameWinList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      height="580"
+      :data="gameWinList"
+      @selection-change="handleSelectionChange"
+    >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="时间" align="center" prop="id" />
       <el-table-column label="今日usdt押注金额" align="center" prop="usdtBetAmount" />
       <el-table-column label="今日usdt中奖金额" align="center" prop="usdtAwardAmount" />
-      <el-table-column label="今日usdt输赢金额" align="center" prop="usdtWinAmount" />
+      <el-table-column label="今日usdt输赢金额" align="center" prop="usdtWinAmount">
+        <template slot-scope="scope">
+          <div
+            v-if="scope.row.usdtWinAmount>0?'global-text-green':'global-text-red'"
+          >{{scope.row.usdtWinAmount}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="今日trx押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="今日trx中奖金额" align="center" prop="trxAwardAmount" />
-      <el-table-column label="今日trx输赢金额" align="center" prop="trxWinAmount" />
+      <el-table-column label="今日trx输赢金额" align="center" prop="trxWinAmount">
+        <template slot-scope="scope">
+          <div
+            v-if="scope.row.trxWinAmount>0?'global-text-green':'global-text-red'"
+          >{{scope.row.trxWinAmount}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -143,7 +160,7 @@
             v-hasPermi="['hash-statistical:gameWin:remove']"
           >删除</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>-->
     </el-table>
 
     <pagination
