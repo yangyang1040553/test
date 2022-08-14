@@ -399,8 +399,11 @@ export default {
         roleName: [
           { required: true, message: "角色名称不能为空", trigger: "blur" }
         ],
-        max_money: [
-          { required: true, message: "最大人工出入款上限不得为空", trigger: "blur" }
+        trx_max_money: [
+          { required: true, message: "最大人工TRX出入款上限不得为空", trigger: "blur" }
+        ],
+         usdt_max_money: [
+          { required: true, message: "最大人工USDT出入款上限不得为空", trigger: "blur" }
         ],
         roleKey: [
           { required: true, message: "权限字符不能为空", trigger: "blur" }
