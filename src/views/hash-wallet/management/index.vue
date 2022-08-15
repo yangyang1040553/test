@@ -110,6 +110,7 @@
       @selection-change="handleSelectionChange"
       height="600"
       border
+      @sort-change="sortChange"
     >
       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="ID" align="center" prop="id" /> -->
@@ -344,7 +345,9 @@ export default {
         hashTransAddressTrx: null,
         rechargeTotal: null,
         withdrawTotal: null,
-        invitationCode: null
+        invitationCode: null,
+        orderByColumn: null,
+        isAsc: 'asc',
       },
       // 表单参数
       form: {},
@@ -366,6 +369,17 @@ export default {
     this.getList();
   },
   methods: {
+    sortChange(val) {
+      console.log(val)
+      if (val.order && val.order == 'descending') {
+        this.queryParams.isAsc = 'desc'
+      } else {
+        this.queryParams.isAsc = 'asc'
+      }
+      this.queryParams.orderByColumn = val.prop && val.prop
+      console.log(this.queryParams)
+      this.getList()
+    },
     handleOpenEdit(row) {
       this.reset();
       this.openEdit = true;
@@ -401,6 +415,8 @@ export default {
         withdrawTotal: null,
         invitationCode: null,
         googleCode: null,
+        orderByColumn: 'createTime',
+        isAsc: 'asc',
       };
       this.resetForm("form");
       this.resetForm("editForm");
