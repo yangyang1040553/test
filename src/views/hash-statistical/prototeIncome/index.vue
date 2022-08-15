@@ -22,7 +22,7 @@
           v-model="queryParams.userId"
           placeholder="请输入用户ID"
           clearable
-              oninput="value=value.replace(/[^\d\.]/g,'')"
+          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -95,7 +95,7 @@
       border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="日期" align="center" prop="id" width="180" sortable>
+      <el-table-column label="日期" align="center" prop="id" width="120" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
@@ -108,7 +108,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="邀请码" align="center" prop="invitationCode">
+      <el-table-column label="邀请码" align="center" prop="invitationCode" width="90">
         <template slot-scope="scope">
           <div
             v-if="queryParams.invitationCode==scope.row.invitationCode"
@@ -117,8 +117,38 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT收益金额" align="center" prop="usdtIncomeAmount" sortable />
-      <el-table-column label="TRX收益金额" align="center" prop="trxIncomeAmount" sortable />
+      <el-table-column label="USDT收益金额" align="center" prop="usdtIncomeAmount" sortable  width="140" />
+      <el-table-column label="USDT一级代理收益金额" align="center" prop="usdt_income1_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_income1_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT二级代理收益金额" align="center" prop="usdt_income2_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_income2_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT三级代理收益金额" align="center" prop="usdt_income3_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_income3_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX收益金额" align="center" prop="trxIncomeAmount" sortable width="160"/>
+      <el-table-column label="TRX一级代理收益金额" align="center" prop="trx_income1_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.trx_income1_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX二级代理收益金额" align="center" prop="trx_income2_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.trx_income2_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX三级代理收益金额" align="center" prop="trx_income3_amount" sortable width="190">
+        <template slot-scope="scope">
+          <div>{{scope.row.trx_income3_amount||"-"}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
