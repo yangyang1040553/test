@@ -422,7 +422,7 @@ export default {
       total: 0,
       queryParams: {
         pageNum: 1,
-        pageSize: 30,
+        pageSize: 20,
       },
       queryParams2: {
         pageNum: 1,
@@ -432,7 +432,7 @@ export default {
       },
       queryParams3: {
         pageNum: 1,
-        pageSize: 30,
+        pageSize: 20,
         region: null,
         regCount: null,
         orderByColumn: 'regCount',
