@@ -422,7 +422,7 @@ export default {
       total: 0,
       queryParams: {
         pageNum: 1,
-        pageSize: 20,
+        pageSize: 30,
       },
       queryParams2: {
         pageNum: 1,
