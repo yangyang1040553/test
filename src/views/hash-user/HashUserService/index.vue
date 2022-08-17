@@ -430,7 +430,7 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.ip)
+    //console.log(this.$route.query.ip)
     if (this.$route.query.ip) {
       this.queryParams.registerIp = this.$route.query.ip
     }
@@ -447,7 +447,7 @@ export default {
       return 'red'
     },
     goToTelegram(row) {
-      console.log(row)
+      //console.log(row)
       if (row.tgAccount) {
         window.open(row.tgAccount, '_blank');
       }
@@ -457,14 +457,14 @@ export default {
       this.userId = userId;
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     goToUserFeedBack(row) {

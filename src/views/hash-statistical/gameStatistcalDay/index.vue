@@ -191,7 +191,7 @@ export default {
   },
   watch: {
     tabPosition(news, old) {
-      console.log(news, old)
+      //console.log(news, old)
       this.queryParams.type = news
       this.getList()
     }
@@ -201,14 +201,14 @@ export default {
   },
   methods: {
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     /** 查询游戏配置列表 */

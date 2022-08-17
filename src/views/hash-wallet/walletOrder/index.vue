@@ -362,7 +362,7 @@ export default {
       return 'red'
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {

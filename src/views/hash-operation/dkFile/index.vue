@@ -276,11 +276,11 @@ export default {
       if (str.length > 0) {
         str = str.substring(0, str.length - 1)
       }
-      console.log(str)
+      //console.log(str)
       this.form.upOssList = str
     },
     onDomainSelect() {
-      console.log(this.selectDomain)
+      //console.log(this.selectDomain)
       // if (!this.resultInfo.domains) {
       //   this.resultInfo.domains = []
       // }
@@ -293,16 +293,16 @@ export default {
         }
         arr.push(obj)
       })
-      console.log("arr=" + arr)
+      //console.log("arr=" + arr)
       let domains = arr
       let obj = { ...this.resultInfo }
       obj.domains = domains
       this.resultInfo = JSON.parse(JSON.stringify(obj))
-      console.log(" this.resultInfo=" + this.resultInfo)
+      //console.log(" this.resultInfo=" + this.resultInfo)
       this.form.json = JSON.stringify(this.resultInfo)
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
@@ -312,18 +312,18 @@ export default {
       this.getList()
     },
     onJsonChange(value) {
-      // console.log('更改value:', value);
+      // //console.log('更改value:', value);
       // 实时保存
       this.onJsonSave(value)
     },
     onJsonSave(value) {
-      // console.log('保存value:', value);
+      // //console.log('保存value:', value);
       this.resultInfo = value
       this.form.json = value
       this.hasJsonFlag = true
     },
     onError(value) {
-      // console.log("json错误了value:", value);
+      // //console.log("json错误了value:", value);
       this.hasJsonFlag = false
     },
     /** 查询对抗配置文件列表 */

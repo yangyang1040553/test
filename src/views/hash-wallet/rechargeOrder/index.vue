@@ -360,7 +360,7 @@ export default {
       if (!this.timeRange) {
         this.timeRange = 5000
       }
-      console.log("this.timeRange=", this.timeRange)
+      //console.log("this.timeRange=", this.timeRange)
       this.timer = setInterval(() => {
         vm.getList()
       }, this.timeRange)
@@ -379,14 +379,14 @@ export default {
       this.userId = userId;
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     /** 查询充值列表 */

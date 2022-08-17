@@ -192,13 +192,13 @@ export default {
   props: ["id", "open"],
   mounted() {
     getHashUserService(this.id).then(response => {
-      console.log(response)
+      //console.log(response)
       this.form = response.data
     })
   },
   watch: {
     tabPosition(news, old) {
-      console.log(news, old)
+      //console.log(news, old)
       if (news == 1) { this.handleGame() }
       if (news == 2) { this.handleWallet() }
       if (news == 3) { this.toWallet() }

@@ -13,7 +13,7 @@ export default {
     };
   },
   created() {
-    console.log(window.location)
+    //console.log(window.location)
   }
 };
 </script>

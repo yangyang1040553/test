@@ -501,7 +501,7 @@ export default {
           res.inviteBetAward = json.inviteBetAward
           res.inviteLimit = json.inviteLimit
           this.form = { ... this.form, ...res }
-          console.log(this.form)
+          //console.log(this.form)
         }
 
       });

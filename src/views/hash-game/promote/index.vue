@@ -443,14 +443,14 @@ export default {
       this.userId = userId;
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     /** 查询推广记录列表 */

@@ -84,8 +84,8 @@ export default {
   },
   watch: {
     value(news, old) {
-      // console.log("this.editor==", editor)
-      // console.log("nes==", news)
+      // //console.log("this.editor==", editor)
+      // //console.log("nes==", news)
       this.currValue = news
       editor.setHtml(this.currValue)
     }
@@ -131,19 +131,19 @@ export default {
         // 上传进度的回调函数
         onProgress(progress) {
           // progress 是 0-100 的数字
-          // console.log('progress', progress)
+          // //console.log('progress', progress)
         },
         // 单个文件上传成功之后
         onSuccess(file, res) {
-          // console.log(`${file.name} 上传成功`, res)
+          // //console.log(`${file.name} 上传成功`, res)
         },
         // 单个文件上传失败
         onFailed(file, res) {
-          // console.log(`${file.name} 上传失败`, res)
+          // //console.log(`${file.name} 上传失败`, res)
         },
         // 上传错误，或者触发 timeout 超时
         onError(file, err, res) {
-          // console.log(`${file.name} 上传出错`, err, res)
+          // //console.log(`${file.name} 上传出错`, err, res)
         },
       }
 
@@ -154,8 +154,8 @@ export default {
       editorConfig.placeholder = '请输入内容'
       editorConfig.onChange = (editor) => {
         // 当编辑器选区、内容变化时，即触发
-        // console.log('content---', editor.children)
-        // console.log('html---', editor.getHtml())
+        // //console.log('content---', editor.children)
+        // //console.log('html---', editor.getHtml())
         const html = editor.getHtml();
         const text = editor.getText()
 
@@ -174,7 +174,7 @@ export default {
         html: this.value
       })
 
-      console.log(" this.editor", this.editor)
+      //console.log(" this.editor", this.editor)
 
       // 创建工具栏
       const toolbar = createToolbar({

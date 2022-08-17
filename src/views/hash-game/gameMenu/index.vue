@@ -230,7 +230,7 @@ export default {
       return 'red'
     },
     setImageUrl(param) {
-      console.log("url==", param)
+      //console.log("url==", param)
       if (param.index == 1) {
         this.form.unSelectedAddr = param.url
       } else {

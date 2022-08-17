@@ -370,14 +370,14 @@ export default {
   },
   methods: {
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     handleOpenEdit(row) {
@@ -465,7 +465,7 @@ export default {
       this.$refs["editForm"].validate(valid => {
         if (valid) {
           if (this.editForm.id != null) {
-            console.log(this.editForm)
+            //console.log(this.editForm)
 
             if (!this.editForm.note) {
               this.editForm.note = ""

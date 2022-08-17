@@ -24,7 +24,7 @@ export default {
   props: ["url", "limit", "index"],
   watch: {
     url(news, old) {
-      //   console.log("1111===", news)
+      //   //console.log("1111===", news)
       this.imageUrl = news
     }
   },
@@ -33,9 +33,9 @@ export default {
   },
   methods: {
     upload(param) {
-    //   console.log(param)
+    //   //console.log(param)
       uploadFile(param.file).then(res => {
-        // console.log("rss===", res.url)
+        // //console.log("rss===", res.url)
         this.imageUrl = res.url
         if (this.index) {
           this.$emit("setImageUrl", { url: res.url, index: this.index })

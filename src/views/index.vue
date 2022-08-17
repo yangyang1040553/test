@@ -449,7 +449,7 @@ export default {
     // this.openLoading();
   },
   mounted() {
-    // console.log(window.location)
+    // //console.log(window.location)
     this.$refs.multipleTable.bodyWrapper.scrollTop = 0;
     this.getList();
     this.getLineChart()
@@ -460,14 +460,14 @@ export default {
       this.open = true
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams2.isAsc = 'desc'
       } else {
         this.queryParams2.isAsc = 'asc'
       }
       this.queryParams2.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams2)
+      //console.log(this.queryParams2)
       this.getList()
     },
     getLineChart() {
@@ -563,7 +563,7 @@ export default {
     /** 查缓存询信息 */
     getList() {
       this.loading = true
-      console.log("查缓存询信息")
+      //console.log("查缓存询信息")
 
       listRedisOnLineList(this.queryParams2).then(response => {
         this.HashUserServiceList = response.rows
@@ -598,9 +598,9 @@ export default {
         var data = res.data
         var list = this.dict.type.operation_type
         list.map((el) => {
-          // console.log(el)
+          // //console.log(el)
           data.map((element) => {
-            // console.log(elment)
+            // //console.log(elment)
             if (el.value == element.a_type) {
               if (!el.usdt_amount && element.wallet_type == 'USDT') {
                 el.usdt_amount = element.amount || 0
@@ -612,7 +612,7 @@ export default {
           })
         })
         this.indexActiveData = list
-        console.log(list)
+        //console.log(list)
 
 
       })

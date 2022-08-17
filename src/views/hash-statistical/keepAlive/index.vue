@@ -253,7 +253,7 @@ export default {
   },
   watch: {
     tabPosition(news, old) {
-      console.log(news, old)
+      //console.log(news, old)
       this.tabPosition = news
       this.formartColum()
       this.formatTime()
@@ -267,14 +267,14 @@ export default {
   },
   methods: {
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     formartColum() {
@@ -321,10 +321,10 @@ export default {
         // this.daterangeRegisterTime[0] = year + "-" + month + "-" + (day - 30)
       }
       var cur = year + "-" + month + "-" + (day < 10 ? "0" + day : day)
-      console.log(cur)
+      //console.log(cur)
       this.daterangeRegisterTime[0] = this.getago(cur, cut)
       this.daterangeRegisterTime[1] = cur
-      console.log(this.daterangeRegisterTime)
+      //console.log(this.daterangeRegisterTime)
     },
     /** 查询留存分析列表 */
     getList() {
@@ -335,7 +335,7 @@ export default {
         this.queryParams.params["endRegisterTime"] = this.daterangeRegisterTime[1];
       }
       this.queryParams.type = this.tabPosition
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       listKeepAlive(this.queryParams).then(response => {
         this.keepAliveList = response.rows;
         this.total = response.total;

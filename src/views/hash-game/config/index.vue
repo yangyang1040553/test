@@ -454,14 +454,14 @@ export default {
     },
 
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     /** 查询游戏配置列表 */
@@ -567,7 +567,7 @@ export default {
 
           this.form.betRule = JSON.stringify(obj)
 
-          console.log(this.form)
+          //console.log(this.form)
 
           if (this.form.id != null) {
             updateConfig(this.form).then(response => {

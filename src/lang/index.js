@@ -29,13 +29,13 @@ const i18n = new VueI18n({
 
 export const getKey = (key) => {
   var v = Cookies.get('language') || 'zh'
-  console.log("key==", key)
-  console.log("v==", v)
+  //console.log("key==", key)
+  //console.log("v==", v)
   if (v == 'en') {
-    console.log("enLocale[key]==", messages.en[key])
+    //console.log("enLocale[key]==", messages.en[key])
     return enLocale[key]
   } else {
-    console.log("enLocale[key]==", messages.zh[key])
+    //console.log("enLocale[key]==", messages.zh[key])
     return zhLocale[key]
   }
 }

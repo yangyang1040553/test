@@ -294,14 +294,14 @@ export default {
       this.userId = userId;
     },
     sortChange(val) {
-      console.log(val)
+      //console.log(val)
       if (val.order && val.order == 'descending') {
         this.queryParams.isAsc = 'desc'
       } else {
         this.queryParams.isAsc = 'asc'
       }
       this.queryParams.orderByColumn = val.prop && val.prop
-      console.log(this.queryParams)
+      //console.log(this.queryParams)
       this.getList()
     },
     /** 查询玩家返佣记录列表 */
@@ -373,7 +373,7 @@ export default {
       this.openUser = true;
       this.userId = row.childUserId;
       // getHashUserService(id).then(response => {
-      //   console.log(response)
+      //   //console.log(response)
       //   if (response.data) {
       //     this.form = response.data;
       //     this.open = true;

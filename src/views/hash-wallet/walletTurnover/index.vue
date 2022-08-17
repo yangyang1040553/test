@@ -293,7 +293,7 @@ export default {
   },
   methods: {
     toOrderList(row) {
-      console.log(row)
+      //console.log(row)
       var path = {}
       var query = { orderId: row.linkedOrder }
       //流水类型 1:下注 2:中奖 3:退回 4:佣金提现 5:充值 6:提现 7:转换 8:后台入款 9:后台扣款
@@ -324,7 +324,7 @@ export default {
 
       // else if (row.code == 8) { }
       // else if (row.code == 9) { }
-      console.log(path)
+      //console.log(path)
       if (path) {
         this.$router.push({ path: path, query })
       }
@@ -386,7 +386,7 @@ export default {
       this.queryParams.userId = null
       this.queryParams.createTime = null
       this.queryParams.id = null
-      // console.log(this.queryParams)
+      // //console.log(this.queryParams)
       this.handleQuery(this.queryParams)
     },
     // 多选框选中数据

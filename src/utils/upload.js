@@ -2,7 +2,7 @@ export const uploadFile = (file) => {
     return new Promise((resolve, reject) => {
         async function uploadFile(file) {
 
-            // console.log(file)
+            // //console.log(file)
 
             const OSS = require('ali-oss')
             const path = require("path")
@@ -40,11 +40,11 @@ export const uploadFile = (file) => {
                 // 填写OSS文件完整路径和本地文件的完整路径。OSS文件完整路径中不能包含Bucket名称。
                 // 如果本地文件的完整路径中未指定本地路径，则默认从示例程序所属项目对应本地路径中上传文件。
                 const result = await client.put('images/' + file.name, file);
-                // const result = await client.put('exampleobject.txt', path.normalize('D:\\localpath\\examplefile.txt'), { headers });   
-                // console.log(result);
+                // const result = await client.put('exampleobject.txt', path.normalize('D:\\localpath\\examplefile.txt'), { headers });
+                // //console.log(result);
                 resolve(result)
             } catch (e) {
-                console.log(e);
+                //console.log(e);
                 reject(e)
             }
         }
