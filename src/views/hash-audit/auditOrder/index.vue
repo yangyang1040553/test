@@ -87,7 +87,7 @@
             :value="dict.value"
           />
         </el-select>
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- <el-form-item label="审核人" prop="checkPerson">
         <el-input
           v-model="queryParams.checkPerson"
@@ -244,6 +244,14 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="谷歌验证码" prop="googleCode">
+          <el-input
+            v-model="form.googleCode"
+            type="text"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入谷歌验证码"
+          />
         </el-form-item>
         <el-form-item label="后台备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入后台备注" />
