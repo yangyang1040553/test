@@ -204,7 +204,7 @@
       </el-table-column>
       <!-- <el-table-column label="场次id" align="center" prop="sessionId" /> -->
       <!-- <el-table-column label="玩家ID" align="center" prop="userId" width="200" /> -->
-      <el-table-column label="玩家ID" align="center" prop="userId" width="200">
+      <el-table-column label="玩家ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -215,14 +215,14 @@
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
       <el-table-column label="邀请码" align="center" prop="invitation_code" />
       <el-table-column label="赔率" align="center" prop="odds" />
-      <el-table-column label="账单ID" align="center" prop="id" width="200" />
+      <el-table-column label="账单ID" align="center" prop="id" width="160" />
 
       <el-table-column label="投注类型" align="center" prop="betWalletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.betWalletType" />
         </template>
       </el-table-column>
-      <el-table-column label="投注金额" align="center" prop="betAmount" width="200">
+      <el-table-column label="投注金额" align="center" prop="betAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.betAmount.toFixed(2) }}</div>
         </template>
@@ -237,22 +237,22 @@
           <dict-tag :options="dict.type.bet_money_status" :value="scope.row.betResult" />
         </template>
       </el-table-column>-->
-      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="120">
+      <el-table-column label="中奖金额 | 退回金额" align="center" prop="awardAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.awardAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="120">
+      <el-table-column label="入账金额" align="center" prop="incomeAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.incomeAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="输赢金额" align="center" prop="winAmount" width="120">
+      <el-table-column label="输赢金额" align="center" prop="winAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.winAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" width="120">
+      <el-table-column label="手续费" align="center" prop="taxAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
         </template>
