@@ -233,7 +233,7 @@
 
     <!-- 添加或修改提现审核对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="审核状态" prop="checkStatus">
           <el-select v-model="form.checkStatus" placeholder="请选择审核状态">
             <el-option
@@ -321,6 +321,8 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        checkStatus: [{ required: true, message: '请选择审核状态', trigger: 'blur' }],
+        googleCode: [{ required: true, message: '请填写谷歌验证码', trigger: 'blur' }],
       }
     };
   },
