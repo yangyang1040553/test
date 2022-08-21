@@ -5,6 +5,7 @@
         <el-radio-button label="1">游戏记录</el-radio-button>
         <el-radio-button label="2">流水</el-radio-button>
         <el-radio-button label="3">钱包</el-radio-button>
+        <el-radio-button label="4">活动奖励</el-radio-button>
       </el-radio-group>
 
       <el-form ref="form" class="form" :model="form" label-width="140px" disabled>
@@ -69,7 +70,7 @@
         </div>
         <div class="line"></div>
         <div class="right">
-           <el-form-item label="是否在线" prop="online">
+          <el-form-item label="是否在线" prop="online">
             <el-select v-model="form.online" placeholder>
               <el-option
                 v-for="dict in dict.type.online"
@@ -85,7 +86,7 @@
           <el-form-item label="上级邀请码" prop="fatherInvitationCode">
             <el-input v-model="form.fatherInvitationCode" placeholder />
           </el-form-item>
-           <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
+          <el-form-item label="USDT远程总额" prop="usdt_remote_amount">
             <el-input v-model="form.usdt_remote_amount" placeholder />
           </el-form-item>
           <el-form-item label="TRX远程总额" prop="trx_remote_amount">
@@ -202,6 +203,7 @@ export default {
       if (news == 1) { this.handleGame() }
       if (news == 2) { this.handleWallet() }
       if (news == 3) { this.toWallet() }
+      if (news == 4) { this.toOperationRecord() }
     }
   },
   methods: {
@@ -216,6 +218,9 @@ export default {
     },
     toWallet() {
       this.$router.push({ path: "/wallet/management", query: { userId: this.form.id } })
+    },
+    toOperationRecord() {
+      this.$router.push({ path: "/hash-operation/operationRecord", query: { userId: this.form.id } })
     },
   }
 }
