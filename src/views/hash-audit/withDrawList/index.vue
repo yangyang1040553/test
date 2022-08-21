@@ -185,7 +185,7 @@
       :row-class-name="tableRowClassName"
       border
     >
-    <el-table-column label="申请时间/审核时间" align="center" prop="createTime" sortable width="200">
+      <el-table-column label="申请时间/审核时间" align="center" prop="createTime" sortable width="200">
         <template slot-scope="scope">
           <div>
             <div>申请:{{scope.row.createTime||"-"}}</div>
@@ -206,7 +206,11 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="邀请码" align="center" prop="invitation_code" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code">
+        <template slot-scope="scope">
+          <div>{{scope.row.invitation_code||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
@@ -228,6 +232,11 @@
       <el-table-column label="矿工费" align="center" prop="minerAmount">
         <template slot-scope="scope">
           <div>{{(scope.row.minerAmount/10000).toFixed(2)}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="提现手续费" align="center" prop="tax_amount">
+        <template slot-scope="scope">
+          <div>{{(scope.row.tax_amount/10000).toFixed(2)}}</div>
         </template>
       </el-table-column>
       <el-table-column label="订单状态" align="center" prop="status">
