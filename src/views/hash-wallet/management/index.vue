@@ -133,6 +133,7 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
+
       <el-table-column label="USDT余额" align="center" prop="usdtAmount" sortable width="130">
         <template slot-scope="scope">
           <div>{{scope.row.usdtAmount || '-'}}</div>
@@ -185,6 +186,27 @@
       <el-table-column label="TRX总提现金额" align="center" prop="trxWithdrawTotal" sortable width="150">
         <template slot-scope="scope">
           <div>{{scope.row.trxWithdrawTotal || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="上次提现时间" align="center" prop="last_withdraw_time" sortable width="130">
+        <template slot-scope="scope">
+          <div>{{scope.row.last_withdraw_time || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="usdt免费提现金额"
+        align="center"
+        prop="free_usdt_amount"
+        sortable
+        width="130"
+      >
+        <template slot-scope="scope">
+          <div>{{scope.row.free_usdt_amount || '-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="trx免费提现金额" align="center" prop="free_trx_amount" sortable width="130">
+        <template slot-scope="scope">
+          <div>{{scope.row.free_trx_amount || '-'}}</div>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">

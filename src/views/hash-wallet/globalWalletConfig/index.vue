@@ -125,6 +125,7 @@
           <span>{{ scope.row.trx_free_check || "-" }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="提现手续费比例" align="center" prop="tax_scala" sortable width="130" />
       <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
@@ -194,6 +195,13 @@
             v-model="form.trx_free_check"
             oninput="value=value.replace(/[^\d\.]/g,'')"
             placeholder="请输入金额"
+          />
+        </el-form-item>
+         <el-form-item label="提现手续费比例" prop="tax_scala">
+          <el-input
+            v-model="form.tax_scala"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入提现手续费比例"
           />
         </el-form-item>
         <!-- <el-form-item label="trx转usdt比例" prop="trxToUsdt">
@@ -310,6 +318,9 @@ export default {
         ],
         trx_free_check: [
           { required: true, message: "TRX免审核金额不能为空", trigger: "blur" }
+        ],
+         tax_scala: [
+          { required: true, message: "提现手续费比例金额不能为空", trigger: "blur" }
         ],
       }
     };
