@@ -17,7 +17,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-       <el-form-item label="邀请码" prop="invitation_code">
+      <el-form-item label="邀请码" prop="invitation_code">
         <el-input
           v-model="queryParams.invitation_code"
           placeholder="请输入邀请码"
@@ -167,7 +167,16 @@
         </template>
       </el-table-column>
       <el-table-column label="玩家昵称" align="center" prop="nickName" />
-      <el-table-column label="邀请码" align="center" prop="invitation_code" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code">
+        <template slot-scope="scope">
+          <div>{{scope.row.invitation_code||'-'}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="流水倍数" align="center" prop="bet_multiple">
+          <template slot-scope="scope">
+          <div>{{scope.row.bet_multiple||'-'}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
@@ -465,7 +474,7 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
-       let obj = { ...this.queryParams }
+      let obj = { ...this.queryParams }
       obj.pageSize = 5000
       this.download('hash-wallet/walletoOpt/export', {
         ...obj
