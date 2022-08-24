@@ -174,11 +174,6 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="唯一ID" align="center" prop="unique_id" width="100">
-        <template slot-scope="scope">
-          <div>{{scope.row.unique_id||"-"}}</div>
-        </template>
-      </el-table-column>
 
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
 
@@ -248,6 +243,11 @@
       </el-table-column>
       <el-table-column label="用户名" align="center" prop="account" width="100" />
       <!-- <el-table-column label="密码" align="center" prop="password" /> -->
+      <el-table-column label="设备ID" align="center" prop="unique_id" width="100">
+        <template slot-scope="scope">
+          <div>{{scope.row.unique_id||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="设备码/平台" align="center" prop="deviceCode" width="160">
         <template slot-scope="scope">
           <div>{{scope.row.deviceCode||"-"}}/{{scope.row.platform||"-"}}</div>
