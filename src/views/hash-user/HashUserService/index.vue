@@ -57,6 +57,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+       <el-form-item label="设备ID" prop="unique_id">
+        <el-input
+          v-model="queryParams.unique_id"
+          placeholder="请输入用户设备ID"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="用户状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择用户状态" clearable>
           <el-option
@@ -427,6 +435,7 @@ export default {
         tgAccount: null,
         loginTime: null,
         registerTime: null,
+        unique_id: null,
       },
       // 表单参数
       form: {},
@@ -517,6 +526,7 @@ export default {
         password: null,
         deviceCode: null,
         platform: null,
+        unique_id: null,
         nickName: null,
         head: null,
         status: null,
@@ -634,9 +644,15 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped >
 .label {
   color: #99a9bf;
   font-weight: bold;
+}
+/* ::v-deep .el-form-item{
+  width:260px;
+} */
+::v-deep .el-input__inner{
+  width:160px;
 }
 </style>
