@@ -301,6 +301,13 @@
             placeholder="请输入金额"
           />
         </el-form-item>
+        <el-form-item label="流水倍数" prop="betMultiple">
+          <el-input
+            v-model="editForm.betMultiple"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入流水倍数"
+          />
+        </el-form-item>
         <el-form-item label="备注" prop="note">
           <el-input v-model="editForm.note" placeholder="请输入备注" />
         </el-form-item>

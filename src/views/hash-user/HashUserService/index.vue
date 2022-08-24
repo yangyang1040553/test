@@ -41,10 +41,18 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="用户IP" prop="registerIp">
+      <el-form-item label="注册IP" prop="registerIp">
         <el-input
           v-model="queryParams.registerIp"
-          placeholder="请输入用户IP"
+          placeholder="请输入用户注册IP"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="登录IP" prop="loginIp">
+        <el-input
+          v-model="queryParams.loginIp"
+          placeholder="请输入用户登录IP"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -76,7 +84,7 @@
           placeholder="请选择注册时间"
         ></el-date-picker>
       </el-form-item>
-       <el-form-item label="登录时间" prop="loginTime">
+      <el-form-item label="登录时间" prop="loginTime">
         <el-date-picker
           clearable
           v-model="queryParams.loginTime"
@@ -166,6 +174,11 @@
           <div class="global-text-blue" @click="openUserDetail(scope.row.id)">{{scope.row.id}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="唯一ID" align="center" prop="unique_id" width="100">
+        <template slot-scope="scope">
+          <div>{{scope.row.unique_id||"-"}}</div>
+        </template>
+      </el-table-column>
 
       <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
 
@@ -216,9 +229,10 @@
           <div>登录:{{scope.row.loginIp||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="登录地址" align="center" prop="login_addr" width="100">
+      <el-table-column label="登录地址|注册地址" align="left" prop="login_addr" width="160">
         <template slot-scope="scope">
-          <div>{{scope.row.login_addr||"-"}}</div>
+          <div>登录地址:{{scope.row.login_addr||"-"}}</div>
+          <div>注册地址:{{scope.row.reg_addr||"-"}}</div>
         </template>
       </el-table-column>
       <!-- <el-table-column label="登录IP" align="center" prop="loginIp" /> -->
