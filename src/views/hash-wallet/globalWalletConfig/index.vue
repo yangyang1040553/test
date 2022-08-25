@@ -114,25 +114,36 @@
       <el-table-column label="商户号" align="center" prop="merchantNo" />
       <el-table-column label="公钥" align="center" prop="publicKey" />
       <el-table-column label="私钥" align="center" prop="privateKey" />
-      <el-table-column label="USDT免审核金额" align="center" prop="usdt_free_check" width="160">
+      <el-table-column label="USDT免审核金额" align="center" prop="usdt_free_check" width="130">
         <template slot-scope="scope">
           <span>{{ scope.row.usdt_free_check || "-" }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="TRX免审核金额" align="center" prop="trx_free_check" width="160">
+      <el-table-column label="TRX免审核金额" align="center" prop="trx_free_check" width="130">
         <template slot-scope="scope">
           <span>{{ scope.row.trx_free_check || "-" }}</span>
         </template>
       </el-table-column>
       <el-table-column label="提现手续费比例" align="center" prop="tax_scala" sortable width="130" />
+      <el-table-column
+        label="活动下注倍数"
+        align="center"
+        prop="activity_bet_multiple"
+        sortable
+        width="130"
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.activity_bet_multiple || "-" }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime || "-" }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="创建者" align="center" prop="createBy" />
+      <!-- <el-table-column label="创建者" align="center" prop="createBy" /> -->
       <el-table-column label="更新时间" align="center" prop="updateTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.updateTime || "-" }}</span>
@@ -183,6 +194,13 @@
         <el-form-item label="私钥" prop="privateKey">
           <el-input v-model="form.privateKey" placeholder="请输入私钥" />
         </el-form-item>
+        <el-form-item label="活动下注倍数" prop="activity_bet_multiple">
+          <el-input
+            v-model="form.activity_bet_multiple"
+            oninput="value=value.replace(/[^\d]/g,'')"
+            placeholder="请输入活动下注倍数"
+          />
+        </el-form-item>
         <el-form-item label="USDT免审核金额" prop="usdt_free_check">
           <el-input
             v-model="form.usdt_free_check"
@@ -197,7 +215,7 @@
             placeholder="请输入金额"
           />
         </el-form-item>
-         <el-form-item label="提现手续费比例" prop="tax_scala">
+        <el-form-item label="提现手续费比例" prop="tax_scala">
           <el-input
             v-model="form.tax_scala"
             oninput="value=value.replace(/[^\d\.]/g,'')"
@@ -319,8 +337,11 @@ export default {
         trx_free_check: [
           { required: true, message: "TRX免审核金额不能为空", trigger: "blur" }
         ],
-         tax_scala: [
+        tax_scala: [
           { required: true, message: "提现手续费比例金额不能为空", trigger: "blur" }
+        ],
+        activity_bet_multiple: [
+          { required: true, message: "活动奖励下注倍数不能为空", trigger: "blur" }
         ],
       }
     };
