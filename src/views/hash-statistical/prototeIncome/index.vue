@@ -117,36 +117,96 @@
           <div v-else>{{scope.row.invitationCode||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT收益金额" align="center" prop="usdtIncomeAmount" sortable  width="140" />
-      <el-table-column label="USDT一级代理收益金额" align="center" prop="usdt_income1_amount" sortable width="190">
+      <el-table-column
+        label="USDT收益金额"
+        align="center"
+        prop="usdtIncomeAmount"
+        sortable
+        width="140"
+      />
+      <el-table-column
+        label="USDT一级代理收益金额"
+        align="center"
+        prop="usdt_income1_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.usdt_income1_amount||"-"}}</div>
+          <div
+            :class="scope.row.usdt_income1_amount?'global-text-blue':''"
+            @click="scope.row.usdt_income1_amount?toRecored(scope.row,'USDT'):false"
+          >{{scope.row.usdt_income1_amount||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT二级代理收益金额" align="center" prop="usdt_income2_amount" sortable width="190">
+      <el-table-column
+        label="USDT二级代理收益金额"
+        align="center"
+        prop="usdt_income2_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.usdt_income2_amount||"-"}}</div>
+          <div
+            :class="scope.row.usdt_income2_amount?'global-text-blue':''"
+            @click="scope.row.usdt_income2_amount?toRecored(scope.row,'USDT'):false"
+          >{{scope.row.usdt_income2_amount||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="USDT三级代理收益金额" align="center" prop="usdt_income3_amount" sortable width="190">
+      <el-table-column
+        label="USDT三级代理收益金额"
+        align="center"
+        prop="usdt_income3_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.usdt_income3_amount||"-"}}</div>
+          <div
+            :class="scope.row.usdt_income3_amount?'global-text-blue':''"
+            @click="scope.row.usdt_income3_amount?toRecored(scope.row,'TRX'):false"
+          >{{scope.row.usdt_income3_amount||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX收益金额" align="center" prop="trxIncomeAmount" sortable width="160"/>
-      <el-table-column label="TRX一级代理收益金额" align="center" prop="trx_income1_amount" sortable width="190">
+      <el-table-column label="TRX收益金额" align="center" prop="trxIncomeAmount" sortable width="160" />
+      <el-table-column
+        label="TRX一级代理收益金额"
+        align="center"
+        prop="trx_income1_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.trx_income1_amount||"-"}}</div>
+          <div
+            :class="scope.row.trx_income1_amount?'global-text-blue':''"
+            @click="scope.row.trx_income1_amount?toRecored(scope.row,'TRX'):false"
+          >{{scope.row.trx_income1_amount||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX二级代理收益金额" align="center" prop="trx_income2_amount" sortable width="190">
+      <el-table-column
+        label="TRX二级代理收益金额"
+        align="center"
+        prop="trx_income2_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.trx_income2_amount||"-"}}</div>
+          <div
+            :class="scope.row.trx_income2_amount?'global-text-blue':''"
+            @click="scope.row.trx_income2_amount?toRecored(scope.row,'TRX'):false"
+          >{{scope.row.trx_income2_amount||"-"}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="TRX三级代理收益金额" align="center" prop="trx_income3_amount" sortable width="190">
+      <el-table-column
+        label="TRX三级代理收益金额"
+        align="center"
+        prop="trx_income3_amount"
+        sortable
+        width="190"
+      >
         <template slot-scope="scope">
-          <div>{{scope.row.trx_income3_amount||"-"}}</div>
+          <div
+            :class="scope.row.trx_income3_amount?'global-text-blue':''"
+            @click="scope.row.trx_income3_amount?toRecored(scope.row,'TRX'):false"
+          >{{scope.row.trx_income3_amount||"-"}}</div>
         </template>
       </el-table-column>
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -262,6 +322,9 @@ export default {
     this.getList();
   },
   methods: {
+    toRecored(row, type) {
+      this.$router.push({ path: "/hash-game/brokerageRecord", query: { userId: row.userId, type: type } })
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;

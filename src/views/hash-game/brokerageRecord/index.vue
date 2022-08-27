@@ -22,7 +22,7 @@
           v-model="queryParams.level"
           placeholder="请输入第几级的佣金"
           clearable
-              oninput="value=value.replace(/[^\d\.]/g,'')"
+          oninput="value=value.replace(/[^\d\.]/g,'')"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -122,8 +122,8 @@
       border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="唯一ID" align="center" prop="id"  width="180"/>
-      <el-table-column label="玩家ID" align="center" prop="userId"  width="160">
+      <el-table-column label="唯一ID" align="center" prop="id" width="180" />
+      <el-table-column label="玩家ID" align="center" prop="userId" width="160">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -233,6 +233,7 @@
 </template>
 
 <script>
+import merge from 'webpack-merge'
 import { listBrokerageRecord, getBrokerageRecord, delBrokerageRecord, addBrokerageRecord, updateBrokerageRecord } from "@/api/hash-game/brokerageRecord";
 import { getHashUserService } from "@/api/hash-user/HashUserService";
 import UserInfoDialog from "../../components/dialog/UserInfoDialog.vue";
@@ -286,6 +287,12 @@ export default {
     };
   },
   created() {
+    if (this.$route.query.userId) {
+      this.queryParams.userId = this.$route.query.userId
+    }
+    if (this.$route.query.type) {
+      this.queryParams.walletType = this.$route.query.type
+    }
     this.getList();
   },
   methods: {
@@ -343,7 +350,10 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
+       this.$router.push({ query: merge({}, {}) })
       this.resetForm("queryForm");
+      this.queryParams.userId=null
+      this.queryParams.walletType=null
       this.handleQuery();
     },
     // 多选框选中数据
