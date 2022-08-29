@@ -257,6 +257,11 @@
           <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
+      <el-table-column label="USDT矿工费" align="center" prop="usdt_miner_fee" width="100">
+        <template slot-scope="scope">
+          <div>{{ scope.row.usdt_miner_fee ||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="奖金回调" align="center" prop="awardCallback">
         <template slot-scope="scope">
           <div

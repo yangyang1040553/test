@@ -88,7 +88,7 @@
       border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="日期" align="center" prop="id" width="180" sortable>
+      <el-table-column label="日期" align="center" prop="id" width="130" sortable>
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.id, '{y}-{m}-{d}') }}</span>
         </template>
@@ -116,6 +116,8 @@
           >{{ scope.row.usdtWinAmount }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="今日USDT手续费" align="center" prop="usdt_tax_amount" />
+      <el-table-column label="今日USDT矿工费" align="center" prop="usdt_miner_fee" />
       <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount" />
       <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount" />
       <el-table-column label="TRX输赢金额" align="center" prop="trxWinAmount" sortable>
@@ -125,7 +127,7 @@
           >{{ scope.row.trxWinAmount }}</span>
         </template>
       </el-table-column>
-
+      <el-table-column label="今日TRX手续费" align="center" prop="trx_tax_amount" />
       <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
