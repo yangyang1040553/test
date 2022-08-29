@@ -118,6 +118,17 @@
             inactive-text="否"
           ></el-switch>
         </el-form-item>
+        <el-form-item label="是否限制设置注册" prop="reg_limit">
+          <el-switch
+            v-model="form.reg_limit"
+            active-color="#13ce66"
+            inactive-color="#34B7EA"
+            active-text="是"
+            active-value="1"
+            inactive-value="0"
+            inactive-text="否"
+          ></el-switch>
+        </el-form-item>
         <el-form-item label="官方群组地址" prop="groupAddr">
           <el-input v-model="form.groupAddr" placeholder="请输入官方群组地址" />
         </el-form-item>
@@ -316,6 +327,9 @@ export default {
         welecome_txt: [
           { required: true, message: "请输入欢迎语", trigger: "blur" }
         ],
+        reg_limit: [
+          { required: true, message: "请选择是否限制设备注册", trigger: "blur" }
+        ],
       }
     };
   },
@@ -347,6 +361,7 @@ export default {
         groupAddr: null,
         regProtocolAddr: null,
         promoteAddr: null,
+        reg_limit: null,
       };
       this.resetForm("form");
     },
