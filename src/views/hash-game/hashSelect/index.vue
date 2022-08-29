@@ -282,7 +282,7 @@ export default {
         createTime: null,
         gameCollect: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
@@ -339,7 +339,7 @@ export default {
         gameCollect: null,
         createTime: null,
         orderByColumn: 'createTime',
-        isAsc: 'asc',
+        isAsc: 'desc',
       };
       this.resetForm("form");
     },
