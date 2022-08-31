@@ -166,9 +166,9 @@
       border
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="订单ID" align="center" prop="id" width="180" />
-      <el-table-column label="交易号" align="center" prop="transactionNo" width="180" />
-      <el-table-column label="玩家ID" align="center" prop="userId" width="180">
+      <el-table-column label="订单ID" align="center" prop="id" width="120" />
+      <el-table-column label="申请信息" align="center" prop="apply_info" width="180" />
+      <el-table-column label="玩家ID" align="center" prop="userId" width="100">
         <template slot-scope="scope">
           <div
             class="global-text-blue"
@@ -176,6 +176,7 @@
           >{{scope.row.userId}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="玩家昵称" align="center" prop="nick_name" width="90" />
       <el-table-column label="钱包类型" align="center" prop="walletType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.wallet_type" :value="scope.row.walletType" />
