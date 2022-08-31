@@ -167,7 +167,13 @@
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="订单ID" align="center" prop="id" width="120" />
-      <el-table-column label="申请信息" align="center" prop="apply_info" width="180" />
+      <el-table-column label="申请信息" align="left" prop="apply_info" width="200">
+        <template slot-scope="scope">
+          <div>
+            <div v-for="(item,index) in  JSON.parse(scope.row.apply_info)" :key="index">{{item}}</div>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column label="玩家ID" align="center" prop="userId" width="100">
         <template slot-scope="scope">
           <div

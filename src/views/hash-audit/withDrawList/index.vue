@@ -197,7 +197,14 @@
       <!-- <el-table-column label="更新时间" align="center" prop="updateTime" sortable width="180" /> -->
       <el-table-column label="审核人" align="center" prop="checkPerson" />
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
-      <el-table-column label="申请信息" align="center" prop="apply_info" width="180" />
+      <el-table-column label="申请信息" align="center" prop="apply_info" width="180">
+        <template slot-scope="scope">
+          <div>
+            <div v-for="(item,index) in  JSON.parse(scope.row.apply_info)" :key="index">{{item}}</div>
+          </div>
+        </template>
+      </el-table-column>
+
       <el-table-column label="玩家ID" align="center" prop="userId" width="100">
         <template slot-scope="scope">
           <div
