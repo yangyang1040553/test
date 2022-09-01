@@ -259,7 +259,7 @@
       </el-table-column>
       <el-table-column label="下注手续费" align="center" prop="bet_fee" width="100">
         <template slot-scope="scope">
-          <div>{{ scope.row.bet_fee.toFixed(2) }}</div>
+          <div>{{ scope.row.bet_fee?scope.row.bet_fee.toFixed(2):"-" }}</div>
         </template>
       </el-table-column>
       <el-table-column label="USDT矿工费" align="center" prop="usdt_miner_fee" width="100">
