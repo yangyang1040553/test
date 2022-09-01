@@ -138,11 +138,13 @@
         </template>
       </el-table-column>
       <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
+      <el-table-column label="USDT下注手续费" align="center" prop="usdt_bet_fee" sortable />
+      <el-table-column label="TRX下注手续费" align="center" prop="trx_bet_fee" sortable />
+      <!-- <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.createTime || "-" }}</span>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <!-- <el-table-column label="创建者" align="center" prop="createBy" /> -->
       <el-table-column label="更新时间" align="center" prop="updateTime" width="180" sortable>
         <template slot-scope="scope">
@@ -220,6 +222,20 @@
             v-model="form.tax_scala"
             oninput="value=value.replace(/[^\d\.]/g,'')"
             placeholder="请输入提现手续费比例"
+          />
+        </el-form-item>
+        <el-form-item label="USDT下注手续费" prop="usdt_bet_fee">
+          <el-input
+            v-model="form.usdt_bet_fee"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入USDT下注手续费"
+          />
+        </el-form-item>
+        <el-form-item label="TRX下注手续费" prop="trx_bet_fee">
+          <el-input
+            v-model="form.trx_bet_fee"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入TRX下注手续费"
           />
         </el-form-item>
         <!-- <el-form-item label="trx转usdt比例" prop="trxToUsdt">
@@ -342,6 +358,12 @@ export default {
         ],
         activity_bet_multiple: [
           { required: true, message: "活动奖励下注倍数不能为空", trigger: "blur" }
+        ],
+        usdt_bet_fee: [
+          { required: true, message: "请输入USDT下注手续费", trigger: "blur" }
+        ],
+        trx_bet_fee: [
+          { required: true, message: "请输入TRX下注手续费", trigger: "blur" }
         ],
       }
     };

@@ -106,9 +106,21 @@
           <div>{{scope.row.note_name?scope.row.note_name:scope.row.nick_name}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="邀请码" align="center" prop="invitation_code" />
-      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount" />
-      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount" />
+      <el-table-column label="邀请码" align="center" prop="invitation_code">
+        <template slot-scope="scope">
+          <div>{{scope.row.invitation_code||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT押注金额" align="center" prop="usdtBetAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtBetAmount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT中奖金额" align="center" prop="usdtAwardAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdtAwardAmount||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="USDT输赢金额" align="center" prop="usdtWinAmount" sortable>
         <template slot-scope="scope">
           <span
@@ -116,10 +128,36 @@
           >{{ scope.row.usdtWinAmount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="今日USDT手续费" align="center" prop="usdt_tax_amount" />
-      <el-table-column label="今日USDT矿工费" align="center" prop="usdt_miner_fee" />
-      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount" />
-      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount" />
+      <el-table-column label="今日USDT手续费" align="center" prop="usdt_tax_amount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_tax_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="今日USDT矿工费" align="center" prop="usdt_miner_fee">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_miner_fee||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT今日活动奖励金" align="center" prop="usdt_activity_amount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_activity_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="USDT今日后台奖励金" align="center" prop="usdt_back_amount">
+        <template slot-scope="scope">
+          <div>{{scope.row.usdt_back_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX押注金额" align="center" prop="trxBetAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxBetAmount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX中奖金额" align="center" prop="trxAwardAmount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trxAwardAmount||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="TRX输赢金额" align="center" prop="trxWinAmount" sortable>
         <template slot-scope="scope">
           <span
@@ -127,25 +165,21 @@
           >{{ scope.row.trxWinAmount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="今日TRX手续费" align="center" prop="trx_tax_amount" />
-      <!-- <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="今日TRX手续费" align="center" prop="trx_tax_amount">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['hash-statistical:win:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['hash-statistical:win:remove']"
-          >删除</el-button>
+          <div>{{scope.row.trx_tax_amount||"-"}}</div>
         </template>
-      </el-table-column>-->
+      </el-table-column>
+      <el-table-column label="TRX今日活动奖励金" align="center" prop="trx_activity_amount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trx_activity_amount||"-"}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="TRX今日后台奖励金" align="center" prop="trx_back_amount">
+        <template slot-scope="scope">
+          <div>{{scope.row.trx_back_amount||"-"}}</div>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination
