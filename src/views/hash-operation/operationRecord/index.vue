@@ -70,7 +70,7 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <!-- <el-col :span="1.5">
+      <el-col :span="1.5">
         <el-button
           type="primary"
           plain
@@ -80,7 +80,7 @@
           v-hasPermi="['hash-operation:operationRecord:add']"
         >新增</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <!--   <el-col :span="1.5">
         <el-button
           type="success"
           plain
@@ -205,7 +205,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="奖励金额" prop="amount">
-          <el-input v-model="form.amount" placeholder="请输入奖励金额" />
+          <el-input
+            v-model="form.amount"
+            oninput="value=value.replace(/[^\d\.]/g,'')"
+            placeholder="请输入奖励金额"
+          />
         </el-form-item>
         <el-form-item label="活动类型" prop="aType">
           <el-select v-model="form.aType" placeholder="请选择活动类型">
@@ -226,6 +230,9 @@
               :value="parseInt(dict.value)"
             ></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="备注" prop="note">
+          <el-input v-model="form.note" placeholder="请输入备注" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -287,6 +294,13 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        userId: [{ required: true, message: '请输入玩家ID', trigger: 'blur' }],
+        nickName: [{ required: true, message: '请输入玩家昵称', trigger: 'blur' }],
+        walletType: [{ required: true, message: '请选择钱包类型', trigger: 'blur' }],
+        amount: [{ required: true, message: '请输入奖励金额', trigger: 'blur' }],
+        aType: [{ required: true, message: '请选择活动类型', trigger: 'blur' }],
+        status: [{ required: true, message: '请选择是否发放', trigger: 'blur' }],
+        note: [{ required: true, message: '请输入备注', trigger: 'blur' }],
       }
     };
   },
