@@ -252,9 +252,14 @@
           <div>{{ scope.row.winAmount.toFixed(2) }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="手续费" align="center" prop="taxAmount" width="100">
+      <el-table-column label="中奖手续费" align="center" prop="taxAmount" width="100">
         <template slot-scope="scope">
           <div>{{ scope.row.taxAmount.toFixed(2) }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="下注手续费" align="center" prop="bet_fee" width="100">
+        <template slot-scope="scope">
+          <div>{{ scope.row.bet_fee.toFixed(2) }}</div>
         </template>
       </el-table-column>
       <el-table-column label="USDT矿工费" align="center" prop="usdt_miner_fee" width="100">
