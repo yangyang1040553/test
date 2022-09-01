@@ -137,7 +137,7 @@
           <span>{{ scope.row.activity_bet_multiple || "-" }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" />
+      <!-- <el-table-column label="矿工费比例" align="center" prop="minerScala" sortable width="130" /> -->
       <el-table-column label="USDT下注手续费" align="center" prop="usdt_bet_fee" sortable />
       <el-table-column label="TRX下注手续费" align="center" prop="trx_bet_fee" sortable />
       <!-- <el-table-column label="创建时间" align="center" prop="createTime" width="180" sortable>
@@ -264,13 +264,13 @@
             </el-col>
           </el-row>
         </el-form-item>-->
-        <el-form-item label="矿工费比例" prop="minerScala">
+        <!-- <el-form-item label="矿工费比例" prop="minerScala">
           <el-input
             v-model="form.minerScala"
             oninput="value=value.replace(/[^\d\.]/g,'')"
             placeholder="请输入矿工费比例"
           />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
