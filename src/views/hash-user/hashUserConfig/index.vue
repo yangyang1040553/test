@@ -157,6 +157,25 @@
         <el-form-item style="margin-top:40px;" label="欢迎语" prop="welecome_txt">
           <el-input v-model="form.welecome_txt" type="textarea" placeholder="请输入欢迎语" />
         </el-form-item>
+        <el-form-item label="是否开启广告" style="margin-top:40px;" prop="open_gg">
+          <el-switch
+            v-model="form.open_gg"
+            active-color="#13ce66"
+            inactive-color="#34B7EA"
+            active-text="是"
+            :active-value="1"
+            :inactive-value="0"
+            inactive-text="否"
+          ></el-switch>
+        </el-form-item>
+        <el-form-item
+          style="margin-top:40px;height:100px;"
+          label="广告地址"
+          v-if="form.open_gg==1"
+          prop="gg_addr"
+        >
+          <UploadVue :index="1" :url="form.gg_addr" @setImageUrl="setImageUrl" />
+        </el-form-item>
       </el-card>
       <!-- <el-card class="box-card">
         <el-form-item label="ios下载地址" prop="iosDownloadAddr">
@@ -249,10 +268,11 @@
 
 <script>
 import { listHashUserConfig, getHashUserConfig, delHashUserConfig, addHashUserConfig, updateHashUserConfig } from "@/api/hash-user/hashUserConfig";
-
+import UploadVue from '../../components/upload/Upload.vue'
 export default {
   dicts: ['force'],
   name: "HashUserConfig",
+  components: { UploadVue },
   data() {
     return {
       // 遮罩层
@@ -279,7 +299,8 @@ export default {
         pageSize: 10,
       },
       // 表单参数
-      form: {},
+      form: {
+      },
       // 表单校验
       rules: {
         newDomainAddr: [
@@ -330,6 +351,12 @@ export default {
         reg_limit: [
           { required: true, message: "请选择是否限制设备注册", trigger: "blur" }
         ],
+        open_gg: [
+          { required: true, message: "请选择是否开启广告", trigger: "blur" }
+        ],
+        gg_addr: [
+          { required: true, message: "请选择是否开启广告", trigger: "blur" }
+        ],
       }
     };
   },
@@ -337,6 +364,9 @@ export default {
     this.getList();
   },
   methods: {
+    setImageUrl(param) {
+      this.form.gg_addr = param.url
+    },
     /** 查询用户全局配置列表 */
     getList() {
       this.loading = true;
