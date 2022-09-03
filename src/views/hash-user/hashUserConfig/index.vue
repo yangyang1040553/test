@@ -300,6 +300,7 @@ export default {
       },
       // 表单参数
       form: {
+        open_gg: 0
       },
       // 表单校验
       rules: {

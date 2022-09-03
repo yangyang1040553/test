@@ -84,8 +84,9 @@
       :data="winList"
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
-      height="600"
       border
+      :show-summary="true"
+      :summary-method="getSummaries"
     >
       <!-- <el-table-column type="selection" width="55" align="center" /> -->
       <el-table-column label="日期" align="center" prop="id" width="130" sortable>
@@ -292,6 +293,39 @@ export default {
     this.getList();
   },
   methods: {
+    // 当前页合计
+    getSummaries(param) {
+      const { columns, data } = param
+      const sums = []
+      columns.forEach((column, index) => {
+        if (index == 0) {
+          sums[index] = "当前页合计"
+          return
+        } else {
+          if (index != 2 && index != 3 && index != 1) {
+            const values = data.map((item) => Number(item[column.property]))
+            if (!values.every((value) => isNaN(value))) {
+              sums[index] = values.reduce((prev, curr) => {
+                const value = Number(curr)
+                if (!isNaN(value)) {
+                  return prev + curr
+                } else {
+                  return prev
+                }
+              }, 0)
+              // sums[index] = sums[index].toFixed(2)
+              // sums[index] = 100
+              // sums[index] = formatDecimal(sums[index] / 100, 2)
+            }
+          } else {
+            sums[index] = "-"
+          }
+        }
+
+      })
+
+      return sums
+    },
     openUserDetail(userId) {
       this.openUser = true;
       this.userId = userId;
