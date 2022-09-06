@@ -313,6 +313,7 @@ export default {
                   return prev
                 }
               }, 0)
+              sums[index]= sums[index].toFixed(4)
               // sums[index] = sums[index].toFixed(2)
               // sums[index] = 100
               // sums[index] = formatDecimal(sums[index] / 100, 2)
