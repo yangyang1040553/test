@@ -252,7 +252,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="谷歌验证码" prop="googleCode">
+        <el-form-item label="谷歌验证码" prop="googleCode" v-if="form.checkStatus==3">
           <el-input
             v-model="form.googleCode"
             type="text"
