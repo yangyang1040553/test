@@ -199,6 +199,11 @@
           <dict-tag :options="dict.type.is_brokerage" :value="scope.row.isBrokerage" />
         </template>
       </el-table-column>
+      <el-table-column label="备注" align="center" prop="note">
+        <template slot-scope="scope">
+          <div>{{scope.row.note||"-"}}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" sortable width="160">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
@@ -362,6 +367,13 @@
               placeholder="请输入内容" clearable />
           </div>
         </el-form-item>-->
+        <el-form-item label="备注" prop="note">
+          <el-input
+            v-model="form.note"
+            placeholder="请输入备注"
+            type="textarea"
+          />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button v-if="!isDetail" type="primary" @click="submitForm">确 定</el-button>
@@ -427,6 +439,7 @@ export default {
         isActivity: [{ required: true, message: '请选择活动场', trigger: 'blur' }],
         isBrokerage: [{ required: true, message: '请选择是否返佣', trigger: 'blur' }],
         weight: [{ required: true, message: '请输入权重', trigger: 'blur' }],
+        note: [{ required: true, message: '请输入备注', trigger: 'blur' }],
       },
       gameMenuList: []
     }
