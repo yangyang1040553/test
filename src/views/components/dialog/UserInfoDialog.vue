@@ -180,7 +180,6 @@
 </template>
 
 <script>
-import { getHashUserService } from '@/api/hash-user/HashUserService'
 export default {
   dicts: ['online', 'user_status'],
   data() {

@@ -111,8 +111,6 @@
         prop="roleKey"
         :show-overflow-tooltip="true"
       />
-      <el-table-column label="TRX最大人工出入款" prop="trx_max_money" />
-      <el-table-column label="USDT最大人工出入款" prop="usdt_max_money" />
       <el-table-column :label="$t('display_order')" prop="roleSort" />
       <el-table-column :label="$t('status')" align="center">
         <template slot-scope="scope">
@@ -184,12 +182,6 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="200px" class="dialog">
         <el-form-item :label="$t('role_name')" prop="roleName">
           <el-input v-model="form.roleName" :placeholder="$t('type_role_name')" />
-        </el-form-item>
-        <el-form-item label="TRX最大金额上限" prop="trx_max_money">
-          <el-input v-model="form.trx_max_money" placeholder="请输入角色TRX最大人工出入款" />
-        </el-form-item>
-        <el-form-item label="USDT最大金额上限" prop="usdt_max_money">
-          <el-input v-model="form.usdt_max_money" placeholder="请输入角色USDT最大人工出入款" />
         </el-form-item>
         <el-form-item prop="roleKey">
           <span slot="label">
@@ -398,12 +390,6 @@ export default {
       rules: {
         roleName: [
           { required: true, message: "角色名称不能为空", trigger: "blur" }
-        ],
-        trx_max_money: [
-          { required: true, message: "最大人工TRX出入款上限不得为空", trigger: "blur" }
-        ],
-         usdt_max_money: [
-          { required: true, message: "最大人工USDT出入款上限不得为空", trigger: "blur" }
         ],
         roleKey: [
           { required: true, message: "权限字符不能为空", trigger: "blur" }

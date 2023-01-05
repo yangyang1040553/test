@@ -582,7 +582,10 @@ export default {
     }
     ,
     openQRCode(url) {
-      window.open(url, "_blank")
+      // console.log("url===",url)
+      setTimeout(() => {
+        window.open(url, "_blank")
+      }, 200);
     },
     /** 查询用户列表 */
     getList() {
