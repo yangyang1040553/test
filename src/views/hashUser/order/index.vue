@@ -2,20 +2,10 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="100px">
       <el-form-item label="用户ID" prop="userId">
-        <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入用户ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.userId" placeholder="请输入用户ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="用户昵称" prop="nickName">
-        <el-input
-          v-model="queryParams.nickName"
-          placeholder="请输入用户昵称"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.nickName" placeholder="请输入用户昵称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <!-- <el-form-item label="邀请码" prop="invitationCode">
         <el-input
@@ -26,12 +16,8 @@
         />
       </el-form-item> -->
       <el-form-item label="商户编号" prop="rechargeMerchantCode">
-        <el-input
-          v-model="queryParams.rechargeMerchantCode"
-          placeholder="请输入商户编号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.rechargeMerchantCode" placeholder="请输入商户编号" clearable
+          @keyup.enter.native="handleQuery" />
       </el-form-item>
       <!-- <el-form-item label="目标钱包类型" prop="toWallet">
         <el-input
@@ -43,12 +29,7 @@
       </el-form-item> -->
       <el-form-item label="转换状态" prop="transStatus">
         <el-select v-model="queryParams.transStatus" placeholder="请选择转换状态" clearable>
-          <el-option
-            v-for="dict in dict.type.trans_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+          <el-option v-for="dict in dict.type.trans_status" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <!-- <el-form-item label="转换比例" prop="scale">
@@ -77,32 +58,18 @@
       </el-form-item> -->
       <el-form-item label="首冲" prop="isFirstRecharge">
         <el-select v-model="queryParams.isFirstRecharge" placeholder="请选择是否首冲" clearable>
-          <el-option
-            v-for="dict in dict.type.is_first_recharge"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+          <el-option v-for="dict in dict.type.is_first_recharge" :key="dict.value" :label="dict.label"
+            :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="支付状态" prop="payStatus">
         <el-select v-model="queryParams.payStatus" placeholder="请选择支付状态" clearable>
-          <el-option
-            v-for="dict in dict.type.pay_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+          <el-option v-for="dict in dict.type.pay_status" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="订单状态" prop="orderStatus">
         <el-select v-model="queryParams.orderStatus" placeholder="请选择订单状态" clearable>
-          <el-option
-            v-for="dict in dict.type.order_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+          <el-option v-for="dict in dict.type.order_status" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <!-- <el-form-item label=" 支付类型关联支付类型表" prop="payTypeNo">
@@ -114,26 +81,13 @@
         />
       </el-form-item> -->
       <el-form-item label="通道编码" prop="channelCode">
-        <el-input
-          v-model="queryParams.channelCode"
-          placeholder="请输入通道编码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.channelCode" placeholder="请输入通道编码" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="渠道编码" prop="channelNo">
-        <el-input
-          v-model="queryParams.channelNo"
-          placeholder="请输入渠道编码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.channelNo" placeholder="请输入渠道编码" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="支付时间" prop="payTime">
-        <el-date-picker clearable
-          v-model="queryParams.payTime"
-          type="date"
-          value-format="yyyy-MM-dd"
+        <el-date-picker clearable v-model="queryParams.payTime" type="date" value-format="yyyy-MM-dd"
           placeholder="请选择支付时间">
         </el-date-picker>
       </el-form-item>
@@ -146,12 +100,8 @@
         </el-date-picker>
       </el-form-item> -->
       <el-form-item label="支付流水编号" prop="thirdOrderNo">
-        <el-input
-          v-model="queryParams.thirdOrderNo"
-          placeholder="请输入三方支付流水编号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.thirdOrderNo" placeholder="请输入三方支付流水编号" clearable
+          @keyup.enter.native="handleQuery" />
       </el-form-item>
       <!-- <el-form-item label="注册渠道" prop="regChannel">
         <el-input
@@ -209,14 +159,8 @@
         >删除</el-button>
       </el-col> -->
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['hashUser:order:export']"
-        >导出</el-button>
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
+          v-hasPermi="['hashUser:order:export']">导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -232,7 +176,7 @@
       <!-- <el-table-column label="目标钱包类型" align="center" prop="toWallet" /> -->
       <el-table-column label="转换状态" align="center" prop="transStatus">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus"/>
+          <dict-tag :options="dict.type.trans_status" :value="scope.row.transStatus" />
         </template>
       </el-table-column>
       <el-table-column label="转换比例" align="center" prop="scale" />
@@ -240,17 +184,17 @@
       <el-table-column label="支付金额" align="center" prop="payMoney" />
       <el-table-column label="是否首充" align="center" prop="isFirstRecharge">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.is_first_recharge" :value="scope.row.isFirstRecharge"/>
+          <dict-tag :options="dict.type.is_first_recharge" :value="scope.row.isFirstRecharge" />
         </template>
       </el-table-column>
       <el-table-column label="支付状态" align="center" prop="payStatus">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.pay_status" :value="scope.row.payStatus"/>
+          <dict-tag :options="dict.type.pay_status" :value="scope.row.payStatus" />
         </template>
       </el-table-column>
       <el-table-column label="订单状态" align="center" prop="orderStatus">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.order_status" :value="scope.row.orderStatus"/>
+          <dict-tag :options="dict.type.order_status" :value="scope.row.orderStatus" />
         </template>
       </el-table-column>
       <!-- <el-table-column label="支付类型关联支付类型表" align="center" prop="payTypeNo" /> -->
@@ -292,14 +236,9 @@
         </template>
       </el-table-column> -->
     </el-table>
-    
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改充值订单记录对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -319,14 +258,10 @@
         <el-form-item label="目标钱包类型" prop="toWallet">
           <el-input v-model="form.toWallet" placeholder="请输入目标钱包类型" />
         </el-form-item>
-        <el-form-item label="转换状态 0=未转换 1=转换中 2=转换失败 3=转换成功" prop="transStatus">
-          <el-select v-model="form.transStatus" placeholder="请选择转换状态 0=未转换 1=转换中 2=转换失败 3=转换成功">
-            <el-option
-              v-for="dict in dict.type.trans_status"
-              :key="dict.value"
-              :label="dict.label"
-:value="parseInt(dict.value)"
-            ></el-option>
+        <el-form-item label="转换状态" prop="transStatus">
+          <el-select v-model="form.transStatus" placeholder="请选择转换状态">
+            <el-option v-for="dict in dict.type.trans_status" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="转换比例" prop="scale">
@@ -340,32 +275,20 @@
         </el-form-item>
         <el-form-item label="0:首充 1:非首充" prop="isFirstRecharge">
           <el-select v-model="form.isFirstRecharge" placeholder="请选择0:首充 1:非首充">
-            <el-option
-              v-for="dict in dict.type.is_first_recharge"
-              :key="dict.value"
-              :label="dict.label"
-:value="parseInt(dict.value)"
-            ></el-option>
+            <el-option v-for="dict in dict.type.is_first_recharge" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label=" 支付状态 0=未支付 1=已支付 2=已取消" prop="payStatus">
           <el-select v-model="form.payStatus" placeholder="请选择 支付状态 0=未支付 1=已支付 2=已取消">
-            <el-option
-              v-for="dict in dict.type.pay_status"
-              :key="dict.value"
-              :label="dict.label"
-:value="dict.value"
-            ></el-option>
+            <el-option v-for="dict in dict.type.pay_status" :key="dict.value" :label="dict.label"
+              :value="dict.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label=" 订单状态 0=未处理 1=已完成 2=已关闭 3=已取消" prop="orderStatus">
           <el-select v-model="form.orderStatus" placeholder="请选择 订单状态 0=未处理 1=已完成 2=已关闭 3=已取消">
-            <el-option
-              v-for="dict in dict.type.order_status"
-              :key="dict.value"
-              :label="dict.label"
-:value="dict.value"
-            ></el-option>
+            <el-option v-for="dict in dict.type.order_status" :key="dict.value" :label="dict.label"
+              :value="dict.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label=" 支付类型关联支付类型表" prop="payTypeNo">
@@ -378,18 +301,11 @@
           <el-input v-model="form.channelNo" placeholder="请输入渠道编码" />
         </el-form-item>
         <el-form-item label="支付时间" prop="payTime">
-          <el-date-picker clearable
-            v-model="form.payTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择支付时间">
+          <el-date-picker clearable v-model="form.payTime" type="date" value-format="yyyy-MM-dd" placeholder="请选择支付时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="失效时间" prop="invalidTime">
-          <el-date-picker clearable
-            v-model="form.invalidTime"
-            type="date"
-            value-format="yyyy-MM-dd"
+          <el-date-picker clearable v-model="form.invalidTime" type="date" value-format="yyyy-MM-dd"
             placeholder="请选择失效时间">
           </el-date-picker>
         </el-form-item>
@@ -578,7 +494,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -620,12 +536,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除充值订单记录编号为"' + ids + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除充值订单记录编号为"' + ids + '"的数据项？').then(function () {
         return delOrder(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {

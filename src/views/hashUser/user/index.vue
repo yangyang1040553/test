@@ -1,122 +1,49 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryForm"
-      size="small"
-      :inline="true"
-      v-show="showSearch"
-      label-width="108px"
-    >
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="108px">
       <el-form-item label="账号" prop="username">
-        <el-input
-          v-model="queryParams.username"
-          placeholder="请输入账号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.username" placeholder="请输入账号" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="电话号码" prop="phoneNumber">
-        <el-input
-          v-model="queryParams.phoneNumber"
-          placeholder="请输入电话号码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.phoneNumber" placeholder="请输入电话号码" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input
-          v-model="queryParams.email"
-          placeholder="请输入邮箱"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.email" placeholder="请输入邮箱" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="设备码" prop="deviceId">
-        <el-input
-          v-model="queryParams.deviceId"
-          placeholder="请输入设备码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.deviceId" placeholder="请输入设备码" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="昵称" prop="nickName">
-        <el-input
-          v-model="queryParams.nickName"
-          placeholder="请输入昵称"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.nickName" placeholder="请输入昵称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="账号绑定时间" prop="bindTime">
-        <el-date-picker
-          clearable
-          v-model="queryParams.bindTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择账号绑定时间"
-        >
+        <el-date-picker clearable v-model="queryParams.bindTime" type="date" value-format="yyyy-MM-dd"
+          placeholder="请选择账号绑定时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="状态" prop="userStatus">
-        <el-select
-          v-model="queryParams.userStatus"
-          placeholder="请选择状态"
-          clearable
-        >
-          <el-option
-            v-for="dict in dict.type.user_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+        <el-select v-model="queryParams.userStatus" placeholder="请选择状态" clearable>
+          <el-option v-for="dict in dict.type.user_status" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="最后登录时间" prop="lastLoginTime">
-        <el-date-picker
-          clearable
-          v-model="queryParams.lastLoginTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择最后登录时间"
-        >
+        <el-date-picker clearable v-model="queryParams.lastLoginTime" type="date" value-format="yyyy-MM-dd"
+          placeholder="请选择最后登录时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="vip过期时间" prop="vipExpireTime">
-        <el-date-picker
-          clearable
-          v-model="queryParams.vipExpireTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择vip过期时间"
-        >
+        <el-date-picker clearable v-model="queryParams.vipExpireTime" type="date" value-format="yyyy-MM-dd"
+          placeholder="请选择vip过期时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="是否是会员" prop="isVip">
-        <el-select
-          v-model="queryParams.isVip"
-          placeholder="请选择是否是会员"
-          clearable
-        >
-          <el-option
-            v-for="dict in dict.type.is_vip"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+        <el-select v-model="queryParams.isVip" placeholder="请选择是否是会员" clearable>
+          <el-option v-for="dict in dict.type.is_vip" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          icon="el-icon-search"
-          size="mini"
-          @click="handleQuery"
-          >搜索</el-button
-        >
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
-          >重置</el-button
-        >
+        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -143,39 +70,17 @@
         >修改</el-button>
       </el-col> -->
       <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['hashUser:user:remove']"
-          >删除</el-button
-        >
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['hashUser:user:remove']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['hashUser:user:export']"
-          >导出</el-button
-        >
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
+          v-hasPermi="['hashUser:user:export']">导出</el-button>
       </el-col>
-      <right-toolbar
-        :showSearch.sync="showSearch"
-        @queryTable="getList"
-      ></right-toolbar>
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table
-      v-loading="loading"
-      :data="userList"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="账号" align="center" prop="username" />
@@ -186,70 +91,38 @@
       <el-table-column label="昵称" align="center" prop="nickName" />
       <el-table-column label="来源类型" align="center" prop="originType" />
       <el-table-column label="来源id" align="center" prop="originId" />
-      <el-table-column
-        label="账号绑定时间"
-        align="center"
-        prop="bindTime"
-        width="180"
-      >
+      <el-table-column label="账号绑定时间" align="center" prop="bindTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.bindTime, "{y}-{m}-{d}") }}</span>
         </template>
       </el-table-column>
       <el-table-column label="登录ip" align="center" prop="loginIp" />
       <el-table-column label="注册ip" align="center" prop="regIp" />
-      <el-table-column label="用户类型" align="center" prop="userType" />
-      <el-table-column
-        label="状态"
-        align="center"
-        prop="userStatus"
-      >
+      <!-- <el-table-column label="用户类型" align="center" prop="userType" /> -->
+      <el-table-column label="状态" align="center" prop="userStatus">
         <template slot-scope="scope">
-          <dict-tag
-            :options="dict.type.user_status"
-            :value="scope.row.userStatus"
-          />
+          <dict-tag :options="dict.type.user_status" :value="scope.row.userStatus" />
         </template>
       </el-table-column>
-      <el-table-column
-        label="最后登录时间"
-        align="center"
-        prop="lastLoginTime"
-        width="180"
-      >
+      <el-table-column label="最后登录时间" align="center" prop="lastLoginTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.lastLoginTime, "{y}-{m}-{d}") }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        label="vip过期时间"
-        align="center"
-        prop="vipExpireTime"
-        width="180"
-      >
+      <el-table-column label="vip过期时间" align="center" prop="vipExpireTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.vipExpireTime, "{y}-{m}-{d}") }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="是否是会员" align="center" prop="isVip">
+      <el-table-column label="会员" align="center" prop="isVip">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.is_vip" :value="scope.row.isVip" />
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        align="center"
-        class-name="small-padding fixed-width"
-      >
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['hashUser:user:edit']"
-            >修改</el-button
-          >
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+            v-hasPermi="['hashUser:user:edit']">修改</el-button>
           <!-- <el-button
             size="mini"
             type="text"
@@ -262,13 +135,8 @@
       </el-table-column>
     </el-table>
 
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改用户管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
@@ -312,12 +180,8 @@
         </el-form-item> -->
         <el-form-item label="状态" prop="userStatus">
           <el-select v-model="form.userStatus" placeholder="请选择状态">
-            <el-option
-              v-for="dict in dict.type.user_status"
-              :key="dict.value"
-              :label="dict.label"
-              :value="parseInt(dict.value)"
-            ></el-option>
+            <el-option v-for="dict in dict.type.user_status" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
         <!-- <el-form-item label="最后登录时间" prop="lastLoginTime">
@@ -342,12 +206,8 @@
         </el-form-item> -->
         <el-form-item label="是否是会员" prop="isVip">
           <el-select v-model="form.isVip" placeholder="请选择是否是会员">
-            <el-option
-              v-for="dict in dict.type.is_vip"
-              :key="dict.value"
-              :label="dict.label"
-              :value="parseInt(dict.value)"
-            ></el-option>
+            <el-option v-for="dict in dict.type.is_vip" :key="dict.value" :label="dict.label"
+              :value="parseInt(dict.value)"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -519,7 +379,7 @@ export default {
           this.getList();
           this.$modal.msgSuccess("删除成功");
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {

@@ -57,6 +57,7 @@
           <dict-tag :options="dict.type.articel_postion" :value="scope.row.position"/>
         </template>
       </el-table-column>
+      <el-table-column label="跳转地址" align="center" prop="jumpUrl" />
       <el-table-column label="播放秒数" align="center" prop="seconds" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -85,6 +86,9 @@
             <el-option v-for="dict in dict.type.articel_enable" :key="dict.value" :label="dict.label"
               :value="parseInt(dict.value)"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="跳转地址" prop="jumpUrl">
+          <el-input v-model="form.jumpUrl" placeholder="请输入${comment}" />
         </el-form-item>
         <el-form-item label="广告位置" prop="position">
 					<el-select v-model="form.position" placeholder="请选择位置">
