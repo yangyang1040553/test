@@ -12,6 +12,12 @@
       <el-form-item label="权重" prop="weight">
         <el-input v-model="queryParams.weight" placeholder="请输入权重" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
+      <el-form-item label="banner" prop="position">
+        <el-select v-model="queryParams.position" placeholder="请选择位置" clearable>
+          <el-option v-for="dict in dict.type.banner_position" :key="dict.value" :label="dict.label"
+            :value="dict.value" />
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -48,6 +54,11 @@
         </template>
       </el-table-column>
       <el-table-column label="跳转的链接" align="center" prop="skipUrl" />
+      <el-table-column label="位置" align="center" prop="position">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.banner_position" :value="scope.row.position" />
+        </template>
+      </el-table-column>
       <el-table-column label="权重" align="center" prop="weight" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -81,6 +92,12 @@
         <el-form-item label="权重" prop="weight">
           <el-input v-model="form.weight" placeholder="请输入权重" />
         </el-form-item>
+        <el-form-item label="位置" prop="position">
+          <el-select v-model="form.position" placeholder="请选择位置">
+            <el-option v-for="dict in dict.type.banner_position" :key="dict.value" :label="dict.label"
+              :value="dict.value"></el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -95,7 +112,7 @@ import { listBannerConfig, getBannerConfig, delBannerConfig, addBannerConfig, up
 
 export default {
   name: "BannerConfig",
-  dicts: ["is_skip"],
+  dicts: ["is_skip", "banner_position"],
   data() {
     return {
       // 遮罩层
