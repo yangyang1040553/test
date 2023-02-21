@@ -47,7 +47,7 @@
     <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="Id" align="center" prop="id" />
-      <el-table-column label="vip类型 1月卡 2季卡 3年卡" align="center" prop="vipType">
+      <el-table-column label="vip类型" align="center" prop="vipType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.vip_type" :value="scope.row.vipType" />
         </template>
