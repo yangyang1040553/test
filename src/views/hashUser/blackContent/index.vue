@@ -47,7 +47,8 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="blackContentList" @selection-change="handleSelectionChange">
+    <el-table :data="blackContentList" @selection-change="handleSelectionChange"
+      element-loading-background="rgba(0, 0, 0, 0.8)">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="${comment}" align="center" prop="id" />
       <el-table-column label="内容标题" align="center" prop="title" />
@@ -97,7 +98,7 @@
       @pagination="getList" />
 
     <!-- 添加或修改黑料内容对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog :title="title" class="dialog" :visible.sync="open" width="800px" append-to-body v-loading="loading">
       <el-form class="form" ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="内容标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入内容标题" />
@@ -158,7 +159,6 @@ export default {
   data() {
     return {
       // 遮罩层
-      loading: true,
       // 选中数组
       ids: [],
       height: 200,
@@ -169,6 +169,7 @@ export default {
       multiple: true,
       // 显示搜索条件
       showSearch: true,
+      loading: false,
       // 总条数
       total: 0,
       // 黑料内容表格数据
@@ -181,6 +182,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      count: 0,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -327,35 +329,57 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
+
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+
       const formData = new FormData();
-      this.coverFileList.forEach((file) => {
+      this.pictureList.forEach((file) => {
         formData.append("files", file.raw);
       });
       console.log("formData===", formData)
       uploadFile(formData).then(res => {
         console.log(res)
+        vim.count++
       })
 
-      // this.$refs["form"].validate(valid => {
-      //   if (valid) {
+      let vim = this
+      let interval = setInterval(() => {
+        if (vim.count == 1) {
 
 
+          loading.close()
+          vim.open = false
+          clearInterval(interval)
 
-      //     if (this.form.id != null) {
-      //       updateBlackContent(this.form).then(response => {
-      //         this.$modal.msgSuccess("修改成功");
-      //         this.open = false;
-      //         this.getList();
-      //       });
-      //     } else {
-      //       addBlackContent(this.form).then(response => {
-      //         this.$modal.msgSuccess("新增成功");
-      //         this.open = false;
-      //         this.getList();
-      //       });
-      //     }
-      //   }
-      // });
+          console.log("提交内容")
+          // this.$refs["form"].validate(valid => {
+          //   if (valid) {
+          //     if (this.form.id != null) {
+          //       updateBlackContent(this.form).then(response => {
+          //         this.$modal.msgSuccess("修改成功");
+          //         this.open = false;
+          //         this.getList();
+          //       });
+          //     } else {
+          //       addBlackContent(this.form).then(response => {
+          //         this.$modal.msgSuccess("新增成功");
+          //         this.open = false;
+          //         this.getList();
+          //       });
+          //     }
+          //   }
+          // });
+
+
+        }
+      }, 500)
+
+
     },
     /** 删除按钮操作 */
     handleDelete(row) {
@@ -405,7 +429,10 @@ export default {
 .form {
   display: flex;
   flex-direction: column;
+}
 
+.dialog {
+  height: 90% !important;
 }
 
 .picturDiv {
